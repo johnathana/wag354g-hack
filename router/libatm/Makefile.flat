@@ -1,0 +1,62 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+lib_current =  1
+lib_age = 0
+lib_revision =  0
+TI_temp_lib_atm_install =  $(TI_build_home)/develop/linux-atm/__install --build=i386-linux --host=mipsel-linux
+
+build:
+# JAH-----DEBUG--->
+#	echo $(PATH)
+#	gcc -v
+#	read
+# JAH-----DEBUG--->
+#	CFLAGS="-Os -Wall" ./configure --prefix=$(TI_temp_lib_atm_install) 
+#	read
+	PATH=$(TI_uclibc_path):$(shell echo -n $(PATH)) $(MAKE) -i
+
+install: 
+	mips_fp_le-strip -s ./src/arpd/.libs/atmarp
+	mips_fp_le-strip -s ./src/arpd/.libs/atmarpd
+	mips_fp_le-strip -s ./src/lib/.libs/libatm.so.$(lib_current).$(lib_age).$(lib_revision)
+
+# Copy libs to uclibc for br2684ctl to link against...
+	install -c -m 755 ./src/lib/.libs/libatm.so.$(lib_current).$(lib_age).$(lib_revision) $(TI_uclibc_library)
+	ln -sf libatm.so.$(lib_current).$(lib_age).$(lib_revision) $(TI_uclibc_library)/libatm.so.$(lib_current)
+	ln -sf libatm.so.$(lib_current).$(lib_age).$(lib_revision) $(TI_uclibc_library)/libatm.so
+	install -m 0755 ./src/include/atm.h $(TI_uclibc_include)
+	install -m 0755 -d $(TI_filesystem_path)/lib
+	install -m 0755 -d $(TI_filesystem_path)/usr
+	install -m 0755 -d $(TI_filesystem_path)/usr/sbin
+	install -m 0755 ./src/arpd/.libs/atmarp $(TI_filesystem_path)/usr/sbin/.
+	install -m 0755 ./src/arpd/.libs/atmarpd $(TI_filesystem_path)/usr/sbin/.
+	install -c -m 755 ./src/lib/.libs/libatm.so.$(lib_current).$(lib_age).$(lib_revision) $(TI_filesystem_path)/lib/libatm.so.$(lib_current).$(lib_age).$(lib_revision)
+	ln -sf libatm.so.$(lib_current).$(lib_age).$(lib_revision) $(TI_filesystem_path)/lib/libatm.so.$(lib_current)
+	ln -sf libatm.so.$(lib_current).$(lib_age).$(lib_revision) $(TI_filesystem_path)/lib/libatm.so
+
+clean:
+	rm -f $(TI_uclibc_library)/libatm.so.$(lib_current).$(lib_age).$(lib_revision)
+	rm -f $(TI_uclibc_library)/libatm.so.$(lib_current)
+	rm -f $(TI_uclibc_library)/libatm.so
+	rm -f $(TI_uclibc_include)/atm.h
+	rm -f $(TI_filesystem_path)/usr/sbin/atmarp
+	rm -f $(TI_filesystem_path)/usr/sbin/atmarpd
+	rm -f $(TI_filesystem_path)/lib/libatm.so.$(lib_current).$(lib_age).$(lib_revision)
+	rm -f $(TI_filesystem_path)/lib/libatm.so.$(lib_current)
+	rm -f $(TI_filesystem_path)/lib/libatm.so
+#
+# Bad autoconfig...bad,bad autoconfig!!! (personal commentary withheld)
+#
+#	cd ./src/lib;test -z "libatm.la" || rm -f libatm.la
+#	cd ./src/lib;rm -rf .libs _libs
+#	cd ./src/lib;rm -f *.o core *.core
+#	cd ./src/lib;rm -f *.lo
+#	cd ./src/arpd;test -z "atmarp atmarpd" || rm -f atmarp atmarpd
+#	cd ./src/arpd;rm -rf .libs _libs
+#	cd ./src/arpd;rm -f *.o core *.core
+#	cd ./src/arpd;rm -f *.lo
+	$(MAKE) clean

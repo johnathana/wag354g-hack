@@ -1,0 +1,352 @@
+./auth.c:link_required(unit)
+./auth.c: * LCP has terminated the link; go to the Dead phase and take the
+./auth.c:link_terminated(unit)
+./auth.c:link_down(unit)
+./auth.c:	update_link_stats(unit);
+./auth.c: * The link is established.
+./auth.c:link_established(unit)
+./auth.c:	    warn("peer refused to authenticate: terminating link");
+./auth.c:    if (multilink) {
+./auth.c:     * Authentication failure: take the link down
+./auth.c:	 * At this point we consider that the link has come up successfully.
+./auth.c: * np_finished - a network protocol has finished using the link.
+./auth.c:	/* no further use for the link: shut up shop. */
+./auth.c: * check_idle - check whether the link has been idle for long
+./auth.c:	/* link is idle: shut it down. */
+./auth.c:    struct wordlist *ap, **plink;
+./auth.c:    for (plink = &addrs; *plink != NULL; plink = &(*plink)->next)
+./auth.c:    *plink = noauth_addrs;
+./auth.c:    *plink = NULL;
+Binary file ./auth.o matches
+./demand.c: * Return value is 1 if we need to bring up the link, 0 otherwise.
+./demand.c: * decide whether to bring up the link or not, and, if we want
+./demand.c: * Return value is 1 if we need to bring up the link, 0 otherwise.
+./demand.c: * bring up the link.
+./demand.c: * loopback, now that the real serial link is up.
+./demand.c: * that is, whether it is worth bringing up the link for.
+./fsm.c: * Randomize fsm id on link/init.
+./ipcp.c:     * We must have a non-zero IP address for both ends of the link.
+./ipcp.c:    update_link_stats(f->unit);
+./ipcp.c: * ip_active_pkt - see if this IP packet is worth bringing the link up for.
+./ipcp.c: * We don't bring the link up for IP fragments or for TCP FIN packets
+Binary file ./ipcp.o matches
+./ipv6cp.c:      "Use uniquely-available persistent value for link local address", 1 },
+./ipv6cp.c:     * Persistent link-local id is only used when user has not explicitly
+./ipv6cp.c:     * We must have a non-zero LL address for both ends of the link.
+./ipv6cp.c:    update_link_stats(f->unit);
+./ipv6cp.c: * ipv6_active_pkt - see if this IP packet is worth bringing the link up for.
+./ipv6cp.c: * We don't bring the link up for IP fragments or for TCP FIN packets
+./lcp.c: * When the link comes up we want to be able to wait for a short while,
+./lcp.c:      "Set number of consecutive echo failures to indicate link failure",
+./lcp.c:      "Maximum received packet size for multilink bundle",
+./lcp.c:      "Use short sequence numbers in multilink headers",
+./lcp.c:      "Don't use short sequence numbers in multilink headers",
+./lcp.c:      "Endpoint discriminator for multilink",
+./lcp.c:      "Don't send or accept multilink endpoint discriminator", 1 },
+./lcp.c:    if (!multilink) {
+./lcp.c:     * If they can't cope with our link quality protocol, we'll have
+./lcp.c:	    if (!ao->neg_mrru || !multilink ||
+./lcp.c:	    if (!ao->neg_ssnhf || !multilink ||
+./lcp.c:     * Note on the MTU: the link MTU can be the MRU the peer wanted,
+./lcp.c:    if (!(multilink && go->neg_mrru && ho->neg_mrru))
+./lcp.c:    link_established(f->unit);
+./lcp.c:    link_down(f->unit);
+./lcp.c:    link_required(f->unit);
+./lcp.c:    link_terminated(f->unit);
+./lcp.c: * Time to shut down the link because there is nothing out there.
+./lcp.c:        notice("Serial link appears to be disconnected.");
+./lcp.h:#define CI_MRRU		17	/* max reconstructed receive unit; multilink */
+./lcp.h:#define CI_SSNHF	18	/* short sequence numbers for multilink */
+./lcp.h:    bool neg_mrru;		/* negotiate multilink MRRU */
+./lcp.h:    int	 mrru;			/* Value of MRRU, and multilink enable */
+./lcp.h:   before deciding the link is looped-back. */
+Binary file ./lcp.o matches
+./main.c:static char linkpidfile[MAXPATHLEN];	/* name of linkname pid file */
+./main.c:int phase;			/* where the link is at */
+./main.c:int kill_link;
+./main.c:static struct timeval start_time;	/* Time when link was started. */
+./main.c:struct pppd_stats link_stats;
+./main.c:int link_connect_time;
+./main.c:int link_stats_valid;
+./main.c:static void create_linkpidfile __P((void));
+./main.c:	if (multilink) {
+./main.c:	    warn("Warning: disabling multilink");
+./main.c:	    multilink = 0;
+./main.c:    create_linkpidfile();
+./main.c:		if (kill_link && !persist)
+./main.c:	    if (kill_link && !persist)
+./main.c:	     * Now we want to bring up the link.
+./main.c:	    info("Starting link");
+./main.c:	link_stats_valid = 0;
+./main.c:	    if (kill_link)
+./main.c:	if (link_stats_valid) {
+./main.c:	    int t = (link_connect_time + 5) / 6;    /* 1/10ths of minutes */
+./main.c:		 link_stats.bytes_out, link_stats.bytes_in);
+./main.c:		&& unlink(pidfilename) < 0 && errno != ENOENT)
+./main.c:	 * If we may want to bring the link up again, transfer
+./main.c:		&& unlink(pidfilename) < 0 && errno != ENOENT)
+./main.c:		if (kill_link)
+./main.c:    kill_link = open_ccp_flag = 0;
+./main.c:	kill_link = 1;
+./main.c:	kill_link = 1;
+./main.c:	create_linkpidfile();
+./main.c:    if (linkpidfile[0])
+./main.c:	create_linkpidfile();
+./main.c:create_linkpidfile()
+./main.c:    if (linkname[0] == 0)
+./main.c:    script_setenv("LINKNAME", linkname, 1);
+./main.c:    slprintf(linkpidfile, sizeof(linkpidfile), "%sppp-%s.pid",
+./main.c:	     _PATH_VARRUN, linkname);
+./main.c:    if ((pidfile = fopen(linkpidfile, "w")) != NULL) {
+./main.c:	error("Failed to create pid file %s: %m", linkpidfile);
+./main.c:	linkpidfile[0] = 0;
+./main.c:    { 0xfb,	"single-link compression" },
+./main.c:	lcp_lowerdown(0);	/* serial link is no longer available */
+./main.c:	link_terminated(0);
+./main.c:    if (pidfilename[0] != 0 && unlink(pidfilename) < 0 && errno != ENOENT)
+./main.c:    if (linkpidfile[0] != 0 && unlink(linkpidfile) < 0 && errno != ENOENT)
+./main.c:	warn("unable to delete pid file %s: %m", linkpidfile);
+./main.c:    linkpidfile[0] = 0;
+./main.c: * update_link_stats - get stats at link termination.
+./main.c:update_link_stats(u)
+./main.c:    if (!get_ppp_stats(u, &link_stats)
+./main.c:    link_connect_time = now.tv_sec - start_time.tv_sec;
+./main.c:    link_stats_valid = 1;
+./main.c:    slprintf(numbuf, sizeof(numbuf), "%d", link_connect_time);
+./main.c:    slprintf(numbuf, sizeof(numbuf), "%d", link_stats.bytes_out);
+./main.c:    slprintf(numbuf, sizeof(numbuf), "%d", link_stats.bytes_in);
+./main.c:     * Find correct place and link it in.
+./main.c: * signal, we just take the link down.
+Binary file ./main.o matches
+./multilink.c: * multilink.c - support routines for multilink.
+./multilink.c:	if (!multilink)
+./multilink.c:	/* if we're doing multilink, we have to negotiate MRRU */
+./multilink.c: * if we are doing multilink.
+./multilink.c:		/* not doing multilink */
+./multilink.c:			notice("oops, multilink negotiated only for receive");
+./multilink.c:	 * and attach the link.
+./options.c:bool	updetach = 0;		/* Detach once link is up */
+./options.c:bool	persist = 0;		/* Reopen link after it goes down */
+./options.c:char	linkname[MAXPATHLEN];	/* logical name for link */
+./options.c:bool	multilink = 0;		/* Enable multilink operation */
+./options.c:char	*bundle_name = NULL;	/* bundle name for multilink */
+./options.c:struct	bpf_program active_filter; /* Filter program for link-active pkts */
+./options.c:      "Detach from controlling tty once link is up",
+./options.c:      "Set time in seconds before disconnecting idle link", OPT_PRIO },
+./options.c:    { "linkname", o_string, linkname,
+./options.c:      "Set logical name for link",
+./options.c:    { "multilink", o_bool, &multilink,
+./options.c:      "Enable multilink operation", OPT_PRIO | 1 },
+./options.c:    { "mp", o_bool, &multilink,
+./options.c:      "Enable multilink operation", OPT_PRIOSUB | OPT_ALIAS | 1 },
+./options.c:    { "nomultilink", o_bool, &multilink,
+./options.c:      "Disable multilink operation", OPT_PRIOSUB | 0 },
+./options.c:    { "nomp", o_bool, &multilink,
+./options.c:      "Disable multilink operation", OPT_PRIOSUB | OPT_ALIAS | 0 },
+./options.c:      "Bundle name for multilink", OPT_PRIO },
+./options.c:    pc.linktype = DLT_PPP;
+./options.c:    pc.linktype = DLT_PPP;
+Binary file ./options.o matches
+./plugins/pppoe/pppoe.c:extern int kill_link;
+./plugins/pppoe/pppoe.c:    "multilink",
+./plugins/pppoe/utils.c:  if (pidfilename[0] != 0 && unlink (pidfilename) < 0 && errno != ENOENT)
+./plugins/pppoe/pppoe.c.2.4.0:extern int kill_link;
+./plugins/pppoe/pppoe.c.2.4.1:extern int kill_link;
+./plugins/pppoe/pppoe.c.2.4.1:    "multilink",
+./plugins/pppoe/pppoe.c.2.4.1.1:extern int kill_link;
+./plugins/pppoe/pppoe.c.2.4.1.1:    "multilink",
+Binary file ./plugins/pppoe/pppoe.o matches
+Binary file ./plugins/pppoe/utils.o matches
+Binary file ./plugins/pppoe/libpppoe.a matches
+Binary file ./plugins/pppoe/pppoe.so matches
+Binary file ./plugins/pppoe/libpppoe.so matches
+Binary file ./plugins/pppoe/pppoed matches
+./plugins/pppoatm.c:    "multilink",
+./plugins/pppoatm.c.2.4.1.0:    "multilink",
+Binary file ./plugins/pppoatm.so matches
+Binary file ./plugins/libpppoatm.so matches
+Binary file ./pppd matches
+./pppd.8:datagrams over serial point-to-point links.  PPP
+./pppd.8:serial links, an extensible Link Control Protocol (LCP), and
+./pppd.8:pppd has terminated the link.  This script could, for example, issue
+./pppd.8:296 is recommended for slow links (40 bytes for TCP/IP header + 256
+./pppd.8:which packets are to be regarded as link activity, and therefore reset
+./pppd.8:the idle timer, or cause the link to be brought up in demand-dialling
+./pppd.8:regularly over the link (for example, routing information packets)
+./pppd.8:which would otherwise prevent the link from ever appearing to be idle.
+./pppd.8:except that qualifiers which are inappropriate for a PPP link, such as
+./pppd.8:Initiate the link only on demand, i.e. when data traffic is present.
+./pppd.8:(i.e., IP packets) across the link.
+./pppd.8:initiating the link.  The option values are logged at level info, and
+./pppd.8:during multilink negotiation to \fI<epdisc>\fR.  The default is to use
+./pppd.8:Specifies how many seconds to wait before re-initiating the link after
+./pppd.8:the link was terminated because it was idle.
+./pppd.8:Specifies that pppd should disconnect if the link is idle for \fIn\fR
+./pppd.8:seconds.  The link is idle when no data packets (i.e. IP packets) are
+./pppd.8:activity filter also count as the link being idle.
+./pppd.8:.B linkname \fIname\fR
+./pppd.8:Sets the logical name of the link to \fIname\fR.  Pppd will create a
+./pppd.8:which instance of pppd is responsible for the link to a given peer
+./pppd.8:Enables the use of PPP multilink; this is an alias for the `multilink'
+./pppd.8:Enables the use of short (12-bit) sequence numbers in multilink
+./pppd.8:available under Linux, and only has any effect if multilink is
+./pppd.8:enabled (see the multilink option).
+./pppd.8:the maximum size for a received packet on a multilink bundle, and is
+./pppd.8:analogous to the MRU for the individual links.  This option is
+./pppd.8:multilink is enabled (see the multilink option).
+./pppd.8:.B multilink
+./pppd.8:Enables the use of the PPP multilink protocol.  If the peer also
+./pppd.8:supports multilink, then this link can become part of a bundle between
+./pppd.8:peer, pppd will join this link to that bundle, otherwise pppd will
+./pppd.8:Disables the use of PPP multilink.  This option is currently only
+./pppd.8:multilink protocol, forcing the use of 24-bit sequence numbers.  This
+./pppd.8:effect if multilink is enabled.
+./pppd.8:.B nomultilink
+./pppd.8:Disables the use of PPP multilink.  This option is currently only
+./pppd.8:routed) using up link bandwidth, or to provide a basic firewall
+./pppd.8:except that qualifiers which are inappropriate for a PPP link, such as
+./pppd.8:PPP link is the only connection to the internet will not normally have
+./pppd.8:terminated the link (by closing LCP).  If IPCP negotiates an
+./pppd.8:link, which will enable the peers to exchange IP packets.
+./pppd.8:delete it when the link is terminated.
+./pppd.8:Multilink PPP provides the capability to combine two or more PPP links
+./pppd.8:single virtual PPP link which has the combined bandwidth of the
+./pppd.8:individual links.  Currently, multilink PPP is only supported under
+./pppd.8:Pppd detects that the link it is controlling is connected to the same
+./pppd.8:peer as another link using the peer's endpoint discriminator and the
+./pppd.8:identity when matching up links to be joined together in a bundle.
+./pppd.8:TDB database in /var/run/pppd.tdb to match up links.
+./pppd.8:Assuming that multilink is enabled and the peer is willing to
+./pppd.8:negotiate multilink, then when pppd is invoked to bring up the first
+./pppd.8:link to the peer, it will detect that no other link is connected to
+./pppd.8:interface unit.  When another pppd is invoked to bring up another link
+./pppd.8:to the peer, it will detect the existing bundle and join its link to
+./pppd.8:detected, or the reason for the link being terminated.  The values
+./pppd.8:The link was established successfully and terminated because it was
+./pppd.8:The link was established successfully and terminated because the
+./pppd.8:The link was terminated because the peer is not responding to echo
+./pppd.8:The link was terminated by the modem hanging up.
+./pppd.8:give information about the link.  The environment variables that pppd
+./pppd.8:The IP address for the local end of the link.  This is only set when
+./pppd.8:The IP address for the remote end of the link.  This is only set when
+./pppd.8:The logical name of the link, set with the \fIlinkname\fR option.
+./pppd.8:A program or script which is executed when the link goes down, if
+./pppd.8:A program or script which is executed when the link is available for
+./pppd.8:A program or script which is executed when the link is no longer
+./pppd.8:Like /etc/ppp/ip-up, except that it is executed when the link is available 
+./pppd.8:\fIinterface-name tty-device speed local-link-local-address
+./pppd.8:remote-link-local-address ipparam\fR
+./pppd.8:longer be transmitted on the link. It is executed with the same parameters 
+./pppd.8:A program or script which is executed when the link is available for
+./pppd.8:A program or script which is executed when the link is no longer
+./pppd.8:Process-ID for pppd process for logical link \fIname\fR (see the
+./pppd.8:\fIlinkname\fR option).
+./pppd.8:\fICompressing TCP/IP headers for low-speed serial links.\fR
+./pppd.8:These signals cause pppd to terminate the link (by closing LCP),
+./pppd.8:This signal causes pppd to terminate the link, restore the serial
+./pppd.h:/* An endpoint discriminator, used with multilink. */
+./pppd.h:extern int	phase;		/* Current state of link - see values below */
+./pppd.h:extern int	baud_rate;	/* Current link speed in bits/sec */
+./pppd.h:extern int	need_holdoff;	/* Need holdoff period after link terminates */
+./pppd.h:extern struct pppd_stats link_stats; /* byte/packet counts etc. for link */
+./pppd.h:extern int	link_stats_valid; /* set if link_stats is valid */
+./pppd.h:extern int	link_connect_time; /* time the link was up for */
+./pppd.h:extern bool	updetach;	/* Detach from controlling tty when link up */
+./pppd.h:extern char	*initializer;	/* Script to initialize physical link */
+./pppd.h:extern char	*connect_script; /* Script to establish physical link */
+./pppd.h:extern char	*disconnect_script; /* Script to disestablish physical link */
+./pppd.h:extern bool	persist;	/* Reopen link after it goes down */
+./pppd.h:extern int	idle_time_limit;/* Shut down link if idle for this long */
+./pppd.h:extern char	linkname[MAXPATHLEN]; /* logical name for link */
+./pppd.h:extern bool	multilink;	/* enable multilink operation */
+./pppd.h:extern char	*bundle_name;	/* bundle name for multilink */
+./pppd.h:extern struct	bpf_program active_filter; /* Filter for link-active pkts */
+./pppd.h:    /* Say whether to bring up link for this pkt */
+./pppd.h:void update_link_stats __P((int)); /* Get stats at link termination */
+./pppd.h:void link_required __P((int));	  /* we are starting to use the link */
+./pppd.h:void link_terminated __P((int));  /* we are finished with the link */
+./pppd.h:void link_down __P((int));	  /* the LCP layer has left the Opened state */
+./pppd.h:void link_established __P((int)); /* the link is up; authenticate now */
+./pppd.h:void np_finished __P((int, int)); /* a network protocol no longer needs link */
+./pppd.h:int  loop_frame __P((unsigned char *, int)); /* should we bring link up? */
+./pppd.h:/* Procedures exported from multilink.c */
+./pppd.h:void mp_check_options __P((void)); /* Check multilink-related options */
+./pppd.h:int  mp_join_bundle __P((void));  /* join our link to an appropriate bundle */
+./pppd.h:int  bundle_attach __P((int));	/* Attach link to existing bundle */
+./pppd.h:				/* Find out how long link has been idle */
+./pppd.h:				/* Return link statistics */
+./sys-linux.c:static int	link_mtu;		/* mtu for the link (not bundle) */
+./sys-linux.c:	if (!looped && !multilink) {
+./sys-linux.c:	if (!multilink) {
+./sys-linux.c:	if (!multilink)
+./sys-linux.c: * if `multilink' was set at the time establish_ppp was called.
+./sys-linux.c: * bundle_attach - attach our link to a given PPP unit.
+./sys-linux.c:		warn("Receive serial link is not 8-bit clean:");
+./sys-linux.c: * and detect when we want to bring the real link up.
+./sys-linux.c: * Return value is 1 if we need to bring up the link, 0 otherwise.
+./sys-linux.c:    link_mtu = mtu;
+./sys-linux.c: * If we were called because the link has gone down then there is nothing
+./sys-linux.c: * get_idle_time - return how long the link has been idle.
+./sys-linux.c: * get_ppp_stats - return statistics for the link.
+./sys-linux.c:		unlink("/dev/ppp");	/* didn't work, undo the mknod */
+./sys-linux.c: * sif6addr - Config the interface with an IPv6 link-local address
+./sys-linux.c:    if (multilink && !new_style_driver) {
+./sys-linux.c:	warn("Warning: multilink is not supported by the kernel driver");
+./sys-linux.c:	multilink = 0;
+Binary file ./sys-linux.o matches
+./sys-solaris.c:static int	link_mtu, link_mru;
+./sys-solaris.c:     * Open the ppp device again and link it under the ip multiplexor.
+./sys-solaris.c:	fatal("Can't link PPP device to IP: %m");
+./sys-solaris.c:	fatal("Can't link PPP device to IP (2): %m");
+./sys-solaris.c:    /* Set the interface name for the link. */
+./sys-solaris.c:     * unlink and re-link the modules, causing the muxid to change.
+./sys-solaris.c:     * unlink and re-link the modules, causing the muxid to change.
+./sys-solaris.c:	error("Can't link tty to PPP mux: %m");
+./sys-solaris.c:		error("Can't unlink tty from PPP mux: %m");
+./sys-solaris.c: * Check whether the link seems not to be 8-bit clean.
+./sys-solaris.c:	warn("Serial link is not 8-bit clean:");
+./sys-solaris.c: * and detect when we want to bring the real link up.
+./sys-solaris.c: * Return value is 1 if we need to bring up the link, 0 otherwise.
+./sys-solaris.c:    ifr.ifr_metric = link_mtu;
+./sys-solaris.c:    lifr.lifr_mtu = link_mtu;
+./sys-solaris.c:    link_mtu = mtu;
+./sys-solaris.c:    link_mru = mru;
+./sys-solaris.c: * get_idle_time - return how long the link has been idle.
+./sys-solaris.c: * get_ppp_stats - return statistics for the link.
+./sys-solaris.c:	error("Couldn't get link statistics: %m");
+./sys-solaris.c: * sif6addr - Config the interface with an IPv6 link-local address
+./sys-solaris.c:    ifr.ifr_metric = link_mtu;
+./sys-solaris.c:		    if (unlink(lock_file) == 0) {
+./sys-solaris.c:	unlink(lock_file);
+./sys-sunos4.c:static int	link_mtu, link_mru;
+./sys-sunos4.c:	fatal("Can't link tty to PPP mux: %m");
+./sys-sunos4.c:		error("Can't unlink tty from PPP mux: %m");
+./sys-sunos4.c: * Check whether the link seems not to be 8-bit clean.
+./sys-sunos4.c:	warn("Serial link is not 8-bit clean:");
+./sys-sunos4.c: * and detect when we want to bring the real link up.
+./sys-sunos4.c: * Return value is 1 if we need to bring up the link, 0 otherwise.
+./sys-sunos4.c:    link_mtu = mtu;
+./sys-sunos4.c:    ifr.ifr_metric = link_mtu;
+./sys-sunos4.c:    link_mru = mru;
+./sys-sunos4.c: * get_idle_time - return how long the link has been idle.
+./sys-sunos4.c: * get_ppp_stats - return statistics for the link.
+./sys-sunos4.c:	error("Couldn't get link statistics: %m");
+./sys-sunos4.c:    ifr.ifr_metric = link_mtu;
+./sys-sunos4.c:		    if (unlink(lock_file) == 0) {
+./sys-sunos4.c:	unlink(lock_file);
+./tdb.c:	/* link it into the free list */
+./tty.c:char	*initializer = NULL;	/* Script to initialize physical link */
+./tty.c:char	*connect_script = NULL;	/* Script to establish physical link */
+./tty.c:char	*disconnect_script = NULL; /* Script to disestablish physical link */
+./tty.c:char	*welcomer = NULL;	/* Script to run after phys link estab. */
+./tty.c:extern int kill_link;
+./tty.c:	kill_link = 0;
+./tty.c:			if (kill_link) {
+./tty.c:			if (kill_link) {
+./tty.c:			if (!persist || errno != EINTR || hungup || kill_link)
+./tty.c:		info("Serial link disconnected.");
+./tty.c:			/* XXX if devnam is a symlink, this will change the link */
+Binary file ./tty.o matches
+./utils.c:	    if (unlink (lock_file) == 0) {
+./utils.c:	unlink(lock_file);
+Binary file ./utils.o matches

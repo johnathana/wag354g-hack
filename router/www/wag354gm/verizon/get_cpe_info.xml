@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<cpe_info>
+	<ddm_ver>2.5</ddm_ver>
+	<cpe_type><% wireless_support(1); %>Wireless-G<% wireless_support(2); %> ADSL gateway</cpe_type>
+	<cpe_manufacturer>Linksys</cpe_manufacturer>
+	<cpe_model><% nvram_get("router_name"); %></cpe_model>
+	<serial_number><% hwaddr_get("lan"); %></serial_number>
+	<hardware_ver><% ddm_show_hwversion(""); %></hardware_ver>
+	<software_ver><% get_firmware_version(); %></software_ver>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</cpe_info>	

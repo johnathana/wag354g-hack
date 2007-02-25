@@ -1,0 +1,1 @@
+#undef  CONFIG_VADEM_CLIO_1000

@@ -1,0 +1,1342 @@
+CHANGES:Fixed 2.2 local IKE fragmentation blackhole.  Still won't work if
+CHANGES:Applied DHR's tunnel patch to streamline IKE/specialSA processing.
+CHANGES:Added local and remote IKE bypass tests to the UML test suite.
+CHANGES:Our "IKE Implementation Issues" IETF draft has been added to our docs.
+CHANGES:IKE (UDP/500) packets which were large enough to be fragmented used to be
+CHANGES:IP-address IDs are emitted as IKE payloads.
+CHANGES:The hole that exempts IKE packets from IPSEC processing was a little too
+CHANGES:wide -- it could let IKE packets from other machines through in clear --
+CHANGES:Added temporary udp/500 IPSEC bypass for IKE daemons, so that they can
+CHANGES.SUPERFS:* Support for Oakley Group 1 (MODP 768 bits) in IKE (ddr)
+CHANGES.X509:- Bug fix: Everytime a certificate was received during IKE Main Phase,
+CHANGES.ipsec_alg:            . pluto IKE algos are (statically) configurable, edit
+CHANGES.ipsec_alg:	 - pre11: accept IKE algo keylens
+CHANGES.ipsec_alg:   +    NEW: added Phase1 (IKE) algorithms:
+CHANGES.ipsec_alg:   +    NEW: IKE algorithm selection 
+CHANGES.ipsec_alg:   + 	NEW: IKE DH group selection (if not selected will default
+CHANGES.ipsec_alg:   +	NEW: auto --status full algorithm info (ESP ciphers, IKE ciphers,
+CHANGES.ipsec_alg:   +	show algos for newest connection state (IKE and ESP)
+README.AggressiveMode:We have found that we need to support Aggressive Mode IKE/ISAKMP for better interoperability with certain other
+README.AggressiveMode:be used for all roadwarriors which is considerably less secure than the issues with Aggressive Mode IKE in our
+README.AggressiveMode:plain text and weakens the security of the IKE protocol. Only use aggressive mode if you need to use FreeSWAN to
+README.AggressiveMode:This patch adds aggressive mode support to pluto (the ISAKMP/IKE component of FreeS/WAN). The aggressive mode is
+README.DPD:	A Traffic-Based Method of Detecting Dead IKE Peers 
+README.NAT-Traversal:    %ike  = accept affected IKE Config Mode IP         [not implemented]
+README.SUPERFS:X.509 Digital Certificate Support (Now includes RFC 2401 IKE Port Selectors)
+README.ipsec_alg:**New IKE (Phase1) algos:
+README.ipsec_alg:  + IKE encrypt algos added: AES, Twofish, Serpent, Blowfish.
+README.ipsec_alg:  + IKE hash algos added: SHA2.
+README.ipsec_alg:    . IKE: show algos status (ipsec auto --status | egrep IKE)
+README.ipsec_alg:    . IKE, ESP: show algos for each conn. 
+README.ipsec_alg:    . new IKE algos get added from ./pluto/alg/*ike_alg*
+README.ipsec_alg:*IKE encryption algos:
+README.ipsec_alg:*IKE hash algos:
+README.ipsec_alg:     SOLUTION: apply extras/patch-ssh-sentinel-IKE2.diff to allow
+README.x509:Exchange (IKE) is specified in the line
+README.x509:during IKE main mode gives proof that the peer is in possession of the private
+README.x509:The ID by which a peer is identifying itself during IKE main mode can by any of
+README.x509:X.509 certificates received by FreeS/WAN during the IKE protocol are
+README.x509:by the peer as part of the IKE protocol.
+README.x509:it will always send a CR, causing the rupture of the IKE negotiation if
+README.x509:PGPnet configured to work with OpenPGP certificates aborts the IKE
+contrib/espinudp-check.c:#define ESPINUDP_WITH_NON_IKE   1  /* draft-ietf-ipsec-nat-t-ike-00/01 */
+contrib/espinudp-check.c:	printf("Checking for ESP in UDP IKE Support (ESPinUDP(%d)): ",ESPINUDP_WITH_NON_IKE);
+contrib/espinudp-check.c:	udpike = check_for_espinudp(fd,ESPINUDP_WITH_NON_IKE);
+doc/manpage.d/ipsec.secrets.5.html:ipsec.secrets - secrets for IKE/IPsec authentication
+doc/manpage.d/ipsec.secrets.5.html:identical secret (the secret is not actually transmitted by the IKE
+doc/manpage.d/ipsec_ikeping.8.html:<HTML><HEAD><TITLE>Manpage of IPSEC_IKEPING</TITLE>
+doc/manpage.d/ipsec_ikeping.8.html:<H1>IPSEC_IKEPING</H1>
+doc/manpage.d/ipsec_ikeping.8.html:ipsec ikeping - send/receive ISAKMP/IKE echo requests/replies
+doc/manpage.d/ipsec_ikeping.8.html:sends and receives ISAKMP/IKE echo request and echo reply packets. These
+doc/manpage.d/ipsec_pluto.8.html:ipsec pluto - IPsec IKE keying daemon
+doc/manpage.d/ipsec_pluto.8.html:is an IKE (``IPsec Key Exchange'') daemon.
+doc/manpage.d/ipsec_pluto.8.html:<H3>IKE's Job</H3>
+doc/manpage.d/ipsec_pluto.8.html:IKE can be deployed on a network node to negotiate Security
+doc/manpage.d/ipsec_pluto.8.html:Associations for that node.  These IKE implementations can only
+doc/manpage.d/ipsec_pluto.8.html:negotiate with other IKE implementations, so IKE must be on each node
+doc/manpage.d/ipsec_pluto.8.html:that is to be an endpoint of an IKE-negotiated Security Association.
+doc/manpage.d/ipsec_pluto.8.html:No other nodes need to be running IKE.
+doc/manpage.d/ipsec_pluto.8.html:An IKE instance (i.e. an IKE implementation on a particular network
+doc/manpage.d/ipsec_pluto.8.html:node) communicates with another IKE instance using UDP IP packets, so
+doc/manpage.d/ipsec_pluto.8.html:IKE instance by the system administrator.
+doc/manpage.d/ipsec_pluto.8.html:IKE deals with two kinds of Security Associations.  The first part of
+doc/manpage.d/ipsec_pluto.8.html:a negotiation between IKE instances is to build an ISAKMP SA.  An
+doc/manpage.d/ipsec_pluto.8.html:ISAKMP SA is used to protect communication between the two IKEs.
+doc/manpage.d/ipsec_pluto.8.html:IPsec SAs can then be built by the IKEs - these are used to carry
+doc/manpage.d/ipsec_pluto.8.html:IKE instances must be able to authenticate each other as part of their
+doc/manpage.d/ipsec_pluto.8.html:IKE negotiation can be initiated by any instance with any other.  If
+doc/manpage.d/ipsec_pluto.8.html:an IKE instance to initiate a negotiation.
+doc/manpage.d/ipsec_pluto.8.html:In summary, an IKE instance is prepared to automate the management of
+doc/manpage.d/ipsec_pluto.8.html:<B>pluto</B> is an implementation of IKE.  It runs as a daemon on a network
+doc/manpage.d/ipsec_pluto.8.html:<B>pluto</B> only implements a subset of IKE.  This is enough for it to
+doc/manpage.d/ipsec_pluto.8.html:interoperate with other instances of <B>pluto</B>, and many other IKE
+doc/manpage.d/ipsec_pluto.8.html:implementations.  We are working on implementing more of IKE.
+doc/manpage.d/ipsec_pluto.8.html:A <B>pluto</B> daemon and another IKE daemon (for example, another instance
+doc/manpage.d/ipsec_pluto.8.html:authentication with other IKE daemons.  For debugging, there is an
+doc/manpage.d/ipsec_pluto.8.html:The default IKE port number is 500, the UDP port assigned by IANA for IKE Daemons.
+doc/manpage.d/ipsec_pluto.8.html:During the IKE exchange to build an SA, the information about the
+doc/manpage.d/ipsec_pluto.8.html:for IKE requests from peers.
+doc/manpage.d/ipsec_pluto.8.html:for IKE negotiations initiated from unknown IP addresses (the
+doc/manpage.d/ipsec_pluto.8.html:the UDP port that IKE listens to on that host.  The default is 500.
+doc/manpage.d/ipsec_pluto.8.html:Propose and allow preshared secret authentication for IKE peers.  This authentication
+doc/manpage.d/ipsec_pluto.8.html:Propose and allow RSA signatures for authentication of IKE peers.  This authentication
+doc/manpage.d/ipsec_pluto.8.html:Note that this has nothing to do with IKE authentication.
+doc/manpage.d/ipsec_pluto.8.html:<B>pluto</B> (or other IKE daemon) according to the named connection.
+doc/manpage.d/ipsec_pluto.8.html:The listen form tells <B>pluto</B> to start listening for IKE requests
+doc/manpage.d/ipsec_pluto.8.html:start listening for IKE traffic on public interfaces.
+doc/manpage.d/ipsec_pluto.8.html:stop listening for IKE traffic on public interfaces.
+doc/manpage.d/ipsec_pluto.8.html:It is generally a good idea to allow IKE messages (UDP port 500)
+doc/manpage.d/ipsec_pluto.8.html:the IKE protocol.
+doc/manpage.d/ipsec_pluto.8.html:For testing, SSH's IKE test page is quite useful:
+doc/manpage.d/ipsec_pluto.8.html:Hint: ISAKMP SAs are often kept alive by IKEs even after the IPsec SA
+doc/manpage.d/ipsec_pluto.8.html:directly.  If one of the IKEs is restarted, the other may try to use
+doc/manpage.d/ipsec_pluto.8.html:the ISAKMP SA but the new IKE won't know about it.  This can lead to
+doc/manpage.d/ipsec_pluto.8.html:problem to the other IKE daemon (in the future it might use
+doc/manpage.d/ipsec_pluto.8.html:The IKE protocol lets the destination of the SA choose the SPI.
+doc/manpage.d/ipsec_pluto.8.html:<B>Pluto</B> and another IKE implementation to interoperate.
+doc/manpage.d/ipsec_pluto.8.html:It is the case that some IKE implementations won't interoperate
+doc/manpage.d/ipsec_pluto.8.html:RFC2409 The Internet Key Exchange (IKE)
+doc/manpage.d/ipsec_pluto.8.html:The Commit Flag is a bad feature of the IKE protocol.
+doc/manpage.d/ipsec_pluto.8.html:logs the unsatisfactory message ``some IKE message we sent has been
+doc/manpage.d/ipsec_pluto.8.html:authenticate each IKE peer to the other.  This is an important task of
+doc/manpage.d/ipsec_pluto.8.html:Phase 1.  Each packet must be authenticated, both in IKE and in IPsec,
+doc/manpage.d/ipsec_pluto.8.html:<DT><A HREF="#lbAE">IKE's Job</A><DD>
+doc/manpage.d/ipsec_whack.8.html:ipsec pluto - IPsec IKE keying daemon
+doc/manpage.d/ipsec_whack.8.html:is an IKE (``IPsec Key Exchange'') daemon.
+doc/manpage.d/ipsec_whack.8.html:<H3>IKE's Job</H3>
+doc/manpage.d/ipsec_whack.8.html:IKE can be deployed on a network node to negotiate Security
+doc/manpage.d/ipsec_whack.8.html:Associations for that node.  These IKE implementations can only
+doc/manpage.d/ipsec_whack.8.html:negotiate with other IKE implementations, so IKE must be on each node
+doc/manpage.d/ipsec_whack.8.html:that is to be an endpoint of an IKE-negotiated Security Association.
+doc/manpage.d/ipsec_whack.8.html:No other nodes need to be running IKE.
+doc/manpage.d/ipsec_whack.8.html:An IKE instance (i.e. an IKE implementation on a particular network
+doc/manpage.d/ipsec_whack.8.html:node) communicates with another IKE instance using UDP IP packets, so
+doc/manpage.d/ipsec_whack.8.html:IKE instance by the system administrator.
+doc/manpage.d/ipsec_whack.8.html:IKE deals with two kinds of Security Associations.  The first part of
+doc/manpage.d/ipsec_whack.8.html:a negotiation between IKE instances is to build an ISAKMP SA.  An
+doc/manpage.d/ipsec_whack.8.html:ISAKMP SA is used to protect communication between the two IKEs.
+doc/manpage.d/ipsec_whack.8.html:IPsec SAs can then be built by the IKEs - these are used to carry
+doc/manpage.d/ipsec_whack.8.html:IKE instances must be able to authenticate each other as part of their
+doc/manpage.d/ipsec_whack.8.html:IKE negotiation can be initiated by any instance with any other.  If
+doc/manpage.d/ipsec_whack.8.html:an IKE instance to initiate a negotiation.
+doc/manpage.d/ipsec_whack.8.html:In summary, an IKE instance is prepared to automate the management of
+doc/manpage.d/ipsec_whack.8.html:<B>pluto</B> is an implementation of IKE.  It runs as a daemon on a network
+doc/manpage.d/ipsec_whack.8.html:<B>pluto</B> only implements a subset of IKE.  This is enough for it to
+doc/manpage.d/ipsec_whack.8.html:interoperate with other instances of <B>pluto</B>, and many other IKE
+doc/manpage.d/ipsec_whack.8.html:implementations.  We are working on implementing more of IKE.
+doc/manpage.d/ipsec_whack.8.html:A <B>pluto</B> daemon and another IKE daemon (for example, another instance
+doc/manpage.d/ipsec_whack.8.html:authentication with other IKE daemons.  For debugging, there is an
+doc/manpage.d/ipsec_whack.8.html:The default IKE port number is 500, the UDP port assigned by IANA for IKE Daemons.
+doc/manpage.d/ipsec_whack.8.html:During the IKE exchange to build an SA, the information about the
+doc/manpage.d/ipsec_whack.8.html:for IKE requests from peers.
+doc/manpage.d/ipsec_whack.8.html:for IKE negotiations initiated from unknown IP addresses (the
+doc/manpage.d/ipsec_whack.8.html:the UDP port that IKE listens to on that host.  The default is 500.
+doc/manpage.d/ipsec_whack.8.html:Propose and allow preshared secret authentication for IKE peers.  This authentication
+doc/manpage.d/ipsec_whack.8.html:Propose and allow RSA signatures for authentication of IKE peers.  This authentication
+doc/manpage.d/ipsec_whack.8.html:Note that this has nothing to do with IKE authentication.
+doc/manpage.d/ipsec_whack.8.html:<B>pluto</B> (or other IKE daemon) according to the named connection.
+doc/manpage.d/ipsec_whack.8.html:The listen form tells <B>pluto</B> to start listening for IKE requests
+doc/manpage.d/ipsec_whack.8.html:start listening for IKE traffic on public interfaces.
+doc/manpage.d/ipsec_whack.8.html:stop listening for IKE traffic on public interfaces.
+doc/manpage.d/ipsec_whack.8.html:It is generally a good idea to allow IKE messages (UDP port 500)
+doc/manpage.d/ipsec_whack.8.html:the IKE protocol.
+doc/manpage.d/ipsec_whack.8.html:For testing, SSH's IKE test page is quite useful:
+doc/manpage.d/ipsec_whack.8.html:Hint: ISAKMP SAs are often kept alive by IKEs even after the IPsec SA
+doc/manpage.d/ipsec_whack.8.html:directly.  If one of the IKEs is restarted, the other may try to use
+doc/manpage.d/ipsec_whack.8.html:the ISAKMP SA but the new IKE won't know about it.  This can lead to
+doc/manpage.d/ipsec_whack.8.html:problem to the other IKE daemon (in the future it might use
+doc/manpage.d/ipsec_whack.8.html:The IKE protocol lets the destination of the SA choose the SPI.
+doc/manpage.d/ipsec_whack.8.html:<B>Pluto</B> and another IKE implementation to interoperate.
+doc/manpage.d/ipsec_whack.8.html:It is the case that some IKE implementations won't interoperate
+doc/manpage.d/ipsec_whack.8.html:RFC2409 The Internet Key Exchange (IKE)
+doc/manpage.d/ipsec_whack.8.html:The Commit Flag is a bad feature of the IKE protocol.
+doc/manpage.d/ipsec_whack.8.html:logs the unsatisfactory message ``some IKE message we sent has been
+doc/manpage.d/ipsec_whack.8.html:authenticate each IKE peer to the other.  This is an important task of
+doc/manpage.d/ipsec_whack.8.html:Phase 1.  Each packet must be authenticated, both in IKE and in IPsec,
+doc/manpage.d/ipsec_whack.8.html:<DT><A HREF="#lbAE">IKE's Job</A><DD>
+doc/HOWTO.ipsec_alg:        IKE encrypt algorithms: AES, twofish, serpent, blowfish,
+doc/HOWTO.ipsec_alg:        IKE hash algorithms:    SHA2
+doc/HOWTO.ipsec_alg:   You can also confirm which IKE algo have been compiled into pluto with
+doc/HOWTO.ipsec_alg:        + ipsec auto --status | egrep IKE
+doc/HOWTO.ipsec_alg:        000 algorithm IKE encrypt: id=65005, name=OAKLEY_TWOFISH_CBC, ...
+doc/HOWTO.ipsec_alg:        000 algorithm IKE encrypt: id=7, name=OAKLEY_AES_CBC, ...
+doc/HOWTO.ipsec_alg:        000 algorithm IKE encrypt: id=5, name=OAKLEY_3DES_CBC, ...
+doc/HOWTO.ipsec_alg:        000 algorithm IKE hash: id=6, name=OAKLEY_SHA2_512, ...
+doc/HOWTO.ipsec_alg:        000 algorithm IKE hash: id=4, name=OAKLEY_SHA2_256, ...
+doc/HOWTO.ipsec_alg:        000 algorithm IKE hash: id=2, name=OAKLEY_SHA, ...
+doc/HOWTO.ipsec_alg:        000 algorithm IKE hash: id=1, name=OAKLEY_MD5, ...
+doc/HOWTO.ipsec_alg:3a1) - For Phase1 (IKE) algorithms:
+doc/HOWTO.ipsec_alg:   - For IKE and ESP from pluto' view:
+doc/HowTo.html:<LI><A HREF="#IKE.ipsec">IKE (Internet Key Exchange)</A></LI>
+doc/HowTo.html:<LI><A HREF="#phases">Phases of IKE</A></LI>
+doc/HowTo.html:<LI><A HREF="#sequence">Sequence of messages in IKE</A></LI>
+doc/HowTo.html:<LI><A HREF="#struct.exchange">Structure of IKE messages</A></LI>
+doc/HowTo.html:<LI><A href="#IKE">IKE</A> (Internet Key Exchange) negotiates connection
+doc/HowTo.html:<LI><A href="#Pluto">Pluto</A> (an IKE daemon) implements IKE,
+doc/HowTo.html:<P>The first step is to allow IPsec packets (IKE on UDP port 500 plus
+doc/HowTo.html:# IKE negotiations
+doc/HowTo.html: with the IKE packets.</DT>
+doc/HowTo.html:<DD>Pluto authenticates its partners during the IKE negotiation, and
+doc/HowTo.html: still allow IKE (UDP port 500) and ESP (protocol 50) packets to and
+doc/HowTo.html:# IKE negotiations
+doc/HowTo.html:<P><STRONG>No</STRONG>, single DES is not used either at the<A href="#IKE">
+doc/HowTo.html: IKE</A> level for negotiating connections or at the<A href="#IPSEC">
+doc/HowTo.html:<P>This is a designed-in limitation of the<A href="#IKE"> IKE</A> key
+doc/HowTo.html:<LI>either the UDP port 500 packets used in IKE negotiations</LI>
+doc/HowTo.html:<LI>incompatibilities between Pluto's<A href="#IKE"> IKE</A>
+doc/HowTo.html: implementation and the IKE at the other end of the tunnel.
+doc/HowTo.html:<P>Pluto messages often indicate where Pluto is in the IKE protocols.
+doc/HowTo.html:at the first step of IKE negotiation (Main Mode), which is itself the 
+doc/HowTo.html:The &quot;no suitable connection for peer *&quot; occurs toward the end of IKE 
+doc/HowTo.html:When one IKE system (for example, Pluto) is negotiating with another
+doc/HowTo.html:  some IKE message we sent has been rejected with 
+doc/HowTo.html:<P>This message is harmless. The IKE protocol provides for a number of
+doc/HowTo.html:<DD>secrets for IKE authentication, either pre-shared keys or RSA
+doc/HowTo.html:<DD>IPsec IKE keying daemon</DD>
+doc/HowTo.html:<LI>UDP port 500 for<A href="#IKE"> IKE</A> negotiations</LI>
+doc/HowTo.html:<LI>allow IPsec packets (typically, IKE on UDP port 500 plus ESP,
+doc/HowTo.html:<LI>let<A href="#Pluto"> Pluto</A> deal with IKE</LI>
+doc/HowTo.html:# IKE negotiations
+doc/HowTo.html: pluto(8)</A> IKE daemon is started.</DD>
+doc/HowTo.html: pluto(8)</A> IKE daemon is stopped.</DD>
+doc/HowTo.html:<P>For<A href="#IKE"> IKE</A> and<A href="#ESP"> ESP</A> it is not
+doc/HowTo.html: can accept UDP 500 IKE packets from anywhere, then use the<A href="#updown">
+doc/HowTo.html:<DT><A href="#IKE">IKE</A> uses<STRONG> the UDP protocol and port 500</STRONG>
+doc/HowTo.html: keying, you need IKE to negotiate connection parameters, acceptable
+doc/HowTo.html: algorithms, key sizes and key setup. IKE handles everything required to
+doc/HowTo.html:  IKE, IPsec, FW, and MASQ are all done on that machine.  The flow is
+doc/HowTo.html:  IKE input:
+doc/HowTo.html:  IKE output:
+doc/HowTo.html:Open port 500 for IKE negotiation.</TD></TR>
+doc/HowTo.html: for IKE negotiation.</TD></TR>
+doc/HowTo.html:<LI>IKE negotiations (aka Phase 1, Main Mode, STATE_MAIN_*)</LI>
+doc/HowTo.html:<P>This error commonly happens because IKE (port 500) packets, needed to
+doc/HowTo.html: daemon implements this using the<A href="#IKE"> IKE</A> protocol.</DD>
+doc/HowTo.html:<LI>Methods of authenticating gateways for IKE
+doc/HowTo.html:<DD>implemented, may be used in IKE or by by AH or ESP transforms.</DD>
+doc/HowTo.html:<DD>implemented, may be used in IKE or by AH or ESP transforms.</DD>
+doc/HowTo.html: key management over IKE.</P>
+doc/HowTo.html: daemon. The key negotiation protocol,<A href="#IKE"> IKE</A>, must
+doc/HowTo.html: ipsec.secrets(5) gets the key used to authenticate your system in IKE
+doc/HowTo.html:<P>The IKE protocol which Pluto uses to negotiate connections between
+doc/HowTo.html: key exchange in the<A href="#IKE"> IKE</A> protocol, then those secrets
+doc/HowTo.html:## IKE
+doc/HowTo.html: (Internet Protocol) level. This requires a higher-level protocol (IKE)
+doc/HowTo.html:<DT>IKE, Internet Key Exchange</DT>
+doc/HowTo.html:<DT>Phase one IKE (main mode exchange)</DT>
+doc/HowTo.html:<DT>Phase two IKE (quick mode exchange)</DT>
+doc/HowTo.html:<P>Both phases of IKE are repeated periodically to automate re-keying.</P>
+doc/HowTo.html:<DT>IKE, Internet Key Exchange</DT>
+doc/HowTo.html:<H3><A name="IKE.ipsec">IKE (Internet Key Exchange)</A></H3>
+doc/HowTo.html:<P>The IKE protocol sets up IPsec (ESP or AH) connections after
+doc/HowTo.html:<P>IKE (RFC 2409) was the outcome of a long, complex process in which
+doc/HowTo.html: mildly, IKE combines:</P>
+doc/HowTo.html:<H4><A name="phases">Phases of IKE</A></H4>
+doc/HowTo.html:<P>IKE negotiations have two phases.</P>
+doc/HowTo.html:<P>After both IKE phases are complete, you have IPsec SAs to carry your
+doc/HowTo.html:<P>The IKE protocol is designed to be extremely flexible. Among the
+doc/HowTo.html:<H4><A name="sequence">Sequence of messages in IKE</A></H4>
+doc/HowTo.html:<P>Each phase (see<A href="#phases"> previous section</A>)of IKE
+doc/HowTo.html:<H4><A name="struct.exchange">Structure of IKE messages</A></H4>
+doc/HowTo.html:<PRE>When one IKE system (for example, Pluto) is negotiating with another
+doc/HowTo.html:<P>There is a separate authentication operation at the IKE level, in
+doc/HowTo.html: re-negotiated, using the<A href="#IKE"> IKE</A> (Internet Key Exchange)
+doc/HowTo.html: implements the IKE protocol. It</P>
+doc/HowTo.html: keys using the<A href="#IKE"> IKE</A> Internet Key Exchange protocol.
+doc/HowTo.html: an alternative to IKE and ISAKMP, described in RFCs 2522 and 2523 which
+doc/HowTo.html: seems moribund, displaced by IKE. Sun now (as of Solaris 8.0) ship an
+doc/HowTo.html: IPsec implementation using IKE. We have no plans to implement SKIP. If
+doc/HowTo.html: IKE Considered Dangerous</A> paper. Note that this is a link to an
+doc/HowTo.html:<LI>peer authentication, authenticating the players in<A href="#IKE">
+doc/HowTo.html: IKE</A>'s<A href="#DH"> Diffie-Hellman</A> key exchanges to prevent<A href="#middle">
+doc/HowTo.html: used in the<A href="#IKE"> IKE</A> protocol. The useful property is
+doc/HowTo.html: field. The IKE/Oakley key determination protocol uses two variants,
+doc/HowTo.html: system using that variant would be destroyed. This is one reason<A href="#IKE">
+doc/HowTo.html: IKE</A> supports two variants. If one is broken, we can switch to the
+doc/HowTo.html:<DT><A name="IKE">IKE</A></DT>
+doc/HowTo.html: our<A href="ipsec.html"> IPsec</A> document. IKE is implemented in<A href="#FreeSWAN">
+doc/HowTo.html:<DT>IKE v2</DT>
+doc/HowTo.html:<DD>A proposed replacement for<A href="#IKE"> IKE</A>. There are other
+doc/HowTo.html: a proposed simpler replacement for<A href="#IKE"> IKE.</A></DD>
+doc/HowTo.html:<BR> strong authentication defeats the attack entirely; this is why<A href="#IKE">
+doc/HowTo.html: IKE</A> requires authentication</LI>
+doc/HowTo.html: exchange in the Oakley protocol, and in<A href="#IKE"> IKE</A>. Four
+doc/HowTo.html: exchange which use a long-term key (such as the shared secret in IKE)
+doc/HowTo.html:<DD>Another key negotiation protocol, an alternative to<A href="#IKE">
+doc/HowTo.html: IKE</A>, described in RFCs 2522 and 2523.</DD>
+doc/HowTo.html: exchange via the<A href="#IKE"> IKE</A> protocol, connection
+doc/HowTo.html: authentication</A> for<A href="#IKE"> IKE</A> negotiations.</P>
+doc/HowTo.html: higher levels of an<A href="#IPSEC"> IPsec</A> implementation (<A href="#IKE">
+doc/HowTo.html:IKE</A>) and used by the lower (<A href="#ESP">ESP</A> and<A href="#AH">
+doc/HowTo.html:rotocols, an alternative to<A href="#IKE"> IKE</A> developed by Sun and
+doc/HowTo.html:2409        The Internet Key Exchange (IKE)
+doc/adv_config.html: daemon. The key negotiation protocol,<A href="glossary.html#IKE"> IKE</A>
+doc/adv_config.html: ipsec.secrets(5) gets the key used to authenticate your system in IKE
+doc/adv_config.html:<P>The IKE protocol which Pluto uses to negotiate connections between
+doc/adv_config.html: Diffie-Hellman</A> key exchange in the<A href="glossary.html#IKE"> IKE</A>
+doc/compat.html: Pluto</A> daemon implements this using the<A href="glossary.html#IKE">
+doc/compat.html: IKE</A> protocol.</DD>
+doc/compat.html:<LI>Methods of authenticating gateways for IKE
+doc/compat.html:<DD>implemented, may be used in IKE or by by AH or ESP transforms.</DD>
+doc/compat.html:<DD>implemented, may be used in IKE or by AH or ESP transforms.</DD>
+doc/compat.html: Photuris</A> key management over IKE.</P>
+doc/draft-ietf-ipsec-dpd-03.txt:            A Traffic-Based Method of Detecting Dead IKE Peers 
+doc/draft-ietf-ipsec-dpd-03.txt:   This draft describes a method of detecting a dead IKE peer.  The 
+doc/draft-ietf-ipsec-dpd-03.txt:   to limit the number of IKE messages sent.  DPD, like other keepalive 
+doc/draft-ietf-ipsec-dpd-03.txt:   mechanisms, is often necessary to perform IKE peer failover, or to 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:   When two peers communicate with IKE [1] and IPSec [2], the situation 
+doc/draft-ietf-ipsec-dpd-03.txt:   for IKE and IPSec to identify the loss of peer connectivity.  As 
+doc/draft-ietf-ipsec-dpd-03.txt:   This problem of detecting a dead IKE peer has been addressed by 
+doc/draft-ietf-ipsec-dpd-03.txt:   managing large numbers of simultaneous IKE sessions is of concern, 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:   This scheme, called Dead Peer Detection (DPD), relies on IKE Notify 
+doc/draft-ietf-ipsec-dpd-03.txt:   messages to query the liveliness of an IKE peer. 
+doc/draft-ietf-ipsec-dpd-03.txt:   for using an IKE message exchange to query a peer's liveliness.  
+doc/draft-ietf-ipsec-dpd-03.txt:   peer is unreachable as soon as possible.  IKE provides no way for 
+doc/draft-ietf-ipsec-dpd-03.txt:   an IKE Notify to query the peer's liveliness.  These methods rely on 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:   (regardless of other IPSec/IKE activity), also increases 
+doc/draft-ietf-ipsec-dpd-03.txt:   DPD addresses the shortcomings of IKE keepalives- and heartbeats-
+doc/draft-ietf-ipsec-dpd-03.txt:   ID.  Both peers of an IKE session MUST send the DPD vendor ID before 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:   (1 and 0 respectively).  An IKE peer MUST send the Vendor ID if it 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:     cookies of the Initiator and Responder of the IKE SA (in that  
+doc/draft-ietf-ipsec-dpd-03.txt:   THERE messages at any time.  Instead, an IKE peer SHOULD send an R-
+doc/draft-ietf-ipsec-dpd-03.txt:   IPSec and IKE SAs to the peer. 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:   received traffic recently from its peer, the number of IKE messages 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:   the expiry of the IKE SA, moving to a newly chosen random number. 
+doc/draft-ietf-ipsec-dpd-03.txt:     A Traffic-Based Method of Detecting Dead IKE Peers   June 2003 
+doc/draft-ietf-ipsec-dpd-03.txt:      (IKE)," November 1998. 
+doc/draft-richardson-ipsec-opportunistic.txt:          A method for doing opportunistic encryption with IKE
+doc/draft-richardson-ipsec-opportunistic.txt:   4.        Impacts on IKE . . . . . . . . . . . . . . . . . . . . . 23
+doc/draft-richardson-ipsec-opportunistic.txt:   4.1       ISAKMP/IKE protocol  . . . . . . . . . . . . . . . . . . 23
+doc/draft-richardson-ipsec-opportunistic.txt:   9.2       DNS configured, IKE failures . . . . . . . . . . . . . . 35
+doc/draft-richardson-ipsec-opportunistic.txt:   11.2.4    (5D) Initial IKE Main Mode Packet goes out . . . . . . . 41
+doc/draft-richardson-ipsec-opportunistic.txt:   11.2.12   (5G) IKE phase 2 . . . . . . . . . . . . . . . . . . . . 42
+doc/draft-richardson-ipsec-opportunistic.txt:   This document describes opportunistic encryption using IKE and IPsec.
+doc/draft-richardson-ipsec-opportunistic.txt:      #  a hash sign represents phase 1 (IKE) cipher-text datagrams
+doc/draft-richardson-ipsec-opportunistic.txt:      phase 1 SA an ISAKMP/IKE security association, sometimes also
+doc/draft-richardson-ipsec-opportunistic.txt:   control plane contains a keying daemon such as ISAKMP/IKE and
+doc/draft-richardson-ipsec-opportunistic.txt:   ([8], [9] and [10] for ISAKMP/IKE), and the details are keying system
+doc/draft-richardson-ipsec-opportunistic.txt:   for those using ISAKMP/IKE to assure inter-operability.
+doc/draft-richardson-ipsec-opportunistic.txt:   An ISAKMP/IKE Delete is sent to clean up the phase 2 SAs as described
+doc/draft-richardson-ipsec-opportunistic.txt:   Explicit deletion is done with an IKE Delete message.  To do this
+doc/draft-richardson-ipsec-opportunistic.txt:   In the expiry method, the tunnel is simply allowed by the IKE daemon
+doc/draft-richardson-ipsec-opportunistic.txt:4. Impacts on IKE
+doc/draft-richardson-ipsec-opportunistic.txt:4.1 ISAKMP/IKE protocol
+doc/draft-richardson-ipsec-opportunistic.txt:   The IKE wire protocol needs no modifications.  The major changes are
+doc/draft-richardson-ipsec-opportunistic.txt:   without prior operator configuration, an IKE daemon must be prepared
+doc/draft-richardson-ipsec-opportunistic.txt:   The major changes to support Opportunistic Encryption are at the IKE
+doc/draft-richardson-ipsec-opportunistic.txt:   introduce a new state and a new event source (DNS replies) to IKE.
+doc/draft-richardson-ipsec-opportunistic.txt:   or an FQDN ID, an IKE daemon will need to examine local caches and
+doc/draft-richardson-ipsec-opportunistic.txt:   proposals such that the IKE datagrams do not need to be fragmented.
+doc/draft-richardson-ipsec-opportunistic.txt:9.2 DNS configured, IKE failures
+doc/draft-richardson-ipsec-opportunistic.txt:   (except via IKE) until the situation is noticed.  So a bias toward
+doc/draft-richardson-ipsec-opportunistic.txt:      (5D) Initial IKE Main Mode Packet goes out
+doc/draft-richardson-ipsec-opportunistic.txt:      (5E) IKE ISAKMP phase 1 succeeds
+doc/draft-richardson-ipsec-opportunistic.txt:      (5G) IKE phase 2 negotiation
+doc/draft-richardson-ipsec-opportunistic.txt:   SG-A's IKE daemon, having looked up the source/destination in the
+doc/draft-richardson-ipsec-opportunistic.txt:   DNS returns properly formed TXT delegation records, and SG-A's IKE
+doc/draft-richardson-ipsec-opportunistic.txt:11.2.4 (5D) Initial IKE Main Mode Packet goes out
+doc/draft-richardson-ipsec-opportunistic.txt:11.2.12 (5G) IKE phase 2
+doc/draft-richardson-ipsec-opportunistic.txt:   As with any IKE negotiation, opportunistic encryption cannot be
+doc/draft-richardson-ipsec-opportunistic.txt:   The design of ISAKMP/IKE, and its use of cookies, defend against many
+doc/draft-richardson-ipsec-opportunistic.txt:   [10]  Harkins, D. and D. Carrel, "The Internet Key Exchange (IKE)",
+doc/draft-richardson-ipsec-opportunistic.txt:         IKE", ID internet-draft (draft-ietf-ipsec-ike-modp-groups-03),
+doc/draft-spencer-ipsec-ike-implementation.nr:.ds CH "IKE Implementation Issues
+doc/draft-spencer-ipsec-ike-implementation.nr:IKE Implementation Issues
+doc/draft-spencer-ipsec-ike-implementation.nr:.S "3" "IKE Infrastructural Issues" "5"
+doc/draft-spencer-ipsec-ike-implementation.nr:.S "6" "Misc. IKE Issues" "16"
+doc/draft-spencer-ipsec-ike-implementation.nr:RFCs 2408 [ISAKMP] and 2409 [IKE],
+doc/draft-spencer-ipsec-ike-implementation.nr:RFCs 2408 [ISAKMP] and 2409 [IKE],
+doc/draft-spencer-ipsec-ike-implementation.nr:IKE and ESP,
+doc/draft-spencer-ipsec-ike-implementation.nr:3. IKE Infrastructural Issues
+doc/draft-spencer-ipsec-ike-implementation.nr:in which ISAKMP SAs are maintained between IKEs
+doc/draft-spencer-ipsec-ike-implementation.nr:there is one and only one ISAKMP SA maintained between a pair of IKEs
+doc/draft-spencer-ipsec-ike-implementation.nr:IKE implementations should always be prepared to retransmit the most recent
+doc/draft-spencer-ipsec-ike-implementation.nr:In fact, until quite recently we discarded any IKE message containing it,
+doc/draft-spencer-ipsec-ike-implementation.nr:state which is difficult to learn reliably given the limitations of IKE.
+doc/draft-spencer-ipsec-ike-implementation.nr:The IKE specification [IKE] hints, but does not actually say,
+doc/draft-spencer-ipsec-ike-implementation.nr:[IKE, section 9].
+doc/draft-spencer-ipsec-ike-implementation.nr:or other IKE activities occurred,
+doc/draft-spencer-ipsec-ike-implementation.nr:because the IKEs have no idea that there was any problem.
+doc/draft-spencer-ipsec-ike-implementation.nr:If IKE activity did occur,
+doc/draft-spencer-ipsec-ike-implementation.nr:the IKE implementation will discover that the other end doesn't seem
+doc/draft-spencer-ipsec-ike-implementation.nr:IKE provides no good way to do the notification:
+doc/draft-spencer-ipsec-ike-implementation.nr:IKE Initial-Contact is an obvious possibility,
+doc/draft-spencer-ipsec-ike-implementation.nr:Also, the specification [IKE section 4.6.3.3]
+doc/draft-spencer-ipsec-ike-implementation.nr:What is wanted is an "IKE ping",
+doc/draft-spencer-ipsec-ike-implementation.nr:The lack of such a facility is a serious failing of IKE.
+doc/draft-spencer-ipsec-ike-implementation.nr:supports IKE ping, and remembering that.)
+doc/draft-spencer-ipsec-ike-implementation.nr:6. Misc. IKE Issues
+doc/draft-spencer-ipsec-ike-implementation.nr:the presence or absence of PFS (for keys [IKE, section 5.5])
+doc/draft-spencer-ipsec-ike-implementation.nr:for identities [IKE, section 8],
+doc/draft-spencer-ipsec-ike-implementation.nr:We find IKE lacking in basic debugging tools.
+doc/draft-spencer-ipsec-ike-implementation.nr:notes that an IKE ping would be useful for connectivity verification.
+doc/draft-spencer-ipsec-ike-implementation.nr:It's also quite common to have IKE negotiate a connection successfully,
+doc/draft-spencer-ipsec-ike-implementation.nr:as IKE [IKE, section 4] specifies?
+doc/draft-spencer-ipsec-ike-implementation.nr:Further IKE challenges appear in the context of Opportunistic Encryption
+doc/draft-spencer-ipsec-ike-implementation.nr:We provide two IKE authentication methods:
+doc/draft-spencer-ipsec-ike-implementation.nr:Nothing in the ISAKMP [ISAKMP] or IKE [IKE] specifications says
+doc/draft-spencer-ipsec-ike-implementation.nr:"More MODP Diffie-Hellman groups for IKE",
+doc/draft-spencer-ipsec-ike-implementation.nr:.R IKE
+doc/draft-spencer-ipsec-ike-implementation.nr:"The Internet Key Exchange (IKE)",
+doc/draft-spencer-ipsec-ike-implementation.nr:"A method for doing opportunistic encryption with IKE",
+doc/draft-spencer-ipsec-ike-implementation.txt:                       IKE Implementation Issues
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   3. IKE Infrastructural Issues ..................................... 5
+doc/draft-spencer-ipsec-ike-implementation.txt:   6. Misc. IKE Issues .............................................. 16
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   management, RFCs 2408 [ISAKMP] and 2409 [IKE], leave many aspects of
+doc/draft-spencer-ipsec-ike-implementation.txt:   management, RFCs 2408 [ISAKMP] and 2409 [IKE], leave many aspects of
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   IKE and ESP, but after the Deep Crack effort [CRACK] demonstrated its
+doc/draft-spencer-ipsec-ike-implementation.txt:3. IKE Infrastructural Issues
+doc/draft-spencer-ipsec-ike-implementation.txt:   which ISAKMP SAs are maintained between IKEs so long as any IPsec SAs
+doc/draft-spencer-ipsec-ike-implementation.txt:   maintained between a pair of IKEs (although see sections 5.3 and 6.5
+doc/draft-spencer-ipsec-ike-implementation.txt:   The unreliable nature of UDP transmission is a nuisance.  IKE
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   fact, until quite recently we discarded any IKE message containing
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   learn reliably given the limitations of IKE.
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   IKE specification [IKE] hints, but does not actually say, that a
+doc/draft-spencer-ipsec-ike-implementation.txt:   of similar but unrelated IPsec SAs simultaneously [IKE, section 9].
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   If the network reconnects before any rekeying attempts or other IKE
+doc/draft-spencer-ipsec-ike-implementation.txt:   activities occurred, recovery is fully transparent, because the IKEs
+doc/draft-spencer-ipsec-ike-implementation.txt:   If IKE activity did occur, the IKE implementation will discover that
+doc/draft-spencer-ipsec-ike-implementation.txt:   host be notified?  IKE provides no good way to do the notification:
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   We have not yet decided what form the notification should take.  IKE
+doc/draft-spencer-ipsec-ike-implementation.txt:   difficulties.  Also, the specification [IKE section 4.6.3.3] refers
+doc/draft-spencer-ipsec-ike-implementation.txt:   What is wanted is an "IKE ping", verifying that the ISAKMP SA is
+doc/draft-spencer-ipsec-ike-implementation.txt:   failing of IKE.  An acknowledged Notification of some sort would be
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   supports IKE ping, and remembering that.)
+doc/draft-spencer-ipsec-ike-implementation.txt:6. Misc. IKE Issues
+doc/draft-spencer-ipsec-ike-implementation.txt:   absence of PFS (for keys [IKE, section 5.5]) is neither negotiated
+doc/draft-spencer-ipsec-ike-implementation.txt:   [IKE, section 8], and this has caused no interoperability problems.
+doc/draft-spencer-ipsec-ike-implementation.txt:   We find IKE lacking in basic debugging tools.  Section 5.4, above,
+doc/draft-spencer-ipsec-ike-implementation.txt:   notes that an IKE ping would be useful for connectivity verification.
+doc/draft-spencer-ipsec-ike-implementation.txt:   It's also quite common to have IKE negotiate a connection
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   phase 1 negotiation be re-used for a new phase 2 negotiation, as IKE
+doc/draft-spencer-ipsec-ike-implementation.txt:   [IKE, section 4] specifies?  Presumably, when it connects the same
+doc/draft-spencer-ipsec-ike-implementation.txt:   Further IKE challenges appear in the context of Opportunistic
+doc/draft-spencer-ipsec-ike-implementation.txt:   We provide two IKE authentication methods: shared secrets ("pre-
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:   Nothing in the ISAKMP [ISAKMP] or IKE [IKE] specifications says
+doc/draft-spencer-ipsec-ike-implementation.txt:              groups for IKE", <draft-ietf-ipsec-ike-modp-
+doc/draft-spencer-ipsec-ike-implementation.txt:   [IKE]      Harkins, D., and Carrel, D., "The Internet Key Exchange
+doc/draft-spencer-ipsec-ike-implementation.txt:              (IKE)", RFC 2409, Nov 1998.
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:              method for doing opportunistic encryption with IKE",
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/draft-spencer-ipsec-ike-implementation.txt:Internet Draft          IKE Implementation Issues            26 Feb 2002
+doc/faq.html:<P><STRONG>No</STRONG>, single DES is not used either at the<A href="glossary.html#IKE">
+doc/faq.html: IKE</A> level for negotiating connections or at the<A href="glossary.html#IPsec">
+doc/faq.html:<P>This is a designed-in limitation of the<A href="glossary.html#IKE">
+doc/faq.html: IKE</A> key negotiation protocol, not a problem with our
+doc/faq.html:<LI>either the UDP port 500 packets used in IKE negotiations</LI>
+doc/faq.html:<LI>incompatibilities between Pluto's<A href="glossary.html#IKE"> IKE</A>
+doc/faq.html: implementation and the IKE at the other end of the tunnel.
+doc/faq.html:<P>Pluto messages often indicate where Pluto is in the IKE protocols.
+doc/faq.html:at the first step of IKE negotiation (Main Mode), which is itself the 
+doc/faq.html:The &quot;no suitable connection for peer *&quot; occurs toward the end of IKE 
+doc/faq.html:When one IKE system (for example, Pluto) is negotiating with another
+doc/faq.html:  some IKE message we sent has been rejected with 
+doc/faq.html:<P>This message is harmless. The IKE protocol provides for a number of
+doc/firewall.html:<LI>UDP port 500 for<A href="glossary.html#IKE"> IKE</A> negotiations</LI>
+doc/firewall.html:<LI>allow IPsec packets (typically, IKE on UDP port 500 plus ESP,
+doc/firewall.html:<LI>let<A href="glossary.html#Pluto"> Pluto</A> deal with IKE</LI>
+doc/firewall.html:# IKE negotiations
+doc/firewall.html: pluto(8)</A> IKE daemon is started.</DD>
+doc/firewall.html: pluto(8)</A> IKE daemon is stopped.</DD>
+doc/firewall.html:<P>For<A href="glossary.html#IKE"> IKE</A> and<A href="glossary.html#ESP">
+doc/firewall.html: can accept UDP 500 IKE packets from anywhere, then use the<A href="#updown">
+doc/firewall.html:<DT><A href="glossary.html#IKE">IKE</A> uses<STRONG> the UDP protocol
+doc/firewall.html: keying, you need IKE to negotiate connection parameters, acceptable
+doc/firewall.html: algorithms, key sizes and key setup. IKE handles everything required to
+doc/firewall.html:  IKE, IPsec, FW, and MASQ are all done on that machine.  The flow is
+doc/firewall.html:  IKE input:
+doc/firewall.html:  IKE output:
+doc/glossary.html:<LI>peer authentication, authenticating the players in<A href="#IKE">
+doc/glossary.html: IKE</A>'s<A href="#DH"> Diffie-Hellman</A> key exchanges to prevent<A href="#middle">
+doc/glossary.html: used in the<A href="#IKE"> IKE</A> protocol. The useful property is
+doc/glossary.html: field. The IKE/Oakley key determination protocol uses two variants,
+doc/glossary.html: system using that variant would be destroyed. This is one reason<A href="#IKE">
+doc/glossary.html: IKE</A> supports two variants. If one is broken, we can switch to the
+doc/glossary.html:<DT><A name="IKE">IKE</A></DT>
+doc/glossary.html: our<A href="ipsec.html"> IPsec</A> document. IKE is implemented in<A href="#FreeSWAN">
+doc/glossary.html:<DT>IKE v2</DT>
+doc/glossary.html:<DD>A proposed replacement for<A href="#IKE"> IKE</A>. There are other
+doc/glossary.html: a proposed simpler replacement for<A href="#IKE"> IKE.</A></DD>
+doc/glossary.html:<BR> strong authentication defeats the attack entirely; this is why<A href="#IKE">
+doc/glossary.html: IKE</A> requires authentication</LI>
+doc/glossary.html: exchange in the Oakley protocol, and in<A href="#IKE"> IKE</A>. Four
+doc/glossary.html: exchange which use a long-term key (such as the shared secret in IKE)
+doc/glossary.html:<DD>Another key negotiation protocol, an alternative to<A href="#IKE">
+doc/glossary.html: IKE</A>, described in RFCs 2522 and 2523.</DD>
+doc/glossary.html: exchange via the<A href="#IKE"> IKE</A> protocol, connection
+doc/glossary.html: authentication</A> for<A href="#IKE"> IKE</A> negotiations.</P>
+doc/glossary.html: higher levels of an<A href="#IPSEC"> IPsec</A> implementation (<A href="#IKE">
+doc/glossary.html:IKE</A>) and used by the lower (<A href="#ESP">ESP</A> and<A href="#AH">
+doc/glossary.html:rotocols, an alternative to<A href="#IKE"> IKE</A> developed by Sun and
+doc/intro.html:<LI><A href="glossary.html#IKE">IKE</A> (Internet Key Exchange)
+doc/intro.html:<LI><A href="glossary.html#Pluto">Pluto</A> (an IKE daemon) implements
+doc/intro.html: IKE, negotiating connections with other systems</LI>
+doc/ipsec.html: protocol (IKE) to set things up for the IP-level services (ESP and AH).</P>
+doc/ipsec.html:<DT>IKE, Internet Key Exchange</DT>
+doc/ipsec.html:<DT>Phase one IKE (main mode exchange)</DT>
+doc/ipsec.html:<DT>Phase two IKE (quick mode exchange)</DT>
+doc/ipsec.html:<P>Both phases of IKE are repeated periodically to automate re-keying.</P>
+doc/ipsec.html:<DT>IKE, Internet Key Exchange</DT>
+doc/ipsec.html:<H3><A name="IKE.ipsec">IKE (Internet Key Exchange)</A></H3>
+doc/ipsec.html:<P>The IKE protocol sets up IPsec (ESP or AH) connections after
+doc/ipsec.html:<P>IKE (RFC 2409) was the outcome of a long, complex process in which
+doc/ipsec.html: mildly, IKE combines:</P>
+doc/ipsec.html:<H4><A name="phases">Phases of IKE</A></H4>
+doc/ipsec.html:<P>IKE negotiations have two phases.</P>
+doc/ipsec.html:<P>After both IKE phases are complete, you have IPsec SAs to carry your
+doc/ipsec.html:<P>The IKE protocol is designed to be extremely flexible. Among the
+doc/ipsec.html:<H4><A name="sequence">Sequence of messages in IKE</A></H4>
+doc/ipsec.html:<P>Each phase (see<A href="#phases"> previous section</A>)of IKE
+doc/ipsec.html:<H4><A name="struct.exchange">Structure of IKE messages</A></H4>
+doc/ipsec.html:<PRE>When one IKE system (for example, Pluto) is negotiating with another
+doc/ipsec.html:<P>There is a separate authentication operation at the IKE level, in
+doc/ipsec.html: periodically re-negotiated, using the<A href="glossary.html#IKE"> IKE</A>
+doc/ipsec.html: implements the IKE protocol. It</P>
+doc/ipsec.html: daemon negotiates keys using the<A href="glossary.html#IKE"> IKE</A>
+doc/ipsec.html: management protocol, an alternative to IKE and ISAKMP, described in
+doc/ipsec.html: it now seems moribund, displaced by IKE. Sun now (as of Solaris 8.0)
+doc/ipsec.html: ship an IPsec implementation using IKE. We have no plans to implement
+doc/manpages.html:<DD>secrets for IKE authentication, either pre-shared keys or RSA
+doc/manpages.html:<DD>IPsec IKE keying daemon</DD>
+doc/oppimpl.txt:IKE connections likewise should be torn down when it appears the need has
+doc/oppimpl.txt:specific reason to talk IKE to us immediately.)  Of course, we have to
+doc/oppimpl.txt:we and it can't communicate *at all* (except via IKE) until we tear down
+doc/oppimpl.txt:in IKE, but there is discussion of changing that, and this seems like the
+doc/oppimpl.txt:non-IKE packet from the other end. 
+doc/oppimpl.txt:either way, the IKE negotiation falls apart.)
+doc/oppimpl.txt:The flip side of IKE waiting for a timeout is that all other forms of
+doc/oppimpl.txt:including all DNS and IKE traffic.]
+doc/opportunism.howto:the IPSEC standards for IKE negotiation.  Remember that Source and
+doc/opportunism.nr:xxx IKE finger to get basic keying info, to be confirmed via DNSSEC?
+doc/opportunism.nr:And the numerous options which can be specified with IKE
+doc/opportunism.nr:an ISAKMP/IKE SA, possibly recreated occasionally by rekeying,
+doc/opportunism.nr:Otherwise, the Initiator starts an IKE Phase 1 negotiation
+doc/opportunism.nr:Responder gets the first IKE message,
+doc/opportunism.nr:and sends first message of IKE's D-H exchange (see 2.4).
+doc/opportunism.nr:Initiator sends IKE authentication message,
+doc/opportunism.nr:Initiator initiates IKE Phase 2 negotiation (see 2.7) to establish tunnel,
+doc/opportunism.nr:for SG discovery is to directly attempt IKE negotiation with the
+doc/opportunism.nr:will intercept the IKE packets,
+doc/opportunism.nr:and will impersonate the destination host for the IKE negotiation.
+doc/opportunism.nr:to do IKE direct to the host when that is what's wanted.
+doc/opportunism.nr:but those are not known until very late in IKE Phase 1 negotiations.
+doc/opportunism.nr:in parallel with IKE activity,
+doc/opportunism.nr:but they would require changes to IKE Phase 1, to separately identify
+doc/opportunism.nr:until IKE Phase 2.)
+doc/opportunism.nr:While the current IKE standard does not actually specify (!) who is
+doc/opportunism.nr:except in the case where the other SG simply did not respond to IKE packets,
+doc/opportunism.nr:(Cases where the other SG responded to IKE with unauthenticated error
+doc/opportunism.nr:IPsec and IKE have far too many useless options, and a few useful ones.
+doc/opportunism.nr:IKE negotiation is quite simplistic, and cannot handle even simple
+doc/opportunism.nr:should opportunistic IKE use a different port than normal IKE?]
+doc/opportunism.nr:IKE keying channels likewise are torn down when it appears the need has
+doc/opportunism.nr:(and all other connections to that IKE peer) dead.
+doc/opportunism.nr:using IKE Phase 1,
+doc/opportunism.nr:the other end can't get packets to it \fIat all\fR (except via IKE)
+doc/opportunism.nr:via an IKE Initial-Contact notification
+doc/opportunism.nr:an IKE-level ping mechanism.
+doc/opportunism.nr:IKE Ping delivery need not be reliable, since the whole point of a ping is
+doc/opportunism.nr:(private) notify value 30000 (``LIKE_HELLO'') as ping
+doc/opportunism.nr:If an IKE Ping gets no response, try some (say 8) IP pings,
+doc/opportunism.nr:if one comes back, try another IKE Ping;
+doc/opportunism.nr:How should IKE Pings be implemented?
+doc/opportunism.spec:numerous options which can be specified  with  IKE  must  be
+doc/opportunism.spec:ISAKMP/IKE SA, possibly recreated occasionally by  rekeying,
+doc/opportunism.spec:         Initiator starts an IKE Phase  1  negotiation  (see
+doc/opportunism.spec:Step 4.  Responder gets the first IKE message, and responds.
+doc/opportunism.spec:         message of IKE's D-H exchange (see 2.4).
+doc/opportunism.spec:         done.   Initiator sends IKE authentication message,
+doc/opportunism.spec:Step 10. Initiator initiates IKE Phase  2  negotiation  (see
+doc/opportunism.spec:attempt  IKE  negotiation  with  the  destination  host, and
+doc/opportunism.spec:intercept the IKE packets, and will impersonate the destina-
+doc/opportunism.spec:tion host for the IKE negotiation.   This  is  superficially
+doc/opportunism.spec:impossible to do IKE direct to the host when that is  what's
+doc/opportunism.spec:until very late in IKE Phase 1 negotiations.
+doc/opportunism.spec:be done in parallel with IKE activity, potentially  speeding
+doc/opportunism.spec:changes  to  IKE  Phase 1, to separately identify the SG and
+doc/opportunism.spec:are  not  known  to the Responder until IKE Phase 2.)  While
+doc/opportunism.spec:the current IKE standard does not actually specify  (!)  who
+doc/opportunism.spec:where the other SG simply did not respond  to  IKE  packets,
+doc/opportunism.spec:(Cases  where the other SG responded to IKE with unauthenti-
+doc/opportunism.spec:IPsec and IKE have far too many useless options, and  a  few
+doc/opportunism.spec:useful  ones.  IKE negotiation is quite simplistic, and can-
+doc/opportunism.spec:[Open question: should opportunistic  IKE  use  a  different
+doc/opportunism.spec:port than normal IKE?]
+doc/opportunism.spec:IKE keying channels likewise are torn down when  it  appears
+doc/opportunism.spec:connection  (and  all  other  connections  to that IKE peer)
+doc/opportunism.spec:using IKE Phase 1, and abandoning the old one.
+doc/opportunism.spec:IKE) until the situation is noticed.  So a bias toward quick
+doc/opportunism.spec:inform the sender via an  IKE  Initial-Contact  notification
+doc/opportunism.spec:ging and testing anyway: an IKE-level ping mechanism.  Ping-
+doc/opportunism.spec:IKE Ping delivery need not  be  reliable,  since  the  whole
+doc/opportunism.spec:vate)  notify value 30000 (``LIKE_HELLO'') as ping and (pri-
+doc/opportunism.spec:If an IKE Ping gets no response, try some (say 8) IP  pings,
+doc/opportunism.spec:comes back, try another IKE Ping; if that gets no  response,
+doc/opportunism.spec:o  How  should IKE Pings be implemented?  (See section 3.3.)
+doc/quickstart-firewall.html:<P>The first step is to allow IPsec packets (IKE on UDP port 500 plus
+doc/quickstart-firewall.html:# IKE negotiations
+doc/quickstart-firewall.html: daemon -- deals with the IKE packets.</DT>
+doc/quickstart-firewall.html:<DD>Pluto authenticates its partners during the IKE negotiation, and
+doc/quickstart-firewall.html: still allow IKE (UDP port 500) and ESP (protocol 50) packets to and
+doc/quickstart-firewall.html:# IKE negotiations
+doc/rfc.html:2409        The Internet Key Exchange (IKE)
+doc/toc.html:<LI><A HREF="ipsec.html#IKE.ipsec">IKE (Internet Key Exchange)</A></LI>
+doc/trouble.html:Open port 500 for IKE negotiation.</TD></TR>
+doc/trouble.html: for IKE negotiation.</TD></TR>
+doc/trouble.html:<LI>IKE negotiations (aka Phase 1, Main Mode, STATE_MAIN_*)</LI>
+doc/trouble.html:<P>This error commonly happens because IKE (port 500) packets, needed to
+doc/user_examples.html:## IKE
+doc/web.html: IKE Considered Dangerous</A> paper. Note that this is a link to an
+doc/src/adv_config.html:      The key negotiation protocol, <a href="glossary.html#IKE">IKE</a>, must
+doc/src/adv_config.html:ipsec.secrets(5) gets the key used to authenticate your system in IKE -- the
+doc/src/adv_config.html:<p>The IKE protocol which Pluto uses to negotiate connections between
+doc/src/adv_config.html:href="glossary.html#IKE">IKE</a> protocol, then those secrets must be stored
+doc/src/compat.html:          the <a href="glossary.html#IKE">IKE</a> protocol.</dd>
+doc/src/compat.html:  <li>Methods of authenticating gateways for IKE
+doc/src/compat.html:        <dd>implemented, may be used in IKE or by by AH or ESP
+doc/src/compat.html:        <dd>implemented, may be used in IKE or by AH or ESP transforms.</dd>
+doc/src/compat.html:management over IKE.</p>
+doc/src/draft-richardson-ipsec-opportunistic.html:<html><head><title>A method for doing opportunistic encryption with IKE</title>
+doc/src/draft-richardson-ipsec-opportunistic.html:<div align="right"><font face="monaco, MS Sans Serif" color="#990000" size="+3"><b><br><span class="title">A method for doing opportunistic encryption with IKE</span></b></font></div>
+doc/src/draft-richardson-ipsec-opportunistic.html:Impacts on IKE<br></b>
+doc/src/draft-richardson-ipsec-opportunistic.html:ISAKMP/IKE protocol<br></b>
+doc/src/draft-richardson-ipsec-opportunistic.html:DNS configured, IKE failures<br></b>
+doc/src/draft-richardson-ipsec-opportunistic.html:(5D) Initial IKE Main Mode Packet goes out<br></b>
+doc/src/draft-richardson-ipsec-opportunistic.html:(5G) IKE phase 2<br></b>
+doc/src/draft-richardson-ipsec-opportunistic.html:This document describes opportunistic encryption using IKE and IPsec.
+doc/src/draft-richardson-ipsec-opportunistic.html: a hash sign represents phase 1 (IKE) cipher-text
+doc/src/draft-richardson-ipsec-opportunistic.html: an ISAKMP/IKE security association, sometimes
+doc/src/draft-richardson-ipsec-opportunistic.html:daemon such as ISAKMP/IKE and performs all authorization, authentication and
+doc/src/draft-richardson-ipsec-opportunistic.html:<a href="#RFC2408">[9]</a> and <a href="#RFC2409">[10]</a> for ISAKMP/IKE),
+doc/src/draft-richardson-ipsec-opportunistic.html:requirements for those using ISAKMP/IKE to assure inter-operability.
+doc/src/draft-richardson-ipsec-opportunistic.html:An ISAKMP/IKE Delete is sent to clean up the phase 2 SAs as described in
+doc/src/draft-richardson-ipsec-opportunistic.html:Explicit deletion is done with an IKE Delete message. To do this requires
+doc/src/draft-richardson-ipsec-opportunistic.html:In the expiry method, the tunnel is simply allowed by the IKE daemon to
+doc/src/draft-richardson-ipsec-opportunistic.html:<h3>4.&nbsp;Impacts on IKE</h3>
+doc/src/draft-richardson-ipsec-opportunistic.html:<h4><a name="anchor32">4.1</a>&nbsp;ISAKMP/IKE protocol</h4>
+doc/src/draft-richardson-ipsec-opportunistic.html:    The IKE wire protocol needs no modifications. The major changes are
+doc/src/draft-richardson-ipsec-opportunistic.html:    prior operator configuration, an IKE daemon must be prepared to negotiate
+doc/src/draft-richardson-ipsec-opportunistic.html:    The major changes to support Opportunistic Encryption are at the IKE daemon
+doc/src/draft-richardson-ipsec-opportunistic.html:  new state and a new event source (DNS replies) to IKE. Although a synchronous 
+doc/src/draft-richardson-ipsec-opportunistic.html:     an FQDN ID, an IKE daemon will need to examine local caches and
+doc/src/draft-richardson-ipsec-opportunistic.html:	such that the IKE datagrams do not need to be fragmented.
+doc/src/draft-richardson-ipsec-opportunistic.html:<h4><a name="anchor48">9.2</a>&nbsp;DNS configured, IKE failures</h4>
+doc/src/draft-richardson-ipsec-opportunistic.html:IKE) until the situation is noticed.  So a bias toward quick
+doc/src/draft-richardson-ipsec-opportunistic.html:Initial IKE Main Mode Packet goes out
+doc/src/draft-richardson-ipsec-opportunistic.html:IKE ISAKMP phase 1 succeeds
+doc/src/draft-richardson-ipsec-opportunistic.html:IKE phase 2 negotiation
+doc/src/draft-richardson-ipsec-opportunistic.html:    SG-A's IKE daemon, having looked up the source/destination in the connection
+doc/src/draft-richardson-ipsec-opportunistic.html:  DNS returns properly formed TXT delegation records, and SG-A's IKE daemon
+doc/src/draft-richardson-ipsec-opportunistic.html:<h4><a name="anchor58">11.2.4</a>&nbsp;(5D) Initial IKE Main Mode Packet goes out</h4>
+doc/src/draft-richardson-ipsec-opportunistic.html:<h4><a name="anchor66">11.2.12</a>&nbsp;(5G) IKE phase 2</h4>
+doc/src/draft-richardson-ipsec-opportunistic.html:As with any IKE negotiation, opportunistic encryption cannot be secure
+doc/src/draft-richardson-ipsec-opportunistic.html:  The design of ISAKMP/IKE, and its use of cookies, defend against many kinds
+doc/src/draft-richardson-ipsec-opportunistic.html:<td class="author-text"><a href="mailto:dharkins@cisco.com">Harkins, D.</a> and <a href="mailto:carrel@ipsec.org">D. Carrel</a>, "<a href="ftp://ftp.isi.edu/in-notes/rfc2409.txt">The Internet Key Exchange (IKE)</a>", RFC 2409, November 1998.</td></tr>
+doc/src/draft-richardson-ipsec-opportunistic.html:<td class="author-text"><a href="mailto:kivinen@ssh.fi">Kivinen, T.</a> and <a href="mailto:mrskojo@cc.helsinki.fi">M. Kojo</a>, "More MODP Diffie-Hellman groups for IKE", ID internet-draft (draft-ietf-ipsec-ike-modp-groups-03), November 2001.</td></tr>
+doc/src/draft-richardson-ipsec-opportunistic.xml:     A method for doing opportunistic encryption with IKE
+doc/src/draft-richardson-ipsec-opportunistic.xml:This document describes opportunistic encryption using IKE and IPsec.
+doc/src/draft-richardson-ipsec-opportunistic.xml:    <t hangText="#"> a hash sign represents phase 1 (IKE) cipher-text
+doc/src/draft-richardson-ipsec-opportunistic.xml:    <t hangText="phase 1 SA"> an ISAKMP/IKE security association, sometimes
+doc/src/draft-richardson-ipsec-opportunistic.xml:daemon such as ISAKMP/IKE and performs all authorization, authentication and
+doc/src/draft-richardson-ipsec-opportunistic.xml:<xref target="RFC2408" /> and <xref target="RFC2409" /> for ISAKMP/IKE),
+doc/src/draft-richardson-ipsec-opportunistic.xml:requirements for those using ISAKMP/IKE to assure inter-operability.
+doc/src/draft-richardson-ipsec-opportunistic.xml:An ISAKMP/IKE Delete is sent to clean up the phase 2 SAs as described in
+doc/src/draft-richardson-ipsec-opportunistic.xml:Explicit deletion is done with an IKE Delete message. To do this requires
+doc/src/draft-richardson-ipsec-opportunistic.xml:In the expiry method, the tunnel is simply allowed by the IKE daemon to
+doc/src/draft-richardson-ipsec-opportunistic.xml:<section title="Impacts on IKE">
+doc/src/draft-richardson-ipsec-opportunistic.xml:  <section title="ISAKMP/IKE protocol">
+doc/src/draft-richardson-ipsec-opportunistic.xml:    The IKE wire protocol needs no modifications. The major changes are
+doc/src/draft-richardson-ipsec-opportunistic.xml:    prior operator configuration, an IKE daemon must be prepared to negotiate
+doc/src/draft-richardson-ipsec-opportunistic.xml:    The major changes to support Opportunistic Encryption are at the IKE daemon
+doc/src/draft-richardson-ipsec-opportunistic.xml:  new state and a new event source (DNS replies) to IKE. Although a synchronous 
+doc/src/draft-richardson-ipsec-opportunistic.xml:     an FQDN ID, an IKE daemon will need to examine local caches and
+doc/src/draft-richardson-ipsec-opportunistic.xml:     In this context, the IKE daemon present in the Policy Enforcement Point
+doc/src/draft-richardson-ipsec-opportunistic.xml:	such that the IKE datagrams do not need to be fragmented.
+doc/src/draft-richardson-ipsec-opportunistic.xml:  <section title="DNS configured, IKE failures">
+doc/src/draft-richardson-ipsec-opportunistic.xml:IKE) until the situation is noticed.  So a bias toward quick
+doc/src/draft-richardson-ipsec-opportunistic.xml:<t hangText="(5D)">Initial IKE Main Mode Packet goes out</t>
+doc/src/draft-richardson-ipsec-opportunistic.xml:<t hangText="(5E)">IKE ISAKMP phase 1 succeeds</t>
+doc/src/draft-richardson-ipsec-opportunistic.xml:<t hangText="(5G)">IKE phase 2 negotiation</t>
+doc/src/draft-richardson-ipsec-opportunistic.xml:    SG-A's IKE daemon, having looked up the source/destination in the connection
+doc/src/draft-richardson-ipsec-opportunistic.xml:  DNS returns properly formed TXT delegation records, and SG-A's IKE daemon
+doc/src/draft-richardson-ipsec-opportunistic.xml:  <section title="(5D) Initial IKE Main Mode Packet goes out">
+doc/src/draft-richardson-ipsec-opportunistic.xml:  <section title="(5G) IKE phase 2">
+doc/src/draft-richardson-ipsec-opportunistic.xml:As with any IKE negotiation, opportunistic encryption cannot be secure
+doc/src/draft-richardson-ipsec-opportunistic.xml:  The design of ISAKMP/IKE, and its use of cookies, defend against many kinds
+doc/src/faq.html:href="glossary.html#IKE">IKE</a> level for negotiating connections or at the
+doc/src/faq.html:href="glossary.html#IKE">IKE</a> key negotiation protocol, not a problem with
+doc/src/faq.html:  <li>either the UDP port 500 packets used in IKE negotiations</li>
+doc/src/faq.html:  <li>incompatibilities between Pluto's <a href="glossary.html#IKE">IKE</a>
+doc/src/faq.html:    implementation and the IKE at the other end of the tunnel.
+doc/src/faq.html:<p>Pluto messages often indicate  where Pluto is in the IKE protocols. The
+doc/src/faq.html:at the first step of IKE negotiation (Main Mode), which is itself the 
+doc/src/faq.html:The "no suitable connection for peer *" occurs toward the end of IKE 
+doc/src/faq.html:When one IKE system (for example, Pluto) is negotiating with another
+doc/src/faq.html:  some IKE message we sent has been rejected with 
+doc/src/faq.html:<p>This message is harmless. The IKE protocol provides for a number of
+doc/src/firewall.html:  <li>UDP port 500 for <a href="glossary.html#IKE">IKE</a> negotiations</li>
+doc/src/firewall.html:  <li>allow IPsec packets (typically, IKE on UDP port 500 plus ESP, protocol
+doc/src/firewall.html:  <li>let <a href="glossary.html#Pluto">Pluto</a> deal with IKE</li>
+doc/src/firewall.html:# IKE negotiations
+doc/src/firewall.html:      href="manpage.d/ipsec_pluto.8.html">pluto(8)</a> IKE daemon is
+doc/src/firewall.html:      href="manpage.d/ipsec_pluto.8.html">pluto(8)</a> IKE daemon is
+doc/src/firewall.html:<p>For <a href="glossary.html#IKE">IKE</a> and <a
+doc/src/firewall.html:IKE packets from anywhere, then use the <a href="#updown">updown</a> script
+doc/src/firewall.html:  <dt><a href="glossary.html#IKE">IKE</a> uses <strong>the UDP protocol and
+doc/src/firewall.html:      keying, you need IKE to negotiate connection parameters, acceptable
+doc/src/firewall.html:      algorithms, key sizes and key setup. IKE handles everything required to
+doc/src/firewall.html:  IKE, IPsec, FW, and MASQ are all done on that machine.  The flow is
+doc/src/firewall.html:  IKE input:
+doc/src/firewall.html:  IKE output:
+doc/src/glossary.html:          href="#IKE">IKE</a>'s <a href="#DH">Diffie-Hellman</a> key
+doc/src/glossary.html:      used in the <a href="#IKE">IKE</a> protocol. The useful property is
+doc/src/glossary.html:      field. The IKE/Oakley key determination protocol uses two variants,
+doc/src/glossary.html:      href="#IKE">IKE</a> supports two variants. If one is broken, we can
+doc/src/glossary.html:  <dt><a name="IKE">IKE</a></dt>
+doc/src/glossary.html:      RFC 2409 and our <a href="ipsec.html">IPsec</a> document. IKE is
+doc/src/glossary.html:  <dt>IKE v2</dt>
+doc/src/glossary.html:    <dd>A proposed replacement for <a href="#IKE">IKE</a>. There are other
+doc/src/glossary.html:      a proposed simpler replacement for <a href="#IKE">IKE.</a></dd>
+doc/src/glossary.html:          href="#IKE">IKE</a> requires authentication</li>
+doc/src/glossary.html:      exchange in the Oakley protocol, and in <a href="#IKE">IKE</a>. Four
+doc/src/glossary.html:      exchange which use a long-term key (such as the shared secret in IKE)
+doc/src/glossary.html:      href="#IKE">IKE</a>, described in RFCs 2522 and 2523.</dd>
+doc/src/glossary.html:      exchange via the <a href="#IKE">IKE</a> protocol, connection
+doc/src/glossary.html:      href="#IKE">IKE </a>negotiations.</p>
+doc/src/glossary.html:      href="#IKE">IKE</a>) and used by the lower (<a href="#ESP">ESP</a> and
+doc/src/glossary.html:      <b>P</b>rotocols, an alternative to <a href="#IKE">IKE</a> developed by
+doc/src/intro.html:  <li><a href="glossary.html#IKE">IKE</a> (Internet Key Exchange) negotiates
+doc/src/intro.html:  <li><a href="glossary.html#Pluto">Pluto</a> (an IKE daemon) implements IKE,
+doc/src/ipsec.html:  content="Linux, IPsec, VPN, security, FreeSWAN, protocol, ESP, AH, IKE">
+doc/src/ipsec.html:level. This requires a higher-level protocol (IKE) to set things up for the
+doc/src/ipsec.html:  <dt>IKE, Internet Key Exchange</dt>
+doc/src/ipsec.html:  <dt>Phase one IKE (main mode exchange)</dt>
+doc/src/ipsec.html:  <dt>Phase two IKE (quick mode exchange)</dt>
+doc/src/ipsec.html:<p>Both phases of IKE are repeated periodically to automate re-keying.</p>
+doc/src/ipsec.html:  <dt>IKE, Internet Key Exchange</dt>
+doc/src/ipsec.html:<h3><a name="IKE.ipsec">IKE (Internet Key Exchange)</a></h3>
+doc/src/ipsec.html:<p>The IKE protocol sets up IPsec (ESP or AH) connections after negotiating
+doc/src/ipsec.html:<p>IKE (RFC 2409) was the outcome of a long, complex process in which quite a
+doc/src/ipsec.html:number of protocols were proposed and debated. Oversimplifying mildly, IKE
+doc/src/ipsec.html:<h4><a name="phases">Phases of IKE</a></h4>
+doc/src/ipsec.html:<p>IKE negotiations have two phases.</p>
+doc/src/ipsec.html:<p>After both IKE phases are complete, you have IPsec SAs to carry your
+doc/src/ipsec.html:<p>The IKE protocol is designed to be extremely flexible. Among the things
+doc/src/ipsec.html:<h4><a name="sequence">Sequence of messages in IKE</a></h4>
+doc/src/ipsec.html:<p>Each phase (see <a href="#phases">previous section</a>)of IKE involves a
+doc/src/ipsec.html:<h4><a name="struct.exchange">Structure of IKE messages</a></h4>
+doc/src/ipsec.html:<pre>When one IKE system (for example, Pluto) is negotiating with another
+doc/src/ipsec.html:      <p>There is a separate authentication operation at the IKE level, in
+doc/src/ipsec.html:      href="glossary.html#IKE">IKE</a> (Internet Key Exchange) protocol. In
+doc/src/ipsec.html:implements the IKE protocol. It</p>
+doc/src/ipsec.html:negotiates keys using the <a href="glossary.html#IKE">IKE</a> Internet Key
+doc/src/ipsec.html:protocol, an alternative to IKE and ISAKMP, described in RFCs 2522 and 2523
+doc/src/ipsec.html:now seems moribund, displaced by IKE. Sun now (as of Solaris 8.0) ship an
+doc/src/ipsec.html:IPsec implementation using IKE. We have no plans to implement SKIP. If a user
+doc/src/manpages.html:    <dd>secrets for IKE authentication, either pre-shared keys or RSA private
+doc/src/manpages.html:    <dd>IPsec IKE keying daemon</dd>
+doc/src/quickstart-firewall.html:<P>The first step is to allow IPsec packets (IKE on UDP port 500 plus
+doc/src/quickstart-firewall.html:# IKE negotiations
+doc/src/quickstart-firewall.html: daemon -- deals with the IKE packets.</DT>
+doc/src/quickstart-firewall.html:<DD>Pluto authenticates its partners during the IKE negotiation, and
+doc/src/quickstart-firewall.html: still allow IKE (UDP port 500) and ESP (protocol 50) packets to and
+doc/src/quickstart-firewall.html:# IKE negotiations
+doc/src/reference.MODPGROUPS.xml:<title abbrev='MODPGROUPS'>More MODP Diffie-Hellman groups for IKE</title>
+doc/src/rfc.html:2409        The Internet Key Exchange (IKE)
+doc/src/trouble.html:<TD>Open port 500 for IKE negotiation.</TD>
+doc/src/trouble.html:<TD>Check that port 500 is open for IKE negotiation.</TD>
+doc/src/trouble.html:<LI>IKE negotiations (aka Phase 1, Main Mode, STATE_MAIN_*)</LI>
+doc/src/trouble.html:<P>This error commonly happens because IKE (port 500) packets, needed 
+doc/src/user_examples.html:## IKE
+doc/src/web.html:    href="http://www.sandelman.ottawa.on.ca/linux-ipsec/html/1999/06/msg00319.html">IKE
+klips/doc/TODO:	replace IKE bypass machinery with SPD entries.
+klips/doc/TODO:		for IKE passthrough.
+klips/doc/klipsNGreq/requirements/001/requirement001.tex:routes. If there is no route to the remote IKE daemon, then there is no point 
+klips/doc/klips2-design-api-trips.txt:		Nested tunnels, IKE recursion api trip
+klips/doc/klips2-design.txt:				- save IKE phase 1 keys
+klips/net/ipsec/ipsec_rcv.c:			else if ( (tp->esp_in_udp == ESPINUDP_WITH_NON_IKE) &&
+klips/net/ipsec/ipsec_rcv.c:				/* ESP Packet with Non-IKE header */
+klips/net/ipsec/ipsec_rcv.c:					"ESPinUDP pkt with Non-IKE - spi=0x%x\n",
+klips/net/ipsec/ipsec_rcv.c:				natt_type = ESPINUDP_WITH_NON_IKE;
+klips/net/ipsec/ipsec_rcv.c:					"IKE packet - not handled here\n");
+klips/net/ipsec/ipsec_tunnel.c:		    "checking for local udp/500 IKE packet "
+klips/net/ipsec/ipsec_tunnel.c:	 * without interference since it is most likely an IKE packet.
+klips/net/ipsec/ipsec_tunnel.c:		/* Whatever the eroute, this is an IKE message
+klips/net/ipsec/ipsec_tunnel.c:				    "local UDP/500 (probably IKE) passthrough: base fragment, rest of fragments will probably get filtered.\n");
+klips/net/ipsec/ipsec_tunnel.c:						case ESPINUDP_WITH_NON_IKE:
+klips/net/ipsec/ipsec_tunnel.c:		/* clear UDP & Non-IKE Markers (if any) */
+klips/net/ipsec/ipsec_tunnel.c: * Fix for 2.2 local IKE fragmentation blackhole.  Still won't work if
+klips/net/ipsec/ipsec_tunnel.c: * Applied DHR's tunnel patch to streamline IKE/specialSA processing.
+klips/net/ipsec/ipsec_tunnel.c: * Added IKE destination port debugging.
+klips/net/ipsec/ipsec_tunnel.c: * Fixed bug as a result of moving IKE bypass above %trap/%hold code.
+klips/net/ipsec/ipsec_tunnel.c: * Moved the UDP/500 IKE check just above the %hold/%trap checks to avoid
+klips/net/ipsec/ipsec_tunnel.c: * IKE packets being stolen by the %hold (and returned to the sending KMd
+klips/net/ipsec/ipsec_tunnel.c: * Added Hans Schultz' fragmented UDP/500 IKE socket port selector.
+klips/net/ipsec/ipsec_tunnel.c: * Add default == eroute.dest to IKE bypass conditions for magic eroutes.
+klips/net/ipsec/ipsec_tunnel.c: * Moved the IKE passthrough check after the eroute lookup so we can pass
+klips/net/ipsec/ipsec_tunnel.c: * IKE through intermediate tunnels.
+klips/net/ipsec/ipsec_tunnel.c: * Put IKE port bypass debug output in user-switched debug statements.
+klips/net/ipsec/ipsec_tunnel.c: * Fixed ntohs bug in udp/500 hole for IKE.
+klips/net/ipsec/pfkey_v2_parser.c:		case ESPINUDP_WITH_NON_IKE: /* with Non-IKE */
+klips/net/ipsec/pfkey_v2_parser.c: * Better state coherency (error management) between pf_key and IKE daemon.
+klips/test/TESTLIST:# east-drop-02: remote source IKE with drop policy
+klips/test/TESTLIST:# east-hold-02: remote source IKE with hold policy
+klips/test/TESTLIST:# east-none-02: remote source IKE with none policy
+klips/test/TESTLIST:# east-pass-02: remote source IKE with pass policy
+klips/test/TESTLIST:# east-reject-02: remote source IKE with reject policy
+klips/test/TESTLIST:# east-trap-02: remote source IKE with trap policy
+klips/test/TESTLIST:# east-trapsubnet-02: remote source IKE with trapsubnet policy
+klips/test/TESTLIST:# west-drop-02: remote source IKE with drop policy
+klips/test/TESTLIST:# west-hold-02: remote source IKE with hold policy
+klips/test/TESTLIST:# west-none-02: remote source IKE with none policy
+klips/test/TESTLIST:# west-pass-02: remote source IKE with pass policy
+klips/test/TESTLIST:# west-reject-02: remote source IKE with reject policy
+klips/test/TESTLIST:# west-trap-02: remote source IKE with trap policy
+klips/test/TESTLIST:# west-trapsubnet-02: remote source IKE with trapsubnet policy
+lib/freeswan.h:#define ESPINUDP_WITH_NON_IKE   1  /* draft-ietf-ipsec-nat-t-ike-00/01 */
+lib/pfkey_v2_build.c:# include "../pluto/defs.h"  /* for PRINTF_LIKE */
+lib/pfkey_v2_parse.c:# include "../pluto/defs.h"  /* for PRINTF_LIKE */
+pluto/alg/Config.ike_alg:## IKE algorithms config. for static linking into pluto
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_AES=y
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_1DES=y
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_BLOWFISH=n
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_CAST=n
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_SERPENT=n
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_TWOFISH=n
+pluto/alg/Config.ike_alg:CONFIG_IKE_ALG_SHA2=n
+pluto/alg/Makefile:# Search for IKE_ALG_INIT_NAME: in ike_alg_*.c to
+pluto/alg/Makefile:		/IKE_ALG_INIT_NAME:/ \
+pluto/alg/Makefile.ike_alg_1des:CONFIG_YES:=$(CONFIG_IKE_ALG_1DES)
+pluto/alg/Makefile.ike_alg_aes:CONFIG_YES:=$(CONFIG_IKE_ALG_AES)
+pluto/alg/Makefile.ike_alg_blowfish:CONFIG_YES:=$(CONFIG_IKE_ALG_BLOWFISH)
+pluto/alg/Makefile.ike_alg_cast:CONFIG_YES:=$(CONFIG_IKE_ALG_CAST)
+pluto/alg/Makefile.ike_alg_serpent:CONFIG_YES:=$(CONFIG_IKE_ALG_SERPENT)
+pluto/alg/Makefile.ike_alg_sha2:CONFIG_YES:=$(CONFIG_IKE_ALG_SHA2)
+pluto/alg/Makefile.ike_alg_twofish:CONFIG_YES:=$(CONFIG_IKE_ALG_TWOFISH)
+pluto/alg/ike_alg_1des.c:	algo_type: IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_1des.c:IKE_ALG_INIT_NAME: ike_alg_1des_init
+pluto/alg/ike_alg_aes.c:	algo_type: 	IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_aes.c:IKE_ALG_INIT_NAME: ike_alg_aes_init
+pluto/alg/ike_alg_blowfish.c:	algo_type: IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_blowfish.c:IKE_ALG_INIT_NAME: ike_alg_blowfish_init
+pluto/alg/ike_alg_cast.c:	algo_type: IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_cast.c:IKE_ALG_INIT_NAME: ike_alg_cast_init
+pluto/alg/ike_alg_serpent.c:	algo_type: 	IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_serpent.c:IKE_ALG_INIT_NAME: ike_alg_serpent_init
+pluto/alg/ike_alg_sha2.c:	algo_type: IKE_ALG_HASH,
+pluto/alg/ike_alg_sha2.c:	algo_type: IKE_ALG_HASH,
+pluto/alg/ike_alg_sha2.c:IKE_ALG_INIT_NAME: ike_alg_sha2_init
+pluto/alg/ike_alg_twofish.c:	algo_type: 	IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_twofish.c:	algo_type: 	IKE_ALG_ENCRYPT,
+pluto/alg/ike_alg_twofish.c:IKE_ALG_INIT_NAME: ike_alg_twofish_init
+pluto/test/bin/CONFIG:export IKEPORT=8500
+pluto/test/bin/dopluto:	--ikeport $IKEPORT \
+pluto/test/bin/dowhack:WESTHOST="--host $WESTIP --ikeport $IKEPORT"
+pluto/test/bin/dowhack:EASTHOST="--host $EASTIP --ikeport $IKEPORT"
+pluto/test/bin/dowhack:ANYHOST="--host %any --ikeport $IKEPORT"
+pluto/test/bin/dowhack:OPPO="--host %opportunistic --ikeport $IKEPORT"
+pluto/test/log.ref/ipsec-oppo/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-oppo/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-psk/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-psk/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-psk-rw/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-psk-rw/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-rsa/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-rsa/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-rsa-c/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-rsa-c/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-rsa-rw/wi-log:002 listening for IKE messages
+pluto/test/log.ref/ipsec-rsa-rw/wi-log:002 listening for IKE messages
+pluto/test/log.ref/isakmp-psk/wi-log:002 listening for IKE messages
+pluto/test/log.ref/isakmp-psk/wi-log:002 listening for IKE messages
+pluto/test/log.ref/isakmp-rsa/wi-log:002 listening for IKE messages
+pluto/test/log.ref/isakmp-rsa/wi-log:002 listening for IKE messages
+pluto/CHANGES:    with respect to IKE traffic (eg. loading public keys)
+pluto/CHANGES:  change brings us in line with other IKE daemons.  Added a fudge
+pluto/CHANGES:  are now just those required by RFC2409 (IKE).  In most cases,
+pluto/CHANGES:  The TCP port is the *same* as the IKE port -- no longer 1 greater.
+pluto/Makefile:# -DPORT=n sets the default UDP port for IKE messages (otherwise 500)
+pluto/Makefile:#    IKE daemons.  In the Makefile, two levels of quoting are needed:
+pluto/alg_info.c: *	IKE alg
+pluto/alg_info.c: *	Add IKE alg info _with_ logic (policy):
+pluto/alg_info.c:/* XXX:jjo to implement different parser for ESP and IKE */
+pluto/alg_info.c:			ALG_INFO_IKE_FOREACH((struct alg_info_ike *)alg_info, ike_info, cnt) {
+pluto/alg_info.c:	ALG_INFO_IKE_FOREACH(alg_info, ike_info, cnt) {
+pluto/alg_info.h:#define ALG_INFO_IKE_FOREACH(ai, ai_ike, i) \
+pluto/alg_info_test.c:#define STR_EXAMPLE_IKE "3des, aes128-sha, aes128-sha2_256-modp2048"
+pluto/alg_info_test.c:			ALG_INFO_IKE_FOREACH(ai_ike, ike_info, i) {
+pluto/alg_info_test.c:		fprintf(stderr, "       -i " STR_EXAMPLE_IKE "\n");
+pluto/connections.c:#ifndef NO_IKE_ALG
+pluto/connections.c:    if (this->host_port != IKE_UDP_PORT)
+pluto/connections.c:	    /* check that all main mode RW IKE policies agree because we must
+pluto/connections.c:	     * aggressive mode IKE policies do not have to agree amongst
+pluto/connections.c:#ifndef NO_IKE_ALG
+pluto/connections.c:#ifndef NO_IKE_ALG
+pluto/connections.c:#ifndef NO_IKE_ALG
+pluto/connections.c: * After the first IKE message is sent, the regular state machinery
+pluto/connections.c: * In RFC 2409 "The Internet Key Exchange (IKE)",
+pluto/connections.c: * in 5.1 "IKE Phase 1 Authenticated With Signatures", describing Main
+pluto/connections.c:#ifndef NO_IKE_ALG
+pluto/connections.h: * - ISAKMP connections, between hosts (for IKE communication)
+pluto/constants.c:	"KEY_IKE",
+pluto/constants.c:    { KEY_IKE, KEY_IKE, isakmp_transform_name, NULL };
+pluto/constants.c:#ifdef NO_EXTRA_IKE
+pluto/constants.h:/* limits on nonce sizes.  See RFC2409 "The internet key exchange (IKE)" 5 */
+pluto/constants.h:#define IKE_UDP_PORT	500
+pluto/constants.h:    /* IKE states */
+pluto/constants.h:#define STATE_IKE_FLOOR	STATE_MAIN_R0
+pluto/constants.h:#define STATE_IKE_ROOF	(STATE_INFO_PROTECTED + 1)
+pluto/constants.h: * RFC2409 "The Internet Key Exchange (IKE)", near end of Appendix A
+pluto/constants.h:#define KEY_IKE               1
+pluto/constants.h:#define SA_REPLACEMENT_MARGIN_DEFAULT	    540	  /* (IPSEC & IKE) nine minutes */
+pluto/constants.h:#define SA_REPLACEMENT_FUZZ_DEFAULT	    100	  /* (IPSEC & IKE) 100% of MARGIN */
+pluto/constants.h:#define SA_REPLACEMENT_RETRIES_DEFAULT	    3	/*  (IPSEC & IKE) */
+pluto/crypto.c:#ifndef NO_IKE_ALG
+pluto/crypto.c:	algo_type: 	IKE_ALG_ENCRYPT,
+pluto/crypto.c:	algo_type: IKE_ALG_HASH,
+pluto/crypto.c:	algo_type: IKE_ALG_HASH,
+pluto/crypto.c:#ifndef NO_IKE_ALG
+pluto/crypto.c: * See RFC2409 "The Internet key exchange (IKE)" 6.
+pluto/crypto.c:/* encrypt or decrypt part of an IKE message using DES
+pluto/crypto.c:/* encrypt or decrypt part of an IKE message using 3DES
+pluto/crypto.c:	return (struct hash_desc *) ike_alg_find(IKE_ALG_HASH, alg, 0);
+pluto/crypto.c:	return (struct encrypt_desc *) ike_alg_find(IKE_ALG_ENCRYPT, alg, 0);
+pluto/db_ops.c:	db_trans_add(ctx, KEY_IKE);
+pluto/db_ops.c:	db_trans_add(ctx, KEY_IKE);
+pluto/defs.h:# define PRINTF_LIKE(n) __attribute__ ((format(printf, n, n+1)))
+pluto/defs.h:# define PRINTF_LIKE(n)	/* ignore */
+pluto/demux.c:/* demultiplex incoming IKE messages
+pluto/demux.c: * rfc2409: The Internet Key Exchange (IKE)
+pluto/demux.c: * This concerns Phase 1 identities, those of the IKE hosts.
+pluto/demux.c: * (3) We respond to an IKE negotiation.
+pluto/demux.c:    *ike_microcode_index[STATE_IKE_ROOF - STATE_IKE_FLOOR];
+pluto/demux.c:	passert(STATE_IKE_FLOOR <= t->state && t->state < STATE_IKE_ROOF);
+pluto/demux.c:	ike_microcode_index[t->state - STATE_IKE_FLOOR] = t;
+pluto/demux.c:	    log("some IKE message we sent has been rejected with ECONNREFUSED (kernel supplied no details)");
+pluto/demux.c:	log("IKE message has the Commit Flag set but Pluto doesn't implement this feature; ignoring flag");
+pluto/demux.c:    passert(STATE_IKE_FLOOR <= from_state && from_state <= STATE_IKE_ROOF);
+pluto/demux.c:    smc = ike_microcode_index[from_state - STATE_IKE_FLOOR];
+pluto/demux.c:	/* rfc2409: The Internet Key Exchange (IKE), 5 Exchanges:
+pluto/demux.c:	/* rfc2409: The Internet Key Exchange (IKE), 5.5 Phase 2 - Quick Mode
+pluto/demux.c:	/* rfc2409: The Internet Key Exchange (IKE), 5.5 Phase 2 - Quick Mode:
+pluto/demux.c:			sprintf(nt_type,"IKE[\"%s\"] Rx {{ Notify : %s",st->st_connection->name,enum_show(&ipsec_notification_names, p->payload.notification.isan_type));
+pluto/demux.c:					sprintf(nt_msg,"(r)IKE[\"%s\"] **Check your ISAKMP Pre-share Key setting !",st->st_connection->name);
+pluto/demux.c:					sprintf(nt_msg,"(r)IKE[\"%s\"]] **Check your PFS setting !",st->st_connection->name);
+pluto/demux.c:					sprintf(nt_msg,"(r)IKE [\"%s\"] **Check your Encryption,Authentication method and PFS settings !",st->st_connection->name);
+pluto/demux.c:					sprintf(nt_msg,"(r)IKE[\"%s\"] **Check your Local/Remote Secure Group settings !",st->st_connection->name);
+pluto/demux.c:		     * from the other IKE, we won't have
+pluto/demux.c:				sprintf(vpnmsg,"IKE[\"%s\"] ESP_SA %s / %s / %d sec / SPI=[%08x:%08x]",st->st_connection->name,enc_str,auth_str,st->st_esp.attrs.life_seconds,ntohl(st->st_esp.our_spi),ntohl(st->st_esp.attrs.spi));
+pluto/demux.c:				sprintf(suc_msg,"<FONT color=blue>IKE[\"%s\"] Set up ESP tunnel with %s Success!</FONT>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/demux.c:				sprintf(msg1,"IKE[\"%s\"] ISAKMP SA CKI=[%s %s] CKR=[%s %s]",st->st_connection->name,i_ck1,i_ck2,r_ck1,r_ck2);
+pluto/demux.c:				sprintf(msg2,"IKE[\"%s\"] ISAKMP SA %s / %s /PreShared / %s / %d sec(*%d sec)",st->st_connection->name,oakley_enc,oakley_auth,group,st->st_oakley.life_seconds,st->st_oakley.life_seconds);
+pluto/demux.c:				sprintf(msg1,"IKE[\"%s\"] ESP_SA %s / %s / %d sec / SPI=[%08x:%08x]",st->st_connection->name,enc_str,auth_str,st->st_esp.attrs.life_seconds,ntohl(st->st_esp.our_spi),ntohl(st->st_esp.attrs.spi));
+pluto/demux.c:				sprintf(msg2,"(b)IKE[\"%s\"] Set up ESP tunnel with %s Success!",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/demux.c:				sprintf(msg1,"IKE[\"%s\"] ISAKMP SA CKI=[%s %s] CKR=[%s %s]",st->st_connection->name,i_ck1,i_ck2,r_ck1,r_ck2);
+pluto/demux.c:				sprintf(msg2,"IKE[\"%s\"] ISAKMP SA %s / %s /PreShared / %s / %d sec(*%d sec)",st->st_connection->name,oakley_enc,oakley_auth,group,st->st_oakley.life_seconds,st->st_oakley.life_seconds);
+pluto/demux.c:				sprintf(ipsec_msg1,"IKE[\"%s\"] ESP_SA %s / %s / %d sec / SPI=[%08x:%08x]",st->st_connection->name,enc_str,auth_str,st->st_esp.attrs.life_seconds,ntohl(st->st_esp.our_spi),ntohl(st->st_esp.attrs.spi));
+pluto/demux.c:				sprintf(ipsec_msg2,"IKE[\"%s\"] Set up ESP tunnel with %s Success!",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/demux.h:/* demultiplex incoming IKE messages
+pluto/id.c:/* identity representation, as in IKE ID Payloads (RFC 2407 DOI 4.6.2.1)
+pluto/id.h:/* identity representation, as in IKE ID Payloads (RFC 2407 DOI 4.6.2.1)
+pluto/ike_alg.c: * IKE modular algorithm handling interface
+pluto/ike_alg.c:		whack_log(RC_LOG_SERIOUS, "no IKE algorithms "
+pluto/ike_alg.c:	ALG_INFO_IKE_FOREACH(ai, ike_info, i) {
+pluto/ike_alg.c:			db_trans_add(db_ctx, KEY_IKE);
+pluto/ike_alg.c:			db_trans_add(db_ctx, KEY_IKE);
+pluto/ike_alg.c: * 	Show registered IKE algorithms
+pluto/ike_alg.c:	IKE_EALG_FOR_EACH(algo) {
+pluto/ike_alg.c:		whack_log(RC_COMMENT, "algorithm IKE encrypt: id=%d, name=%s, blocksize=%d, keydeflen=%d"
+pluto/ike_alg.c:	IKE_HALG_FOR_EACH(algo) {
+pluto/ike_alg.c:		whack_log(RC_COMMENT, "algorithm IKE hash: id=%d, name=%s, hashsize=%d"
+pluto/ike_alg.c:#define IKE_DH_ALG_FOR_EACH(idx) for(idx = 0; idx != elemsof(oakley_group); idx++)
+pluto/ike_alg.c:	IKE_DH_ALG_FOR_EACH(i) {
+pluto/ike_alg.c:		whack_log(RC_COMMENT, "algorithm IKE dh group: id=%d, name=%s, bits=%d"
+pluto/ike_alg.c: * 	Show IKE algorithms for 
+pluto/ike_alg.c:		    , "\"%s\"%s:   IKE algorithms wanted: %s"
+pluto/ike_alg.c:		    , "\"%s\"%s:   IKE algorithms found:  %s"
+pluto/ike_alg.c:		, "\"%s\"%s:   IKE algorithm newest: %s_%d-%s-%s"
+pluto/ike_alg.c: * 	IKE algo list handling
+pluto/ike_alg.c:struct ike_alg *ike_alg_base[IKE_ALG_MAX+1] = {NULL, NULL};
+pluto/ike_alg.c:/*	check if IKE encrypt algo is present */
+pluto/ike_alg.c:/*	check if IKE hash algo is present */
+pluto/ike_alg.c:		ALG_INFO_IKE_FOREACH(alg_info_ike, ike_info, i) {
+pluto/ike_alg.c:			ALG_INFO_IKE_FOREACH(alg_info_ike, ike_info, i) {
+pluto/ike_alg.c:						loglog(RC_LOG_SERIOUS, "You should NOT use insecure IKE algorithms (%s)!"
+pluto/ike_alg.c:	if (a->algo_type > IKE_ALG_MAX)
+pluto/ike_alg.c: * 	Validate and register IKE hash algorithm object
+pluto/ike_alg.c: * 	Validate and register IKE encryption algorithm object
+pluto/ike_alg.h:#ifndef _IKE_ALG_H
+pluto/ike_alg.h:#define _IKE_ALG_H
+pluto/ike_alg.h:#define IKE_ALG_COMMON \
+pluto/ike_alg.h:    IKE_ALG_COMMON;
+pluto/ike_alg.h:    IKE_ALG_COMMON;
+pluto/ike_alg.h:    IKE_ALG_COMMON;
+pluto/ike_alg.h:#define IKE_EALG_FOR_EACH(a) \
+pluto/ike_alg.h:	for(a=ike_alg_base[IKE_ALG_ENCRYPT];a;a=a->algo_next)
+pluto/ike_alg.h:#define IKE_HALG_FOR_EACH(a) \
+pluto/ike_alg.h:	for(a=ike_alg_base[IKE_ALG_HASH];a;a=a->algo_next)
+pluto/ike_alg.h:#define IKE_ALG_ENCRYPT	0
+pluto/ike_alg.h:#define IKE_ALG_HASH	1
+pluto/ike_alg.h:#define IKE_ALG_MAX	1
+pluto/ike_alg.h:extern struct ike_alg *ike_alg_base[IKE_ALG_MAX+1];
+pluto/ike_alg.h:	return (struct hash_desc *) ike_alg_find(IKE_ALG_HASH, alg, 0);
+pluto/ike_alg.h:	return (struct encrypt_desc *) ike_alg_find(IKE_ALG_ENCRYPT, alg, 0);
+pluto/ike_alg.h:#endif /* _IKE_ALG_H */
+pluto/ipsec.secrets.5:ipsec.secrets \- secrets for IKE/IPsec authentication
+pluto/ipsec.secrets.5:identical secret (the secret is not actually transmitted by the IKE
+pluto/ipsec_doi.c: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c:				sprintf(nt_msg,"(r)IKE[\"%s\"] **Check your ISAKMP Pre-share Key setting !",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_type,"IKE[\"%s\"] Tx >> Notify : INVALID_PAYLOAD_TYPE",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_msg,"(r)IKE[\"%s\"] **Check your PFS and Pre-share Key settings !",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_type,"IKE[\"%s\"] Tx >> Notify : PAYLOAD_MALFORMED",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_msg,"(r)IKE[\"%s\"] **Check your Encryption,Authentication method and PFS settings !",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_type,"IKE[\"%s\"] Tx >> Notify : NO_PROPOSAL_CHOSEN",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_msg,"(r)IKE[\"%s\"] **Check your Local/Remote Secure Group settings !",sndst->st_connection->name);
+pluto/ipsec_doi.c:				sprintf(nt_type,"IKE[\"%s\"] Tx >> Notify : INVALID_ID_INFORMATION",sndst->st_connection->name);
+pluto/ipsec_doi.c:			sprintf(delmsg,"IKE[\"%s\"] Tx >> Delete ESP_SA : spi = %08x\n",st->st_connection->name,ntohl(st->st_esp.our_spi));
+pluto/ipsec_doi.c:			sprintf(del_msg,"IKE[%s] Tx >> Delete ISAKMP_SA : cookie %s %s | %s %s\n",st->st_connection->name,i_ck1,i_ck2,r_ck1,r_ck2);
+pluto/ipsec_doi.c:			sprintf(delmsg,"IKE[\"%s\"] Rx {{ Delete ESP_SA : spi = %08x",st->st_connection->name,ipsec_spi);
+pluto/ipsec_doi.c:			sprintf(delmsg,"IKE[%s] Rx {{ Delete ISAKMP_SA : cookie %s %s | %s %s",st->st_connection->name,r_ck1,r_ck2,i_ck1,i_ck2);
+pluto/ipsec_doi.c:	    sprintf(tx_mi1, "IKE[\"%s\"] Tx >> MM_I1 : %s SA",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(tx_ai1,"IKE[\"%s\"] Tx >> AG_I1 : %s SA, KE, NONCE, ID\n",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c:    sprintf(tx_qi1,"IKE[\"%s\"] Tx >> QM_I1 : %s HASH, SA, NONCE, KE, ID, ID\n",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c:	    , IPPROTO_UDP, IKE_UDP_PORT
+pluto/ipsec_doi.c:		sprintf(mm_I1_msg,"IKE[\"%s\"] Rx {{ MM_I1 : %s SA",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(mm_R1_msg,"IKE[\"%s\"] Tx >> MM_R1 : %s SA",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(rx_mr1,"IKE[\"%s\"] Rx {{ MM_R1 : %s SA",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:	    sprintf(tx_mi2,"IKE[\"%s\"] Tx >> MM_I2 : %s KE, NONCE\n",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:	    sprintf(rx_mi2,"IKE[\"%s\"] Rx {{ MM_I2 : %s KE, NONCE",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:	    sprintf(tx_mr2,"IKE[\"%s\"] Tx >> MM_R2 : %s KE, NONCE",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:	sprintf(rx_mr2,"IKE[\"%s\"] Rx {{ MM_R2 : %s KE, NONCE",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:	sprintf(tx_mi3,"IKE[\"%s\"] Tx >> MM_I3 : %s ID, HASH",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c:    sprintf(mi3,"IKE[\"%s\"] Rx {{ MM_I3 : %s ID, HASH",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:    sprintf(mr3_msg,"IKE[\"%s\"] Tx >> MM_R3 : %s ID, HASH",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(rx_mr3,"IKE[\"%s\"] Rx {{ MM_R3 : %s ID,HASH",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:    sprintf(rx_ai1,"IKE[\"%s\"] Rx {{ AG_I1 : %s  SA, KE, NONCE, ID, ID, HASH",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(ar1,"IKE[\"%s\"] Tx >> AG_R1 : %s SA, KE, NONCE, ID, HASH\n",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(rx_ai1,"IKE[\"%s\"] Rx {{ AG_I1 : %s SA, KE, NONCE, ID",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c:	    sprintf(tx_ai2,"IKE[\"%s\"] Tx >> AG_I2 : %s HASH\n",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(rx_ai2,"IKE[\"%s\"] Rx {{ AG_I2 : %s HASH",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:		sprintf(rx_qi1,"IKE[\"%s\"] Rx {{ QM_I1 : %s HASH, SA, NONCE, KE, ID, ID",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:		sprintf(tx_qr1,"IKE[\"%s\"] Tx >> QM_R1 : %s HASH, SA, NONCE, KE, ID, ID",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c:		sprintf(rx_qr1,"IKE[\"%s\"] Rx {{ QM_R1 : %s HASH, SA, NONCE, KE, ID, ID",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(tx_qi2,"IKE[\"%s\"] Tx >> QM_I2 : %s HASH",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c:	    sprintf(rx_qi2,"IKE[\"%s\"] Rx {{ QM_I2 : %s HASH",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/kernel.c:    /* if routing would affect IKE messages, reject */
+pluto/kernel.c:    && c->this.host_port != NAT_T_IKE_FLOAT_PORT
+pluto/kernel.c:    && c->this.host_port != IKE_UDP_PORT
+pluto/kernel.c:		ESPINUDP_WITH_NON_ESP : ESPINUDP_WITH_NON_IKE;
+pluto/kernel_comm.c:	log("listening for IKE messages");
+pluto/kernel_comm.c:	log("no longer listening for IKE messages");
+pluto/kernel_comm.c:#ifndef NO_IKE_ALG
+pluto/log.h:extern void log(const char *message, ...) PRINTF_LIKE(1);
+pluto/log.h:extern void exit_log(const char *message, ...) PRINTF_LIKE(1) NEVER_RETURNS;
+pluto/log.h:extern void log_errno_routine(int e, const char *message, ...) PRINTF_LIKE(2);
+pluto/log.h:extern void exit_log_errno_routine(int e, const char *message, ...) PRINTF_LIKE(2) NEVER_RETURNS NEVER_RETURNS;
+pluto/log.h:extern void whack_log(int mess_no, const char *message, ...) PRINTF_LIKE(2);
+pluto/log.h:extern void loglog(int mess_no, const char *message, ...) PRINTF_LIKE(2);
+pluto/log.h:extern err_t builddiag(const char *fmt, ...) PRINTF_LIKE(1);
+pluto/log.h:extern void DBG_log(const char *message, ...) PRINTF_LIKE(1);
+pluto/nat_traversal.c:#ifdef _IKE_ALG_H
+pluto/nat_traversal.c:		(sport == IKE_UDP_PORT) &&
+pluto/nat_traversal.c:			IKE_UDP_PORT
+pluto/nat_traversal.c:		if (((c->this.host_port == NAT_T_IKE_FLOAT_PORT) &&
+pluto/nat_traversal.c:			((c->this.host_port != NAT_T_IKE_FLOAT_PORT) &&
+pluto/nat_traversal.c:				? NAT_T_IKE_FLOAT_PORT : pluto_port;
+pluto/nat_traversal.c:		(c->this.host_port != NAT_T_IKE_FLOAT_PORT)) {
+pluto/nat_traversal.c:			DBG_log("NAT-T: floating to port %d", NAT_T_IKE_FLOAT_PORT);
+pluto/nat_traversal.c:		c->this.host_port = NAT_T_IKE_FLOAT_PORT;
+pluto/nat_traversal.c:		c->that.host_port = NAT_T_IKE_FLOAT_PORT;
+pluto/nat_traversal.c:	if (((c->this.host_port == NAT_T_IKE_FLOAT_PORT) &&
+pluto/nat_traversal.c:		((c->this.host_port != NAT_T_IKE_FLOAT_PORT) &&
+pluto/nat_traversal.c:						i->ike_float ? NAT_T_IKE_FLOAT_PORT : pluto_port);
+pluto/nat_traversal.h:#define NAT_T_IKE_FLOAT_PORT     4500
+pluto/nat_traversal.h: * IKE port floating
+pluto/packet.h: * RFC 2409 "IKE" Appedix B specifies:
+pluto/packet.h: * RFC 2409 "IKE" 5.3 specifies:
+pluto/pluto.8:ipsec pluto \- IPsec IKE keying daemon
+pluto/pluto.8:is an IKE (``IPsec Key Exchange'') daemon.
+pluto/pluto.8:.SS IKE's Job
+pluto/pluto.8:IKE can be deployed on a network node to negotiate Security
+pluto/pluto.8:Associations for that node.  These IKE implementations can only
+pluto/pluto.8:negotiate with other IKE implementations, so IKE must be on each node
+pluto/pluto.8:that is to be an endpoint of an IKE-negotiated Security Association.
+pluto/pluto.8:No other nodes need to be running IKE.
+pluto/pluto.8:An IKE instance (i.e. an IKE implementation on a particular network
+pluto/pluto.8:node) communicates with another IKE instance using UDP IP packets, so
+pluto/pluto.8:IKE instance by the system administrator.
+pluto/pluto.8:IKE deals with two kinds of Security Associations.  The first part of
+pluto/pluto.8:a negotiation between IKE instances is to build an ISAKMP SA.  An
+pluto/pluto.8:ISAKMP SA is used to protect communication between the two IKEs.
+pluto/pluto.8:IPsec SAs can then be built by the IKEs \- these are used to carry
+pluto/pluto.8:IKE instances must be able to authenticate each other as part of their
+pluto/pluto.8:IKE negotiation can be initiated by any instance with any other.  If
+pluto/pluto.8:an IKE instance to initiate a negotiation.
+pluto/pluto.8:In summary, an IKE instance is prepared to automate the management of
+pluto/pluto.8:\fBpluto\fP is an implementation of IKE.  It runs as a daemon on a network
+pluto/pluto.8:\fBpluto\fP only implements a subset of IKE.  This is enough for it to
+pluto/pluto.8:interoperate with other instances of \fBpluto\fP, and many other IKE
+pluto/pluto.8:implementations.  We are working on implementing more of IKE.
+pluto/pluto.8:A \fBpluto\fP daemon and another IKE daemon (for example, another instance
+pluto/pluto.8:authentication with other IKE daemons.  For debugging, there is an
+pluto/pluto.8:The default IKE port number is 500, the UDP port assigned by IANA for IKE Daemons.
+pluto/pluto.8:During the IKE exchange to build an SA, the information about the
+pluto/pluto.8:for IKE requests from peers.
+pluto/pluto.8:.\" The identity is transmitted in the IKE protocol, and is what is authenticated.
+pluto/pluto.8:for IKE negotiations initiated from unknown IP addresses (the
+pluto/pluto.8:the UDP port that IKE listens to on that host.  The default is 500.
+pluto/pluto.8:Propose and allow preshared secret authentication for IKE peers.  This authentication
+pluto/pluto.8:Propose and allow RSA signatures for authentication of IKE peers.  This authentication
+pluto/pluto.8:Note that this has nothing to do with IKE authentication.
+pluto/pluto.8:\fBpluto\fP (or other IKE daemon) according to the named connection.
+pluto/pluto.8:The listen form tells \fBpluto\fP to start listening for IKE requests
+pluto/pluto.8:start listening for IKE traffic on public interfaces.
+pluto/pluto.8:stop listening for IKE traffic on public interfaces.
+pluto/pluto.8:It is generally a good idea to allow IKE messages (UDP port 500)
+pluto/pluto.8:the IKE protocol.
+pluto/pluto.8:For testing, SSH's IKE test page is quite useful:
+pluto/pluto.8:Hint: ISAKMP SAs are often kept alive by IKEs even after the IPsec SA
+pluto/pluto.8:directly.  If one of the IKEs is restarted, the other may try to use
+pluto/pluto.8:the ISAKMP SA but the new IKE won't know about it.  This can lead to
+pluto/pluto.8:problem to the other IKE daemon (in the future it might use
+pluto/pluto.8:The IKE protocol lets the destination of the SA choose the SPI.
+pluto/pluto.8:\fBPluto\fP and another IKE implementation to interoperate.
+pluto/pluto.8:It is the case that some IKE implementations won't interoperate
+pluto/pluto.8:RFC2409 The Internet Key Exchange (IKE)
+pluto/pluto.8:The Commit Flag is a bad feature of the IKE protocol.
+pluto/pluto.8:logs the unsatisfactory message ``some IKE message we sent has been
+pluto/pluto.8:authenticate each IKE peer to the other.  This is an important task of
+pluto/pluto.8:Phase 1.  Each packet must be authenticated, both in IKE and in IPsec,
+pluto/routing.txt:The idea is that IKE packets between us and a peer should not be
+pluto/routing.txt:our shunt eroutes should not apply to our IKE packets (shunt eroutes
+pluto/server.c:bool listening = FALSE;	/* should we pay attention to IKE messages? */
+pluto/server.c:     * is mandatory but doesn't work well with IKE (why?).
+pluto/server.c:			    ESPINUDP_WITH_NON_IKE);
+pluto/server.c:                        fd = create_socket(ifp, v->name, NAT_T_IKE_FLOAT_PORT);
+pluto/server.c:			setportof(htons(NAT_T_IKE_FLOAT_PORT), &q->addr);
+pluto/server.c:			    q->vname, q->rname, ip_str(&q->addr), NAT_T_IKE_FLOAT_PORT);
+pluto/server.h:extern bool listening;	/* should we pay attention to IKE messages? */
+pluto/server.h:/* interface: a terminal point for IKE traffic, IPsec transport mode
+pluto/server.h: * Note: the port for IKE is always implicitly UDP/pluto_port.
+pluto/server.h:    int fd;	/* file descriptor of socket for IKE UDP messages */
+pluto/spdb.c: * our rejection.  We better not propose it to an IKE daemon
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1024des3tiger) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1536des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1536des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1024des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1024des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk768des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk768des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1536des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1536des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1024des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1024des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig768des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig768des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1024des3tiger) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1536des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1536des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1536des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1536des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1024des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1024des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig1024des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk1024des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig768des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk768des3sha) },
+pluto/spdb.c:	{ KEY_IKE, AD(otrsasig768des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(otpsk768des3md5) },
+pluto/spdb.c:	{ KEY_IKE, AD(oakley_tr_am) },
+pluto/spdb.c:#if !defined NO_KERNEL_ALG || !defined NO_IKE_ALG
+pluto/spdb.c:#ifndef NO_IKE_ALG
+pluto/spdb.c:#if !defined NO_KERNEL_ALG || !defined NO_IKE_ALG
+pluto/spdb.c:#ifndef NO_IKE_ALG
+pluto/spdb.c:	if (trans.isat_transid != KEY_IKE)
+pluto/spdb.c:	    loglog(RC_LOG_SERIOUS, "expected KEY_IKE but found %s in Oakley Transform"
+pluto/spdb.c:#ifndef NO_IKE_ALG
+pluto/spdb.c:#ifndef NO_IKE_ALG
+pluto/spdb.c:#ifndef NO_IKE_ALG
+pluto/spdb.c:#ifndef NO_IKE_ALG
+pluto/spdb.c:   sprintf(log_msg,"IKE[%s] :<FONT color=red>***Check your Encryption and Authentication and PFS method settings!</FONT><br>",st->st_connection->name); 
+pluto/spdb.c:    sprintf(log_msg,"IKE[%s] :<FONT color=red>*** No Acceptable Proposal in IPsec SA</FONT><br>",st->st_connection->name);
+pluto/state.c:u_int16_t pluto_port = IKE_UDP_PORT;	/* Pluto's port */
+pluto/state.c: * A Message ID is contained in each IKE message header.
+pluto/state.h: * A Message ID is contained in each IKE message header.
+pluto/timer.c:			    " first IKE message";
+pluto/virtual.c:#define F_VIRTUAL_IKE_CONFIG  4
+pluto/virtual.c: * %ike  = accept affected IKE Config Mode IP         [not implemented]
+pluto/virtual.c:	    flags |= F_VIRTUAL_IKE_CONFIG;
+pluto/whack.c:    CD_IKEPORT,
+pluto/whack.c:    CD_IKELIFETIME,
+pluto/whack.c:    CD_IKE,
+pluto/whack.c:    { "ikeport", required_argument, NULL, CD_IKEPORT + OO + NUMERIC_ARG },
+pluto/whack.c:    { "ikelifetime", required_argument, NULL, CD_IKELIFETIME + OO + NUMERIC_ARG },
+pluto/whack.c:    { "ike", required_argument, NULL, CD_IKE + OO },
+pluto/whack.c:    e->host_port = IKE_UDP_PORT;
+pluto/whack.c:	case CD_IKEPORT:	/* --ikeport <port-number> */
+pluto/whack.c:	case CD_IKELIFETIME:	/* --ikelifetime <seconds> */
+pluto/whack.c:	case CD_IKE:	/* --ike <ike_alg1,ike_alg2,...> */
+pluto/whack.h:    RC_NOTIFICATION = 200	/* as per IKE notification messages */
+pluto/Makefile_bak:# -DPORT=n sets the default UDP port for IKE messages (otherwise 500)
+pluto/Makefile_bak:#    IKE daemons.  In the Makefile, two levels of quoting are needed:
+pluto/Makefile_bak0214:# -DPORT=n sets the default UDP port for IKE messages (otherwise 500)
+pluto/Makefile_bak0214:#    IKE daemons.  In the Makefile, two levels of quoting are needed:
+pluto/kernel.c_bak:    /* if routing would affect IKE messages, reject */
+pluto/kernel.c_bak:    && c->this.host_port != NAT_T_IKE_FLOAT_PORT
+pluto/kernel.c_bak:    && c->this.host_port != IKE_UDP_PORT
+pluto/kernel.c_bak:		ESPINUDP_WITH_NON_ESP : ESPINUDP_WITH_NON_IKE;
+pluto/kernel.c_cnd:    /* if routing would affect IKE messages, reject */
+pluto/kernel.c_cnd:    && c->this.host_port != NAT_T_IKE_FLOAT_PORT
+pluto/kernel.c_cnd:    && c->this.host_port != IKE_UDP_PORT
+pluto/kernel.c_cnd:		ESPINUDP_WITH_NON_ESP : ESPINUDP_WITH_NON_IKE;
+pluto/ipsec_doi.c_0304: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c_0304:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_0304:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_0304:    sprintf(messages, "IKE(%s) Tx >> MM_I1 : %s SA<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> AG_I1 : %s SA, KE, NONCE, ID<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c_0304: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c_0304:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c_0304:    sprintf(vpnmsg,"IKE(%s) Tx >> QM_I1 : %s HASH, SA, NONCE, KE, ID, ID<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_0304:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c_0304:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c_0304:	    , IPPROTO_UDP, IKE_UDP_PORT
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) responding to Main Mode from unknown peer %s:%u<br>", c->name,ip_str(&c->that.host_addr), c->that.host_port);
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) responding to Main Mode from unknown peer %s",c->name, ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) Rx << MM_I1 : %s SA<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx << MM_R1 : %s SA<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << MM_R1 : %s SA<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) : Tx >> MM_I2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << MM_I2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> MM_R2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) Rx << MM_R2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> MM_I3 : %s ID, HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << MM_I3 : %s ID, HASH<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> MM_R3 : %s ID, HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << AG_I1 : %s  SA, KE, NONCE, ID, ID, HASH <br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> AG_R1 : %s SA, KE, NONCE, ID, HASH<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << AG_I1 : %s SA, KE, NONCE, ID<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> AG_I2 : %s HASH<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << AG_I2 : %s HASH<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) Rx << QM_I1 : %s HASH, SA, NONCE, KE, ID, ID<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) Tx >> QM_R1 : %s HASH, SA, NONCE, KE, ID, ID<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_0304:	sprintf(messages,"IKE(%s) Rx << QM_R1 : %s HASH, SA, NONCE, KE, ID, ID<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Tx >> QM_I2 : %s HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_0304:    sprintf(messages,"IKE(%s) Rx << QM_I2 : %s HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_ipaddr: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c_ipaddr:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_ipaddr:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_ipaddr: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c_ipaddr: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c_ipaddr:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c_ipaddr:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c_ipaddr:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c_ipaddr:	    , IPPROTO_UDP, IKE_UDP_PORT
+pluto/ipsec_doi.c_orig: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c_orig:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_orig:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_orig:    sprintf(messages, "IKE(%s) Tx >> MM_I1 : %s SA<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> AG_I1 : %s SA, KE, NONCE, ID<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c_orig: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c_orig:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c_orig:    sprintf(vpnmsg,"IKE(%s) Tx >> QM_I1 : %s HASH, SA, NONCE, KE, ID, ID<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_orig:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c_orig:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c_orig:	    , IPPROTO_UDP, IKE_UDP_PORT
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) responding to Main Mode from unknown peer %s:%u<br>", c->name,ip_str(&c->that.host_addr), c->that.host_port);
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) responding to Main Mode from unknown peer %s",c->name, ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) Rx << MM_I1 : %s SA<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx << MM_R1 : %s SA<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << MM_R1 : %s SA<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) : Tx >> MM_I2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << MM_I2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> MM_R2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) Rx << MM_R2 : %s KE, NONCE<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> MM_I3 : %s ID, HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << MM_I3 : %s ID, HASH<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> MM_R3 : %s ID, HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << AG_I1 : %s  SA, KE, NONCE, ID, ID, HASH <br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> AG_R1 : %s SA, KE, NONCE, ID, HASH<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << AG_I1 : %s SA, KE, NONCE, ID<br>",st->st_connection->name,ip_str(&(st->st_connection->that.host_addr)));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> AG_I2 : %s HASH<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << AG_I2 : %s HASH<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) Rx << QM_I1 : %s HASH, SA, NONCE, KE, ID, ID<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) Tx >> QM_R1 : %s HASH, SA, NONCE, KE, ID, ID<br>",c->name,ip_str(&c->that.host_addr));
+pluto/ipsec_doi.c_orig:	sprintf(messages,"IKE(%s) Rx << QM_R1 : %s HASH, SA, NONCE, KE, ID, ID<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Tx >> QM_I2 : %s HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_orig:    sprintf(messages,"IKE(%s) Rx << QM_I2 : %s HASH<br>",st->st_connection->name,ip_str(&st->st_connection->that.host_addr));
+pluto/ipsec_doi.c_0308: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c_0308:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_0308:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_0308: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c_0308: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c_0308:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c_0308:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c_0308:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c_0308:	    , IPPROTO_UDP, IKE_UDP_PORT
+pluto/ipsec_doi.c_orig_0311: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c_orig_0311:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_orig_0311:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_orig_0311: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c_orig_0311: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c_orig_0311:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c_orig_0311:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c_orig_0311:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c_orig_0311:	    , IPPROTO_UDP, IKE_UDP_PORT
+pluto/ipsec_doi.c_system: * According to RFC2409 "The Internet key exchange (IKE)" 5:
+pluto/ipsec_doi.c_system:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_system:#ifdef _IKE_ALG_H
+pluto/ipsec_doi.c_system: * See RFC2409 IKE 5.
+pluto/ipsec_doi.c_system: * See RFC2409 "The Internet Key Exchange (IKE)" 5.5.
+pluto/ipsec_doi.c_system:#ifndef NO_IKE_ALG
+pluto/ipsec_doi.c_system:	((id->isaid_doi_specific_b == 0) || (id->isaid_doi_specific_b == NAT_T_IKE_FLOAT_PORT))) {
+pluto/ipsec_doi.c_system:    && !(id->isaid_doi_specific_a == IPPROTO_UDP && id->isaid_doi_specific_b == IKE_UDP_PORT))
+pluto/ipsec_doi.c_system:	    , IPPROTO_UDP, IKE_UDP_PORT
+testing/utils/ikeping/ikeping.8:.TH IPSEC_IKEPING 8 "23 Feb 2002"
+testing/utils/ikeping/ikeping.8:ipsec ikeping \- send/receive ISAKMP/IKE echo requests/replies
+testing/utils/ikeping/ikeping.8:sends and receives ISAKMP/IKE echo request and echo reply packets. These
+testing/utils/ikeping/ikeping.c:/* send out an IKE "ping" packet.
+testing/utils/ikeping/ikeping.c:	    " [--listen]     causes IKEping to open a socket and reply to requests.\n"
+testing/utils/ikeping/ikeping.c:	    " [--verbose]    causes IKEping to hexdump all packets sent/received.\n"
+testing/utils/ikeping/ikeping.c: * send an IKE ping
+testing/utils/ikeping/ikeping.c: * send an IKE ping
+utils/ipsec.conf.5:IKE encryption/authentication algorithms to be built
+utils/ipsec.conf.5:You can see IKE algorithms supported by 
+utils/ipsec.conf.5:.B ipsec auto \-\-status | grep alg.*IKE
+utils/ipsec_pr.template:SEND-PR: pluto	- Problems with IKE daemon

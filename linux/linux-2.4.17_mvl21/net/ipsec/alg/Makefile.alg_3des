@@ -1,0 +1,20 @@
+MOD_3DES += ipsec_3des.o
+
+ALG_MODULES += $(MOD_3DES)
+ALG_SUBDIRS += libdes
+
+obj-$(CONFIG_IPSEC_ALG_3DES) += $(MOD_3DES)
+static_init-func-$(CONFIG_IPSEC_ALG_3DES)+= ipsec_3des_init
+alg_obj-$(CONFIG_IPSEC_ALG_3DES) += ipsec_alg_3des.o
+
+DES_3DES_OBJS=ipsec_alg_3des.o ../libdes/libdes.a
+
+$(MOD_3DES): $(DES_3DES_OBJS)
+	$(LD) -r $(DES_3DES_OBJS) -o $@
+
+# avoid multiple rules for libdes.a
+ifeq ($(LIBDES),)
+LIBDES:=../libdes/libdes.a
+$(LIBDES):
+	$(MAKE) -C .. libdes/libdes.a
+endif

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<cpe_configuration>
+<service_type>ADSL, PPPoE</service_type>
+<lan_ip_addr>192.168.1.1</lan_ip_addr>
+<lan_subnet_mask>255.255.255.0</lan_subnet_mask>
+<lan_gateway_ip>192.168.1.254</lan_gateway_ip>
+<lan_ip_type>DHCP</lan_ip_type>
+<lan_ip_start>192.168.1.2</lan_ip_start>
+<lan_ip_end>192.168.1.200</lan_ip_end>
+<lan_client_ip_table>
+<lan_client_details>
+<lan_client_ip_addr>192.168.1.2</lan_client_ip_addr>
+<lan_client_mac_addr>00-11-22-33-44-55</lan_client_mac_addr>
+<lan_client_ip_type>DHCP</lan_client_ip_type>
+<lan_client_ip_lease>Leased</lan_client_ip_lease>
+</lan_client_details>
+<lan_client_details>
+<lan_client_ip_addr>192.168.1.3</lan_client_ip_addr>
+<lan_client_mac_addr>00-AA-BB-CC-DD-EE</lan_client_mac_addr>
+<lan_client_ip_type>DHCP</lan_client_ip_type>
+<lan_client_ip_lease>Leased</lan_client_ip_lease>
+</lan_client_details>
+</lan_client_ip_table>
+<wan_ip_type>DHCP</wan_ip_addr>
+<wan_ip_addr>123.234.123.100</wan_ip_addr>
+<wan_subnet_mask>255.255.0.0</wan_subnet_mask>
+<wan_gateway_ip>123.234.123.234</wan_gateway_ip>
+<wan_dns1>120.120.120.1</wan_dns1>
+<wan_dns2>120.120.120.2</wan_dns2>
+<wan_dns3>120.120.120.3</wan_dns3>
+<wan_dns4>120.120.120.4</wan_dns4>
+<idle_timeout>0</idle_timeout>
+<error_no>0</error_no>
+<error_desc>No Error</error_desc>
+</cpe_configuration>			

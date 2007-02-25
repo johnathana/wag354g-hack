@@ -1,0 +1,265 @@
+#!/bin/sh
+# default updown script
+#
+# RCSID $Id: _updown,v 1.1.1.2 2005/03/28 06:57:43 sparq Exp $
+# CAUTION:  Installing a new version of FreeS/WAN will install a new
+# copy of this script, wiping out any custom changes you make.  If
+# you need changes, make a copy of this under another name, and customize
+# that, and use the (left/right)updown parameters in ipsec.conf to make
+# FreeS/WAN use yours instead of this default one.
+
+# check interface version
+
+. /var/cmd
+
+#echo "connection=$PLUTO_CONNECTION"
+file_full="/tmp/ipsecst/$PLUTO_CONNECTION"
+#echo "file_name=$PLUTO_CONNECTION"
+#echo "file_full=$file_full"
+mkdir /tmp/ipsecst
+touch $file_full
+
+case "$PLUTO_VERSION" in
+1.[0])	# Older Pluto?!?  Play it safe, script may be using new features.
+	echo "$0: obsolete interface version \`$PLUTO_VERSION'," >&2
+	echo "$0: 	called by obsolete Pluto?" >&2
+	exit 2
+	;;
+1.*)	;;
+*)	echo "$0: unknown interface version \`$PLUTO_VERSION'" >&2
+	exit 2
+	;;
+esac
+
+# check parameter(s)
+case "$1:$*" in
+':')			# no parameters
+	;;
+ipfwadm:ipfwadm)	# due to (left/right)firewall; for default script only
+	;;
+custom:*)		# custom parameters (see above CAUTION comment)
+	;;
+*)	echo "$0: unknown parameters \`$*'" >&2
+	exit 2
+	;;
+esac
+
+# utility functions for route manipulation
+# Meddling with this stuff should not be necessary and requires great care.
+#uproute() {
+#	doroute add
+#}
+#downroute() {
+#	doroute del
+#}
+#doroute() {
+#	parms="-net $PLUTO_PEER_CLIENT_NET netmask $PLUTO_PEER_CLIENT_MASK"
+#	parms2="dev $PLUTO_INTERFACE gw $PLUTO_NEXT_HOP"
+#	case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+#	"0.0.0.0/0.0.0.0")
+#		# horrible kludge for obscure routing bug with opportunistic
+#		it="route $1 -net 0.0.0.0 netmask 128.0.0.0 $parms2 &&
+#			route $1 -net 128.0.0.0 netmask 128.0.0.0 $parms2"
+#		;;
+#	*)	it="route $1 $parms $parms2"
+#		;;
+#	esac
+#	eval $it
+#	st=$?
+#	if test $st -ne 0
+#	then
+#		# route has already given its own cryptic message
+#		echo "$0: \`$it' failed" >&2
+#		if test " $1 $st" = " add 7"
+#		then
+#			# another totally undocumented interface -- 7 and
+#			# "SIOCADDRT: Network is unreachable" means that
+#			# the gateway isn't reachable.
+#			echo "$0: (incorrect or missing nexthop setting??)" >&2
+#		fi
+#	fi
+#	return $st
+#}
+
+
+
+# the big choice
+
+case "$PLUTO_VERB:$1" in
+prepare-host:*|prepare-client:*)
+	# delete possibly-existing route (preliminary to adding a route)
+	case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+	"0.0.0.0/0.0.0.0")
+		# horrible kludge for obscure routing bug with opportunistic
+		it="route del -net 0.0.0.0 netmask 128.0.0.0 2>&1 ;
+			route del -net 128.0.0.0 netmask 128.0.0.0 2>&1"
+		;;
+	*)
+		it="route del -net $PLUTO_PEER_CLIENT_NET \
+					netmask $PLUTO_PEER_CLIENT_MASK 2>&1"
+		;;
+	esac
+	oops="`eval $it`"
+	status="$?"
+	if test " $oops" = " " -a " $status" != " 0"
+	then
+		oops="silent error, exit status $status"
+	fi
+	case "$oops" in
+	'SIOCDELRT: No such process'*)
+		# This is what route (currently -- not documented!) gives
+		# for "could not find such a route".
+		oops=
+		status=0
+		;;
+	esac
+	if test " $oops" != " " -o " $status" != " 0"
+	then
+		echo "$0: \`$it' failed ($oops)" >&2
+	fi
+	exit $status
+	;;
+route-host:*|route-client:*)
+	# connection to me or my client subnet being routed
+################zhangbin###########################################################
+             #uproute
+	#doroute add
+
+                parms="-net $PLUTO_PEER_CLIENT_NET netmask $PLUTO_PEER_CLIENT_MASK"
+                parms2="dev $PLUTO_INTERFACE gw $PLUTO_NEXT_HOP"
+                case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+                "0.0.0.0/0.0.0.0")
+		# horrible kludge for obscure routing bug with opportunistic
+			flag="oe"
+			it="route add -net 0.0.0.0 netmask 128.0.0.0 $parms2 &&
+			route add -net 128.0.0.0 netmask 128.0.0.0 $parms2"
+		;;
+	*)		flag="normal"
+			it="route add $parms $parms2"
+		;;
+	esac
+	
+	case "$flag" in
+	"oe")
+		route add -net 0.0.0.0 netmask 128.0.0.0 $parms2
+		route add -net 128.0.0.0 netmask 128.0.0.0 $parms2
+        	;;
+	*)
+		#echo "**route add"
+		#echo "parms=$parms"
+		#$echo "route add $parms $parms2" >> /tmp/dd
+		route add $parms $parms2
+
+
+		;;
+	esac
+	# zhangbin for status file
+
+		echo "1" > $file_full
+		#echo "write file!****"
+
+        #eval $it
+
+	#st=$?
+	#if test $st -ne 0
+	#then
+		# route has already given its own cryptic message
+	#	echo "$0: \`$it' failed" >&2
+	#	if test " add $st" = " add 7"
+	#	then
+			# another totally undocumented interface -- 7 and
+			# "SIOCADDRT: Network is unreachable" means that
+			# the gateway isn't reachable.
+	#		echo "$0: (incorrect or missing nexthop setting??)" >&2
+	#	fi
+	#fi
+	#$st add
+################zhangbin###########################################################
+	;;
+unroute-host:*|unroute-client:*)
+	# connection to me or my client subnet being unrouted
+################zhangbin###########################################################
+	#downroute
+	#doroute del
+                parms="-net $PLUTO_PEER_CLIENT_NET netmask $PLUTO_PEER_CLIENT_MASK"
+                parms2="dev $PLUTO_INTERFACE gw $PLUTO_NEXT_HOP"
+                case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+                "0.0.0.0/0.0.0.0")
+	# horrible kludge for obscure routing bug with opportunistic
+		it="route del -net 0.0.0.0 netmask 128.0.0.0 $parms2 &&
+			route del -net 128.0.0.0 netmask 128.0.0.0 $parms2"
+		;;
+	*)	it="route del $parms $parms2"
+		;;
+	esac
+	eval $it
+	st=$?
+	if test $st -ne 0
+	then
+		# route has already given its own cryptic message
+		echo "$0: \`$it' failed" >&2
+		if test " del $st" = " add 7"
+		then
+			# another totally undocumented interface -- 7 and
+			# "SIOCADDRT: Network is unreachable" means that
+			# the gateway isn't reachable.
+			echo "$0: (incorrect or missing nexthop setting??)" >&2
+		fi
+	fi
+	# zhangbin for status file
+	file_full="/tmp/ipsecst/$PLUTO_CONNECTION"
+	echo "0" > $file_full
+	#$st del
+################zhangbin###########################################################
+	;;
+up-host:*)
+	# connection to me coming up
+	# If you are doing a custom version, firewall commands go here.
+	;;
+down-host:*)
+	# connection to me going down
+	# If you are doing a custom version, firewall commands go here.
+	;;
+up-client:)
+	# connection to my client subnet coming up
+	# If you are doing a custom version, firewall commands go here.
+	echo "1" > $file_full
+	#echo "up-client set $file_full to 1"
+	case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+                "0.0.0.0/0.0.0.0")
+		;;
+	*)		
+		iptables -t nat -I POSTROUTING -s $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK -d $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK -j ACCEPT
+		echo "iptables -t nat -I POSTROUTING -s $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK -d $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK -j ACCEPT" >> /tmp/vpn-ipt
+		;;
+	esac
+
+	;;
+down-client:)
+	# connection to my client subnet going down
+	# If you are doing a custom version, firewall commands go here.
+	#file_full="/tmp/ipsecst/$PLUTO_CONNECTION"
+	echo "will down-client"
+	echo "0" > $file_full
+	iptables -t nat -D POSTROUTING -s $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK -d $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK -j ACCEPT
+	echo "iptables -t nat -D POSTROUTING -s $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK -d $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK -j ACCEPT" >> /tmp/vpn-ipt
+	;;
+up-client:ipfwadm)
+	# connection to client subnet, with (left/right)firewall=yes, coming up
+	# This is used only by the default updown script, not by your custom
+	# ones, so do not mess with it; see CAUTION comment up at top.
+	#echo "second up-client"
+	ipfwadm -F -i accept -b -S $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK \
+		-D $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK
+	;;
+down-client:ipfwadm)
+	# connection to client subnet, with (left/right)firewall=yes, going down
+	# This is used only by the default updown script, not by your custom
+	# ones, so do not mess with it; see CAUTION comment up at top.
+	ipfwadm -F -d accept -b -S $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK \
+		-D $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK
+	;;
+*)	echo "$0: unknown verb \`$PLUTO_VERB' or parameter \`$1'" >&2
+	exit 1
+	;;
+esac

@@ -1,0 +1,241 @@
+#! /bin/sh
+# default updown script
+# Copyright (C) 2000, 2001  D. Hugh Redelmeier, Henry Spencer
+#
+# Modifications for iproute2 based policy routing.
+# Copyright (C) 2002, 2003  Tuomo Soini <tis@foobar.fi>
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.  See <http://www.fsf.org/copyleft/gpl.txt>.
+# 
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# RCSID $Id: _updown,v 1.1.1.2 2005/03/28 06:57:36 sparq Exp $
+
+
+
+# CAUTION:  Installing a new version of FreeS/WAN will install a new
+# copy of this script, wiping out any custom changes you make.  If
+# you need changes, make a copy of this under another name, and customize
+# that, and use the (left/right)updown parameters in ipsec.conf to make
+# FreeS/WAN use yours instead of this default one.
+
+
+
+# check interface version
+case "$PLUTO_VERSION" in
+1.[0])	# Older Pluto?!?  Play it safe, script may be using new features.
+	echo "$0: obsolete interface version \`$PLUTO_VERSION'," >&2
+	echo "$0: 	called by obsolete Pluto?" >&2
+	exit 2
+	;;
+1.*)	;;
+*)	echo "$0: unknown interface version \`$PLUTO_VERSION'" >&2
+	exit 2
+	;;
+esac
+
+# check parameter(s)
+case "$1:$*" in
+':')			# no parameters
+	;;
+ipfwadm:ipfwadm)	# due to (left/right)firewall; for default script only
+	;;
+custom:*)		# custom parameters (see above CAUTION comment)
+	;;
+*)	echo "$0: unknown parameters \`$*'" >&2
+	exit 2
+	;;
+esac
+
+# import configs for route stuff
+IPROUTETABLE=42
+if test -f /etc/sysconfig/ipsec
+then
+    . /etc/sysconfig/ipsec
+fi
+
+# utility functions for route manipulation
+# Meddling with this stuff should not be necessary and requires great care.
+uproute() {
+	doroute add
+	ip route flush cache
+}
+
+downroute() {
+	doroute del
+	ip route flush cache
+}
+
+uprule() {
+	dorule del
+	dorule add
+	ip route flush cache
+}
+
+downrule() {
+	dorule del
+	ip route flush cache
+}
+
+doroute() {
+	parms="$PLUTO_PEER_CLIENT"
+	parms2="dev $PLUTO_INTERFACE"
+	parms3=
+	if test -n "$DEFAULTSOURCE"
+	then
+	    parms3="src $DEFAULTSOURCE"
+	fi
+	if test -n "$IPROUTETABLE"
+	then
+	    parms3="$parms3 table $IPROUTETABLE"
+	fi
+	case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+	"0.0.0.0/0.0.0.0")
+		# horrible kludge for obscure routing bug with opportunistic
+		it="ip route $1 0.0.0.0/1 $parms2 &&
+			ip route $1 128.0.0.0/1 $parms2"
+		;;
+	*)	it="ip route $1 $parms $parms2 $parms3"
+		;;
+	esac
+	eval $it
+	st=$?
+	return $st
+}
+
+dorule() {
+	sr=0
+	if test -n "$IPROUTETABLE"
+	then
+	    iprule="to $PLUTO_PEER_CLIENT"
+	    if test "${DEFAULTSOURCE%/*}" = "${PLUTO_MY_CLIENT%/*}" -o "${PLUTO_ME%/*}" = "${PLUTO_MY_CLIENT%/*}"
+	    then
+		iprule2="iif lo table $IPROUTETABLE"
+	    else
+		iprule2="from $PLUTO_MY_CLIENT table $IPROUTETABLE"
+	    fi
+	    case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+	    "0.0.0.0/0.0.0.0")
+		    # horrible kludge for obscure routing bug with opportunistic
+		    sr=0
+		    ;;
+	    *)
+		    ir="ip rule $1 $iprule $iprule2"
+		    oops="`eval $ir 2>&1`"
+		    sr=$?
+		    if test " $oops" = " " -a " $sr" != " 0"
+		    then
+			oops="silent error, exit status $sr"
+		    fi
+		    case "$oops" in
+		    'RTNETLINK answers: No such process'*)
+			    # This is what ip rule gives
+			    # for "could not find such a rule"
+			    oops=
+			    sr=0
+			    ;;
+		    esac
+		    if test " $oops" != " " -o " $sr" != " 0"
+		    then
+			echo "$0: \`$ir' failed ($oops)" >&2
+		    fi
+		    ;;
+	    esac
+	fi
+	return $sr
+}
+
+# the big choice
+case "$PLUTO_VERB:$1" in
+prepare-host:*|prepare-client:*)
+	# delete possibly-existing route (preliminary to adding a route)
+	case "$PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK" in
+	"0.0.0.0/0.0.0.0")
+	# horrible kludge for obscure routing bug with opportunistic
+		it="ip route del 0.0.0.0/1 2>&1 ;
+			ip route del 128.0.0.0/1 2>&1"
+		;;
+	*)
+		if test -n "$IPROUTETABLE"
+		then
+			it="ip route del $PLUTO_PEER_CLIENT table $IPROUTETABLE 2>&1"
+		else
+			it="ip route del $PLUTO_PEER_CLIENT 2>&1"
+		fi
+		;;
+	esac
+	oops="`eval $it 2>&1`"
+	status="$?"
+	if test " $oops" = " " -a " $status" != " 0"
+	then
+		oops="silent error, exit status $status"
+	fi
+	case "$oops" in
+	'RTNETLINK answers: No such process'*)
+		# This is what ip route gives
+		# for "could not find such a route".
+		oops=
+		status=0
+		;;
+	esac
+	if test " $oops" != " " -o " $status" != " 0"
+	then
+		echo "$0: \`$it' failed ($oops)" >&2
+	fi
+	ip route flush cache
+	exit $status
+	;;
+route-host:*|route-client:*)
+	# connection to me or my client subnet being routed
+	uproute
+	;;
+unroute-host:*|unroute-client:*)
+	# connection to me or my client subnet being unrouted
+	downroute
+	;;
+up-host:*)
+	# connection to me coming up
+	uprule
+	# If you are doing a custom version, firewall commands go here.
+	;;
+down-host:*)
+	# connection to me going down
+	downrule
+	# If you are doing a custom version, firewall commands go here.
+	;;
+up-client:)
+	# connection to my client subnet coming up
+	uprule
+	# If you are doing a custom version, firewall commands go here.
+	;;
+down-client:)
+	# connection to my client subnet going down
+	downrule
+	# If you are doing a custom version, firewall commands go here.
+	;;
+up-client:ipfwadm)
+	# connection to client subnet, with (left/right)firewall=yes, coming up
+	uprule
+	# This is used only by the default updown script, not by your custom
+	# ones, so do not mess with it; see CAUTION comment up at top.
+	ipfwadm -F -i accept -b -S $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK \
+		-D $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK
+	;;
+down-client:ipfwadm)
+	# connection to client subnet, with (left/right)firewall=yes, going down
+	downrule
+	# This is used only by the default updown script, not by your custom
+	# ones, so do not mess with it; see CAUTION comment up at top.
+	ipfwadm -F -d accept -b -S $PLUTO_MY_CLIENT_NET/$PLUTO_MY_CLIENT_MASK \
+		-D $PLUTO_PEER_CLIENT_NET/$PLUTO_PEER_CLIENT_MASK
+	;;
+*)	echo "$0: unknown verb \`$PLUTO_VERB' or parameter \`$1'" >&2
+	exit 1
+	;;
+esac

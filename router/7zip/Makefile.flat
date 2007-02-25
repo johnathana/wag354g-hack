@@ -1,0 +1,17 @@
+include ../../TI_Build.make
+
+#export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+TEMPPATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin/:/usr/local/bin
+
+all: build install
+
+build:
+	PATH=$(TEMPPATH) $(MAKE)
+	PATH=$(TEMPPATH) strip --remove-section .note 7zip
+	PATH=$(TEMPPATH) strip --remove-section .comment 7zip
+
+install: 
+	install -m 0755 7zip $(TI_tools_path)/bin
+
+clean:
+	$(MAKE) clean

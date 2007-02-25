@@ -1,0 +1,1 @@
+#define CONFIG_MIPS_AR7WRD 1

@@ -1,0 +1,5 @@
+<cpe_configuration>
+	<status>update complete</status>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</cpe_configuration>

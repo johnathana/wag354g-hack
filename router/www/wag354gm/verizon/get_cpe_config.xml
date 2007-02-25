@@ -1,0 +1,20 @@
+<cpe_configuration>
+	<service_type><% ddm_show_wanproto(""); %></service_type>
+	<lan_ip_addr><% nvram_get("lan_ipaddr"); %></lan_ip_addr>
+	<lan_subnet_mask><% nvram_get("lan_netmask"); %></lan_subnet_mask>
+	<lan_ip_type><% ddm_show_lanproto(""); %></lan_ip_type>
+	<lan_ip_start><% prefix_ip_get("lan_ipaddr",1); %><% nvram_get("dhcp_start"); %></lan_ip_start>
+	<lan_ip_end><% prefix_ip_get("lan_ipaddr",1); %><% ddm_show_ipend(""); %></lan_ip_end>
+	<% ddmdumpleases(""); %>
+	<wan_ip_type><% ddm_show_wanproto(""); %></wan_ip_type>
+	<wan_ip_addr><% ddm_show_wanipaddr(""); %></wan_ip_addr>
+	<wan_subnet_mask><% ddm_show_wannetmask(""); %></wan_subnet_mask>
+	<wan_gateway_ip><% ddm_show_wangateway(""); %></wan_gateway_ip>
+	<wan_dns1><% ddm_show_wandns(0); %></wan_dns1>
+	<wan_dns2><% ddm_show_wandns(1); %></wan_dns2>
+	<wan_dns3><% ddm_show_wandns(2); %></wan_dns3>
+	<wan_dns4>not supported</wan_dns4>
+	<idle_timeout><% ddm_show_idletime(""); %></idle_timeout>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</cpe_configuration>

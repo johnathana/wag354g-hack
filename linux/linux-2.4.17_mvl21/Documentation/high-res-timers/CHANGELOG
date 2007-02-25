@@ -1,0 +1,56 @@
+Bout time I started one of these :)
+
+For version 2.4.17-3.0
+
+Found a fixed a major bug that lost (or delayed) timers for a LONG time.
+All timers, not just POSIX timers.
+
+Also removed changes to limits.h and changed config.in to default to
+3000 timers and to use the TSC clock.  Also disabled some debug code
+that was getting turned on if CONFIG_KGDB was defined.
+
+For version 2.4.17-2.2
+
+Fixed the set up of the arch_to_latch conversion constant so we actually
+do get sub jiffies interrupts, thanks to Jim Houston for spotting this
+one.
+
+Put normalize code in the clock_gettime() call so we no longer return
+un-normalized time (i.e. nanoseconds > 1 sec.).
+
+Changed the run_timer_list code to get the latest version of "NOW" just
+prior to the scan.
+
+Changed schedule_next_interrupt() to accept a flag indicating how to
+return if the requested time has already elapsed (it was indicating
+"time elapsed" and not scheduling an interrupt which does not work well
+if we REALLY need the interrupt).
+
+For version 2.4.17-2.1
+
+Since 2.4.17-3.1 (the last to go to sourceforge)
+
+Fixed compile problems with high-res-timers turned off (who would do
+such a thing?)
+
+Changed all the ex_ math code to sc_ (it is scaled math after all).
+
+Added man pages
+
+Changed to no longer try to measure the minimun interval we can
+support.  It is now fixed at 500 micro seconds.  Looking for a new way
+to do this.  The old one ran into NMI issues on SMP machines.
+
+Fixed config.in "] problem (must be " ]).
+
+Picked up several more name space collisions on jiffies.
+
+Added the rest of the system call links for all archs, save, I think sh.
+
+Fixed a bug where a call to clock_gettime messed up gettimeofday.
+
+Simplified the lib stuff and moved the whole thing into the kernel tree.
+It no longer depends on links in /usr/include.
+
+I am sure I am forgetting something, but sigh, lets ship this thing.
+

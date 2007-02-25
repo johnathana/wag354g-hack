@@ -1,0 +1,253 @@
+Modular ALGO support version 0.8.1 for freeswan-1.98b
+$Id: HOWTO.ipsec_alg,v 1.1.1.2 2005/03/28 06:57:36 sparq Exp $
+
+HOWTO-ipsec_alg.txt       --Juanjo <jjo-ipsec@mendoza.gov.ar> 
+====================        Linux IP Aliasing creator, IPMASQ 2.2 Maintainer
+These patches provide additional algorithm support for (per connection
+selectable)
+- Phase1 (pluto)
+        IKE encrypt algorithms: AES, twofish, serpent, blowfish,
+        IKE hash algorithms:    SHA2
+        DH group:               2048, 3072, 4096
+- Phase2 (KLIPS)
+        ESP encrypt algorithms modules: AES, twofish, serpent, blowfish, 3DES
+        ESP auth algorithms modules: SHA2, SHA1, MD5.
+        PFS group:              2048, 3072, 4096
+
+See (1b) for more details
+
+Quickstart
+==========
+1) Patches:
+1a) Depeding of installation (stock or x509), use:
+  - Stock freeswan:
+     freeswan-alg-0.8.1-BASE-common.diff.gz
+     freeswan-alg-0.8.1-BASE-klips.diff.gz
+     freeswan-alg-0.8.1-BASE-pluto.diff.gz
+
+  - x509 (0.9.x) patched freeswan : 
+     freeswan-alg-0.8.1-BASE-common.diff.gz
+     freeswan-alg-0.8.1-BASE-klips.diff.gz
+     freeswan-alg-0.8.1-BASE-pluto_with_x509.diff.gz
+
+1b) Decide which ciphers you want (you can patch in any order)
+
+     --file--------------------------------- -phase-- --comment---------
+     freeswan-alg-0.8.1-enc-3des.diff.gz      -  P2   x86 optimized asm
+     freeswan-alg-0.8.1-enc-aes.diff.gz       P1 P2   128-256 bits
+     freeswan-alg-0.8.1-enc-blowfish.diff.gz  P1 P2   128-256 bits
+     freeswan-alg-0.8.1-enc-null.diff.gz      -  P2  
+     freeswan-alg-0.8.1-enc-serpent.diff.gz   P1 P2   128-256 bits
+     freeswan-alg-0.8.1-enc-twofish.diff.gz   P1 P2   128-256 bits
+     freeswan-alg-0.8.1-enc-crytoapi.diff.gz  -  P2   several ciphers
+                                                     
+     freeswan-alg-0.8.1-auth-md5.diff.gz      -  P2   x86 optimized asm
+     freeswan-alg-0.8.1-auth-sha1.diff.gz     -  P2   x86 optimized asm
+     freeswan-alg-0.8.1-auth-sha2.diff.gz     P1 P2   sha2_256 and sha2_512
+
+Eg: you want AES and TWOFISH ciphers:
+        cd /path/to/src/freeswan-1.98b
+        zcat freeswan-alg-0.8.1-BASE-common.diff.gz   | patch -p1 -s
+        zcat freeswan-alg-0.8.1-BASE-klips.diff.gz    | patch -p1 -s
+        zcat freeswan-alg-0.8.1-BASE-pluto.diff.gz    | patch -p1 -s
+        zcat freeswan-alg-0.8.1-enc-aes.diff.gz       | patch -p1 -s
+        zcat freeswan-alg-0.8.1-enc-twofish.diff.gz   | patch -p1 -s
+
+Optionally, you could use ciphers from cryptoapi (must be already installed,
+see www.kerneli.org), further info below.
+
+2) Proceed as always with freeswan configuration/compilation,
+   you MUST recompile KLIPS (kernel) _and_ pluto.
+
+   For kernel config., these new kernel config items will appear:
+    
+>>  IPSEC Modular Extensions (CONFIG_IPSEC_ALG) [Y/n/?] y
+>>       AES encryption algorithm (CONFIG_IPSEC_ALG_AES) [M/n/y/?] m
+>>       TWOFISH encryption algorithm (CONFIG_IPSEC_ALG_TWOFISH) [M/n/y/?] m
+>>       :
+
+   Compile, install, etc.
+   Don't forget to compile and also INSTALL PATCHED PLUTO (Phase1 algorithms
+   will be statically compiled into pluto).
+
+
+3) Reload ipsec/pluto and insert algo module
+        + modprobe ipsec_aes
+   Confirm ESP algo is present in kernel with
+        + ipsec auto --status | egrep ESP
+        000 algorithm ESP encrypt: id=3, name=ESP_3DES, ...
+        000 algorithm ESP encrypt: id=12, name=ESP_AES, ...
+        000 algorithm ESP auth attr: id=1, name=AUTH_ALGORITHM_HMAC_MD5, ...
+        000 algorithm ESP auth attr: id=2, name=AUTH_ALGORITHM_HMAC_SHA1, ...
+        :
+
+   You can also confirm which IKE algo have been compiled into pluto with
+        + ipsec auto --status | egrep IKE
+        000 algorithm IKE encrypt: id=65005, name=OAKLEY_TWOFISH_CBC, ...
+        000 algorithm IKE encrypt: id=7, name=OAKLEY_AES_CBC, ...
+        000 algorithm IKE encrypt: id=5, name=OAKLEY_3DES_CBC, ...
+        000 algorithm IKE hash: id=6, name=OAKLEY_SHA2_512, ...
+        000 algorithm IKE hash: id=4, name=OAKLEY_SHA2_256, ...
+        000 algorithm IKE hash: id=2, name=OAKLEY_SHA, ...
+        000 algorithm IKE hash: id=1, name=OAKLEY_MD5, ...
+
+       
+3) Edit connection parameters to select wanted algorithms and reload conn.
+
+3a) You should specify which algorithms you want for your connections.
+   NOTE: if you omit these parameters (esp=, ike= or pfsgroup=), pluto 
+         will behave as stock.
+   
+   Examples:
+
+3a1) - For Phase1 (IKE) algorithms:
+     . Add to your dotconf for the connection:
+
+        ike=aes128-sha,aes128-md5   
+        
+        NOTE: Phase1 sha1 string is "sha"
+
+     . which is the SAME AS ...
+
+        ike=aes128-sha-modp1536,aes128-sha-modp1024,\
+                aes128-md5-modp1536,aes128-md5-modp1024
+
+     . or you can be more specific ...
+
+        ike=aes128-sha-modp1536,aes128-md5-modp1536
+
+     . or more paranoid ...
+
+        ike=aes128-sha2_256-modp2048    
+        
+
+3a2) - For Phase2 (ESP) algorithms:
+
+       NOTE: missing pfsgroup=modpXXXX implies using
+             pfsgroup equal to Phase1' DH group
+   
+     . Add to your dotconf for the connection:
+
+        esp=aes128-sha1,aes128-md5
+
+     . which is the SAME AS ...
+
+        esp=aes128-sha1,aes128-md5
+
+     . or you can be more specific ...
+
+        esp=aes128-sha1
+        pfsgroup=modp1536
+
+     . or more paranoid ...
+
+        ike=aes128-sha2_256
+        pfsgroup=modp2048
+
+3b) - After editing reload that configuration
+
+        + ipsec auto --replace <connection>
+
+4) Bring up a connection against peer (with AES support, obviously)
+
+        + ipsec auto --up  <connection>
+
+   Confirm
+   - For ESP from kernel:
+
+        + ipsec spi | grep AES
+
+   - For IKE and ESP from pluto' view:
+
+        + ipsec auto --status | grep <connection>.*algo
+
+5) Additional testing
+   For ESP, all kernel modules accept test argument, eg:
+
+        + modprobe ipsec_aes test=1     # ask module to probe itself
+        + dmesg | tail -10              # show timing results
+
+   Recommended comparison:    ipsec_3des vs ipsec_aes   8)
+
+6) cryptoapi kernel module (info taken from CHANGES.ipsec_alg)
+   By default, loading ipsec_cryptoapi will try to register all cryptoapi
+   supported ciphers that have ESP id defined.
+
+   module args:
+     latebind=1   delay cryptoapi cipher binding until SA creation time
+     noauto=1     won't auto register all algos, only forced ones:
+     excl=1       don't allow more ciphers impl. for this algo
+     aes=0        don't do aes
+     aes=1        force do aes
+     aes=128,256  force aes with these keyminbits,keymaxbits
+                  ... same for: blowfish cast twofish serpent des_ede3
+     test=1       algo testing (as other modules)
+     debug=1
+  
+   Examples:
+     modinfo -p ipsec_cryptoapi                    (quite useful info)
+     modprobe ipsec_cryptoapi    (will try to register all known ciphers)
+     modprobe ipsec_cryptoapi test=1
+     modprobe ipsec_cryptoapi latebind=1   (don't lock cipher modules at loadtime)
+     modprobe ipsec_cryptoapi noauto=1 aes=1 twofish=1    (only these)
+     modprobe ipsec_cryptoapi aes=128,128       (this keylens for AES)
+     modprobe ipsec_cryptoapi des_ede3=0         (everything but 3DES)
+
+   After module loading, you will see several lines from kernel, similar than these:
+     ...
+     cryptoapi: loaded
+     cryptoapi: Registered aes-ecb (0)
+     cryptoapi: Registered aes-cbc (65536)
+     cryptoapi: Registered aes-cfb (131072)
+     cryptoapi: Registered aes-ctr (262144)
+     cryptoapi: Registered aes-rtc (524288)
+     setup_ipsec_alg_capi_cipher(): alg_type=15 alg_id=12 name=aes-cbc keyminbits=128 keymaxbits=256, ret=0
+     cryptoapi: Registered twofish-ecb (0)
+     cryptoapi: Registered twofish-cbc (65536)
+     cryptoapi: Registered twofish-cfb (131072)
+     cryptoapi: Registered twofish-ctr (262144)
+     cryptoapi: Registered twofish-rtc (524288)
+     setup_ipsec_alg_capi_cipher(): alg_type=15 alg_id=253 name=twofish-cbc keyminbits=128 keymaxbits=256, ret=0
+     ...
+   All previous steps (3-5: testing, conf setup, etc) are the SAME, the only difference now
+   is kernel cipher implementation.
+
+7) TIPS:
+   * You can permanently add ipsec_* algo modules loading in 
+     /etc/modules.conf:
+          add above ipsec ipsec_aes ipsec_3des ipsec_md5 ipsec_sha1
+
+Appendix A
+~~~~~~~~~~
+- if ike and esp strings are absent, pluto will use _same_ as original 
+  (unpatched) pluto, ie:
+
+  Phase1: if ike string is absent, it fallbacks to:
+
+     ike=3des-md5-modp1536,3des-md5-modp1024,\
+         3des-sha-modp1536,3des-sha-modp1024
+
+  Phase2: if esp string is absent, it fallbacks to:
+
+     esp=3des-md5,3des-sha1
+     [ no pfsgroup => use Phase1's DH group ]
+
+- If your pluto compilation bombs with something like
+    :
+    In file included from /usr/include/linux/byteorder/little_endian.h:11,
+                     from /usr/include/asm/byteorder.h:45,
+                     from serpent.c:24:
+    /usr/include/linux/byteorder/swab.h:132: warning: no previous prototype
+        for `__fswab16'
+    :
+    cc -o pluto ... (final stage: linking)
+    :
+    /usr/src/super-freeswan-1.98b_kb5/libcrypto/libserpent/serpent.c:458:
+    undefined reference to `__fswab32'
+
+  It's a problem with old kernel-headers that incorrectly declare fswab*() 
+  functions as "extern __inline__ ..." instead of "static __inline__ ..."
+  The solution is to upgrade to newer kernel-headers package (specifically
+  this was a rh72 issue with kernel-headers-2.4.7, after upgrading to
+  kernel-headers-2.4.9 the problem got solved).
+

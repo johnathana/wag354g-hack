@@ -1,0 +1,48 @@
+H3 {
+	MARGIN-TOP: 1px; MARGIN-BOTTOM: 1px; FONT: bold 15pt Arial,Verdana,Helvetica,sans-serif; COLOR: white
+}
+TH {
+	FONT: bold 10pt Arial,Helvetica,sans-serif; COLOR: white
+}
+BODY {
+	FONT: 10pt Arial,Helvetica,sans-serif; COLOR: black
+}
+TABLE {
+	BORDER-RIGHT: white; BORDER-TOP: white; FONT: 10pt Arial,Helvetica,sans-serif; BORDER-LEFT: white; COLOR: black; BORDER-BOTTOM: white; BORDER-COLLAPSE: collapse
+}
+TD {
+	FONT-WEIGHT: normal; FONT-SIZE: 8pt; COLOR: black; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; FONT-VARIANT: normal
+}
+B {
+	FONT-WEIGHT: bold
+}
+.num {
+	FONT: 8pt Courier,serif
+}
+.tt {
+	FONT: 8pt Courier,serif; COLOR: black
+}
+.headrow {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; MARGIN-TOP: 1px; BACKGROUND: #cccccc; MARGIN-BOTTOM: 1px; FONT: bold 8pt Arial,Helvetica,sans-serif; BORDER-LEFT: 1px solid; COLOR: black; BORDER-BOTTOM: 1px solid; TEXT-ALIGN: center
+}
+.incell {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; FONT: 8pt Arial,Helvetica,sans-serif; BORDER-LEFT: 1px solid; COLOR: black; BORDER-BOTTOM: 1px solid; TEXT-ALIGN: center
+}
+A {
+	TEXT-DECORATION: none
+}
+A {
+	TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #ffffff
+}
+A:visited {
+	COLOR: #ffffff
+}
+.small A:link {
+	COLOR: #b5b5e6
+}
+.small A:visited {
+	COLOR: #b5b5e6
+}

@@ -1,0 +1,5 @@
+<set_admin_info>
+	<admin_userid><% nvram_get("http_username"); %></admin_userid>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</set_admin_info>

@@ -1,0 +1,36 @@
+Aggressive Mode support in Super FreeS/WAN 1.99.* (from http://marasystems.com/download/freeswan/)
+
+We have found that we need to support Aggressive Mode IKE/ISAKMP for better interoperability with certain other
+less flexible IPSec implementations. In our case the demand is mainly from beeing able to use FreeS/WAN as a
+road-warrior to other implementations using PSK authentication. Without Aggressive Mode only a single PSK key can
+be used for all roadwarriors which is considerably less secure than the issues with Aggressive Mode IKE in our
+opinion.
+
+If possible we strongly advice to investigate the use of more secure identification methods such as RSA
+signatures or X509 certificates. Aggressive mode reveals sensitive information about the caller and responder in
+plain text and weakens the security of the IKE protocol. Only use aggressive mode if you need to use FreeSWAN to
+replace another product already using aggressive mode and upgrading the IPSec infrastructure to more modern
+authentication mechanisms than PSK is not possible.
+
+This patch adds aggressive mode support to pluto (the ISAKMP/IKE component of FreeS/WAN). The aggressive mode is
+enabled by a new aggrmode option, both in ipsec.conf tunnel definitions and in direct whack pluto tunnel
+definition commands.  Check "man ipsec.conf" for the documentation of these new options.
+
+Known Issues
+
+* The implementation of aggressive mode is currently limited to PSK, DES3, DH Group 2 only, and this in a rather
+  crude manner in terms of source changes. Any attemtps to use aggressive mode in combination with RSA keys or X509
+  certificates will most likely fail badly. Support for other encryption methods and DH groups should at a minimum
+  be added.
+* Responder mode does not work well for road warriors with unknown IP addresses. It seems %any is used while
+  searching ipsec.secrets rather than the known peer ID. This may be related to how Main Mode implements road
+  warriors as there %any has to be used in a temporary connection object until the real identity is known, but this
+  is not the case in aggressive mode as there is the identity immediately known. 
+
+* Seems to react to aggressive mode initiate packets even if aggressive mode is not enabled in the profile. 
+  Should immediately drop aggressive mode initiation packets if aggressive mode is not enabled. 
+  This needs more testing.
+
+The Aggressive Mode patch is from MARA Systems AB, Sweden (http://www.marasystems.com/) 
+
+http://marasystems.com/download/freeswan/

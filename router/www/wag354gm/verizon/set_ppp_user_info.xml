@@ -1,0 +1,6 @@
+<set_ppp_user_info>
+	<ppp_userid><% ddm_get_pppuser(""); %></ppp_userid>
+	<ppp_passwd><% ddm_get_ppppassword(""); %></ppp_passwd>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</set_ppp_user_info>

@@ -1,0 +1,179 @@
+		How to use Virtual IP with Super FreeS/WAN
+
+Tuomo Soini <tis@foobar.fi>
+Ken Bantoft <ken@freeswan.ca>
+
+
+You can modify Super FreeS/WAN very easily to provide virtual ip support. 
+This support is very simple and relies on using iproute instead of route in 
+_updown script. Using iproute requires kernel version 2.2 or greater and
+policyrouting support in kernel.
+
+
+There are 2 major advantages to using Virtual IP support:
+
+
+1.	Have road warriors be assigned static ip to make firewalling simpler.
+
+2.	Use only 1 tunnel for a full net1-sgw1===sgw2-net2 configuration.
+	The Secure Gateways can speak to each other using an internal ip
+	addresses.
+
+	You'll need some /etc/hosts or internal dns magic if there are services
+	provided by the Secure Gateways that you need to access.
+
+
+
+To Enable Virtual IP Support:
+
+1.	Backup /usr/local/lib/ipsec/_updown*
+2.	Copy the _updown* scripts from this directory to /usr/local/lib/ipsec
+3.	Edit /etc/sysconfig/ipsec file and insert a line like:
+
+	DEFAULTSOURCE='192.168.0.10'
+
+	If you want to use ip 192.168.0.10 as your virtual ip.
+
+	If you have problems with policyrouting, you can disable it here by
+	setting:
+
+	IPROUTETABLE=
+
+	Remember: You need an interface with your virtual ip already on your
+	machine. The simplest way is to use the ip of your internal interface
+	as your virtual ip. This way, your Secure Gateway speaks with the
+	Secure Gateway on other end with internal address and thus removes
+	the need to add extra ipsec tunnels.
+
+	If you are using laptop or want to use other virtual address than your
+	internal ip address, you can add that address as alias to loopback
+	interface (lo).
+
+	On RedHat linux this can be done by adding definitions for interface
+	lo:0.
+
+	Here is example for /etc/sysconfig/network-scripts/ifcfg-lo:0
+
+	DEVICE='lo:0'
+	ONBOOT='yes'
+	BOOTPROTO='none'
+	USERCTL='no'
+	NAME='virtual'
+	IPADDR='192.168.0.10'
+	BROADCAST='255.255.255.255'
+	NETWORK='0.0.0.0'
+	NETMASK='255.255.255.255'
+	NO_ALIASROUTING='yes'
+
+
+4.	If you want to have your local lan ip as virtual ip for road warrior
+	you need to add proxy arp support to your Secure Gateway internal
+	internal interface.
+
+	This is done by modifying the /proc filesystem.  For example, if your
+	internal interface is eth1 then the command would be: 
+
+	echo 1 >/proc/sys/net/ipv4/conf/eth1/proxy_arp
+
+	To avoid doing this at every boot, you can enable it automatically by
+	adding following lines to /etc/sysctl.conf
+
+	# enable proxy_arp for internal interface eth1
+	net.ipv4.conf.eth1.proxy_arp = 1
+
+
+
+Example Configurations
+Note: These use X.509 Digital Certificates for authentication.
+This is not required.
+
+# Client side
+config setup
+	# THIS SETTING MUST BE CORRECT or almost nothing will work;
+	# %defaultroute is okay for most simple cases.
+        interfaces="%defaultroute"
+	# Debug-logging controls:  "none" for (almost) none, "all" for lots.
+	klipsdebug=none
+	plutodebug=none
+	# Use auto= parameters in conn descriptions to control startup actions.
+	plutoload=%search
+	plutostart=%search
+	# Close down old connection when new one using same ID shows up.
+	uniqueids=yes
+	# Enable NAT-Traversal
+	nat_traversal=yes
+	# Disable nat-t-ike-03 port floating
+	#disable_port_floating=no
+	# RFC1918 networks
+	virtual_private=%v4:10.0.0.0/8,%v4:172.16.0.0/12,%v4:192.168.0.0/16
+
+conn %default
+	left=%defaultroute
+	leftsubnet=192.168.0.10/32
+	leftid="C=FI, CN=roadwarrior.mydomain.tld, E=roadwarrior@mydomain.tld"
+	leftcert=roadwarrior.mydomain.tld.crt
+	leftrsasigkey=%cert
+	rightrsasigkey=%cert
+	authby=rsasig
+	compress=yes
+	disablearrivalcheck=no
+	ikelifetime=6h
+	keylife=1h
+	keyingtries=0
+
+conn rw1-headq
+	right=10.10.10.10
+	rightsubnet=192.168.0.0/24
+	rightid="C=FI, CN=sgw.mydomain.tld, E=sgw-admin@mydomain.tld"
+	auto=start
+
+# Server side
+config setup
+	# THIS SETTING MUST BE CORRECT or almost nothing will work;
+	# %defaultroute is okay for most simple cases.
+        interfaces="%defaultroute"
+	# Debug-logging controls:  "none" for (almost) none, "all" for lots.
+	klipsdebug=none
+	plutodebug=none
+	# Use auto= parameters in conn descriptions to control startup actions.
+	plutoload=%search
+	plutostart=%search
+	# Close down old connection when new one using same ID shows up.
+	uniqueids=yes
+	# Enable NAT-Traversal
+	nat_traversal=yes
+	# Disable nat-t-ike-03 port floating
+	#disable_port_floating=no
+	# RFC1918 networks
+	virtual_private=%v4:10.0.0.0/8,%v4:172.16.0.0/12,%v4:192.168.0.0/16
+
+conn %default
+	left=%defaultroute
+	leftid="C=FI, CN=sgw.mydomain.tld, E=sgw-admin@mydomain.tld"
+	leftcert=sgw.mydomain.tld
+	leftrsasigkey=%cert
+	rightrsasigkey=%cert
+	authby=rsasig
+	compress=yes
+	disablearrivalcheck=no
+	keyingtries=0
+
+conn headq-rw1
+	leftsubnet=192.168.0.0/24
+	right=%any
+	rightsubnet=vhost:%v4:192.168.0.10/32
+	rightid="C=FI, CN=roadwarrior.mydomain.tld, E=roadwarrior@mydomain.tld"
+	keylife=1h
+	keyingtries=1
+	auto=add
+
+conn headq-rw2
+	leftsubnet=192.168.0.0/24
+	right=%any
+	rightsubnet=vhost:%v4:192.168.0.11/32
+	rightid="C=FI, CN=roadwarrior2.mydomain.tld, E=user@mydomain.tld"
+	keylife=1h
+	keyingtries=1
+	auto=add
+
+# EOF

@@ -1,0 +1,1 @@
+#define CONFIG_MIPS_CPMAC_PORTS (1)

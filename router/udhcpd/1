@@ -1,0 +1,93 @@
+clientpacket.c:		char str[sizeof("udhcp "VERSION)];
+clientpacket.c:	} vendor_id = { DHCP_VENDOR,  sizeof("udhcp "VERSION) - 1, "udhcp "VERSION};
+Binary file clientpacket.o matches
+CVS/Repository:bcm4712/src/router/udhcpd
+CVS/Entries:/README.udhcpc/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+CVS/Entries:/README.udhcpd/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+CVS/Entries:/libbb_udhcp.h/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+CVS/Entries:/udhcpc.8/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+CVS/Entries:/udhcpd.8/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+CVS/Entries:/udhcpd.conf.5/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+debug.h:#include "libbb_udhcp.h"
+dhcp_1015.c: * udhcp Server
+dhcp_1015.c:int udhcpd_main(int argc, char *argv[])
+dhcp_1015.c:	OPEN_LOG("udhcpd");
+dhcp_1015.c:	LOG(LOG_INFO, "udhcp server (v%s) started", VERSION);
+dhcpc.c: * udhcp DHCP client
+dhcpc.c:#define DEFAULT_SCRIPT	"/usr/share/udhcpc/default.script"
+dhcpc.c:"Usage: udhcpc [OPTIONS]\n\n"
+dhcpc.c:int udhcpc_main(int argc, char *argv[])
+dhcpc.c:			printf("udhcpcd, version %s\n\n", VERSION);
+dhcpc.c:	OPEN_LOG("udhcpc");
+dhcpc.c:	LOG(LOG_INFO, "udhcp client (v%s) started", VERSION);
+dhcpc.h:#include "libbb_udhcp.h"
+Binary file dhcpc.o matches
+dhcpd.c: * udhcp Server
+dhcpd.c:int udhcpd_main(int argc, char *argv[])
+dhcpd.c:	OPEN_LOG("udhcpd");
+dhcpd.c:	LOG(LOG_INFO, "udhcp server (v%s) started", VERSION);
+dhcpd.h:#include "libbb_udhcp.h"
+dhcpd.h:#define DHCPD_CONF_FILE         "/etc/udhcpd.conf"
+dhcpd.h:	unsigned long auto_time; 	/* how long should udhcpd wait before writing a config file.
+Binary file dhcpd.o matches
+Binary file dumpleases matches
+dumpleases.c:#include "libbb_udhcp.h"
+dumpleases.c:	char file[255] = "/var/lib/misc/udhcpd.leases";
+Binary file dumpleases.o matches
+files.c:	{"lease_file",	read_str, &(server_config.lease_file),	"/var/lib/misc/udhcpd.leases"},
+files.c:	{"pidfile",	read_str, &(server_config.pidfile),	"/var/run/udhcpd.pid"},
+Binary file files.o matches
+frontend.c:extern int udhcpd_main(int argc, char *argv[]);
+frontend.c:extern int udhcpc_main(int argc, char *argv[]);
+frontend.c:		ret = udhcpd_main(argc, argv);
+frontend.c:	else ret = udhcpc_main(argc, argv);
+Binary file frontend.o matches
+libbb_udhcp.h:/* libbb_udhcp.h - busybox compatability wrapper */
+Makefile:# udhcp makefile
+Makefile:# Uncomment this to get a shared binary. Call as udhcpd for the server,
+Makefile:# and udhcpc for the client
+Makefile:EXEC1 = udhcpd
+Makefile:EXEC1 = udhcpd
+Makefile:EXEC2 = udhcpc
+Makefile:BOOT_PROGRAMS = udhcpc
+Makefile:DAEMONS = udhcpd
+Makefile:	mkdir -p $(USRSHAREDIR)/udhcpc
+Makefile:			$(USRSHAREDIR)/udhcpc/default.$$name ; \
+Makefile:	$(INSTALL) udhcpd.conf.5 $(USRSHAREDIR)/man/man5
+Makefile:	$(INSTALL) udhcpc.8 udhcpd.8 $(USRSHAREDIR)/man/man8
+Makefile:	-rm -f udhcpd udhcpc dumpleases *.o core
+samples/sample.bound:# Sample udhcpc renew script
+samples/sample.bound:RESOLV_CONF="/etc/udhcpc/resolv.conf"
+samples/README:	udhcpd.conf: A sample udhpcd configuration file.
+samples/README:	sample.renew	: sample scripts for the udhcpc client.
+samples/sample.deconfig:# Sample udhcpc deconfig script
+samples/sample.nak:# Sample udhcpc nak script
+samples/sample.renew:# Sample udhcpc bound script
+samples/sample.renew:RESOLV_CONF="/etc/udhcpc/resolv.conf"
+samples/sample.script:exec /usr/share/udhcpc/sample.$1
+samples/simple.script:# udhcpc script edited by Tim Riker <Tim@Rikers.org>
+samples/simple.script:[ -z "$1" ] && echo "Error: should be called from udhcpc" && exit 1
+samples/udhcpd.conf.bak:# Sample udhcpd configuration file (/etc/udhcpd.conf)
+samples/udhcpd.conf.bak:# The interface that udhcpd will use
+samples/udhcpd.conf.bak:# If remaining is true (default), udhcpd will store the time
+samples/udhcpd.conf.bak:# remaining for each lease in the udhcpd leases file. This is
+samples/udhcpd.conf.bak:# The time period at which udhcpd will write out a dhcpd.leases
+samples/udhcpd.conf.bak:# file. If this is 0, udhcpd will never automatically write a
+samples/udhcpd.conf.bak:#lease_file	/var/lib/misc/udhcpd.leases	#defualt: /var/lib/misc/udhcpd.leases
+samples/udhcpd.conf.bak:#pidfile	/var/run/udhcpd.pid	#default: /var/run/udhcpd.pid
+samples/udhcpd.conf.bak:# Everytime udhcpd writes a leases file, the below script will be called.
+samples/udhcpd.conf.bak:# The following are bootp specific options, setable by udhcpd.
+samples/udhcpd.conf:# Sample udhcpd configuration file (/etc/udhcpd.conf)
+samples/udhcpd.conf:# The interface that udhcpd will use
+samples/udhcpd.conf:# If remaining is true (default), udhcpd will store the time
+samples/udhcpd.conf:# remaining for each lease in the udhcpd leases file. This is
+samples/udhcpd.conf:# The time period at which udhcpd will write out a dhcpd.leases
+samples/udhcpd.conf:# file. If this is 0, udhcpd will never automatically write a
+samples/udhcpd.conf:#lease_file	/var/lib/misc/udhcpd.leases	#defualt: /var/lib/misc/udhcpd.leases
+samples/udhcpd.conf:#pidfile	/var/run/udhcpd.pid	#default: /var/run/udhcpd.pid
+samples/udhcpd.conf:# Everytime udhcpd writes a leases file, the below script will be called.
+samples/udhcpd.conf:# The following are bootp specific options, setable by udhcpd.
+samples/CVS/Repository:bcm4712/src/router/udhcpd/samples
+samples/CVS/Entries:/udhcpd.conf/1.1.1.1/Fri Jul  4 08:12:45 2003//Tv2_02_0_003_US
+socket.c: * udhcp client/server
+Binary file udhcpd matches

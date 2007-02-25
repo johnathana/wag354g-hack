@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<admin_info>
+	<admin_userid><% nvram_get("http_username"); %></admin_userid>
+	<password_status><% ddm_check_passwd(""); %></password_status>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</admin_info>	

@@ -1,0 +1,73 @@
+<HTML><HEAD><TITLE>ADSL Current Status</TITLE>
+<% no_cache(); %>
+<!--<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">-->
+<META http-equiv=Content-Type content="text/html; charset=unicode">
+
+<script src="common.js"></script>
+<script language="JavaScript" type="text/javascript" src="share.js"></script>
+document.title=(share.acst);
+</HEAD>
+<BODY bgColor=white>
+<CENTER>
+<TABLE cellSpacing=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD><FONT face=Arial color=blue><B><script>Capture(share.acst)</script></B></FONT></TD>
+    <TD align=right>
+      <FORM><INPUT onclick="window.location.replace('ADSLCStatus.htm')" type=button value=" Refresh "></FORM></TD></TR>
+  <TR align=middle bgColor=#b3b3b3>
+    <TH><FONT face=verdana size=2><script>Capture(share.item)</script></FONT></TH>
+    <TH><FONT face=verdana size=2><script>Capture(share.values)</script></FONT></TH></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.alinetype)</script></TD>
+    <TD><% nvram_dslstatus_get("trainedmode", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.alinecoding)</script>ADSL Line Coding</TD>
+    <TD><% nvram_dslstatus_get("trainedpath", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.lineatt)</script></TD>
+    <TD>(<script>Capture(share.down)</script>):<% nvram_dslstatus_get("dsatten", 0); %>&nbsp;&nbsp;(<script>Capture(share.up)</script>):<% nvram_dslstatus_get("usatten", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.noise)</script></TD>
+    <TD>(<script>Capture(share.down)</script>):<% nvram_dslstatus_get("dsmargin", 0); %>&nbsp;&nbsp;(<script>Capture(share.up)</script>):<% nvram_dslstatus_get("usmargin", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.totalpow)</script></TD>
+    <TD>(<script>Capture(share.down)</script>):<% nvram_dslstatus_get("dspower", 0); %>&nbsp;&nbsp;(<script>Capture(share.up)</script>):<% nvram_dslstatus_get("uspower", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.curstate)</script></TD>
+    <TD><script>Capture(share.downstr)</script>:&nbsp;<% nvram_dslstatus_get("dsrate", 2); %>(K)&nbsp;&nbsp;<script>Capture(share.upstr)</script>:&nbsp;<% nvram_dslstatus_get("usrate", 2); %>(K)</TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.alinestatus)</script></TD>
+    <TD><% nvram_dslstatus_get("dslstatus", 0); %></TD></TR>
+  <!--<TR align=middle bgColor=#cccccc>
+    <TD>Relative Capacity Occupation</TD>
+    <TD>(Down):0&nbsp;&nbsp;(Up):0</TD></TR>
+-->
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.fecfast)</script></TD>
+    <TD>(<script>Capture(share.near)</script>):<% nvram_dslstatus_get("FEC:", 0); %>&nbsp;&nbsp;(<script>Capture(share.far)</script>):<% nvram_dslstatus_get("FEC:", 1); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.fecinterl)</script></TD>
+    <TD>(<script>Capture(share.near)</script>):<% nvram_dslstatus_get("FEC:", 2); %>&nbsp;&nbsp;(<script>Capture(share.far)</script>):<% nvram_dslstatus_get("FEC:", 3); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.crcfast)</script></TD>
+    <TD>(<script>Capture(share.near)</script>):<% nvram_dslstatus_get("CRC:", 0); %>&nbsp;&nbsp;(<script>Capture(share.far)</script>):<% nvram_dslstatus_get("CRC:", 1); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.crcinterl)</script></TD>
+    <TD>(<script>Capture(share.near)</script>):<% nvram_dslstatus_get("CRC:", 2); %>&nbsp;&nbsp;(<script>Capture(share.far)</script>):<% nvram_dslstatus_get("CRC:", 3); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.hecfast)</script></TD>
+    <TD>(<script>Capture(share.near)</script>):<% nvram_dslstatus_get("HEC:", 0); %>&nbsp;&nbsp;(<script>Capture(share.far)</script>):<% nvram_dslstatus_get("HEC:", 1); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.hecfast)</script></TD>
+    <TD>(<script>Capture(share.near)</script>):<% nvram_dslstatus_get("HEC:", 2); %>&nbsp;&nbsp;(<script>Capture(share.far)</script>):<% nvram_dslstatus_get("HEC:", 3); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.showtime)</script></TD>
+    <TD><% nvram_dslstatus_get("lasttime", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.aver)</script></TD>
+    <TD><% nvram_dslstatus_get("dslver", 0); %></TD></TR>
+  <TR align=middle bgColor=#cccccc>
+    <TD><script>Capture(share.aboard)</script></TD>
+    <TD><% nvram_dslstatus_get("annex", 0); %></TD></TR>
+</TBODY></TABLE></CENTER></BODY></HTML>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<wan_ip_info>
+	<wan_ip_type><% ddm_show_wanproto(""); %></wan_ip_type>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</wan_ip_info>	

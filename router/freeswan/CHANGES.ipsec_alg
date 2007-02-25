@@ -1,0 +1,393 @@
+$Id: CHANGES.ipsec_alg,v 1.1.1.2 2005/03/28 06:57:35 sparq Exp $
+
+v0.8.1: new cryptoapi module, new pluto/alg/Config.ike_alg
+       -rc8
+            . blowfish kernel module: bump maxbits to 448, thanks to
+	      Claude Gygax.
+
+       -rc7
+	    . KLIPS DES Makefile fixed, 1DES fix from 
+	      Ard Biesheuvel <a.k.biesheuvel@its.tudelft.nl>
+            . ipsec.conf.5 edition: esp=, ike= and pfsgroup= documented
+
+       -rc6:
+            . fix ESP aes256 support
+	    . merge Config.alg_cryptoapi.in from kenb tree (orig: mcp)
+	    . docs updates (cryptoapi instructions in doc/HOWTO.ipsec_alg)
+
+       -rc5:
+            . bugfixes from mcp and kenb
+            . synced with ken' CVS at XXXtagnameXXX
+
+       -rc4:
+            . pluto IKE algos are (statically) configurable, edit
+              pluto/alg/Config.ike_alg
+	      Ie. you can have fully algo patched freeswan and yet
+	      select with algos you want inside.
+            . *unsupported*, *optional*, *disabled by default* 1DES 
+	      algo (I can hear you guys shouting :)
+
+              Caution has been taken SO THAT 1DES is NOT used
+              unless explicitely wanted
+              - 1des won't be in proposal by default (same as other
+                algos), you must specify it in "esp" and "ike"
+                strings under pluto confs.
+              - 1des won't be accepted (as responder) unless
+                listed in "esp"/"ike" strings (this behaviour
+                IS different from other algos where algo presence
+		is enough for accepting proposal).
+	        Besides, pluto will log as SERIOUS everytime a 1DES proposal
+	        is used.
+	      - kernel module (ipsec_1des.o) will WARN everytime
+	        a new ipsec_sa creates a des context, unless 
+		loaded as "modprobe ipsec_1des I_know_1des_is_insecure=1"
+
+       -rc3:
+            . add (forgotten) net/ipsec/Makefile patching from 
+	      klips/patches2.3/net.Makefile-alg, thanks to
+	      "Tomasz Torcz, BG" <zdzichu@irc.pl>
+       -rc1,2:
+	    . merge (0 conflicts) 1.99 changes
+            . KLIPS: avoid gcc warnings when neither MD5,SHA1 or 3DES
+	    . libcrypto: do #define XXX_LONG u_int32_t in lib*/xxx.h
+       -pre8:
+            . gcc-3.2 (eg rh80) support (mainly bbye to __FUNCTION__)
+       -pre6:
+            . merged ESP NULL fixes, created RELNOTES.ipsec_alg
+	    . cope with __FUNCTION__ (deprecated in gcc-3.2)
+
+      * KLIPS:
+         - *NEW* ipsec_cryptoapi.o : will try to register all cryptoapi
+	   (http://www.kerneli.org) supported ciphers that have ESP id defined.
+
+           Authors: Harpo MAxx, Luciano Ruete and me.
+           module args:
+            latebind=1   delay cryptoapi cipher binding until SA creation time
+            noauto=1     won't auto register all algos, only forced ones:
+	    excl=1       don't allow more ciphers impl. for this algo
+            aes=0        don't do aes
+            aes=1        force do aes
+	    aes=128,256  force aes with these keyminbits,keymaxbits
+	        ... same for: blowfish cast twofish serpent des_ede3
+            test=1       algo testing (as other modules)
+	    debug=1
+
+	   Examples:
+            .  modinfo -p ipsec_cryptoapi                    (quite useful info)
+            .  modprobe ipsec_cryptoapi    (will try to register al known ciphers)
+            .  modprobe ipsec_cryptoapi test=1
+            .  modprobe ipsec_cryptoapi latebind=1   (dont lock cipher-mods at loadtime)
+            .  modprobe ipsec_cryptoapi noauto=1 aes=1 twofish=1    (only these)
+            .  modprobe ipsec_cryptoapi aes=128,128       (this keylens for AES)
+            .  modprobe ipsec_cryptoapi des_ede3=0         (everything but 3DES)
+
+	 - allow several cipher implementations to load, last one will
+	   be used for NEW SAs
+	 - make algo tests more robust agaist broken cipher modules (no
+	   one ATM, but useful for debugging)
+	 - added "excl" (exclusive) argument to all algo modules
+	   excl=1       will force exclusive registration for this algo
+         - added struct ipsec_alg * as 1st parameters to method calls
+	 - struct ipsec_alg: 
+	   . 2 new methods (_new_key and _destroy_key) to accomodate 
+	     dynamic cipher contexts creation (eg. cryptoapi)
+	   . 1 new field: _data to "private" cipher usage
+         - removed innecesary openssl headers from libcrypto/
+
+v0.8.0b: contribs
+         - Pawel Krawczyk:
+	   change ipsec_aes.o XCBC AES bits to comply with current draft
+	 - Mathieu Lafon:
+           make ALG_INFO_F_STRICT actually strict (include enc,auth,DH checks),
+	   use it as eg.    esp="aes128-sha1,aes128-md5!"  (note the '!')
+	   
+v0.8.0a: bugfixes
+         - fix ipsec.o build without CONFIG_IPSEC_ALG
+         - fix ipsec.o build without CONFIG_IPSEC_DEBUG
+	 - 64bit cleanups (tested on alpha), BIG thanks to
+	   Ken Bantoft <ken@freeswan.ca> for providing platform
+
+v0.8.0: Phase1 cipher algorithms support, plus MODP2048-4096
+	 - final: releases testing, random docs update
+	 - rc2:   pluto/db_ops.c allocation stats (debugging)
+	 - rc1:   no user visible changes (polishing)
+	 - pre14: whack.c: force initialization of new vars
+	 - pre13: fixed make *go, different CFLAGS in libcrypto for pluto
+	          and KLIPS
+	 - pre11: accept IKE algo keylens
+	
+ * PLUTO: 
+   +    NEW: added Phase1 (IKE) algorithms:
+    	     AES, twofish, serpent, blowfish; SHA2_256, SHA2_512
+
+   +    NEW: IKE algorithm selection 
+        	ike="aes128-sha,aes128-md5"
+		ike="aes256-sha,aes256-md5"
+   + 	NEW: IKE DH group selection (if not selected will default
+             to current 1536,1024) eg:
+		ike="aes128-sha-modp2048"
+	     if no PFS group is specified, it will default to P1's DH
+	     (as current pluto does).
+   +	NEW: support for OAKLEY_MODP2048, 3072 and 4096
+   	     *only* by explicit selection in ike string
+	     NOTE: Additionally pluto will warn if it takes "too" long to 
+	           compute_dh_shared, eg (PIII 1.4GHz):
+		     003 "uml2-fbsd" #4: WARNING: compute_dh_shared(): \
+		     for OAKLEY_GROUP_MODP4096 (extension) took 223155 usec
+
+   +	NEW: pfsgroup support
+   	     new parameter in dotconf, eg:
+		pfsgroup=modp2048
+   +	NEW: auto --status full algorithm info (ESP ciphers, IKE ciphers,
+   	     DH groups)
+   +	(pre11+) fixed proposals for RSASIGs
+
+   + 	keylen handling fixes for ESP proposals
+   +	show algos for newest connection state (IKE and ESP)
+   		+ ipsec auto --status | grep algo.*newe
+   +    added patches from Mathieu Lafon - Arkoon Network Security,
+        for ESP proposals:
+        . (optional, me) strict response with esp= only algos by
+	  adding '!' to esp string, eg:   esp=aes128-sha1,aes128-md5!
+        . NULL esp= string handling: propose everything.
+   +    massive cipher code reorganization, new ./libcrypto/lib<algo>
+   	hierachy, almost no code changes.
+
+   +	[OT] contributed SHA2 patch to KAME project (typo error
+   	in sha2 array setup)
+
+ * KLIPS
+   + 	IMPORTANT: **possibly esp= string incompatible change**
+
+        Bumped AES,Serpent,twofish to 128-256 keys, so now you
+   	*MUST* specify keylength in alg string
+		esp=aes-md5       (OLD)
+	should be 
+		esp=aes128-md5    (explicit keylen)
+
+v0.7.3: KLIPS ext->alg rename, manual conn support
+
+ The most user visible change is just 1 AES option, no more CAST and manual
+ connection support (tested Ok with cloned scripts from ./testing/ ).
+
+ Changes from previous release:
+ * KLIPS: the big rename
+   - 	renamed *ipsec_ext* to *ipsec_alg*, *IPSEC_EXT* to *IPSEC_ALG*, 
+	everywhere: in filenames, interface and Config*.in => you must
+	re-select kernel build configuration for IPSEC_ALG_* 
+	(former IPSEC_EXT_*)
+   -	implemented 2linked list ipsec_alg registration instead
+	of fixed arrays => some space savings and better scalability
+	(debugged from previous available beta ).
+   -	more documentation in ipsec_alg.[ch]
+   - 	CAST discontinued, AES: only 1 impl (mailing list discussion)
+	
+ * KLIPS UTILS: manual connection support
+   -	manual conn support (klips/utils/spi.c)
+	. same pluto parser for esp strings
+	. debug flag support
+	. Makefile trickery to allow compilation "from" some pluto sources
+	  (constants.c, kernel_alg.c, alg_info.c)
+
+ * PLUTO: stricter runtime kernel algo checking
+   - 	stricter runtime algo checking in spdb.c, makes proposal
+	selection as responder more robust by avoiding *falsely* accepting
+	proposals for stock algos (3DES, MD5, SHA1) if not present.
+
+v0.7.2b:
+ Changes from v0.7.2a
+ 	* PLUTO
+	- make pluto patch for x509 patched freeswan.
+	- fixed pluto crash for RW cases (alg_info ref_cnt).
+
+v0.7.2a: "spawn of the missing link"
+ Changes from v0.6.3: 
+ 	* User visible:
+	- ipsec auto --status gives verbose info about discovered algos:
+	  Eg:
+	  + ipsec auto --status | egrep ESP
+	  000   algorithm ESP encrypt: id=3, name=ESP_3DES
+	  000   algorithm ESP encrypt: id=12, name=ESP_AES
+	  000   algorithm ESP auth attr: id=1, name=AUTH_ALGORITHM_HMAC_MD5
+	  000   algorithm ESP auth attr: id=2, name=AUTH_ALGORITHM_HMAC_SHA1
+	  000   algorithm ESP auth attr: id=5, name=AUTH_ALGORITHM_HMAC_SHA2_256
+	  000   algorithm ESP auth attr: id=7, name=AUTH_ALGORITHM_HMAC_SHA2_512
+	  000 "quark-nkosa":   ESP algorithms wanted: 12/000-2/000,    \
+	       253/000-2/000, 252/000-2/000, 7/000-2/000, 6/000-2/000, \
+	       11/000-2/000, 3/000-2/000,
+	  000 "quark-nkosa":   ESP algorithms loaded: 12/128-2/160, 3/168-2/160,
+
+	- ESP auth modules: 
+	     . SHA2 (256, 512)
+	     . SHA1, MD5, RIPEMD (all with opt. x86 asm); 
+	     . experimental XCBC_MAC_AES
+
+	- tested over linux-2.2.x
+
+	- working STATIC compilation for all modules (with core ipsec.o
+	  static or modular)
+	  
+	- tested interop with SSH Sentinel for all common modules: 
+	  aes(rinjdael), twofish, blowfish, cast, 3des (module)
+	  
+	- ext modules (loaded or static) will prevail stock implementation:
+	  you can compile with all stock algos and insert modules (for 
+	  same algos: 3DES, SHA1, MD5) to test/benchmark them.
+
+ 	* KLIPS
+	- *NEW* ESP auth hooks (!)
+	- STATIC COMPILATION of any module (with static or modular ipsec.o)
+	  pretty bloody work... to cope with ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	- Makefile changes (eg: make -C ext clean ... works recursely)
+	- changed hooking code and logic: 
+	  a loaded MODULE will hook BEFORE stock algo (3des, md5, sha1)
+	  ie. you can test the new modules by just loading them and
+	  doing down/up.
+	  This allows, eg. compiling ipsec.o WITHOUT any algo (and load
+	  them afterwards)
+	- ipsec_sa->ipsec_ext link:  ip_sa->ips_ext_{enc,auth}
+	  . no more lookups with enc_alg for each packet processing (obvious)
+	  . no more micro-locking: just count ipsec_sa' pointer for ref count
+	  . direct usage of ipsec_ext data from other places, eg:
+	    ipsec_tunnel.c:    ip_s->ipsec_ext_enc->blocksize
+	- new struct ipsec_ext_enc, ipsec_ext_auth "derived" from 
+	  struct ipsec_ext (thanks cpp :)
+	- BIG cleanup: about 20% less lines of code in ipsec_ext.c (450 lin)
+	- IV,esp_head functions eliminated, direct IV handling
+	  using ixt->blocksize
+	- tiny exported interface (ipsec_ext.h)
+	- INC/DEC MODULE usage count (you'll actually _see_ your algo module
+	  working :)
+	- namespace (structs, fields) re-arranged
+	- prefix all ipsec_ext fields with "ixt_", "ixt_e_" and "ixt_a_"
+	- NOT-YET: sadb 256 array alternative: linked list, etc
+
+      * PLUTO
+	- ipsec auto --status will show very useful info about algos loaded
+        - SADB_AALG_MAX=15, debug ESP auth registration 
+	- better diagnostics for absent kernel algos for esp selection
+	- changed logic in spdb.c to allow replacing any ESP proposal =>
+	  added "policy" parameter, used in kernel_alg_db_prop_new()
+	  (v0.7.2a)
+	
+  ************************************************************************
+  *   recall that from v0.6 pluto MUST have the esp= connection parameter 
+  *   in the dotconf connection section
+  *   eg.
+  *           esp=aes,3des  
+  *   to propose/use AES transform (_and_ 3DES).
+  *
+  *   Pluto WILL ONLY offer esp= list, checking 1-by-1 if
+  *   if kernel cipher support IS LOADED and skipping that one if not.
+  *   
+  *   So, if you want previous behaviour (offer-all-loaded-ciphers) just add:
+  *
+  *      conn %default
+  *           esp=aes,twofish,serpent,cast,blowfish,3des
+  *   
+  *   Some valid transform strings:
+  *          "aes"                    equiv. to   "aes128-md5,aes128-sha1"
+  *          "aes-sha1"               equiv. to   "aes128-sha1"
+  *          "aes128-sha1, 3des-sha1"
+  *          "aes128,blowfish96,3des"
+  *          "aes-sha2_256,aes-sha2_512"
+  *          
+  ***********************************************************************
+
+v0.6.3:
+ Changes from v0.6.3:
+	* KLIPS
+	- ext_aes: 
+		libaes pentium asm implementation: 2x speed !
+ 		(from loopAES-v1.5)
+	- ext_aes-opt:
+		alternative (also 2x) impl. upgraded to libaes-0.03
+		(from Nigel at libaes.sourceforge.net)
+	- some minor tweaks to minimize ipsec_ext_aes.c ipsec_ext_aes-opt.c diff
+v0.6.2:
+ Changes from v0.6.1:
+ 	* KLIPS
+	- added ipsec_aes-opt: AES optimized impl. from Nigel 
+	  (libaes.sourceforge.net)
+	* PLUTO
+	- enhanced and cleaned up esp= dotconf parsing code 
+
+v0.6.1:
+ Changes from v0.6.2:
+	* KLIPS:
+	- renamed blowfish: "bf" -> "blowfish" (ie: modprobe ipsec_blowfish)
+
+v0.6: "esp= support"
+ Changes from v0.5:
+	* KLIPS: _no_changes_
+	* PLUTO: esp= configurabilty
+	- added enum_search() to constants.c: returns value if strcmp()==0
+	  Used by parsing logic tricks to allow searching in enum_names
+	  arrays (thus avoiding yetanother duplication), eg:         
+	  	"3des"  -> "ESP_3DES"
+		"md5"   -> "AUTH_ALGORITHM_HMAC_MD5"
+	- added "esp" parsing to utils/auto, default=3des
+        - added msg.esp (string 7) to whack->pluto protocol 
+	- new file alg_info.c for esp algo parsing logic
+	  . build proposals with esp= ordered list only _ANDed_
+	    with registered (runtime kernel) ESP algos
+	  Eg: (assuming all these algos are loaded) in ipsec.conf
+	    connection section:
+	     <none> or esp=	# default: 3DES+{MD5,SHA1}
+	     esp=3des-sha1	# only this: 3DES+SHA1
+	     esp=aes,cast	# AES+{MD5,SHA1}, CAST+{MD5,SHA1}
+	- alg_info_test: test utility for esp algo parsing, eg:
+	      $ cd pluto
+	      $ make alg_info_test    
+	      $ ./alg_info_test  aes,cast,3des-sha1
+		(12 = "ESP_AES", 1 = "AUTH_ALGORITHM_HMAC_MD5")
+		(12 = "ESP_AES", 2 = "AUTH_ALGORITHM_HMAC_SHA1")
+		(6 = "ESP_CAST", 1 = "AUTH_ALGORITHM_HMAC_MD5")
+		(6 = "ESP_CAST", 2 = "AUTH_ALGORITHM_HMAC_SHA1")
+		(3 = "ESP_3DES", 2 = "AUTH_ALGORITHM_HMAC_SHA1")
+
+v0.5: "kidnapped CPU hero"
+ Changes from v0.4:
+  NOTE: you must _really_ clean the build area (*.o ) because some _MAX
+        values have changed.
+
+	* KLIPS
+	- Changed SADB_EALG_MAX from 12 to 256 (to accomodate ESP enc ids
+	  like ESP_SERPENT=252, ESP_TWOFISH=253)
+	- Added timing measurement tests (cipher "bandwidth"), eg:
+	   # modprobe ipsec_twofish test=1
+	   # dmesg | tail -9
+	   ipsec_twofish_init(enc_alg=253 name=twofish): ret=0
+	   klips_debug:ipsec_ext_test: enc_alg=253 blocksize=16 \
+	   		key_e_size=8892 keysize=16
+	   klips_debug:ipsec_ext_test: cbc_encrypt=1 ret=1024
+	   klips_debug:ipsec_ext_test: memcmp(enc, tmp) ret=1: OK.
+	   klips_debug:ipsec_ext_test: cbc_encrypt=0 ret=1024
+	   klips_debug:ipsec_ext_test: memcmp(dec,tmp) ret=0: OK.
+	   klips_debug:ipsec_ext_test: decrypt speed=25200 KB/s
+	   klips_debug:ipsec_ext_test: encrypt speed=28600 KB/s
+	   ipsec_twofish_init(enc_alg=253): test_ret=0
+
+	- Changed BLOWFISH to use asm versions if possible
+	- Added SERPENT, TWOFISH from
+		Dr Brian Gladman http://fp.gladman.plus.com/index.html
+		(nicely hacked to un-global-ize sources)
+	- Added CAST from 
+		OpenBSD sources ("public domain")
+		*tested Ok against OpenBSD 3.0*
+	- Added NULL from
+		me :)
+
+	* PLUTO
+	- (also touched by SADB_EALG_MAX changes) please _really_ clean
+	  lib/*.o pluto/*.o before recompiling
+	- esp_transform_name bumped to 256 entries (from about 12)
+	- first attr.key_len processing (be careful, may break)
+	  no negotiation, just use peers attr.key_len  if it's lower
+	  than maxkeybits
+	- patch from Nigel Metheringham to allow RH62/2.2.20 compilation
+
+v0.4: 
+	First release (should fill-in here :)
+ 
+

@@ -1,0 +1,41 @@
+#ifndef DDM_H
+#define DDM_H
+char ddm_vpi[5];
+char ddm_vci[8];
+char ddm_encapmode[20];
+char ddm_multiplex[5];
+char ddm_qostype[8];
+char ddm_pcr[8];
+char ddm_scr[8];
+char ddm_autodetect[3];
+char ddm_applyonboot[3];
+char ddm_pppoe_username[64];
+char ddm_pppoe_password[64];
+char ddm_pppoe_demand[3];
+char ddm_pppoe_idletime[8];
+char ddm_pppoe_redialperiod[8];
+char ddm_pppoa_username[64];
+char ddm_pppoa_password[64];
+char ddm_pppoa_demand[3];
+char ddm_pppoa_idletime[8];
+char ddm_pppoa_redialperiod[8];
+char ddm_pppoa_dhcpenable[3];
+char ddm_bridged_ipaddr[32];
+char ddm_bridged_netmask[32];
+char ddm_bridged_gateway[32];
+char ddm_bridged_pdns[32];
+char ddm_bridged_sdns[32];
+char ddm_routed_ipaddr[32];
+char ddm_routed_netmask[32];
+char ddm_routed_gateway[32];
+char ddm_routed_pdns[32];
+char ddm_routed_sdns[32];
+#ifdef CLIP_SUPPORT
+char ddm_clip_ipaddr[32];
+char ddm_clip_netmask[32];
+char ddm_clip_gateway[32];
+char ddm_clip_pdns[32];
+char ddm_clip_sdns[32];
+#endif
+
+#endif

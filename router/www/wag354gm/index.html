@@ -1,0 +1,106 @@
+
+<html>
+<head>
+<title>&gt;Log In</title>
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">-->
+<META http-equiv=Content-Type content="text/html; charset=unicode">
+
+<link rel="stylesheet" href="../html/css/nsp.css" type="text/css">
+<script language="JavaScript" src="../../html/js/jsl.js"></script>
+<script language="JavaScript">
+function uiDoOnLoad()
+{
+   jslSetValue ("uiViewUserName","uiPostUserName");
+   top.resizeTo(1024,780);
+}
+function uiDoSave()
+{ 
+  jslSetValue ("uiPostUserName","uiViewUserName");
+  jslSetValue ("uiPostPassword","uiViewPassword");
+
+  document.getElementById("uiPostForm").submit();
+}
+</script>
+</head>
+
+<body onload="uiDoOnLoad()" bgcolor="#FFFFFF" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 background="../html/images/ti_background.gif">
+
+<!-- Refresh control  -->
+<form method="POST" action="../cgi-bin/webcm" target="_self" id="uiPostForm" > 
+  <input type="hidden" name="getpage"   value="../html/menus/menu1.html" id="uiPostGetPage">
+  <input type="hidden" name="errorpage" value="../html/index.html" id="uiPostErrPage">
+  <input type="hidden" name="var:pagename" value="home" id="uiPostPageName">
+  <input type="hidden" name="var:menu" value="home" id="uiPostMenu">
+  <input type="hidden" name="var:menutitle" value="Home" id="uiPostMenuTitle">
+  <input type="hidden" name="var:pagetitle" value="Home" id="uiPostPageTitle">
+<!-- END Refresh control  -->
+
+<!-- Submit data -->
+<input type="hidden" name="login:command/username" value="Admin" id="uiPostUserName"> 
+<input type="hidden" name="login:command/password" value="" id="uiPostPassword">
+</form>
+
+
+<table width=761 border=0 cellpadding=0 cellspacing=0 align=center>
+<tr>
+	<td width=761 height=64 colspan=2 nowrap></td>
+</tr>
+
+<tr>
+	<td width=761 align=center valign=top>
+	
+<form onsubmit="return false;">	
+		<table border=0 cellpadding=0 cellspacing=1 width=590 bgcolor="#838383">
+		<tr>
+			<td>
+			<table border=0 cellpadding=20 cellspacing=0 width=589 bgcolor="#FFFFFF">
+			<tr>
+				<td align=center valign=top>
+				
+				<table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=300>
+				<tr>
+					<td colspan=4 align=center class="header" bgcolor="#FFFFFF"><script>Capture(share.login)</script></td>
+				</tr>
+				<tr>
+					<td colspan=4 class="" bgcolor="#FFFFFF" align=left>
+					<font size=1><script>Capture(share.plogin)</script></font>
+					</td>
+				</tr>
+				<tr>
+					<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+				</tr>
+				<tr>
+					<td width=15 nowrap bgcolor="#CED3D9"></td>
+					<td nowrap align=right class="" bgcolor="#FFFFFF"><font size=1><script>Capture(setddns.username)</script>: </font></td>
+					<td align=left class="" bgcolor="#FFFFFF">
+						<input type="text" value="" size="14" maxlength="32" class="" name="uiViewUserName" id="uiViewUserName">
+					</td>
+					<td width=15 nowrap bgcolor="#CED3D9"></td>
+				</tr>
+				<tr>
+					<td width=15 nowrap bgcolor="#CED3D9"></td>
+					<td nowrap align=right class="" bgcolor="#FFFFFF"><font size=1><script>Capture(setddns.password)</script>: </font></td>
+					<td align=left class="" bgcolor="#FFFFFF">
+					 <input type="password" value="" size="14" maxlength="32" class="" name="uiViewPassword" id="uiViewPassword">
+					</td>	
+					<td width=15 nowrap bgcolor="#CED3D9"></td>
+				</tr>
+				<tr>
+					<td colspan=4 align=right bgcolor="#FFFFFF" height=26>
+	   				 <input type="image" src="../html/images/ti_button_login.gif" alt="Login" width=62 height=19 border=0 onclick="uiDoSave()"></td>
+				</tr>
+				</table>
+				</td>
+			</tr>
+			</table>
+			</td>
+		</tr>
+		</table>	
+</form>
+
+	</td>
+</tr>
+</table>
+
+</body>
+</html>

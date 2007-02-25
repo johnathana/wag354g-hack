@@ -1,0 +1,23 @@
+MOD_MD5 := ipsec_md5.o
+
+ALG_MODULES += $(MOD_MD5)
+ALG_SUBDIRS += libmd5
+
+obj-$(CONFIG_IPSEC_ALG_MD5) += $(MOD_MD5)
+static_init-func-$(CONFIG_IPSEC_ALG_MD5)+= ipsec_md5_init
+alg_obj-$(CONFIG_IPSEC_ALG_MD5) += ipsec_alg_md5.o
+
+MD5_OBJS :=ipsec_alg_md5.o libmd5/libmd5.a
+
+$(MOD_MD5): libmd5 $(MD5_OBJS)
+	$(LD) $(EXTRA_LDFLAGS) -r $(MD5_OBJS) -o $@
+
+libmd5 : $(LIBCRYPTO)/libmd5 
+	test -d $@ || mkdir $@ ;exit 0
+	test -d $@/asm || mkdir $@/asm;exit 0
+	cd $@ && ln -sf $?/Makefile $?/*.[chS] .
+	cd $@/asm && ln -sf $?/asm/*.pl .
+
+libmd5/libmd5.a:
+	( cd libmd5 && \
+		$(MAKE) CC='$(CC)' 'ARCH_ASM=$(ARCH_ASM)' CFLAGS='$(CFLAGS) $(EXTRA_CFLAGS)' EXTRA_CFLAGS='$(EXTRA_CFLAGS)' libmd5.a ;)

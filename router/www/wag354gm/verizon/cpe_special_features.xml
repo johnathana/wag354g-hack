@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<cpe_special_features>
+	<feature_name>Wireless Encryption Key
+		<feature_desc>Allows for wireless connection between a host and the DSL Router</feature_desc>
+		<feature_value>abcd1234</feature_value>
+		<feature_status>Enabled</feature_status>
+		<feature_access>Admin</feature_access>
+	</feature_name>
+	<error_no>0</error_no>
+	<error_desc>No Error</error_desc>
+</cpe_special_features>
+	

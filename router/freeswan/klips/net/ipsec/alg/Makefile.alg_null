@@ -1,0 +1,13 @@
+MOD_NULL := ipsec_null.o
+
+ALG_MODULES += $(MOD_NULL)
+ALG_SUBDIRS += 
+
+obj-$(CONFIG_IPSEC_ALG_NULL) += ipsec_null.o
+static_init-func-$(CONFIG_IPSEC_ALG_NULL)+= ipsec_null_init
+alg_obj-$(CONFIG_IPSEC_ALG_NULL) += ipsec_alg_null.o
+
+NULL_OBJS=ipsec_alg_null.o
+ipsec_null.o: $(NULL_OBJS)
+	$(LD) -r $(NULL_OBJS) -o $@
+

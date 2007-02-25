@@ -1,0 +1,1 @@
+#define CONFIG_IPSEC_ALG_1DES 1

@@ -1,0 +1,1 @@
+#define CONFIG_NETLINK_DEV 1

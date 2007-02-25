@@ -1,0 +1,37 @@
+broadcom.c:valid_ipaddr(webs_t wp, char *value, struct variable *v)
+broadcom.c:	if (valid_ipaddr(wp, value, v))
+broadcom.c:	validate_list(wp, value, v, valid_ipaddr);
+broadcom.c:	if (!valid_ipaddr(wp, ipaddr, v)){
+broadcom.c:	if(valid_ipaddr(wp, ipaddr, v))
+broadcom.c:		if(!valid_ipaddr(wp, ipaddr, v))
+broadcom.h:extern int valid_ipaddr(webs_t wp, char *value, struct variable *v);
+broadcombak.c:valid_ipaddr(webs_t wp, char *value, struct variable *v)
+broadcombak.c:	if (valid_ipaddr(wp, value, v))
+broadcombak.c:	validate_list(wp, value, v, valid_ipaddr);
+broadcombak.c:	if (!valid_ipaddr(wp, ipaddr, v)){
+broadcombak.c:	if(valid_ipaddr(wp, ipaddr, v))
+broadcombak.c:		if(!valid_ipaddr(wp, ipaddr, v))
+broadcombak.h:extern int valid_ipaddr(webs_t wp, char *value, struct variable *v);
+index.c:          if(!valid_ipaddr(wp,trap_ipaddr,v))
+index.c:	if(!valid_ipaddr(wp, dhcpserver_ipaddr, v))	
+index.c:	if(!valid_ipaddr(wp, lan_ipaddr, v))	
+index.c:	if(!valid_ipaddr(wp, wan_ipaddr, &which[0]))
+index.c:	if(!valid_ipaddr(wp, wan_gateway, &which[2]))	
+ipsec.c:		if (!valid_ipaddr(wp, l_ipaddr_l, &ltype_config_variables[0]))
+ipsec.c:			printf("!valid_ipaddr!\n");
+ping_config.c:	if(!valid_ipaddr(wp, ping_ipaddr, &ping_config_variables[0]))
+ping_config.c:	if(!valid_ipaddr(wp, ping_ipaddr, &ping_config_variables[0]))
+pvc.c:	if (!valid_ipaddr(wp, ipaddr, &clip_config_variables[0]) || !valid_netmask(wp, netmask, &clip_config_variables[1]) || !valid_ipaddr(wp, gateway, &clip_config_variables[2]) || !valid_ipaddr(wp, pdns, &clip_config_variables[3]))
+pvc.c:		if(!valid_ipaddr(wp, sdns, &clip_config_variables[4]))
+pvc.c:		if (!valid_ipaddr(wp, ipaddr, &bridged_config_variables[1]) || !valid_netmask(wp, netmask, &bridged_config_variables[2]) || !valid_ipaddr(wp, gateway, &bridged_config_variables[3]) || !valid_ipaddr(wp, pdns, &bridged_config_variables[4]))
+pvc.c:			if(!valid_ipaddr(wp, sdns, &bridged_config_variables[5]))
+pvc.c:	if (!valid_ipaddr(wp, ipaddr, &routed_config_variables[0]) || !valid_netmask(wp, netmask, &routed_config_variables[1]) || !valid_ipaddr(wp, gateway, &routed_config_variables[2]) || !valid_ipaddr(wp, pdns, &routed_config_variables[3]))
+pvc.c:		if(!valid_ipaddr(wp, sdns, &routed_config_variables[4]))
+setup_wizard.c:			if(!valid_ipaddr(wp, wan_ip, &which[4])){
+setup_wizard.c:			if(!valid_ipaddr(wp, wan_mask, &which[5])){
+setup_wizard.c:			if(!valid_ipaddr(wp, wan_gw, &which[6])){
+setup_wizard.c:		if(!valid_ipaddr(wp, dns0, &which[1])){
+setup_wizard.c:		if(!valid_ipaddr(wp, dns1, &which[2])){
+setup_wizard.c:		if(!valid_ipaddr(wp, dns2, &which[3])){
+static_route.c:	if (!valid_ipaddr(wp, ipaddr, &static_route_variables[0]) ||
+static_route.c:	    !valid_ipaddr(wp, gateway, &static_route_variables[2]))

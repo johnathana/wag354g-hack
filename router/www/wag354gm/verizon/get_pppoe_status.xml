@@ -1,0 +1,7 @@
+<pppoe_status>
+	<pppoe_detect_status><% ddm_get_pppstatus(""); %></pppoe_detect_status>
+	<ac_name><% ddm_show_pppoe_acname(""); %></ac_name>
+	<service_name><% ddm_show_pppoe_srvname(""); %></service_name>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</pppoe_status>

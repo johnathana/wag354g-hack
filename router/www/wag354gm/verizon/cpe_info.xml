@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<cpe_info>
+	<ddm_ver>1.8.1</ddm_ver>
+	<cpe_type>DSL Router</cpe_type>
+	<cpe_manufacturer>CyberTAN Corp</cpe_manufacturer>
+	<cpe_model><% nvram_get("router_name"); %></cpe_model>
+	<serial_number>5711438</serial_number>
+	<hardware_ver>00001111</hardware_ver>
+	<software_ver>001</software_ver>
+	<error_no>0</error_no>
+	<error_desc>No Error</error_desc>
+</cpe_info>	

@@ -1,0 +1,300 @@
+#! /bin/sh
+# do random checks to see if IPsec was installed and started properly
+#
+# Copyright (C) 2001 Michael Richardson <mcr@freeswan.org>
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.  See <http://www.fsf.org/copyleft/gpl.txt>.
+# 
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# RCSID $Id: verify.in,v 1.1.1.2 2005/03/28 06:57:46 sparq Exp $
+
+LOGS=${LOGS-/var/log}
+CONFS=${IPSEC_CONFS-/etc}
+me="ipsec verify"
+
+PATH=/sbin:/usr/bin:/usr/local/sbin:/usr/local/sbin:$PATH export PATH
+
+set -e
+
+printmsg() {
+    printf "%-60s" "$1"
+}
+
+# Check DNS Configuration based on a hostname
+# $1 = Hostname (string)
+# eg: checkdnshost oetest.freeswan.org
+checkdnshost() { 
+
+    printmsg "Looking for forward key for $1"  
+    # host -t key $host > /tmp/checkdns$$ |egrep  '(0x4200|16896)' >/dev/null
+    if host -t key $host |egrep  '(0x4200|16896)' >/dev/null
+    then
+        echo '[OK]'
+    else
+    #if host -t key $host |grep 
+        echo '[NO KEY]'
+    fi
+}
+
+# Check DNS Configuration based on IP address
+# $1 = IP Address (string) 
+# eg: checkdnsip 127.0.0.2
+checkdnsip() {
+    echo $1|sed -e 's,\., ,g' | while read a b c d rest
+    do
+        printmsg "Looking for TXT in reverse map: $d.$c.$b.$a.in-addr.arpa"
+        if host -t txt $d.$c.$b.$a.in-addr.arpa. | grep -v '$a.$b.$c.$d' > /dev/null
+        then
+	    echo '[OK]'
+        else
+	    echo '[FAILED]'
+        fi
+
+        ipsecgwip=`host -t txt $d.$c.$b.$a.in-addr.arpa. |grep X-IPsec-Server | sed s/.*X-IPsec-Server\([0-9].*\)=// | sed s/[\"\ ].*//`
+	
+    	if [ ! -z $ipsecgwip ] 
+	then 
+        echo $ipsecgwip|sed -e 's,\., ,g' | while read a b c d rest
+        do
+            printmsg "Looking for KEY in reverse map: $d.$c.$b.$a.in-addr.arpa"
+            if host -t key $d.$c.$b.$a.in-addr.arpa. | grep -v '(0x4200|16896)' >/dev/null
+            then
+                echo '[OK]'
+            else
+		echo '[FAILED]'
+            fi
+        done
+	fi
+    done
+}
+
+checktarget() {
+
+if [ $1 = "ACCEPT" ]
+then
+        echo '[OK]' > $tunres
+else
+        echo '[FAILED]' > $tunres
+        echo "$1 from $2 to $3 kills tunnel $4 -> $5" >> $tunres
+fi
+}
+
+checktunnel() {
+
+csource=$1;
+cdest=$2;
+ctun=$3;
+all="0.0.0.0/0";
+tunres=/tmp/tunres$$
+#printmsg " Checking $ctun from $csource to $cdest";
+printmsg " $ctun";
+
+iptables -t nat -L POSTROUTING -n | grep -v POSTROUTING |grep -v target | while read
+do
+        echo $REPLY |sed -e 's, , ,g' | while read target prot opt source dest 
+        do
+                touch $tunres
+                if [  \( "$source" = "$csource" \) -a \( \( "$dest" = "$cdest" \) -o \( "$dest" = "$all" \) \) ]
+                then
+                        checktarget $target $source $dest $csource $cdest
+                        cat $tunres
+                elif [  \( "$source" = "$all" \) -a \( \( "$dest" = "$cdest" \) -o \( "$dest" = "$all" \) \) ]
+                then
+                        checktarget $target $source $dest $csource $cdest
+                        cat $tunres
+                fi
+        done 
+done
+if [ ! -s $tunres ]
+then
+        echo "[OK]";
+fi
+rm $tunres
+}
+
+# If no --host supplied, we assume we're talking about ourself
+if [ -z $1 ]
+then
+	host=`hostname`
+else
+ 	case "$1" in
+ 	--host) host="$2" ; shift	;;
+         --)     shift ; break           ;;
+         -*)     echo "$me: unknown option \`$1'" >&2 ; exit 2   ;;
+         *)      shift ; break         ;;
+        esac
+ 	ipaddr=`host -t A $host|grep address|sed -e 's,.*address\ ,,'`
+ 	if [ -z $ipaddr ]
+ 	then
+ 		echo "Host does not resolve, aborting tests..."
+ 		exit 1
+ 	else
+ 	checkdnshost $host
+ 	checkdnsip $ipaddr	
+ 	fi
+	exit 0
+fi
+ 
+
+echo "Checking your system to see if IPsec got installed and started correctly"
+
+printmsg "Version check and ipsec on-path"
+if ipsec --version >/dev/null
+then
+    echo '[OK]'
+else
+    echo '[FAILED]'
+fi
+
+printmsg "Checking for KLIPS support in kernel"
+if [ -f /proc/net/ipsec_eroute ] 
+then
+    echo '[OK]'
+else
+    echo '[FAILED]'
+fi
+
+printmsg "Checking for RSA private key (${CONFS}/ipsec.secrets)"
+if [ -f ${CONFS}/ipsec.secrets ] && ipsec showhostkey >/dev/null
+then
+    echo '[OK]'
+else
+    echo '[FAILED]'
+fi
+
+printmsg "Checking that pluto is running"
+if ipsec whack --status >/dev/null
+then
+    echo '[OK]'
+ 
+/bin/ls /proc/sys/net/ipv4/conf | while read net
+do
+    case $net in
+	all) continue ;;
+	default) continue ;;
+	lo) continue ;;
+    esac
+
+if [ -f /proc/net/ip_fwchains ]
+then
+	defaultsrcip=`netstat -an |grep :500 | awk '{print $4;}' | sed "s/:500//"`
+	if [ -z $defaultsrcip ] 
+	then 
+		printmsg "Unknown pluto state, not listening on port udp 500"; 
+	fi
+    	printmsg "Checking IPchains port 500 hole ($defaultsrcip on $net)"
+	result=`ipchains --check input -p udp --src $defaultsrcip 500 --dst 2.3.4.5 500 -i $net`
+	if [ $result = "accepted" ]
+	then
+	    echo '[OK]'
+	else
+	    echo '[BLOCKED]'
+	fi
+else 
+	if	 [ -f /proc/net/ip_tables_names ]
+	then
+	defaultsrcip=`netstat -an |grep :500 | awk '{print $4;}' | sed "s/:500//"`
+	if [ -z $defaultsrcip ] 
+	then 
+		printmsg "Unknown pluto state, not listening on port udp 500"; 
+	fi
+		# iptables --check will never happen, hack it outselves
+		# use tcpdump? nmap? custom rule? at least check outgoing 500? ping outside activeOE box?
+		# echo "Cannot check if IPtables has port 500 hole ($defaultsrcip on $net)"
+	fi
+fi
+
+done
+    
+else
+    echo '[FAILED]'
+fi
+
+echo "DNS checks. "
+
+host=`hostname`
+
+checkdnshost $host
+
+pubfile=/tmp/fspub$$
+privfile=/tmp/fspriv$$
+
+echo false >$pubfile
+echo false >$privfile
+
+/sbin/ifconfig -a | grep 'inet addr' | while IFS=': ' read inet blurb addr rest
+do
+    case $addr in
+	127.*) ;;
+	10.*) echo true >$privfile;;
+	172.1[6789].*.*) echo true >$privfile;;
+	172.2?.*.*) echo true >$privfile;;
+	172.3[01].*.*) echo true >$privfile;;
+	192.168.*.*) echo true >$privfile;;
+	169.254.*.*) echo true >$privfile;;
+	*) echo true >$pubfile;;
+    esac
+done | sort -u | while read hostip
+do
+	checkdnsip $hostip
+done
+
+private=`cat $privfile`
+public=`cat $pubfile`
+
+printmsg "Does the machine have at least one non-private address"
+if $private
+then
+    echo '[OK]'
+else
+    if $public
+    then
+	echo '[OK]'
+    else
+	echo '[FAILED]'
+    fi
+fi
+
+rm $pubfile
+rm $privfile
+
+#
+# XXX - go look for subnet behind me's text records. 
+#
+
+# check for forwarding if we have to route
+
+if [ "1" != `cat /proc/net/dev | egrep -v '(ipsec|lo:|Inter|packets)'| wc -l | sed "s/ //g"` ]
+then
+	printmsg "Two or more interfaces found, checking IP forwarding"
+	if [ "0" = `cat /proc/sys/net/ipv4/ip_forward` ]
+	then
+		echo '[FAILED]'
+	else
+		echo '[OK]'
+		# check for nat if forwarding
+		printmsg "Checking NAT and MASQUERADING"
+		if [ ! -f /proc/net/ip_conntrack ]
+		then
+			#should check ipchains masq too
+			echo '[N/A]'
+		else
+			echo "";
+			ipsec eroute |grep tun0x | while read
+			do
+	                        echo $REPLY|sed -e 's, , ,g' | while read foo esource a edest b tun rest
+                        	do
+                                	checktunnel $esource $edest $tun
+                        	done
+                	done
+        	fi
+     fi
+fi
+

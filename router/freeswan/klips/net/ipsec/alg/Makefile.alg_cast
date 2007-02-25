@@ -1,0 +1,23 @@
+MOD_CAST := ipsec_cast.o
+
+ALG_MODULES += $(MOD_CAST)
+ALG_SUBDIRS += libcast
+
+obj-$(CONFIG_IPSEC_ALG_CAST) += $(MOD_CAST)
+static_init-func-$(CONFIG_IPSEC_ALG_CAST)+= ipsec_cast_init
+alg_obj-$(CONFIG_IPSEC_ALG_CAST) += ipsec_alg_cast.o
+
+CAST_OBJS := ipsec_alg_cast.o libcast/libcast.a
+
+$(MOD_CAST): libcast $(CAST_OBJS)
+	$(LD) -r $(CAST_OBJS) -o $@
+
+libcast : $(LIBCRYPTO)/libcast 
+	test -d $@ || mkdir $@ ;exit 0
+	test -d $@/asm || mkdir $@/asm;exit 0
+	cd $@ && ln -sf $?/Makefile $?/*.[chS] .
+	cd $@/asm && ln -sf $?/asm/*.pl .
+
+libcast/libcast.a:
+	( cd libcast && \
+		$(MAKE) CC='$(CC)' 'ARCH_ASM=$(ARCH_ASM)' CFLAGS='$(CFLAGS) $(EXTRA_CFLAGS)' EXTRA_CFLAGS='$(EXTRA_CFLAGS)' libcast.a ;)

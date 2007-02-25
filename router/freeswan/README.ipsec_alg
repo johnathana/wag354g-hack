@@ -1,0 +1,194 @@
+READMe-ipsec_alg.txt       --Juanjo <jjo-ipsec@mendoza.gov.ar> 
+====================         Linux IP Aliasing creator, IPMASQ 2.2 Maintainer
+
+$Date: 2005/03/28 06:57:36 $
+
+Modular ALGO support version 0.8.1 for freeswan-1.99.
+PLEASE read CHANGES.ipsec_alg file for updates.
+
+**New IKE (Phase1) algos:
+  Encrypt : AES, Twofish, Serpent, Blowfish, CAST
+     Auth : SHA2
+
+**New ESP (Phase2 or manual) kernel algos:
+  Encrypt : AES [*] , Twofish, Serpent, Blowfish [*], CAST [*]
+     Auth : SHA2, MD5 [*], SHA1 [*].
+  [*] uses x86 assembler implementation if possible
+
+  Optionally you can use ipsec_cryptoapi.o module to use "Linux CryptoAPI"
+  ciphers; you need to previously patch and enable your kernel with cryptoapi
+  from http://www.kerneli.org/
+
+**New DH and PFS groups: 2048, 3072, 4096
+
+All algorithms (including DH groups) _per_connection_ selectable.
+Alternative x509 pluto patch with same features.
+
+For setup instructions, please read doc/HOWTO.ipsec_alg.
+--
+Tested on linux 2.4.18-17.7.x/i686, 2.4.18-17.8.0/i686, 2.4.19/um-i386, 2.4.9-31/alpha
+
+* Known userbase:
+  + Debian 3.0 distro, since Mar 2002 
+  + Devil-linux distro, since Jun 2002 <heiko@zuerker.org>
+  + Super-Freeswan-1.98b-kbX, since Aug 2002
+    http://www.freeswan.ca/code/super-freeswan/
+  + cipherfunk.org kernel patch, since Sep 2002 (-fnk9)
+    ftp://cipherfunk.org/pub/kernels/v2.4/
+  + wolk project (http://sourceforge.net/projects/wolk), through
+    super-freeswan 
+
+* Highlights
+  + *optimized* AES cipher (ipsec_aes.o kernel module) can achieve 2x to 3x
+    SPEED INCREASE (or CPU unhog), thus converting (see docs/performance.html)
+    CPU=C*25 to 
+
+       CPU [mhz]= C [mbit/s] *10 
+
+    So, you can almost saturate a 100mbit/s link with 1GHz PIII with
+    these new ESP cipher modules.
+
+  + interop: patched/stock freeswan, OpenBSD 3.0, FreeBSD-4.5 and SSH Sentinel
+    * PLEASE READ AHEAD (TABLE) *
+
+  + IKE encrypt algos added: AES, Twofish, Serpent, Blowfish.
+    with configurable keylen, eg: aes128 ... aes256
+
+  + IKE hash algos added: SHA2.
+
+  + ESP modular ciphers and authenticators (generic KLIPS hooks)
+    eg. just do:  modprobe ipsec_aes
+
+  + ESP encrypt algos: AES, Serpent, Twofish, Blowfish, CAST and
+    (modularized) 3DES; configurable keylen, eg: aes128 ... aes256
+
+  + ESP auth algos: SHA2, SHA1, MD5, RIPEMD  and (experimental) XCBC_MAC_AES
+
+  + ESP cryptoapi module (you _must_ have cryptoapi previosly installed)
+
+  + x509 coexistance  (alternative pluto patch)
+
+  + timing tests support (raw algo speed):
+
+  	modprobe ipsec_aes test=1; dmesg | tail -10
+	modprobe ipsec_3des test=1; dmesg | tail -10
+
+  + New pluto features
+    . create P1 proposals from ike= config parameter (eg: ike=aes128-sha)
+    . create P2 proposals from esp= config parameters (eg: esp=aes128-sha1 )
+      *AND*ed with kernel algos actually present.
+    . IKE: show algos status (ipsec auto --status | egrep IKE)
+    . ESP: show algos status (ipsec auto --status | egrep ESP)
+    . IKE, ESP: show algos for each conn. 
+    	  ipsec auto --status | egrep algo.*newe
+    . ESP: get informed of new runtime algos available upon
+      module loading/unloading (from kernel SADB_REGISTER)
+    . strict flag '!' to force algo match as a responder, eg:
+              ike=aes256-sha1-modp2048!
+    . new IKE algos get added from ./pluto/alg/*ike_alg*
+
+  + manual conn support for all algorithms (with same esp string)
+    . allow manual conns with same algorithm strings as pluto, spi reads
+      /proc/net/pf_key_supported to validate algorithm "presence" and
+      key sizes (and thus try to "predict" EINVAL errors).
+
+* KLIPS Changes (for developers):
+  + truely non-invasive patch
+  + generalized algo hook for ESP encrypt and auth
+  + ipsec_alg object linked (pointed) from ipsec_sa
+  + generic ESP algo [un]registration dispatches SADB_REGISTER msg
+    with new algos info, which is fully parsed by patched pluto.
+  + loaded modules will "override" stock ones (get linked and called first)
+  + actual WORKING implemented algos: 
+    encrypt: AES, Twofish, Serpent, Blowfish, 3DES (discont'd: CAST)
+    auth:    SHA2, SHA1, MD5, XCBC_MAC_AES (discont'd: RIPEMD)
+
+************************************************************************
+Interop TESTS (besides self-to-self)
+  FSW           : stock freeswan 1.9x
+  OBSD          : OpenBSD 3.0
+  FBSD		: FreeBSD 4.5 (KAME)
+  SSHs          : SSH Sentinel 1.3
+
+_Algorithm interop TABLE:_
+-------------- ----------------------------------------------------------------
+*ESP encryption algos:                                     
+-Algorithm x86asm module-name    dotconf            interop tests
+ AES           y  ipsec_aes      esp=aes                OBSD FBSD SSHs *(3,4)
+ 3DES          y  ipsec_3des     esp=3des           FSW OBSD FBSD SSHs
+ SERPENT       n  ipsec_serpent  esp=serpent        -
+ NULL          -  ipsec_null     esp=null           -
+ BLOWFISH      y  ipsec_blowfish esp=blowfish           OBSD FBSD SSHs *(3,5)
+ CAST          y  ipsec_cast     esp=cast               OBSD FBSD SSHs *(3,6)
+ TWOFISH       n  ipsec_twofish  esp=twofish                  --  SSHs
+ <cryptoapi's> n  ipsec_cryptoapi <same_as_above>
+Note: since 0.8.1 series you can also use ciphers from cryptoapi with
+ipsec_cryptoapi.o kernel module
+
+--------------
+*ESP authentication algos:
+-Algorithm x86asm module-name    dotconf            interop tests
+ SHA2_256      n  ipsec_sha2     esp=<enc>-sha2_256 -
+ SHA2_512      n  ipsec_sha2     esp=<enc>-sha2_512 -
+ SHA1          y  ipsec_sha1     esp=<enc>-sha1     FSW OBSD FBSD SSHs
+ MD5           y  ipsec_md5      esp=<enc>-md5      FSW OBSD FBSD SSHs
+ RIPEMD        y  ipsec_ripemd   esp=<enc>-ripemd       OBSD             (*1)
+ XCBC_MAC_AES  y  ipsec_aes      esp=<enc>-id9      -                    (*2)
+
+
+-------------- ---------------------------------------------------------------
+*IKE encryption algos:
+-Algorithm x86asm  dotconf            interop tests
+ AES           -   ike=aes128              --  FBSD SSHs
+ BLOWFISH      -   ike=blowfish128        OBSD FBSD SSHs
+ CAST          -   ike=cast128            OBSD FBSD SSHs (*3)
+ TWOFISH       -   ike=twofish128          --   --  SSHs
+ 3DES          -   ike=3des              ---stock-algo---
+--------------
+*IKE hash algos:
+-Algorithm x86asm  dotconf            interop tests
+ MD5           -   ike=<enc>-md5         ---stock-algo---
+ SHA1          -   ike=<enc>-sha         ---stock-algo---
+ SHA2_256      -   ike=<enc>-sha2_256      --  FBSD  -- 
+ SHA2_512      -   ike=<enc>-sha2_512      --   --   --  FBSD/KAME fails
+-------------- ---------------------------------------------------------------
+x86-asm       : if arch==i586/i686 it uses optimized assembler 
+                you can disable with   env NO_ASM=1 make ...
+
+(*1) only with OBSD as initiatior, fails if passive
+(*2) experimental  (draft-ietf-ipsec-ciph-aes-xcbc-mac-00.txt), working Ok
+     enable with:  "modprobe ipsec_aes auth_id=<n>" and n<=9, 
+     I privately test with n=9, and put  "esp=aes-id9" in dotconf.
+(*3) only with SSHs as responder because SSHs makes a proposal with 
+     OAKLEY_ENCRYPTION_ALGORITHM=65289.
+     SOLUTION: apply extras/patch-ssh-sentinel-IKE2.diff to allow
+     SSHs originated SAs (it justs make pluto know about 65289),
+     of course, will still negotiate OAKLEY_3DES_CBC.
+     ^^THIS INFO MAYBE OUTDATED^^
+     
+(*4) for SSHs and FBSD: specify "esp=aes128" in dotconf
+(*5) for FBSD and OBSD: specify "esp=blowfish128" in dotconf
+(*6) dis-continued after 0.7.3
+
+
+_Algorithm sources taken from_:
+OpenSSL      : sha1, md5, ripemd, blowfish, cast
+Brian Gladman: aes
+Crypto-API   : twofish, serpent
+FreeSWAN     : 3des
+Jari Ruusu   : aes (gnu asm), sha2
+Nigel Metheringham: aes-opt (asm) at libaes.sourceforge.net
+************************************************************************
+
+Available under GPL at
+Original sites:
+	http://www.irrigacion.gov.ar/juanjo/ipsec/
+	http://www.osep.mendoza.gov.ar/juanjo/ipsec/
+Mirrors:
+	(CA)    http://www.freeswan.ca/patches/www.irrigacion.gov.ar/juanjo/ipsec/
+
+	(CA)    http://nyetwork.org/ipsec/aes/
+	(UK)    ftp://zeniii.linux.org.uk/pub/linux/crypto/ipsec/
+	(BR)	http://ipsecaes.fase.com.br/
+
+$Id: README.ipsec_alg,v 1.1.1.2 2005/03/28 06:57:36 sparq Exp $

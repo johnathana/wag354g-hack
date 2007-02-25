@@ -1,0 +1,186 @@
+Changes:
+
+Note: For tracking purposes, the (name1/name2) means (author/who merged
+the code into cvs)
+
+1.99.8
+* Applied freeswan-msl2tp-payload-malformed-workaround.patch (jjo)
+* Add support for ID_FQDN (kb)
+* Applied NAT-T 0.6 diffs (ml/ts/kb)
+* Applied X.509 0.9.32 diffs (fix port selector bug) (as/kb)
+* Added RFC3526 support (MODP Groups) (jjo)
+* Fix libsha2/libaes/twofish compiling bug (-fomit-frame-pointer typos) (kb)
+
+1.99.7.3
+* Added X.509 0.9.31 diffs - fixed RSA certs (as/kb)
+
+1.99.7.2
+* Added X.509 0.9.30 diffs - fixes wildcard DNs (as/kb)
+
+
+1.99.7.1
+* Added X.509 0.9.29 diffs (as/kb)
+* Compile fix for some versions of Linux kernel which didn't like " " in
+  the config.in files (kb)
+* Fix for GCC 3.3 compiling spi.c (trivial whitespace fix)
+* Added contib/fswcert - from http://www.strongsec.com/freeswan/old.htm
+
+
+1.99.7
+* Added X.509 0.9.27 diffs (as/kb)
+* Added X.509 0.9.28 diffs (as/kb)
+* Fix for 1DES in 56bit mode (jjo)
+* Fix for building ALG's on 2.2.x (jjo)
+* Dead Peer Detection (draft-ietf-ipsec-dpd-02) - based on Snapgear patch,
+  ported into Super FreeS/WAN by Pawe³ Krawczyk (pk), JuanJo Ciarlante
+  (jjo) and myself (kb).  Run "man ipsec.conf" to see how to use the dpd*
+  parameters.
+* contrib/ipsecrets2pem - convert from /etc/ipsec.secrets RSA key
+  to PEM RSA key format; it acts as a stdin/out filter. (jjo)
+
+
+* Dead Peer Detection (draft-ietf-ipsec-dpd-02) - based on Snapgear patch, 
+  ported into Super FreeS/WAN by Pawe³ Krawczyk (pk), JuanJo Ciarlante 
+  (jjo) and myself (kb).  Run "man ipsec.conf" to see how to use the dpd*
+  parameters.
+* Several changes to Aggressive Mode support - 4 patches from Henrik were 
+  applied.  These fix the assert() crash reported on the mailing list, make 
+  support more strict (only do aggressive mode if enabled), fixes for 
+  Aggressive Mode Roadwarriors, and some better error reporting (hn/kb)
+
+
+1.99.6.2
+* Fix for running OE w/NAT, where clients behind OE/NAT GW would only be
+  able to reach OE enabled hosts, meaning 99% of connections failed. (mcr/kb)
+* Added X.509 0.9.27 diffs (as/kb)
+* Fix for 1DES in 56bit mode (jjo)
+* Fix for building ALG's on 2.2.x (jjo)
+* Fix for nicer debug message (jam/kb)
+* Added X.509 0.9.28 diffs (as/kb)
+
+1.99.6.1
+* Fix to connections.c for connection not found problems (introduced as
+  part of the X.509 0.9.25 patch (as/kb)
+* Update docs to reflect the new requirement for cryptoapi package (kb)
+* Fix for compiling ALG 3DES when the internal 3DES is disabled - this
+  lead to libdes.a build errors. (jjo)
+
+1.99.6
+* Check for cryptoapi support during config for ALG (mcp/kb)
+* Change utils/setup to stop FreeS/WAN after NFS (if you have NFS mounts
+  over IPSec, your machine would take ages to shutdown) (ts/kb)
+* Added X.509 0.9.25 diffs (as/kb)
+* Added Aggressive Mode Initiator support (Henrik/kb) 
+* Fixes for ALG ESP keylen (jjo)
+* Fixes for 1DES inter-op with Win2K/XP (Ard Biesheuvel/jjo)
+
+1.99.5
+* New version numbering system
+* Add ALG 0.8.1rc4 - can now using cryptoapi style of alg/hash 
+  registration (optional) (jjo)
+* New "ipsec verify" command (Paul Wouters/kb)
+* Added X.509 0.9.22 diffs (as/kb)
+* Doc fixes to change --start -> --up (also broken in stock 1.99) (kb)
+* Added contrib/espinudp-check.c, a little utility to test your kernel for
+  ESPinUDP support.  (kb)
+
+_kb3 to _kb4
+* MTS Patch to fix AT&T's IBM VPN system.  This just does some keepalive magic
+  so AT&T doesn't kill the connection. (amcedwards/kb)
+* Added X.509 0.9.20 diffs (as/kb)
+* Fixes to NAT-T for draft 02_n (SafeNet SoftRemote Interop) (mlafon/kb)
+* Added X.509 0.9.21 diffs, which fixes OE conflict with port selectors
+  (as/kb)
+
+_kb2 to _kb3
+* Change Makefile's minstall target to "make modules" first, since when
+  building against never-compiled kernel sources, make modules_install
+  would fail due to various modules never having been built. (kb)
+* Added X.509 patch 0.9.16 and 0.9.17 with Stephen Bevan's Port Selector
+  (RFC 2401) patch, with various bugfixes by Andreas Steffan. (as/kb)
+* Added X.509 patch 0.9.18 diffs - bugfixes for port selectors by Andreas
+* Various code-jiggery to make port selections not conflict with NAT-T
+  (mlafon/kb)
+* Patched from NAT-T 0.4 -> 0.5  - Adds support for new NAT-T RFC, and changes
+  proposal order so SSH Sentinel, FreeS/WAN and SafeNet SoftRemote.  This also
+  includes bugfix that was part of _kb2 (mlafon/kb)
+* NAT-T 0.5a (bugfix for floating ports) (mlafon/kb)
+* Added X.509 0.9.19 patch diffs (as/kb)
+
+_kb1 to _kb2
+* Disable NAT_T_SUPPORT_LAST_DRAFTS, as it currently breaks NAT-T support
+  for FreeS/WAN to FreeS/WAN connections.  SSH Sentinel unaffected.
+  Reported by Tuomo Soini.  (mlafon/kb)
+
+_kb10 to 1.99_kb1
+* Replaced docs/ with 1.99's vastly improved docs (kb)
+* Final code diffs from 1.99candOc25S -> 1.99 Final (kb)
+* Replaced testing/ with 1.99's testing tree (kb)
+
+*** 1.98b_kb series below this point *** 
+
+_kb9 to _kb10
+* Bugfix for server.c to compile properly.  (Tuomo Soini/kb)
+* Bugfix in libcrypto/perlasm/x86unix.pl to remove gcc2 dependacy (jjo/kb)
+* Fix ESP/AH DOS from CERT (http://www.kb.cert.org/vuls/id/459371)
+  in ipsec_rcv.c (backported from 1.99 - rgb/kb)
+* Backport from 1.99 for new rpm building system (sam/kb)
+* Backport from 1.99 for _startklips to work with new RH kernels 
+  (2.4.18-17.#.x style naming) (sam/kb)
+* Makefile fixes so make minstall works again (broken in 1.99cand-oct25) (kb)
+
+_kb8 to _kb9
+* Bugfix in klips Makefile for -DNAT_TRAVERSAL (mlafon/kb)
+* Bugfix in pluto to not shutdown ipsec# during --rereadsecrets (dhr/kb)
+* Changed libdes so it compiles with GCC 3.2 (ie: RH 8.0) (Tom Hughes/kb)
+
+_kb7 to _kb8
+* Support for Oakley Group 1 (MODP 768 bits) in IKE (ddr)
+  Note: This is unsafe for production use, however it is required by RFC2409
+* Bugfix for NULL cipher.  Thanks to this fix, FreeS/WAN can now talk
+  ESP_NULL with KAME or Win2K.  Both fixes contributed by David De Reu
+  <DeReu@tComLabs.com> JuanJo then cleaned up the NULL fix for inclusion
+  here. (ddr/jjo)
+* Bumped NAT-T to 0.4, which includes the bug fixed in _kb7 (math)
+
+
+_kb6 to _kb7
+
+* Fix for manual keying with NAT-T - reported by Tim Carr (math)
+
+_kb5 to _kb6
+
+* Fix for __fswab32 errors which caused pluto + whack not to compile. (jjo)
+
+_kb4 to _kb5
+
+* NAT-T Enabled by default now (math)
+* Bumped X.509 patch from v0.9.14 to v0.9.15 (as/kb)
+* Changed package naming format so future RPM releases are possible (kb)
+
+_kb3 to _kb4
+
+* Started from scratch using v1.98b tree.
+* Now using NAT-T 0.3, which includes the PSK bug fix
+* Now using Notify/DeleteSA 020904, which includes the Cisco Inter-op Fix
+
+_kb2 to _kb3
+
+* Used Pawel's patches as a baseline
+* Applied DHR's Pluto Lifetime fix
+* Applied NAT-T 0.2
+* Applied Notify/DeleteSA patched version from Andreas Steffen
+* Fix for Cisco Inter-op on SA
+* Fix for PSK + NAT-T conflicts
+* Included ESPinUDP version for 2.4.18 and 2.4.19
+
+_kb2
+
+* Never publicly released
+
+_kb1 (aka super-freeswan-1.98b)
+
+* Buggy, please don't use.  Use at least kb3 or newer
+
+# RCSID $Id: CHANGES.SUPERFS,v 1.1.1.2 2005/03/28 06:57:35 sparq Exp $
+

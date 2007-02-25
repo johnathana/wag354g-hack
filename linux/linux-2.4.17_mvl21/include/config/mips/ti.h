@@ -1,0 +1,1 @@
+#define CONFIG_MIPS_TI 1

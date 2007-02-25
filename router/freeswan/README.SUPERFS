@@ -1,0 +1,173 @@
+
+		Release Notes for Super FreeS/WAN, v1.99.8
+
+Super FreeS/WAN is a largely patched up version of FreeS/WAN
+(www.freeswan.org) with support for all sorts of additional features that
+aren't considered mainline, or haven't been tested enough for the
+FreeS/WAN developers to accept into the mainline branch.
+
+New patches and functionality that isn't tested as widely for "production
+use" land here first.  Then we beg the developers to accept the patches
+until they get in (or so we hope!)
+
+This version includes the following major patches:
+
+X.509 Digital Certificate Support (Now includes RFC 2401 IKE Port Selectors)
+ALG 0.8.1 (All ciphers/hashes enabled)
+Notify/Delete SA (020904 version)
+NAT Traversal
+MODP 768bit Phase 1 Support
+MTS Keepalive Support
+Aggressive Mode Support
+Dead Peer Detection (draft-ietf-ipsec-dpd-03) Support
+
+As well, various bugfixes have been applied on top of these patches - for
+a full list, see CHANGES.SUPERFS
+
+Download from http://www.freeswan.ca/code/super-freeswan 
+
+This version of Super FreeS/WAN is made possible by patches from the
+following folks:
+
+Andreas Steffan - X.509 patches
+Andrew McEdwards - MTS Keepalive Support
+David De Reu - ALG fixes and MODP768 patch
+Henrik Nordstrom - Aggressive Mode patch
+JuanJo Ciarlante - ALG (AES, Blowfish, etc...) patches, DPD fixes & various other patches
+Mathieu Lafon - Notify/DeleteSA patch, NAT Traversal patches
+Pawe³ Krawczyk - Porting + fixes to DPD
+Stephen Bevan - RFC 2409 port selectors patch (Now part of Andreas's X.509)
+Tom Hughes - RH 8.0 (GCC 3.2) compile fixes
+Tuomo Soini - Extensive testing of NAT-T + RPM build processes
+FreeS/WAN Team - v1.99 + providing me access to thier CVS tree to get bugfixes 
+Snapgear - Initial Dead Peer Detection patches for ucLinux..
+
+As well as various folks for testing it, encouraging development of it,
+and sending me patches + feedback.
+
+IMPORTANT NOTES:
+
+1. Port selectors are still a relativly new feature - read 
+   README.selectors if you are interested in using them.
+2. Port selectors when using NAT Traversal is untested.
+3. For NAT Traversal information, including how to turn it on and use it, 
+   please see README.NAT-Traversal
+4. For Aggressive Mode information, including how to turn it on, 
+   please see README.AggressiveMode
+5. For Dead Peer Detection, including how to enable it and setting the 
+   timeouts, please see README.DPD and "man ipsec.conf"
+
+
+DEPENDANCIES: 		 *** PLEASE READ ME !!! *** 
+
+A number of folks have reported problems where pluto and/or whack don't
+compile properly.  As well if you upgraded over top of another FreeS/WAN
+installation, you may see errors like this:
+
+ipsec__plutorun: /usr/local/lib/ipsec/whack: option `--ike' is ambiguous 
+
+There a few packages required for Super FreeS/WAN's pluto/whack to
+compile, in addition to the FreeS/WAN requirements.  They are:
+
+1. On RedHat 7.x systems, kernel-headers 2.4.9-34 or higher.  2.4.7-10 is
+broken, and you will see __fswab32 errors during compilation of some of
+the crypto modules.  On non RedHat systems, you'll probably need kernel
+2.4.10 or higher.
+
+2. OpenSSL headers (openssl-devel on RedHat).  These are needed because a
+few of the crypto ciphers are taken from the OpenSSL package.
+
+3. A non-corrupt kernel source tree.  This seems to fix many reported
+problems - starting with a fresh tree, either vendor supplied or from
+http://www.kernel.org.  The best test is to build a kernel from your
+source tree before patching in Super FreeS/WAN.
+
+4. As well, all of the normal FreeS/WAN requirements are needed - most 
+importantly, libgmp + libgmp-devel headers.  (GNU Math Precision Library)
+
+5. CryptoAPI support - you can get a copy of this from here:
+   http://www.kernel.org/pub/linux/kernel/crypto/v2.4/cryptoapi-0.1.0.tar.gz
+   * Note: Some Distros (RedHat) already include this.  If you get errors
+   about libdes.a not compiling as part of ipsec_alg_3des, then you need this.
+
+
+
+HOW TO INSTALL:
+
+0. It's best if you're already installed FreeS/WAN before, so you'll be
+familiar with the steps outlined below.
+
+1. Read all the README's.  Ignore the patching instructions - I've done all
+that for you.  Go back and read the PRE-REQs section in this README.  
+Ensure you have all the requirements, since 90% of build problems stem
+from not having either a recent kernel-headers package, or openssl-devel,
+or a corrupt kernel-source.
+
+2. If you want NAT-Traversal, you need to build a new kernel, since this
+patch touches the TCP/IP stack in the kernel - otherwise, you can build a
+module.
+
+3. For those interested in exactly how I build/install it, the steps are:
+ i) 	Uncompress linux-2.4.#.tar.bz2 in /usr/src/linux, build a normal
+	working kernel. With recent RedHat kernels (2.4.18+) you will 
+	probably need to run "make mrproper" immediately after installing
+	the source rpm.
+ ii) 	Ensure that your new kernel works before proceeding
+ iii) 	In the super-freeswan source dir:
+ 	Quick way: "make menugo && make minstall"
+ 	Step by step way: 
+	"make insert && make oldmod && make programs && make minstall" 
+
+
+UPGRADING:
+
+1. Just install overtop - it won't replace your ipsec.* config files 
+
+2. If you are already running a kernel with ESPinUDP support, you don't
+need to recompile your kernel - just build the new Super FreeS/WAN as you
+did before and install.
+
+
+EXTRA NOTES:
+
+1. Tuomo Soini provides Source RPMs @
+http://tis.foobar.fi/software/?freeswan
+
+2. Building this a module works, however if you want to the NAT Traversal,
+you'll need to build a new kernel, as the EDPinUDP patch touches the
+TCP/IP stack in the kernel.
+
+This is tested to compile + play happily with 2.4.18 and higher only.  
+It's been reported to work as far back as 2.4.9, but it won't work with
+2.4.2.  I don't have a huge collection of machines at my disposal to play
+with, so I rely mainly on bug reports and feedback from users to know what
+kernel versions work.  So if you're using another version, please let me
+know so I can add it to the list of known-good combinations.
+
+
+BUGS:
+
+Feedback for bugs with the package itself to ken@freeswan.ca, or
+bugs@lists.freeswan.org (mailing list)
+
+
+DEVELOPMENT:
+
+http://lists.freeswan.ca - sfs-dev mailing list + archives are located
+there.  If you wish to join in, please subscribe to the mailing list.  
+All RCs, patches and discussion happens there.
+
+SUPPORT:
+
+Please try not to email me directly for support/howto questions - use the
+mailing lists for that, as the authors of each of the patches are there,
+as are other people who can probably help quicker than I can -
+http://lists.freeswan.org/mailman/listinfo/users - I read it several times
+daily so I'll see reports made there, and reply as I have time.
+
+
+Ken Bantoft 2003-07-08
+ken@freeswan.ca
+
+# RCSID $Id: README.SUPERFS,v 1.1.1.2 2005/03/28 06:57:36 sparq Exp $
+

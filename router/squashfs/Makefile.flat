@@ -1,0 +1,14 @@
+all: build install
+
+build:
+	ln -sf ../kernel/linux-2.4.17_mvl21/include include
+	$(NATIVEPATH) $(MAKE) FLAT=yes
+
+
+install: 
+	install -m 0755 mksquashfs ../../tools/bin
+
+
+clean:
+	rm -f ../../tools/bin/mksquashfs
+	$(MAKE) clean

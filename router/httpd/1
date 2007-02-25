@@ -1,0 +1,6 @@
+74c74
+< OBJS  += setup_wizard.o pvc.o ipsec.o email_alert.o ping_config.o ipsec_service.o vpn_setting.o diagstart.o qos.o #pvc_connection.o pvc_routing.o Alg_timeout.o
+---
+> OBJS  += setup_wizard.o pvc.o ipsec.o email_alert.o ping_config.o ipsec_service.o vpn_setting.o diagstart.o qos.o
+80d79
+< 

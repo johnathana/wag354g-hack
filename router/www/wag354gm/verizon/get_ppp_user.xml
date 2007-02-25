@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<ppp_user_info>
+	<ppp_userid><% ddm_get_pppuser(""); %></ppp_userid>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</ppp_user_info>	

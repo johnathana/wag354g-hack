@@ -1,0 +1,1 @@
+#define CONFIG_TI_CUSTOM_SYS_CALLS 1

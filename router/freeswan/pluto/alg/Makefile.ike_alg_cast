@@ -1,0 +1,13 @@
+ALG:=cast
+CONFIG_YES:=$(CONFIG_IKE_ALG_CAST)
+DIR_CAST:=$(LIBCRYPTO)/libcast
+ALG_DIRS-$(CONFIG_YES) := $(ALG_DIRS-$(CONFIG_YES)) $(DIR_CAST)
+ALG_LIBS-$(CONFIG_YES) := $(ALG_LIBS-$(CONFIG_YES)) $(DIR_CAST)/libcast.a
+ALG_SRCS-$(CONFIG_YES) := $(ALG_SRCS-$(CONFIG_YES)) ike_alg_$(ALG).c
+ALG_OBJS-$(CONFIG_YES) := $(ALG_OBJS-$(CONFIG_YES)) ike_alg_$(ALG).o
+
+$(DIR_CAST)/libcast.a:
+	make -C $(DIR_CAST) CFLAGS="$(CFLAGS)" libcast.a
+
+ike_alg_$(ALG).o: ike_alg_$(ALG).c
+	$(CC) -I $(LIBCRYPTO) -I$(DIR_CAST) $(COPTS) $(ALLFLAGS) -c $<

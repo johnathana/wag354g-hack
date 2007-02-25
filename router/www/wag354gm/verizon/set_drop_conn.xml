@@ -1,0 +1,6 @@
+<conn_info>
+	<ppp_userid><% ddm_get_pppuser(""); %></ppp_userid>
+	<conn>DROP</conn>
+	<error_no><% ddm_error_no(); %></error_no>
+	<error_desc><% ddm_error_desc(); %></error_desc>
+</conn_info>

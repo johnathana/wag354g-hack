@@ -1,0 +1,1 @@
+#undef  CONFIG_IDT_79S334

@@ -1,0 +1,9 @@
+This directory contains the decompression algorithms for lzma. There are
+actually two different sets of files here, all kinda mashed together. The
+decompressor for the kernel is contained in LzmaDecode.* LzmaWrapper.*. These
+use a C version of decompressing that only uses a small amount of memory. The
+other set is from the 7zip program, stripped out from the rest of that code.
+
+There is a correlation between the magic values for the decoder and encoder.
+
+TODO: List these out.

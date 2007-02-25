@@ -1,0 +1,21 @@
+#
+# RCSID $Id: snoop110-100,v 1.1.1.2 2005/03/28 06:57:40 sparq Exp $
+#
+tcpdump -i eth1 -N -s 800 ether host 00:60:08:3E:C5:1A and 00:00:C0:83:A8:27 -a -vv
+
+#
+# $Log: snoop110-100,v $
+# Revision 1.1.1.2  2005/03/28 06:57:40  sparq
+# - GuangZhou release v1.00.57
+#
+# Revision 1.1.1.1  2004/07/26 01:39:25  sparq
+# Mirror v0.01.9 release from K.C division of CyberTAN.
+#
+# Revision 1.1.1.1  2002/09/05 03:13:18  ken
+# 1.98b
+#
+# Revision 1.2  1999/04/06 04:54:31  rgb
+# Fix/Add RCSID Id: and Log: bits to make PHMDs happy.  This includes
+# patch shell fixes.
+#
+#

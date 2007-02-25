@@ -1,0 +1,23 @@
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_tcp_sh.o -c extensions/libipt_tcp.c
+ld -shared -o extensions/libipt_tcp.so extensions/libipt_tcp_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_udp_sh.o -c extensions/libipt_udp.c
+ld -shared -o extensions/libipt_udp.so extensions/libipt_udp_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_mac_sh.o -c extensions/libipt_mac.c
+ld -shared -o extensions/libipt_mac.so extensions/libipt_mac_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_standard_sh.o -c extensions/libipt_standard.c
+ld -shared -o extensions/libipt_standard.so extensions/libipt_standard_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_state_sh.o -c extensions/libipt_state.c
+ld -shared -o extensions/libipt_state.so extensions/libipt_state_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_SNAT_sh.o -c extensions/libipt_SNAT.c
+ld -shared -o extensions/libipt_SNAT.so extensions/libipt_SNAT_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_DNAT_sh.o -c extensions/libipt_DNAT.c
+ld -shared -o extensions/libipt_DNAT.so extensions/libipt_DNAT_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_MASQUERADE_sh.o -c extensions/libipt_MASQUERADE.c
+ld -shared -o extensions/libipt_MASQUERADE.so extensions/libipt_MASQUERADE_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_TCPMSS_sh.o -c extensions/libipt_TCPMSS.c
+ld -shared -o extensions/libipt_TCPMSS.so extensions/libipt_TCPMSS_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_LOG_sh.o -c extensions/libipt_LOG.c
+ld -shared -o extensions/libipt_LOG.so extensions/libipt_LOG_sh.o
+cc -O2 -Wall -Wunused -I/usr/src/linux/include -Iinclude/ -DIPTABLES_VERSION=\"1.2.7a\"  -fPIC -o extensions/libipt_autofw_sh.o -c extensions/libipt_autofw.c
+extensions/libipt_autofw.c:26:44: linux/netfilter_ipv4/ip_autofw.h: No such file or directory
+make: *** [extensions/libipt_autofw_sh.o] Error 1

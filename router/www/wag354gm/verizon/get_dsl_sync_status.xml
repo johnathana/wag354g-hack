@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<dsl_status>
+	<sync_status><% nvram_dslstatus_get("dslstatus", 1); %></sync_status>
+	<downstream_rate><% nvram_dslstatus_get("dsrate", 1); %></downstream_rate>
+	<upstream_rate><% nvram_dslstatus_get("usrate", 1); %></upstream_rate>
+	<downstream_margin><% nvram_dslstatus_get("dsmargin"); %></downstream_margin>
+	<upstream_margin><% nvram_dslstatus_get("usmargin"); %></upstream_margin>
+	<error_no>0</error_no>
+	<error_desc>No Error</error_desc>
+</dsl_status>	
+	

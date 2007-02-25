@@ -1,0 +1,4 @@
+include
+ipsec_alg_static_init.c
+lib*
+.ipsec_*.o*

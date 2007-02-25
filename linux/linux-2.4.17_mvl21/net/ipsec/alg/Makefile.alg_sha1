@@ -1,0 +1,23 @@
+MOD_SHA1 := ipsec_sha1.o
+
+ALG_MODULES += $(MOD_SHA1)
+ALG_SUBDIRS += libsha1
+
+obj-$(CONFIG_IPSEC_ALG_SHA1) += $(MOD_SHA1)
+static_init-func-$(CONFIG_IPSEC_ALG_SHA1)+= ipsec_sha1_init
+alg_obj-$(CONFIG_IPSEC_ALG_SHA1) += ipsec_alg_sha1.o
+
+SHA1_OBJS :=ipsec_alg_sha1.o libsha1/libsha1.a
+
+$(MOD_SHA1): libsha1 $(SHA1_OBJS)
+	$(LD) $(EXTRA_LDFLAGS) -r $(SHA1_OBJS) -o $@
+
+libsha1 : $(LIBCRYPTO)/libsha1 
+	test -d $@ || mkdir $@ ;exit 0
+	test -d $@/asm || mkdir $@/asm;exit 0
+	cd $@ && ln -sf $?/Makefile $?/*.[chS] .
+	cd $@/asm && ln -sf $?/asm/*.pl .
+
+libsha1/libsha1.a:
+	( cd libsha1 && \
+		$(MAKE) CC='$(CC)' 'ARCH_ASM=$(ARCH_ASM)' CFLAGS='$(CFLAGS) $(EXTRA_CFLAGS)' EXTRA_CFLAGS='$(EXTRA_CFLAGS)' libsha1.a ;)

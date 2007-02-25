@@ -1,0 +1,130 @@
+
+This is the read me file for the high-res-timer patch.
+
+New with this release (2.4.17-2.0):
+
+This file and those "near" it are now in the kernel tree.  You may move
+it out if you like, however, if you build the library file where it is
+you should not need to mess with the links to the kernel tree as
+described below.  Also, should you want to send me a patch, I would like
+it to be in this location.
+
+Be aware that the patch is not just to the kernel.  There are four
+parts:
+
+1.)The kernel patch, 
+2.)A library file (contains the system call stubs and a header file), and
+3.)A patch to 2 header files to expand some of the signal structures and
+such.
+4.)A set of test programs.
+
+If you like, you can copy the two *.h files in a separate directory
+(called "bits"), patch them there and then use "-I/xxx" in the cc
+command, where "xxx" is the path to then new bits directory. (Don't
+include "bits" in xxx, the #include <bits/yyy.h> has the "bits" in it.) 
+This is what I am doing for testing so as not to affect my include files
+till I am REALLY sure this is what I want.  The test program Makefile is
+set up to pick up the include files from the directory created for them
+by un-archiving this tar ball.  The tar ball includes patched versions of the
+two header files, but you may want to patch your own to be sure you have
+current versions for your system.
+
+Header file issues: In addition to the headers called out in the
+standard and the man pages you will want to include the lib/posix_time.h
+file in this tar ball.  This file _may_ have conflicts with your
+standard headers, depending on the version of glibc you are using.  It
+has everything you need to use glibc versions as old as 2.1.2.  New
+glibc versions have almost all of this stuff included in them.
+
+You will need to build the library file (make is included in the patch)
+AFTER you patch the kernel as it uses the system call definitions the
+patch puts in (also after the first make on the tree so that the asm
+link in include is defined in the kernel tree).  In order for this to
+work you need to have a symbolic link in /usr/include for asm that
+points to the kernel include asm directory.  You already have this link,
+but it may point to a different kernel if you have more than one on your
+system.  Again, you can provide an alternative for this by putting
+"-Ipath/include" in the CPPFLAGS macro in the library build make file. 
+Here path should be to the top directory of your new kernel (i.e. where
+include is found).  Note, the Makefile trys to point to a directory in
+the tar ball but this will not exist and should be harmless if you have the
+correct asm link.  A recommended link for asm in /usr/include is:
+
+ln -s ../src/linux/include/asm asm
+
+This assumes that you have your kernel(s) located in the /usr/src
+directory and have a symbolic link to the current kernel (which you will
+need to do the patch).  If you should move to a new kernel, changing the
+link in /usr/src will allow the /usr/include/asm to follow.
+
+A possible problem exists in the lib/posix_time.h file in this patch.
+It includes /usr/include/time.h which MAY already define "struct
+itimerspec".  If the library fails to build because of this, just change
+the #if 1 to a #if 0 at that location in lib/posix_time.h.  If this does
+not work, PLEASE let me know about this (send me a copy of your time.h
+file).
+
+After building the library, install it in your /usr/lib directory on
+your target. Then rebuild your kernel, and you should be set to build
+timer calls into your applications.
+
+MAN PAGES
+
+We now have man pages (Thanks to Robert Love).  
+
+However, we did the man pages for the system we would like to have, but
+don't just yet.  Here are the known deficiencies:
+
+The SIGEV_THREAD stuff in timer_create() requires glibc or thread
+package support which we just don't have yet.
+
+The SIGEV_THREAD in timer_create() requires thread groups be supported
+in the thread package.  Linux threads does not yet use thread groups so
+this will not work.  If you do create your own, or use a thread package
+that does use thread groups, be aware that the thread id that is to be
+passed to the kernel must be a pid, not a pthread_t id.  Again glibc
+will do this translation once it gets to using thread groups.
+
+In clock_nanosleep() the standard requires that absolute sleep requests
+end at the right clock time, even if the clock is reset while sleeping,
+and this is what the man page says, but we haven't added the code to the
+kernel to do this yet.
+
+The clock_* man pages talk about two CLOCK_*CPU* clocks.  These will be
+supported someday, but not just yet.  For now, expect bad clock id
+errors on these clocks.
+
+The man pages on *_getcpuclockid actually describe functions in the
+existing glibc, at least at newer revs.  You may or may not actually
+find the functions depending on your glibc version.  Not that is
+matters, because, as we said above, we don't yet support these clocks in
+the kernel.
+
+Installing the man pages:
+
+In the .../man directory there is a make file that will install the
+pages.  The target directory must exist and is determined as follows:
+
+# If the  enviroment variable MANPATH is  defined and not  null, use the
+# first entry in it.
+
+# Otherwise, if "/etc/man.config" exists, use the first MANPATH entry in
+# it.  If both of these fail, print an error and quit.
+
+# If you  want to override this to  put the pages in  directory foo use:
+# make MANPATH=foo
+
+# If you  want to  force it to  use the  /etc/man.config and you  have a
+# MANPATH use: make MANPATH=
+
+Usually you will need root capability to store into the man page
+directory.
+
+Thats all the problems I can think of.  As always, let me know if there
+is more to be said here, or anywhere.
+
+Let me know if you have any problems.  I would like to keep these
+instructions for the next user...  Be nice if they were correct :)
+
+George Anzinger george@mvista.com
+

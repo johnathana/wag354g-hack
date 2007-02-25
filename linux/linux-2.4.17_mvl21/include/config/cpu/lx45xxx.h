@@ -1,0 +1,1 @@
+#undef  CONFIG_CPU_LX45XXX

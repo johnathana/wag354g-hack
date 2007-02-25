@@ -1,0 +1,35 @@
+Super FreeS/WAN Contributed Patches/Configs/Add-ons
+
+Things that I won't include in the default distribution because
+they either restrict compatibility, or have additional requirements
+beyond that of stock FreeS/WAN.
+
+
+README.vitual_ip (Tuomo Soini/Ken Bantoft)
+------------------------------------------
+How to enable Virtual IP support
+
+
+_updown.* (Tuomo Soini)
+-----------------------
+Replacement _updown script with Virtual IP support
+
+
+espinudp-check.c (Ken Bantoft)
+------------------------------
+This will check your kernel to see if it supports ESPinUDP (needed for NAT-T)
+
+gcc -o espinudp-check espinudp-check.c
+
+
+ipsecrets2pem (JuanJo Ciarlante)
+--------------------------------
+Export freeswan RSA keys to PEM format you can easily test with 
+make -C ipsecrets2pem test
+
+
+fswcert	(Andreas Grünbacher)
+----------------------------
+Allows the painless extraction of public keys, private keys and ASN.1 
+distinguished names from X.509 certificates and RSA or PKCS#12 key files
+

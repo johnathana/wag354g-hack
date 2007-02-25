@@ -1,0 +1,67 @@
+--- /usr/include/bits/siginfo.h	Mon Sep 20 02:12:45 1999
++++ bits/siginfo.h	Mon Dec 17 22:03:59 2001
+@@ -56,9 +56,10 @@
+ 	/* POSIX.1b timers.  */
+ 	struct
+ 	  {
+-	    unsigned int _timer1;
+-	    unsigned int _timer2;
+-	  } _timer;
++	    __timer_t _tid;	/* timer id */
++            int _overrun;	/* overrun count */
++	    sigval_t si_sigval;	/* Signal value, same as below  */
++          } _timer;
+ 
+ 	/* POSIX.1b signals.  */
+ 	struct
+@@ -97,6 +98,8 @@
+ /* X/Open requires some more fields with fixed names.  */
+ # define si_pid		_sifields._kill.si_pid
+ # define si_uid		_sifields._kill.si_uid
++# define si_tid		_sifields._timer._tid
++# define si_overrun	_sifields._timer._overrun
+ # define si_status	_sifields._sigchld.si_status
+ # define si_utime	_sifields._sigchld.si_utime
+ # define si_stime	_sifields._sigchld.si_stime
+@@ -252,7 +255,8 @@
+     union
+       {
+ 	int _pad[__SIGEV_PAD_SIZE];
+-
++        int _tid;
++              
+ 	struct
+ 	  {
+ 	    void (*_function) __PMT ((sigval_t)); /* Function to start.  */
+@@ -264,6 +268,7 @@
+ /* POSIX names to access some of the members.  */
+ # define sigev_notify_function   _sigev_un._sigev_thread._function
+ # define sigev_notify_attributes _sigev_un._sigev_thread._attribute
++# define sigev_notify_thread_id  _sigev_un._tid
+ 
+ /* `sigev_notify' values.  */
+ enum
+@@ -272,8 +277,11 @@
+ # define SIGEV_SIGNAL	SIGEV_SIGNAL
+   SIGEV_NONE,			/* Other notification: meaningless.  */
+ # define SIGEV_NONE	SIGEV_NONE
+-  SIGEV_THREAD			/* Deliver via thread creation.  */
++  SIGEV_THREAD,			/* Deliver via thread creation.  */
+ # define SIGEV_THREAD	SIGEV_THREAD
++  SIGEV_DUMMY,
++  SIGEV_THREAD_ID
++# define SIGEV_THREAD_ID SIGEV_THREAD_ID
+ };
+ 
+ #endif	/* have _SIGNAL_H.  */
+--- /usr/include/bits/types.h	Mon Sep 20 02:12:52 1999
++++ bits/types.h	Tue Oct 16 13:14:05 2001
+@@ -84,6 +84,8 @@
+ typedef long int __swblk_t;		/* Type of a swap block maybe?  */
+ 
+ typedef long int __clock_t;
++typedef int __timer_t;
++typedef int __clockid_t;
+ 
+ /* One element in the file descriptor mask array.  */
+ typedef unsigned long int __fd_mask;
