@@ -214,28 +214,6 @@ CONFIG_OPENSSL=y
 endif
 
 
-#zhangbin 2004.11.18
-ifeq ($(CLI_SUPPORT),1)
-# cli module kirby
-#obj-$(CONFIG_PARSER) += parser
-obj-y += parser
-#obj-$(CONFIG_TELNETD) += telnetd
-#obj-y += telnetd
-
-#obj-y += cli
-endif
-
-#zhangbin 2004.11.18
-ifeq ($(CLI_SUPPORT),1)
-# cli module kirby
-#obj-$(CONFIG_PARSER) += parser
-obj-y += parser
-#obj-$(CONFIG_TELNETD) += telnetd
-#obj-y += telnetd
-
-#obj-y += cli
-endif
-
 obj-$(CONFIG_TFTPD) += tftpd
 obj-$(CONFIG_CRON) += cron
 obj-$(CONFIG_PPTP) += pptp-client
@@ -750,18 +728,6 @@ vlan-clean:
 nas-install:
 	cd $(INSTALLDIR)/nas/usr/sbin && ln -sf nas nas4not
 
-#kirby
-ifeq ($(CLI_SUPPORT),1)
-parser:
-	$(MAKE) -C parser
-parser-install:
-	mkdir -p $(INSTALLDIR)/parser/bin
-	install -D parser/configurator/configurator $(INSTALLDIR)/parser/bin/configurator
-	$(STRIP) -s  $(INSTALLDIR)/parser/bin/configurator
-
-parser-clean:
-	$(MAKE) -C parser clean
-endif
 
 ########################################################################
 # Below is added by CT

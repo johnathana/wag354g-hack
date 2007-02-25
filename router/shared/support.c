@@ -31,4 +31,5 @@ struct support_list supports[] = {
 	{"SINGLEUSER", 		"", 		"", 		"SINGLEUSER_SUPPORT", 		"1", "0"},
 	{"IPPPOE", 		"", 		"", 		"IPPPOE_SUPPORT", 		"1", "0"},
 	{"CRON", 		"cron", 		"CRON", 		"CRON_SUPPORT", 		"1", "0"},
+	{"TELNET",		"",		"",	"CLI_SUPPORT",				"1", "0"},
 };

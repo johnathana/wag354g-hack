@@ -12,9 +12,9 @@ int mk_etc_passwd(void){
 	passwd=fopen("/tmp/passwd","w");
 
 	fprintf(passwd,"%s:",nvram_safe_get("http_username"));
-	fprintf(passwd,"%s:0:0::/tmp:/bin/configurator\n",crypt(nvram_safe_get("http_passwd"),"Zi"));
+	fprintf(passwd,"%s:0:0::/tmp:/bin/sh\n",crypt(nvram_safe_get("http_passwd"),"Zi"));
 	fprintf(passwd,"%s:",nvram_safe_get("http_remote_username"));
-	fprintf(passwd,"%s:0:0::/tmp:/bin/configurator\n",crypt(nvram_safe_get("http_remote_passwd"),"Zi"));
+	fprintf(passwd,"%s:0:0::/tmp:/bin/sh\n",crypt(nvram_safe_get("http_remote_passwd"),"Zi"));
 	
 	fclose(passwd);
 	return 0;

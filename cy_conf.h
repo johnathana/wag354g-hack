@@ -22,8 +22,8 @@
 //#define	CONFIG_QOS_ADVANCED	n	<remove the line>
 //#define	ROUTED_UNLIMIT_SUPPORT	0	<remove the line>
 //#define	CONFIG_ROUTED_UNLIMIT	n	<remove the line>
-//#define	CLI_SUPPORT	0	<remove the line>
-//#define	CONFIG_CLI	n	<remove the line>
+#define	CLI_SUPPORT	1
+#define	CONFIG_CLI	y
 //#define	IPCP_NETMASK_SUPPORT	0	<remove the line>
 //#define	CONFIG_IPCP_NETMASK	n	<remove the line>
 //#define	SETUP_WIZARD_FT_SUPPORT	0	<remove the line>

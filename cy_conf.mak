@@ -23,8 +23,8 @@ CONFIG_QOS=y
 # CONFIG_QOS_ADVANCED is not set	<remove the line>
 #ROUTED_UNLIMIT_SUPPORT	is not set     <remove the line>
 # CONFIG_ROUTED_UNLIMIT is not set	<remove the line>
-#CLI_SUPPORT	is not set     <remove the line>
-# CONFIG_CLI is not set	<remove the line>
+CLI_SUPPORT=1
+CONFIG_CLI=y
 #IPCP_NETMASK_SUPPORT	is not set     <remove the line>
 # CONFIG_IPCP_NETMASK is not set	<remove the line>
 #SETUP_WIZARD_FT_SUPPORT	is not set     <remove the line>

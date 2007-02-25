@@ -10,4 +10,4 @@ struct support_list {
 	char *log_level;
 };
 extern struct support_list supports[];
-#define SUPPORT_COUNT 29
+#define SUPPORT_COUNT 30
