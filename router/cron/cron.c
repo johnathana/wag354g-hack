@@ -34,11 +34,6 @@ static char rcsid[] = "$Id: cron.c,v 1.1.1.2 2005/03/28 06:57:34 sparq Exp $";
 #include <string.h>
 #include "shutils.c"
 #include <sys/stat.h>
-/*****************songtao***************************/
-struct stat fstat_buf;
-int fstat_i;
-long int fstat_len;
-/******************************************************/
  
 
 static	void	usage __P((void)),
@@ -282,27 +277,6 @@ sigchld_handler(x) {
 #else
 		pid = wait3(&waiter, WNOHANG, (struct rusage *)0);
 #endif
-/**************songtao*********************************/
-            fstat_i=stat("/var/log/messages",&fstat_buf);
-
-            if(fstat_i==0)
-             {
-               fstat_len=fstat_buf.st_size;
-               if(fstat_len>131072)
-	       {
-		       reboot_klog_flag = 0;
-                      eval("rm","/var/log/messages");
-	       }
-	       else if((fstat_len > 70000) && (reboot_klog_flag == 0))
-	       {
-		       reboot_klog_flag = 1;
-		       eval("killall", "klogd");
-		       sleep(2);
-		       eval("klogd");
-	       }
-             }
-
-/*****************************************************/
   	    
 		switch (pid) {
 		case -1:
