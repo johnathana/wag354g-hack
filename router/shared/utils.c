@@ -1921,7 +1921,7 @@ int find_pid_by_ps(char* pidName)
         int pid= -1 ;
         char line[254];
 
-        if((fp = popen("ps -ax", "r"))){
+        if((fp = popen("ps", "r"))){
                 while( fgets(line, sizeof(line), fp) != NULL ) {
                         if(strstr(line, pidName)){
                                 sscanf(line, "%d", &pid);
@@ -1965,7 +1965,7 @@ int *find_all_pid_by_ps(char* pidName)
 	int *pidList = NULL;
 	int i = 0;
 
-        if((fp = popen("ps -ax", "r"))){
+        if((fp = popen("ps", "r"))){
                 while( fgets(line, sizeof(line), fp) != NULL ) {
                         if(strstr(line, pidName)){
                                 sscanf(line, "%d", &pid);
