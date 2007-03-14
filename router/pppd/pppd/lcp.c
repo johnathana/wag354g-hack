@@ -2110,24 +2110,6 @@ void LcpLinkFailure (f)
 }
 
 /*
- *  Check if we have been received "echo reply" packet
- */
-
-static void LcpCheckReply(arg)
-	void *arg;
-{
-	//fsm *f1 = &lcp_fsm[ifunit];
-	//junzhao 2004.7.9
-	fsm *f1 = (fsm *)arg;
-
-	if(lcp_echos_pending >= 1)
-		TIMEOUT(LcpEchoTimeout, f1, 1);
-	else
-		TIMEOUT(LcpEchoTimeout, f1, lcp_echo_interval-1);
-}
-
-
-/*
  * Timer expired for the LCP echo requests from this process.
  */
 
@@ -2135,9 +2117,7 @@ static void
 LcpEchoCheck (f)
     fsm *f;
 {
-    //junzhao 2004.7.9
-    if(check_adsl_status())
-  	  LcpSendEchoRequest (f);
+    LcpSendEchoRequest (f);
     if (f->state != OPENED)
 	return;
 
@@ -2146,9 +2126,7 @@ LcpEchoCheck (f)
      */
     if (lcp_echo_timer_running)
 	warn("assertion lcp_echo_timer_running==0 failed");
-    //TIMEOUT (LcpEchoTimeout, f, lcp_echo_interval);
-    //junzhao 2004.3.18
-    TIMEOUT (LcpCheckReply, f, 1);
+    TIMEOUT (LcpEchoTimeout, f, lcp_echo_interval);
     lcp_echo_timer_running = 1;
 }
 
@@ -2178,7 +2156,6 @@ lcp_received_echo_reply (f, id, inp, len)
     int len;
 {
     u_int32_t magic;
-    	FILE *fp = NULL;
 
     /* Check the magic number - don't count replies from ourselves. */
     if (len < 4) {
@@ -2187,14 +2164,6 @@ lcp_received_echo_reply (f, id, inp, len)
     }
     GETLONG(magic, inp);
 
-//xtt added for Diagtool of PPPoE 07-09-2004
- 	if((fp = fopen("/tmp/D_PPP_P.log", "r")) == NULL)
-	{
-		fp = fopen("/tmp/D_PPP_P.log", "w");
-		fprintf(fp, "PPP LCPbOk\n");
-	}
-	fclose(fp);
-//xtt end    
     if (lcp_gotoptions[f->unit].neg_magicnumber
 	&& magic == lcp_gotoptions[f->unit].magicnumber) {
 	warn("appear to have received our own echo-reply!");
