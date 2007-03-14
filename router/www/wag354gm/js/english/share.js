@@ -19,7 +19,7 @@ bmenu.statu="Status";
 var share = new Object();
 share.firmwarever="Firmware Version";
 
-share.wireless_g="Wireless-G";
+share.wireless_g="";
 
 share.wgag=" ADSL Home Gateway";
 
@@ -408,7 +408,7 @@ share.dynamic="Dynamic";
 share.srvname="Service Name";
 
 share.productname=" ADSL2 Gateway";
-share.productname1=" ADSL Home Gateway";
+share.productname1=" Hacked by JohnAthana";
 
 share.psel="Please Select";
 
