@@ -170,20 +170,6 @@ child_process(e, u)
 		Debug(DPROC, ("[%d] grandchild process Vfork()'ed\n",
 			      getpid()))
 
-		/* write a log message.  we've waited this long to do it
-		 * because it was not until now that we knew the PID that
-		 * the actual user command shell was going to get and the
-		 * PID is part of the log message.
-		 */
-		/*local*/{
-			char *x = mkprints((u_char *)e->cmd, strlen(e->cmd));
-
-			log_it(usernm, getpid(), "CMD", x);
-			free(x);
-		}
-
-		/* that's the last thing we'll log.  close the log files.
-		 */
 #ifdef SYSLOG
 		closelog();
 #endif
