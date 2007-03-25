@@ -30,8 +30,6 @@ ifeq ($(CONFIG_ISDN_PPP),y)
 endif
 
 subdir-m += mac
-subdir-y += smtp
-obj-y += smtp/smtp.o
 
 subdir-$(CONFIG_NET_PCMCIA) += pcmcia
 subdir-$(CONFIG_NET_WIRELESS) += wireless

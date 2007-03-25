@@ -30,11 +30,6 @@ extern int proc_read_enable_bridge(char *page, char **start, off_t off, int coun
 extern int proc_write_enable_bridge(struct file *file, const char *buffer, unsigned long count, void *data);
 extern int proc_read_enable_pppoe_pass(char *page, char **start, off_t off, int count, int *eof, void *context);
 extern int proc_write_enable_pppoe_pass(struct file *file, const char *buffer, unsigned long count, void *data);
-
-extern void smtp_buf_proc_init();
-extern void k_mail_d();
-extern void SystemTimeInit();
-
 extern int proc_read_enable_half_bridge(char *page, char **start, off_t off, int count, int *eof, void *context);
 extern int proc_write_enable_half_bridge(struct file *file, const char *buffer, unsigned long count, void *data);
 extern int proc_read_wan_ip_addr(char *page, char **start, off_t off, int count, int *eof, void *context);
@@ -135,15 +130,9 @@ extern int env_selection;
 void init_cybertan_config()
 {
 	struct proc_dir_entry *proc;
-	
 	struct proc_dir_entry *wl;
-	
-	
-	//for email alert	
-	kernel_thread(k_mail_d, NULL, CLONE_FS | CLONE_FILES | CLONE_SIGHAND);
-	smtp_buf_proc_init();
-	SystemTimeInit();
-	
+
+
 	cyber_dir = proc_mkdir("Cybertan", NULL);
 	if(cyber_dir)
 	{

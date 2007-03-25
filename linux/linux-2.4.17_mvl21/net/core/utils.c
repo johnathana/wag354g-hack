@@ -63,8 +63,6 @@ int net_ratelimit(void)
 		missed = 0;
 		toks -= net_msg_cost;
 		spin_unlock_irqrestore(&ratelimit_lock, flags);
-		if (lost)
-			printk(KERN_WARNING "NET: %d messages suppressed.\n", lost);
 		return 1;
 	}
 	missed++;

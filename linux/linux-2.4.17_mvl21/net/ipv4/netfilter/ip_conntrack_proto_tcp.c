@@ -396,13 +396,7 @@ static void log_packet(struct iphdr *iph, struct tcphdr *tcph)
 	/* TCP:     10+max(25,20+30+13+9+36+11+127) = 256 */
 }
 
-#define log_invalid_packet(iph, tcph, format, arg...) 	\
-do { 							\
-	spin_lock_bh(&log_lock); 			\
-	log_packet(iph, tcph); 				\
-	printk(format, ## arg); 			\
-	spin_unlock_bh(&log_lock); 			\
-} while (0);
+#define log_invalid_packet(iph, tcph, format, arg...)
 
 /* TCP connection tracking based on 'Real Stateful TCP Packet Filtering
    in IP Filter' by Guido van Rooij.
