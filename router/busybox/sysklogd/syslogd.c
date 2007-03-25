@@ -51,7 +51,7 @@ static const char *logFilePath = __LOG_FILE;
 static int logFileSize = 200 * 1024;
 
 /* number of rotated message files */
-static int logFileRotate = 1;
+static int logFileRotate = 0;
 #endif
 
 /* interval between marks in seconds */
