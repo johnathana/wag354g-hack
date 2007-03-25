@@ -38,8 +38,7 @@
 #include <crypt.h>
 
 #include "libbb.h"
-/* kirby 2004/12.22 */
-#include "pwd_.h"
+
 
 
 /* Ask the user for a password.
@@ -56,15 +55,13 @@ int correct_password ( const struct passwd *pw )
 		struct spwd *sp = getspnam ( pw-> pw_name );
 
 		if ( !sp )
-			/* kirby 2004/12.22 */
-			//bb_error_msg_and_die ( "no valid shadow password" );
-			error_msg_and_die ( "no valid shadow password" );
+			bb_error_msg_and_die ( "\nno valid shadow password" );
 
 		correct = sp-> sp_pwdp;
 	}
 	else
 #endif
-    	correct = pw-> pw_passwd;
+		correct = pw-> pw_passwd;
 
 	if ( correct == 0 || correct[0] == '\0' )
 		return 1;
@@ -75,8 +72,6 @@ int correct_password ( const struct passwd *pw )
 		return 0;
 	}
 	encrypted = crypt ( unencrypted, correct );
-	/* kirby 2004/12.22 */
-    //memset ( unencrypted, 0, bb_strlen ( unencrypted ));
-    memset ( unencrypted, 0, strlen ( unencrypted ));
+	memset ( unencrypted, 0, strlen ( unencrypted ));
 	return ( strcmp ( encrypted, correct ) == 0 ) ? 1 : 0;
 }

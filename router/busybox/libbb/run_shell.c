@@ -36,14 +36,42 @@
 #include <syslog.h>
 #include <ctype.h>
 #include "libbb.h"
+#ifdef CONFIG_SELINUX
+#include <selinux/selinux.h>  /* for setexeccon  */
+#endif
+
+#ifdef CONFIG_SELINUX
+static security_context_t current_sid=NULL;
+
+void
+renew_current_security_context(void)
+{
+  if  (current_sid)
+    freecon(current_sid);  /* Release old context  */
+
+  getcon(&current_sid);  /* update */
+
+  return;
+}
+void
+set_current_security_context(security_context_t sid)
+{
+  if  (current_sid)
+    freecon(current_sid);  /* Release old context  */
+
+  current_sid=sid;
+
+  return;
+}
+
+#endif
 
 /* Run SHELL, or DEFAULT_SHELL if SHELL is empty.
    If COMMAND is nonzero, pass it to the shell with the -c option.
    If ADDITIONAL_ARGS is nonzero, pass it to the shell as more
    arguments.  */
 
-void run_shell ( const char *shell, int loginshell, const char *command, const char **additional_args
-)
+void run_shell ( const char *shell, int loginshell, const char *command, const char **additional_args)
 {
 	const char **args;
 	int argno = 1;
@@ -54,14 +82,10 @@ void run_shell ( const char *shell, int loginshell, const char *command, const c
 
 		args = (const char **) xmalloc (sizeof (char *) * ( 4  + additional_args_cnt ));
 
-	/* kirby 2004/12.22 */	 
-	args [0] = get_last_path_component ( bb_xstrdup ( shell ));
+	args [0] = bb_get_last_path_component ( bb_xstrdup ( shell ));
 
-	if ( loginshell ) {
-		char *args0;
-		bb_xasprintf ( &args0, "-%s", args [0] );
-		args [0] = args0;
-	}
+	if ( loginshell )
+		args [0] = bb_xasprintf ("-%s", args [0]);
 
 	if ( command ) {
 		args [argno++] = "-c";
@@ -72,9 +96,12 @@ void run_shell ( const char *shell, int loginshell, const char *command, const c
 			args [argno++] = *additional_args;
 	}
 	args [argno] = 0;
-	execv ( shell, (char **) args );
-
-	/* kirby 2004/12.22 */
-	//bb_perror_msg_and_die ( "cannot run %s", shell );
-	perror_msg_and_die ( "cannot run %s", shell );
+#ifdef CONFIG_SELINUX
+	if ( (current_sid) && (!setexeccon(current_sid)) ) {
+	    freecon(current_sid);
+	    execve(shell, (char **) args, environ);
+	} else
+#endif
+	  execv ( shell, (char **) args );
+	bb_perror_msg_and_die ( "cannot run %s", shell );
 }

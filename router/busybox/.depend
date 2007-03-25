@@ -1,0 +1,2172 @@
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/less.o: /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/less/regexp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/less/marks.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/less/flagcs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/less/flags.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/less/brackets.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/makedevs.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/makedevs/table.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/makedevs/leaf.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/strings.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/setsid.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/eject.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mtab/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/mountpoint.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/crond.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/crond/call/sendmail.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug/crond/option.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/watchdog.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/hdparm.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/getset/dma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hdparm/hdio/getset/dma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/tristate/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hdparm/hdio/tristate/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/drive/reset.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hdparm/hdio/drive/reset.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/unregister/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hdparm/hdio/unregister/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/scan/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/hdparm/hdio/scan/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hdparm/hdio/scan/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/get/identity.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/hdparm/get/identity.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hdparm/get/identity.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/rx.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/adjtimex.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/crontab.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/devfsd.o: /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/devfsd/verbose.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/devfsd/verbose.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/devfsd/fg/np.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/devfsd/modload.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/debug.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/mt.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/last.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/time.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/bbconfig.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/dc.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/miscutils/runlevel.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/modutils/lsmod.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/query/module/interface.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/check/tainted/module.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/lsmod/pretty_2_6/output.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/modutils/insmod.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature_2_6/modules.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature_2_4/modules.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/check/tainted/module.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/check/tainted/module.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/insmod/load/map/full.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/insmod/load/map.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/insmod/loadinkmem.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/insmod/ksymoops/symbols.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/insmod/version/checking.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/modutils/modprobe.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature_2_6/modules.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature_2_4/modules.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/modprobe/multiple/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/modutils/rmmod.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/query/module/interface.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature_2_6/modules.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature_2_4/modules.h
+
+/home/john/Desktop/wag/busybox-1.2.2/init/halt.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/initrd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/init.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/init/init_shared.o: /home/john/Desktop/wag/busybox-1.2.2/init/init_shared.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/init.h
+
+/home/john/Desktop/wag/busybox-1.2.2/init/init.o: /home/john/Desktop/wag/busybox-1.2.2/init/init_shared.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/syslogd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/swaponoff.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/initrd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/init/coredumps.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/extra/quiet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/init/sctty.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/use/inittab.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug/init.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/init/mesg.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/usage.o: /home/john/Desktop/wag/busybox-1.2.2/include/applets.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/usage.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/applets/busybox.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/autowidth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/locale/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/installer.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/installer.h
+
+/home/john/Desktop/wag/busybox-1.2.2/applets/applets.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/usage_compressed.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/grp_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/applets.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/usage.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/suid/config/quiet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/suid/config.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/suid/config.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/suid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/suid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/compress/usage.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/show/usage.h
+
+/home/john/Desktop/wag/busybox-1.2.2/applets/version.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/bt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/shell/lash.o: /home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/fancy/prompt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/sh/standalone/shell.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/sh/extra/quiet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/locale/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.o: /home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/fancy/prompt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/username/completion.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/tab/completion.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/savehistory.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/history.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing/vi.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/locale/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/shell/hush.o: /home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/fancy/prompt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/standalone/shell.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/extra/quiet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/savehistory.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing/vi.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash.h
+
+/home/john/Desktop/wag/busybox-1.2.2/shell/msh.o: /home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/fancy/prompt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/sh/standalone/shell.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/standalone/shell.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/extra/quiet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/busybox/exec/path.h
+
+/home/john/Desktop/wag/busybox-1.2.2/shell/ash.o: /home/john/Desktop/wag/busybox-1.2.2/shell/cmdedit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/fancy/prompt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/tab/completion.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/savehistory.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing/vi.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/command/editing.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/standalone/shell.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sh/extra/quiet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/expand/prmt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/random/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/optimize/for/size.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/mail.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ash/cmdcmd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/cmdcmd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ash/builtin/test.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/builtin/test.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ash/builtin/echo.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/builtin/echo.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/getopts.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/math/support_64.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/math/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ash/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/read/timeout.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/read/nchars.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ash/job/control.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ash/job/control.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/busybox/exec/path.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/locale/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/sysklogd/logread.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/logread/reduced/locking.h
+
+/home/john/Desktop/wag/busybox-1.2.2/sysklogd/logger.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/syslogd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/sysklogd/syslogd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipc/syslog/buffer/size.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipc/syslog.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/remote/log.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/rotate/logfile.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/sysklogd/klogd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/cpio.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/dpkg.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/deb/tar/bz2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/deb/tar/gz.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/dpkg_deb.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/deb/tar/bz2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/deb/tar/gz.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/bunzip2.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/ar.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/gzip.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/gunzip.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/rpm2cpio.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/rpm.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/unzip.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/unlzma.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/gunzip.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/gunzip/uncompress.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/tar.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/long/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/long/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/compress.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/compress.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/gzip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/gzip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/from.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/from.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/lzma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/lzma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/bzip2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/bzip2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tar/create.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/create.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/uncompress.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/herror_msg_and_die.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/inet_common.o: /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/get_line_from_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/pw_encrypt.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/qmodule.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_askpass.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/get_console.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/messages.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/bt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xconnect.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/simplify_path.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_xchdir.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/loop.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/fgets_str.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/device_open.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/vfork_daemon_rexec.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/safe_write.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/pwd2spwd.o: /home/john/Desktop/wag/busybox-1.2.2/include/shadow_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xregcomp.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/vdprintf.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/u_signal_names.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xstat.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/mode_string.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/safe_read.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/ask_confirmation.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/change_identity.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/full_write.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/error_msg_and_die.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/perror_msg_and_die.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_asprintf.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/find_root_device.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/login.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/find_mount_point.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/process_escape_sequence.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/herror_msg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/crc32.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/restricted_shell.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_xlisten.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_do_delay.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xfuncs.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/busybox/exec/path.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/llist.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/get_last_path_component.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/run_parts.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/copyfd.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/full_read.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/obscure.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/dump.o: /home/john/Desktop/wag/busybox-1.2.2/include/dump.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/human_readable.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/printf.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_xsocket.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/concat_path_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/create_icmp6_socket.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/parse_number.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/inode_hash.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/mtab_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/mtab/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xreadlink.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/safe_strtol.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/remove_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/perror_nomsg_and_die.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/find_pid_by_name.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/opendir.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/vperror_msg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xgethostbyname2.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/trim.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/recursive_action.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xgetularg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_xbind.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/perror_msg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/getopt_ulflags.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ps.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/tar.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/ar.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/getopt/long.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/procps.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/top/cpu/usage/percentage.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/md5.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/md5/size/vs/speed.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_xdaemon.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xgetcwd.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/chomp.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/create_icmp_socket.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/speed_table.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/kernel_version.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/get_terminal_width_height.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/vherror_msg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/wfopen.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/setup_environment.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/correct_password.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/shadowpasswds.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xgethostbyname.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/verror_msg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/isdirectory.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/print_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/make_directory.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/safe_strncpy.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/sha1.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/last_char_is.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/skip_whitespace.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/parse_mode.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/concat_subpath_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/default_error_retval.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/error_msg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/read_package_field.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/bb_pwd.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/grp_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/mtab.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/mtab/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/compare_string_array.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/run_shell.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/xgetlarg.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libbb/copy_file.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/preserve/hardlinks.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libpwdgrp/pwd_grp.o: /home/john/Desktop/wag/busybox-1.2.2/libpwdgrp/pwd_grp_internal.c \
+   /home/john/Desktop/wag/busybox-1.2.2/include/shadow_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/libpwdgrp/pwd_grp_internal.o: /home/john/Desktop/wag/busybox-1.2.2/include/shadow_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/grp_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/fdisk.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fdisk/advanced.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/osf/label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sun/label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sgi/label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/aix/label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fdisk/writable.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/mdev.o: /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mdev/exec.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mdev/conf.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/fsck_minix.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/minix2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/setarch.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/switch_root.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/freeramdisk.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/freeramdisk.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/fdflush.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/nfsmount.o: /home/john/Desktop/wag/busybox-1.2.2/util-linux/nfsmount.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mount/nfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/getopt.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/mkswap.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mkswap/v0.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/dmesg.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/mount.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/mtab/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mtab/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mount/loop.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mount/nfs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/more.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/use/termios.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/umount.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mtab/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mount/loop.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/umount/all.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/ipcs.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/fdformat.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/ipcrm.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/hexdump.o: /home/john/Desktop/wag/busybox-1.2.2/include/dump.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/pivot_root.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/fbset.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fbset/readmode.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fbset/fancy.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/readprofile.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/swaponoff.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/hwclock.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/hwclock/adjtime/fhs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/hwclock/long/options.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/rdate.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/losetup.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/util-linux/mkfs_minix.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/minix2.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/setlogcons.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/setconsole.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/setconsole/long/options.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/clear.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/reset.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/dumpkmap.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/chvt.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/setkeycodes.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/loadfont.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/deallocvt.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/loadkmap.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/console-tools/openvt.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/usage.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipc/syslog.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/remote/log.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/rotate/logfile.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ps/wide.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/pidof/omit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/pidof/single.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tftp/blocksize.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tftp/put.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tftp/get.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/telnetd/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/telnet/autologin.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/ping6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/ping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/nc/gaping/security/hole.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipcalc/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/hw.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/memstart/ioaddr/irq.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/slip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/status.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/auth/md5.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/basic/auth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/setuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/without/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/makedevs/table.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/makedevs/leaf.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/getset/dma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/tristate/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/drive/reset.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/unregister/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/hdio/scan/hwif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/hdparm/get/identity.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/devfsd/fg/np.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/mtab/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/mount/loop.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/mdev/exec.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/insmod/load/map.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/zero/term.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/termopt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/confirmation.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/grep/context.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/grep/egrep/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/exec.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/inum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/newer.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/type.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/perm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/mmin.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/mtime.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/find/print0.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/start/stop/daemon/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/readlink/follow.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/md5/sha1/sum/check.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/human/readable.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/human/readable.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/autowidth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/tail.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/stat/format.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/sort/big.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/sleep.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/color.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/timestamps.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/sortfiles.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/recursive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/followlinks.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/filetypes.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/fancy/head.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/fancy/echo.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/du/default/blocksize_1k.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/du/default/blocksize_1k.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/dd/ibs/obs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/date/isofmt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/compress.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/gzip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/lzma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/bzip2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/create.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/libbb.h: /home/john/Desktop/wag/busybox-1.2.2/include/platform.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/shadow_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/grp_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/top/cpu/usage/percentage.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/devfs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/shadowpasswds.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/buffers/go/in/bss.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/buffers/go/on/stack.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/grp_.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/config/use/bb/pwd/grp.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/busybox.h: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/applets.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/applets.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/use/logger.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/klogd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/logread.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/syslogd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/msh.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/lash.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/hush.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ash.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/sh/is/msh.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/sh/is/lash.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/sh/is/hush.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/sh/is/ash.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/uptime.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/top.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/bb/sysctl.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/renice.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ps.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/pidof.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/killall.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/kill.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fuser.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/free.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/zcip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/wget.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/vconfig.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/app/dumpleases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/app/udhcpc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/app/udhcpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/traceroute.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tftp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/telnetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/telnet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/route.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ping6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/nslookup.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/netstat.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/nc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/nameif.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ipcalc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/iptunnel.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/iproute.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/iplink.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ipaddr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ifupdown.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ifconfig.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/httpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/hostname.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ftpput.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ftpget.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fakeidentd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ether/wake.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dnsd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/arping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/watchdog.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/time.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/setsid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/strings.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rx.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/runlevel.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mountpoint.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/makedevs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/hdparm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/less.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/last.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/eject.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/devfsd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/crontab.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/crond.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/bbconfig.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/adjtimex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/umount.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/switch/root.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/swaponoff.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/setarch.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/readprofile.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rdate.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/pivot/root.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mount.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/more.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mkswap.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mdev.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/losetup.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ipcs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ipcrm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/hwclock.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/hexdump.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/getopt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mkfs/minix.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fsck/minix.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/freeramdisk.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fdisk.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fdformat.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fdflush.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fbset.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dmesg.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/modprobe.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/lsmod.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rmmod.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/insmod.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/findfs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/e2label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tune2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mke2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/lsattr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fsck.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/e2fsck.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/chattr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/vlock.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sulogin.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/su.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/passwd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/login.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/getty.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/deluser.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/adduser.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/delgroup.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/addgroup.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mesg.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/halt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/initrd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/init.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/xargs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/grep/fgrep/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/grep/egrep/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/grep.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/find.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/vi.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sed.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/patch.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ed.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/awk.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/which.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/start/stop/daemon.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/run/parts.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/readlink.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/pipe/progress.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mktemp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/setlogcons.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/setkeycodes.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/setconsole.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/reset.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/openvt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/loadkmap.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/loadfont.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dumpkmap.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/deallocvt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/clear.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/chvt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/yes.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/whoami.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/who.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/wc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/watch.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/uuencode.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/uudecode.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/usleep.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/uniq.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/uname.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tty.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/true.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/touch.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/test.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tee.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tail.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sync.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/stty.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/stat.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sort.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sleep.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/sha1sum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/seq.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rmdir.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/realpath.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/pwd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/printf.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/printenv.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/od.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/nohup.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/nice.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mv.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mknod.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mkfifo.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/mkdir.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/md5sum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ls.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/logname.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ln.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/length.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/install.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/id.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/hostid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/head.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/fold.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/false.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/expr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/env.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/echo.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/du.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/unix2dos.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dos2unix.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dirname.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/diff.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/df.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/date.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cut.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/comm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cmp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cksum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/chroot.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/chown.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/chmod.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/chgrp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/catv.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cat.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cal.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/basename.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/unzip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/unlzma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/uncompress.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/tar.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rpm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/rpm2cpio.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/gzip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/gunzip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dpkg/deb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/dpkg.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/cpio.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/bunzip2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/ar.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/install/no/usr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/verbose/usage.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/shadow_.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/config/use/bb/shadow.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/config/use/bb/pwd/grp.h
+
+/home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h: /home/john/Desktop/wag/busybox-1.2.2/include/platform.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ftpgetput.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ftpgetput/long/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ftpput.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/ftpget.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/iptunnel.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/httpd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/httpd/encode/url/str.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/encode/url/str.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/encode/url/str.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/set/remote/port/to/env.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/config/with/script/interpr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/cgi.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/cgi.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/config/with/mime/types.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/httpd/auth/md5.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/auth/md5.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/auth/md5.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/httpd/basic/auth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/basic/auth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/basic/auth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/httpd/setuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/setuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/setuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/reload/config/sighup.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/httpd/without/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/httpd/without/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/httpd/without/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/nslookup.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/vconfig.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/tftp.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/debug/tftp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/tftp/blocksize.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tftp/blocksize.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tftp/put.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tftp/put.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tftp/get.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tftp/get.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/route.o: /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/arping.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ping.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/ping6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/ping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/nameif.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/iproute.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/zcip.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/interface.o: /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/telnet.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/telnet/autologin.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/telnet/ttype.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/autowidth.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/inetd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/inetd/rpc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/inetd/support/builtin/chargen.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/inetd/support/builtin/daytime.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/inetd/support/builtin/time.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/inetd/support/builtin/discard.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/inetd/support/builtin/echo.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ipaddr.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/netstat.o: /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/route.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/fakeidentd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/telnetd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/telnetd/inetd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/login.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/devpts.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ip.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ip/tunnel.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ip/route.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ip/link.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ip/address.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/nc.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/nc/gaping/security/hole.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/hostname.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ipcalc.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ipcalc/long/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/ipcalc/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ipcalc/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipcalc/fancy.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ifconfig.o: /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/broadcast/plus.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/hw.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/memstart/ioaddr/irq.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/slip.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifconfig/status.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ether-wake.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ping6.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/ping6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/ping.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/dnsd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/wget.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/wget/ip6/literal.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/wget/authentication.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/wget/statusbar.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/ifupdown.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifupdown/mapping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ifupdown/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifupdown/ipv6.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ifupdown/ipv4.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifupdown/ipv4.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ifupdown/ip.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/iplink.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/traceroute.o: /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/traceroute/use/icmp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/traceroute/source/route.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/traceroute/verbose.h
+
+/home/john/Desktop/wag/busybox-1.2.2/debianutils/which.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/debianutils/pipe_progress.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/debianutils/run_parts.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/debianutils/readlink.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/readlink/follow.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/debianutils/mktemp.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/debianutils/start_stop_daemon.o: /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/start/stop/daemon/long/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/skip/feature/start/stop/daemon/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/start/stop/daemon/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/start/stop/daemon/fancy.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/findutils/xargs.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/zero/term.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/termopt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/quotes.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/xargs/support/confirmation.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/findutils/find.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/exec.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/inum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/newer.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/xdev.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/type.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/perm.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/mmin.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/mtime.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/find/print0.h
+
+/home/john/Desktop/wag/busybox-1.2.2/findutils/grep.o: /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/grep/context.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/grep/fgrep/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/grep/egrep/alias.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/lsattr.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/mke2fs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/util.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/util.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/util.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsck.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_ext_attr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/fsck.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/kernel-jbd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/kernel-list.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/tune2fs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/kernel-jbd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/util.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/grp_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/findfs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/findfs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/e2label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/e2label.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/chattr.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/fsck.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/fsck.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/devfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsbb.h: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsck.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsck.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/renice.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/ps.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ps/wide.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/selinux.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/pidof.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/pidof/omit.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/pidof/single.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/uptime.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/fuser.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/sysctl.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/free.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/top.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/top/cpu/usage/percentage.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/top/cpu/usage/percentage.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/use/termios.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/procps/kill.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/killall.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/whoami.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/date.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/date/isofmt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/date/isofmt.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/head.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/fancy/head.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug/yank/susv2.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/comm.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/catv.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/uname.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/cut.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/uniq.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/chgrp.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/usleep.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/sort.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/sort/big.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/expr.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/expr/math/support_64.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/md5_sha1_sum.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/md5/sha1/sum/check.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/sha1sum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/sha1sum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/md5sum.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/md5sum.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/cksum.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/printenv.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/test.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/test_64.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/mknod.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/rm.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/true.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/uuencode.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/logname.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/cat.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/length.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/ls.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/human/readable.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/autowidth.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/color/is/default.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/color.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/username.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ls/timestamps.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/timestamps.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/ls/sortfiles.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ls/sortfiles.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/sortfiles.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/ls/recursive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/recursive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/followlinks.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ls/filetypes.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/locale/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/sleep.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/sleep.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/nice.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/hostid.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/realpath.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/cp.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/dirname.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/watch.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/sync.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/basename.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/dd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/dd/ibs/obs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/dd/signal/handling.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/cmp.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/diff.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/diff/minimal.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/diff/dir.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/diff/binary.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/du.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/human/readable.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/du/default/blocksize_1k.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/echo.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/fancy/echo.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/tty.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/printf.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/mkdir.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mkdir/long/options.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/ln.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/tee.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tee/use/block/io.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/install.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/install/long/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/stat.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/use/feature/stat/format.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/stat/format.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/dos2unix.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/chmod.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/mv.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/mv/long/options.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/who.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/df.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/human/readable.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/false.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/stty.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/tail.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/fancy/tail.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug/yank/susv2.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/wc.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/locale/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/env.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/env/long/options.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/uudecode.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/chroot.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/od.o: /home/john/Desktop/wag/busybox-1.2.2/include/dump.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/touch.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/mkfifo.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/yes.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/rmdir.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/tr.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tr/equiv.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/tr/classes.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/nohup.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/fold.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/debug/yank/susv2.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/seq.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/sum.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/pwd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/chown.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/id.o: /home/john/Desktop/wag/busybox-1.2.2/include/pwd_.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/cal.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/locale/support.h
+
+/home/john/Desktop/wag/busybox-1.2.2/editors/vi.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/optimize/cursor.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/vi/win/resize.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/win/resize.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/set.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/setopts.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/readonly.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/dot/cmd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/use/signals.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/search.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/yankmark.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/vi/colon.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/locale/support.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/bt.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/editors/ed.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/editors/awk.o: /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/awk/math.h
+
+/home/john/Desktop/wag/busybox-1.2.2/editors/patch.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/editors/sed.o: /home/john/Desktop/wag/busybox-1.2.2/include/xregex.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/getty.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/syslogd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/wtmp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/utmp.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/login.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/securetty.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/wtmp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/utmp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/deluser.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/deluser.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/shadowpasswds.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/su.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/utmp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/vlock.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/sulogin.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/shadowpasswds.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/selinux.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/passwd.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/shadowpasswds.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/adduser.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/shadowpasswds.h
+
+/home/john/Desktop/wag/busybox-1.2.2/loginutils/addgroup.o: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/shadowpasswds.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/cp_mv_stat.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/getopt_mk_fifo_nod.o: /home/john/Desktop/wag/busybox-1.2.2/coreutils/libcoreutils/coreutils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/read_bb.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bitops.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/flushb.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/freefs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/swapfs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_ext_attr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/valid_blk.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/inline.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/check_desc.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bmove.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/dupfs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/newdir.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bb_inode.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext_attr.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_ext_attr.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ind_block.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ismounted.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/link.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bb_compat.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/irel_ma.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/irel.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/badblocks.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/getsectsize.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/unix_io.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/kernel-jbd.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs_inline.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bitops.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/sparse.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/dir_iterate.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/expanddir.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/getsize.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/dirhash.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_err.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_io.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_types.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bitops.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/alloc_tables.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/dblist.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/write_bb_file.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/namei.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/mkdir.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/cmp_bitmaps.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_io.h: /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/alloc.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/rs_bitmap.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/test_io.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/io_manager.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/inode.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/e2image.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/dirblock.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/icount.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/alloc_sb.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/res_gdt.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/block.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/inode_io.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_types.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/dblist_dir.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/get_pathname.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/closefs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fsP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/mkjournal.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2fsck.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/kernel-jbd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bitmaps.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/read_bb_file.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/imager.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/finddev.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/fileio.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/version.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/openfs.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/e2image.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/alloc_stats.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/unlink.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/gen_bitmap.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/initialize.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/lookup.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/bmap.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/brel_ma.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/brel.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/rw_bitmaps.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/e2image.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/list.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/lfs.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/resolve.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/probe.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/read.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/probe.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/probe.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/tag.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/devno.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/cache.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/save.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/dev.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/version.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkid_getsize.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/devname.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/blkid/blkidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/unpack.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/parse.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/compare.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/gen_uuid.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/pack.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/unparse.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid_time.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuidP.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/uuid/uuid.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/fgetsetflags.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/iod.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/pe.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/pf.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/hashstr.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/ls.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/fgetsetversion.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/ps.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/parse_num.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/uuid.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_types.h \
+   /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/ostype.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/feature.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/mntopts.o: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h
+
+/home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/e2p/e2p.h: /home/john/Desktop/wag/busybox-1.2.2/e2fsprogs/ext2fs/ext2_fs.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ipaddress.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/iptunnel.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ll_addr.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/inet_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ll_map.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ll_map.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/libnetlink.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/iproute.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/libnetlink.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/libnetlink.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rtm_map.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_parse_common_args.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rtm_map.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ll_map.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/libnetlink.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ll_types.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h: /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/iplink.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ip_common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/ll_proto.o: /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/rt_names.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/libiproute/utils.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientpacket.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/packet.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/arpping.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/arpping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpc.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/signalpipe.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/socket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientsocket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientpacket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/files.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/pidfile.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/pidfile.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/socket.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/socket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/script.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/signalpipe.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/signalpipe.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/udhcp/debug.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/leases.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/files.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/arpping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/libbb_udhcp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/leases.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientpacket.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientpacket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpc.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientsocket.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/clientsocket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/libbb_udhcp.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/packet.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/busybox.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/install/no/usr.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/serverpacket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/files.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/signalpipe.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/socket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/arpping.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/udhcp/debug.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/serverpacket.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/packet.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/files.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/files.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/udhcp/debug.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpc.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/libbb_udhcp.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/packet.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/libbb_udhcp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/udhcp/debug.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/pidfile.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/udhcp/syslog.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/udhcp/syslog.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/bb/ver.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/serverpacket.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/serverpacket.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/static_leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dumpleases.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/libbb_udhcp.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/leases.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h
+
+/home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/packet.o: /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/options.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/common.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/dhcpd.h \
+   /home/john/Desktop/wag/busybox-1.2.2/networking/udhcp/packet.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/decompress_bunzip2.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/archive_xread_all.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/filter_accept_list.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/data_extract_to_buffer.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/filter_accept_all.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/decompress_unzip.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/header_skip.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/get_header_tar.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/gnu/extensions.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/tar/oldgnu/compatibility.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/filter_accept_reject_list.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/decompress_uncompress.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/data_extract_to_stdout.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/get_header_ar.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/ar/long/filenames.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/archive_xread_all_eof.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/open_transformer.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/unpack_ar_archive.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/filter_accept_list_reassign.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/deb/tar/lzma.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/deb/tar/bz2.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/deb/tar/gz.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/seek_by_char.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/header_verbose_list.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/get_header_tar_lzma.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/init_handle.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/find_list_entry.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/header_list.o: /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/get_header_tar_bz2.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/seek_by_jump.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/unarchive/tape.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/get_header_tar_gz.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/check_header_gzip.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/data_align.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/decompress_unlzma.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/config/feature/lzma/fast.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/config/enable/feature/clean/up.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/data_skip.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/get_header_cpio.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/archival/libunarchive/data_extract_all.o: /home/john/Desktop/wag/busybox-1.2.2/include/libbb.h \
+   /home/john/Desktop/wag/busybox-1.2.2/include/unarchive.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/conf.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/expr.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/mconf.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h \
+   /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/util.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/symbol.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/menu.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/confdata.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc.h: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lkc_proto.h \
+   /home/john/Desktop/wag/busybox-1.2.2/scripts/config/expr.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/util.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/colors.h \
+   /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/checklist.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/textbox.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/inputbox.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/yesno.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/menubox.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h
+
+/home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/msgbox.o: /home/john/Desktop/wag/busybox-1.2.2/scripts/config/lxdialog/dialog.h

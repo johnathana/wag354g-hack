@@ -37,9 +37,6 @@
 #include <ctype.h>
 #include "libbb.h"
 
-/* kirby 2004/12.22 */
-#include "pwd_.h"
-
 
 
 #define DEFAULT_LOGIN_PATH      "/bin:/usr/bin"
@@ -48,8 +45,7 @@
 static void xsetenv ( const char *key, const char *value )
 {
 	    if ( setenv ( key, value, 1 ))
-			    /* kirby 2004/12.22 */
-				error_msg_and_die (memory_exhausted);
+				bb_error_msg_and_die (bb_msg_memory_exhausted);
 }
 
 void setup_environment ( const char *shell, int loginshell, int changeenv, const struct passwd *pw )
@@ -62,13 +58,11 @@ void setup_environment ( const char *shell, int loginshell, int changeenv, const
 		 * to change to that directory.  There is no "default" home
 		 * directory.
 		 * Some systems default to HOME=/
-		 */		
+		 */
 		if ( chdir ( pw-> pw_dir )) {
 			if ( chdir ( "/" )) {
 				syslog ( LOG_WARNING, "unable to cd to %s' for user %s'\n", pw-> pw_dir, pw-> pw_name );
-				/* kirby 2004/12.22 */
-				//bb_error_msg_and_die ( "cannot cd to home directory or /" );
-				error_msg_and_die ( "cannot cd to home directory or /" );
+				bb_error_msg_and_die ( "cannot cd to home directory or /" );
 			}
 			fputs ( "warning: cannot change to home directory\n", stderr );
 		}
@@ -87,7 +81,7 @@ void setup_environment ( const char *shell, int loginshell, int changeenv, const
 	}
 	else if ( changeenv ) {
 		/* Set HOME, SHELL, and if not becoming a super-user,
-	   	   USER and LOGNAME.  */
+		   USER and LOGNAME.  */
 		xsetenv ( "HOME",  pw-> pw_dir );
 		xsetenv ( "SHELL", shell );
 		if  ( pw-> pw_uid ) {

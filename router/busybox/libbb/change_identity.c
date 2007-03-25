@@ -37,9 +37,6 @@
 #include <ctype.h>
 
 #include "libbb.h"
-/* kirby 2004/12.22 */
-#include "pwd_.h"
-#include "grp_.h"
 
 
 /* Become the user and group(s) specified by PW.  */
@@ -61,7 +58,5 @@ void change_identity ( const struct passwd *pw )
 	const char *err_msg = change_identity_e2str(pw);
 
 	if(err_msg)
-		/* kirby 2004/12.22 */
-		//bb_perror_msg_and_die ( "%s", err_msg );
-		perror_msg_and_die ( "%s", err_msg );
+		bb_perror_msg_and_die ( "%s", err_msg );
 }

@@ -445,7 +445,6 @@ bridge-install:
 	$(STRIP) $(INSTALLDIR)/bridge/usr/sbin/brctl
 
 busybox:
-	cd busybox && rm -f Config.h && ln -sf configs/$(CONFIG_BUSYBOX_CONFIG).h Config.h
 	$(MAKE) -C busybox STRIPTOOL=$(STRIP)
 
 busybox-install:
