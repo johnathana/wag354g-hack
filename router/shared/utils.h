@@ -5,7 +5,7 @@ extern int C_led(int i);
 extern int get_single_ip(char *ipaddr, int which);
 extern char *get_mac_from_ip(char *ip);
 //junzhao
-extern int sar_getstats(char *stat_str);
+extern unsigned int sar_getstats(char *stat_str);
 extern void my_lock(int fd, int type);
 extern void my_unlock(int fd);
 //extern int file_to_buf_withlock(char *path, char *buf, int len);

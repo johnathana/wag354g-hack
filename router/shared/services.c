@@ -1750,8 +1750,8 @@ int wanledctrl_main(int argc, char **argv)
 	char *which_pvc = argv[1];
 	char *mode = argv[2];
 	char *submode = argv[3];
-	int last_tx, last_rx;
-	int curr_tx, curr_rx;
+	unsigned int last_tx, last_rx;
+	unsigned int curr_tx, curr_rx;
 	last_tx = sar_getstats("Tx Total Bytes:");
 	last_rx = sar_getstats("Rx Total Bytes:");
 	
@@ -1764,7 +1764,7 @@ int wanledctrl_main(int argc, char **argv)
 		{
 			curr_tx = sar_getstats("Tx Total Bytes:");
 			curr_rx = sar_getstats("Rx Total Bytes:");
-			if((curr_tx - last_tx > 0) || (curr_rx - last_rx > 0))
+			if((curr_tx != last_tx) || (curr_rx != last_rx))
 			{
 				last_tx = curr_tx;
 				last_rx = curr_rx;

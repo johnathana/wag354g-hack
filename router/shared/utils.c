@@ -327,10 +327,10 @@ int macaddr_get(char *mac_addr)
 	return 0;
 }
 
-int sar_getstats(char *stat_str)
+unsigned int sar_getstats(char *stat_str)
 {
     	FILE *fd;
-    	int var=0;
+    	unsigned int var = 0;
     	int retval;
     	char *pbuff;
     	char *pos;
@@ -364,7 +364,7 @@ int sar_getstats(char *stat_str)
     	pos += strlen(stat_str);
 
     	if(pos)
-        	retval = sscanf(pos," %d", &var);
+        	retval = sscanf(pos," %u", &var);
     
     	free(pbuff);
     	return var;
