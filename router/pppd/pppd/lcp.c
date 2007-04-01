@@ -2156,6 +2156,7 @@ lcp_received_echo_reply (f, id, inp, len)
     int len;
 {
     u_int32_t magic;
+    FILE *fp = NULL;
 
     /* Check the magic number - don't count replies from ourselves. */
     if (len < 4) {
@@ -2163,6 +2164,15 @@ lcp_received_echo_reply (f, id, inp, len)
 	return;
     }
     GETLONG(magic, inp);
+
+//xtt added for Diagtool of PPPoE 07-09-2004
+    if((fp = fopen("/tmp/D_PPP_P.log", "r")) == NULL)
+    {
+	fp = fopen("/tmp/D_PPP_P.log", "w");
+	fprintf(fp, "PPP LCPbOk\n");
+    }
+    fclose(fp);
+//xtt end
 
     if (lcp_gotoptions[f->unit].neg_magicnumber
 	&& magic == lcp_gotoptions[f->unit].magicnumber) {
