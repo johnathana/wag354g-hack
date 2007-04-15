@@ -919,7 +919,7 @@ ppp_net_init(struct net_device *dev)
 	dev->get_stats = ppp_net_stats;
 	dev->do_ioctl = ppp_net_ioctl;
 	dev->addr_len = 0;
-	dev->tx_queue_len = 100; /* Changed from 3 to 100, for the PRIOWRR scheduler */
+	dev->tx_queue_len = 3; /* PRIOWRR scheduler disabled */
 	dev->type = ARPHRD_PPP;
 	dev->flags = IFF_POINTOPOINT | IFF_NOARP | IFF_MULTICAST;
 	return 0;
