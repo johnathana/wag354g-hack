@@ -298,7 +298,7 @@ height=25>&nbsp;</TD>
 height=25>&nbsp;</TD>
           <TD colSpan=3 height=25>&nbsp;</TD>
           <TD height=25 colspan="2">
-	    <script>document.write("<INPUT id=button1 onclick=\"ViewDHCP()\" type=button <% nvram_invmatch(\"lan_proto\", \"dhcp\", \"disabled\"); %> value=\"" + stabutton.dhcptbl + "\" name=dhcp_table>");</script>
+	    <script>document.write("<INPUT id=button1 onclick=\"ViewDHCP()\" type=button <% nvram_invmatch("lan_proto", "dhcp", "disabled"); %> value=\"" + stabutton.dhcptbl + "\" name=dhcp_table>");</script>
 	  </TD>
 	    <% dns_entry_support(1); %>
 	    <input type="button" value="DNS Entries Table" name="dns_entry_table" onclick="ViewDNS()"> <% dns_entry_support(2); %>
