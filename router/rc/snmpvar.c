@@ -164,51 +164,28 @@ int create_snmpvar(void)
     close (ft);
     return 0;
 }
-#define PRINTD(args...)
 
-/* Lai modify at 2005.08.23 */
+
 int start_snmp(void)
-{          
+{
 	int ret = 0;
-    char buf[64];
 
-    if (nvram_match ("snmp_enable", "1"))
-	{      
-   		create_snmpvar ();
-	#ifdef L2TP_SUPPORT
-		{
-          	struct in_addr network_addr, netmask_addr, eth_addr;
-           	unsigned int ip_addr;
-           	char *str_addr;
-                       	
-			if (inet_aton(nvram_safe_get("l2tp_lan_network"), &network_addr) && (inet_aton(nvram_safe_get ("l2tp_lan_netmask"), &netmask_addr))) 
-			{
-           		ip_addr = ntohl(network_addr.s_addr & netmask_addr.s_addr)+1;
-           		eth_addr.s_addr = htonl(ip_addr);
-           		str_addr = inet_ntoa(eth_addr);
-           		which_conn = atoi(nvram_safe_get("wan_active_connection"));
-          		vcc_global_init();
-           		if (strstr(encapmode, "l2tp_ppp"))
-              		snprintf(buf, 65, "snmpd");
-				else 
-              		snprintf(buf, 65, "snmpd");
-			}
-			else
-               	snprintf(buf, 65, "snmpd");
-		}
-	#else
-		snprintf(buf, 65, "snmpd");
-	#endif /* L2TP_SUPPORT */
+	eval("killall", "-9", "snmpd");
+	sleep(2);
+
+	if (nvram_match("snmp_enable", "1")) {
+		create_snmpvar();
+		ret = eval("snmpd");
 	}
-    system(buf);
-    return ret;
+
+	return ret;
 }
 
-int stop_snmp (void)
-{   
-	int ret = 0;   
-        
-	ret = eval ("killall","-9","snmpd");
-    return ret;
-}
 
+int stop_snmp(void)
+{
+	int ret = 0;
+
+	ret = eval("killall", "-9", "snmpd");
+	return ret;
+}
