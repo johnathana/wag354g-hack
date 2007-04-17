@@ -2,9 +2,9 @@
 cd router
 make linux-clean
 make linux-dep
-make linux
+make -j2 linux
 make clean
-make 
+make -j2 
 make linux-modules
 make install
 make rom
