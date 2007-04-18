@@ -20,9 +20,12 @@
 
 #include "httpd.h"
 
+ssize_t getdelim(char **lineptr, size_t *n, int delim, FILE *stream);
 static char * get_arg(char *args, char **next);
 //static void call(char *func, FILE *stream);
 static void call(char *func, webs_t stream);
+int findend(char * str);
+int process_asp_file(FILE *src, FILE *dst);
 
 /* Look for unquoted character within a string */
 static char *
@@ -69,6 +72,10 @@ call(char *func, webs_t stream) //jimmy, https, 8/4/2003
 	char * argv[16];
 	struct ej_handler *handler;
 
+	//printf("%s\n",func);
+
+	while(*func==' ')*func++;
+
 	/* Parse out ( args ) */
 	if (!(args = strchr(func, '(')))
 		return;
@@ -95,56 +102,31 @@ int
 do_ej(char *path, webs_t stream)	// jimmy, https, 8/4/2003
 {
 	FILE *fp;
-	int c;
-	char pattern[1000], *asp = NULL, *func = NULL, *end = NULL;
-	int len = 0;
+	FILE *tmp = tmpfile();
+	char buf[4096];
+	int len=0;
 
 	if (!(fp = fopen(path, "r")))
 		return -1;
 
-	while ((c = getc(fp)) != EOF) {
 
-		/* Add to pattern space */
-		pattern[len++] = c;
-		pattern[len] = '\0';
-		if (len == (sizeof(pattern) - 1))
-			goto release;
-
-
-		/* Look for <% ... */
-		if (!asp && !strncmp(pattern, "<%", len)) {
-			if (len == 2)
-				asp = pattern + 2;
-			continue;
+	if(tmp == NULL || do_ssl==1){
+		process_asp_file(fp,stream);
+		if(tmp) fclose(tmp);
+	}else{
+		process_asp_file(fp,tmp);
+		fflush(tmp);
+		rewind(tmp);
+		while(!feof(tmp)){
+			len = fread(buf,sizeof(char),sizeof(buf),tmp);
+			wfwrite(buf,len,1,stream);
 		}
-
-		/* Look for ... %> */
-		if (asp) {
-			if (unqstrstr(asp, "%>")) {
-				for (func = asp; func < &pattern[len]; func = end) {
-					/* Skip initial whitespace */
-					for (; isspace((int)*func); func++);
-					if (!(end = unqstrstr(func, ";")))
-						break;
-					*end++ = '\0';
-
-					/* Call function */
-					call(func, stream);
-				}
-				asp = NULL;
-				len = 0;
-			}
-			continue;
-		}
-
-	release:
-		/* Release pattern space */
-		//fputs(pattern, stream);
-		wfputs(pattern, stream); //jimmy, https, 8/4/2003
-		len = 0;
+		fclose(tmp);
 	}
-
 	fclose(fp);
+
+		
+
 	//wwzh add for WAN UPGRADE NOTIFY at 2004-06-16
 #ifdef WAN_UPGRADE
 	{
@@ -159,6 +141,54 @@ do_ej(char *path, webs_t stream)	// jimmy, https, 8/4/2003
 #endif
 	return 0;
 }
+int
+findend(char *str)
+{
+	char *end;
+	int n = strlen(str);
+
+	end = str + strlen(str) + 1;
+	while(end--){
+		if(*end == ';')
+			return n;
+		n--;
+	}
+	return n;
+}
+
+
+int process_asp_file(FILE *src, FILE *dst){
+
+	char *line = NULL;
+	size_t len_t = 0;
+	ssize_t read;
+	int tempc;
+	int n=0;
+
+	while((read = getdelim(&line,&len_t,'<',src)!=-1)){
+		tempc = getc(src);
+		if(tempc == '%'){
+			line[strlen(line)-1]='\0';
+			wfputs(line,dst);
+			read = getdelim(&line,&len_t,'%',src);
+			if(read ==-1) return -1;
+
+			n = findend(line);
+			line[n]='\0';
+			call(line,(webs_t)dst);
+
+			read = getdelim(&line,&len_t,'>',src);
+
+		}else{
+			ungetc(tempc,src);
+			wfputs(line,dst);
+		}
+	}
+	if(line)
+		free(line);
+	return 0;
+}
+
 
 int
 ejArgs(int argc, char **argv, char *fmt, ...)

@@ -4,7 +4,7 @@
 ** and
 ** mini_httpd - small HTTP server
 **
-** Copyright © 1999,2000 by Jef Poskanzer <jef@acme.com>.
+** Copyright  1999,2000 by Jef Poskanzer <jef@acme.com>.
 ** All rights reserved.
 **
 ** Redistribution and use in source and binary forms, with or without
@@ -104,7 +104,7 @@ typedef union {
 #endif
 #define DEFAULT_HTTPS_PORT 443
 #define DEFAULT_HTTP_PORT 80
-extern int do_ssl;
+extern int do_ssl = 0;
 int server_port;
 char pid_file[80];
 
@@ -468,13 +468,18 @@ int
 do_file(char *path, webs_t stream) //jimmy, https, 8/4/2003
 {
 	FILE *fp;
-	int c;
+	char buf[4096];
+	int len =0;
 
 	if (!(fp = fopen(path, "r")))
 		return -1;
-	while ((c = getc(fp)) != EOF)
-		//fputc(c, stream);
-		wfputc(c, stream); // jimmy, https, 8/4/2003
+
+	memset(buf,0,sizeof(buf));
+	while(!feof(fp)){
+		len = fread(buf,sizeof(char),4096,fp);
+		wfwrite(buf,len,1,stream);
+	}
+
 	fclose(fp);
 	return 0;
 }
@@ -883,6 +888,8 @@ int main(int argc, char **argv)
 #endif
 	strcpy(pid_file, "/var/run/httpd.pid");
 	server_port = DEFAULT_HTTP_PORT;
+
+	do_ssl = 0;
 
 	while ((c = getopt(argc, argv, "Sp:h")) != -1)
                 switch (c) {
