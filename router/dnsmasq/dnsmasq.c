@@ -150,21 +150,6 @@ int main (int argc, char **argv)
 	  if (!iface)
 	    close(i);
 	}
-
-      /* Change uid and gid for security */
-      if (username && (ent_pw = getpwnam(username)))
-	{
-	  gid_t dummy;
-	  struct group *gp;
-	  /* remove all supplimentary groups */
-	  setgroups(0, &dummy);
-	  /* change group to "dip" if it exists, for /etc/ppp/resolv.conf 
-	     otherwise get the group for "nobody" */
-	  if ((gp = getgrnam("dip")) || (gp = getgrgid(ent_pw->pw_gid)))
-	    setgid(gp->gr_gid); 
-	  /* finally drop root */
-	  setuid(ent_pw->pw_uid);
-	}
     }
   
   /* In debug mode, log to stderr too and cut the prefix crap. */
@@ -183,8 +168,6 @@ int main (int argc, char **argv)
     syslog(LOG_INFO, "serving MX record for mailhost %s target %s", 
 	   mxname, mxtarget);
   
-  if (getuid() == 0 || geteuid() == 0)
-    syslog(LOG_WARNING, "failed to drop root privs");
   
   servers = last_server = check_servers(serv_addrs, interfaces, peerfd, peerfd6);
   
