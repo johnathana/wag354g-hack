@@ -3347,6 +3347,7 @@ initHandlers(void)
 	websAspDefine("forward_port", ej_forward_port);
 	websAspDefine("static_route", ej_static_route);
 	websAspDefine("localtime", ej_localtime);
+	websAspDefine("show_uptime", ej_show_uptime);
 //	websAspDefine("dumplog", ej_dumplog);
 	websAspDefine("dump_syslog",ej_dump_syslog);
 	websAspDefine("dump_vpnlog",ej_dump_vpnlog); //zhangbin  2004.4.20
@@ -4333,7 +4334,7 @@ struct ej_handler ej_handlers[] = {
 
 
 
-	
+	{ "show_uptime", ej_show_uptime },
 	{ "nvram_else_selmatch", ej_nvram_else_selmatch },
 	{ "nvram_else_match", ej_nvram_else_match },
 	{ "nvram_list", ej_nvram_list },

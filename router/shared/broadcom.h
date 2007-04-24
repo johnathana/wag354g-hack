@@ -153,6 +153,7 @@ extern int ej_dump_valid_parts(int eid, webs_t wp, int argc, char_t **argv);
 int ej_active_connection_table(int eid, webs_t wp, int argc, char_t **argv);
 
 /* for status */
+extern int ej_show_uptime(int eid, webs_t wp, int argc, char_t **argv);
 extern int ej_show_status(int eid, webs_t wp, int argc, char_t **argv);
 extern int ej_localtime(int eid, webs_t wp, int argc, char_t **argv);
 extern int ej_nvram_status_get(int eid, webs_t wp, int argc, char_t **argv);

@@ -68,6 +68,30 @@ extern int check_ppp_connserv_fail(int num);
 extern int check_ppp_getip_fail(int num);
 #endif
 
+
+int ej_show_uptime(int eid, webs_t wp, int argc, char_t **argv)
+{
+	FILE *fp;
+	char s[20];
+	int uptime;
+	int days, hours, minutes;
+
+	if ((fp = fopen("/proc/uptime", "r")) == NULL)
+		return websWrite(wp, "-");
+
+	fscanf(fp, "%d", &uptime);
+	fclose(fp);
+	minutes = uptime / 60;
+	hours = minutes / 60;
+	days = hours / 24;
+	minutes = minutes % 60;
+	hours = hours % 24;
+
+	sprintf(s, "%d day%s, %d:%02d", days, (days != 1) ? "s" : "", hours, minutes);
+
+	return websWrite(wp, s);
+}
+
 int
 ej_show_status_setting(int eid, webs_t wp, int argc, char_t **argv)
 {

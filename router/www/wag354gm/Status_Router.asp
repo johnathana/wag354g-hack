@@ -284,6 +284,14 @@ height=23 cellSpacing=0 cellPadding=0 width=809 border=0>
 
           <TD width=13 height=25>&nbsp;</TD>
           <TD width=15 background=image/UI_05.gif height=25>&nbsp;</TD></TR>
+	<TR>
+          <TD width=156 bgColor=#e7e7e7 height=25>&nbsp;</TD>
+          <TD width=8 background=image/UI_04.gif height=25>&nbsp;</TD>
+          <TD colSpan=3 height=25>&nbsp;</TD>
+	  <TD width=101 height=25>Uptime:</TD>
+	  <TD><b><% show_uptime(); %></b></TD>
+          <TD width=13 height=25>&nbsp;</TD>
+          <TD width=15 background=image/UI_05.gif height=25>&nbsp;</TD></TR>
 
 	<TR>
           <TD width=156 bgColor=#000000 height=25>
