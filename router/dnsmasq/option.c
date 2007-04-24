@@ -21,7 +21,6 @@ struct myoption {
   int val;
 };
 
-#ifdef HAVE_GETOPT_LONG
 static struct myoption opts[] = { 
   {"version", 0, 0, 'v'},
   {"no-hosts", 0, 0, 'h'},
@@ -45,10 +44,13 @@ static struct myoption opts[] = {
   {"pid-file", 1, 0, 'x'},
   {"strict-order", 0, 0, 'o'},
   {"server", 1, 0, 'S'},
+  {"local", 1, 0, 'S' },
+  {"address", 1, 0, 'A' },
   {"conf-file", 1, 0, 'C'},
+  {"no-resolv", 0, 0, 'R'},
+  {"expand-hosts", 0, 0, 'E'},
   {0, 0, 0, 0}
 };
-#endif
 
 struct optflags {
   char c;
@@ -64,6 +66,8 @@ static struct optflags optmap[] = {
   { 'n', OPT_NO_POLL },
   { 'd', OPT_DEBUG },
   { 'o', OPT_ORDER },
+  { 'R', OPT_NO_RESOLV },
+  { 'E', OPT_EXPAND },
   { 'v', 0},
   { 'w', 0},
   { 0, 0 }
@@ -72,47 +76,37 @@ static struct optflags optmap[] = {
 static char *usage =
 "Usage: dnsmasq [options]\n"
 "\nValid options are :\n"
+"-A  --addr=/domain/ipaddr   Return ipaddr for all hosts in specified domains.\n"
 "-a, --listen-address=ipaddr Specify local address(es) to listen on.\n"
 "-b, --bogus-priv            Fake reverse lookups for RFC1918 private address ranges.\n"
 "-c, --cache-size=cachesize  Specify the size of the cache in entries (defaults to %d).\n"
-#ifdef HAVE_FILE_SYSTEM
 "-C, --conf-file=path        Specify configuration file (defaults to " CONFFILE ").\n"
-#endif
 "-d, --no-daemon             Do NOT fork into the background: run in debug mode.\n"
 "-e, --selfmx                Return self-pointing MX records for local hosts.\n"
+"-E, --expand-hosts          Expand simple names in /etc/hosts with domain-suffix.\n"
 "-f, --filterwin2k           Don't forward spurious DNS requests from Windows hosts.\n"
-#ifdef HAVE_FILE_SYSTEM
 "-h, --no-hosts              Do NOT load " HOSTSFILE " file.\n"
-#endif
 "-i, --interface=interface   Specify interface(s) to listen on.\n"
-#ifdef HAVE_FILE_SYSTEM
 "-l, --dhcp-lease=path       Specify the path to the DHCP lease file.\n"
-#endif
 "-m, --mx-host=host_name     Specify the MX name to reply to.\n"
-#ifdef HAVE_FILE_SYSTEM
 "-n, --no-poll               Do NOT poll " RESOLVFILE " file, reload only on SIGHUP.\n"
 "-o, --strict-order          Use nameservers strictly in the order given in " RESOLVFILE ".\n"
-#endif
 "-p, --port=number           Specify port to listen for DNS requests on (defaults to 53).\n"
 "-q, --log-queries           Log queries.\n"
-#ifdef HAVE_FILE_SYSTEM
+"-R, --no-resolv             Do NOT read resolv.conf.\n"
 "-r, --resolv-file=path      Specify path to resolv.conf (defaults to " RESOLVFILE ").\n"
-#endif
-"-S, --server=/domain/ipaddr Specify address(es) of upstream servers with optional domain.\n"
+"-S, --server=/domain/ipaddr Specify address(es) of upstream servers with optional domains.\n"
+"    --local=/domain/        Never forward queries to specified domains.\n"
 "-s, --domain-suffix=domain  Specify the domain suffix which DHCP entries will use.\n"
 "-t, --mx-target=host_name   Specify the host in an MX reply.\n"
-#if defined(CHUSER)
 "-u, --user=username         Change to this user after startup. (defaults to " CHUSER ").\n" 
-#endif
 "-v, --version               Display dnsmasq version.\n"
 "-w, --help                  Display this message.\n"
-#ifdef HAVE_FILE_SYSTEM
 "-x, --pid-file=path         Specify path of PID file. (defaults to " RUNFILE ").\n"
-#endif
 "\n";
 
 
-unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file, 
+unsigned int read_opts (int argc, char **argv, char *buff, struct resolvc **resolv_files, 
 			char **mxname, char **mxtarget, char **lease_file, 
 			char **username, char **domain_suffix, char **runfile, 
 			struct iname **if_names, struct iname **if_addrs,
@@ -120,25 +114,21 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 {
   int option = 0, i;
   unsigned int flags = 0;
-#ifdef HAVE_FILE_SYSTEM
   FILE *f = NULL;
   char *conffile = CONFFILE;
   int conffile_set = 0;
-#endif
 
+  opterr = 0;
 
   while (1)
     {
-#ifdef HAVE_FILE_SYSTEM
       if (!f)
-#endif
 #ifdef HAVE_GETOPT_LONG
-	option = getopt_long(argc, argv, "owefnbvhdqr:m:p:c:l:s:i:t:u:a:x:S:C:", 
+	option = getopt_long(argc, argv, "ERowefnbvhdqr:m:p:c:l:s:i:t:u:a:x:S:C:A:", 
 			     (struct option *)opts, NULL);
 #else
-        option = getopt(argc, argv, "owefnbvhdqr:m:p:c:l:s:i:t:u:a:x:S:C:");
+        option = getopt(argc, argv, "ERowefnbvhdqr:m:p:c:l:s:i:t:u:a:x:S:C:A:");
 #endif
-#ifdef HAVE_FILE_SYSTEM
       else
 	{ /* f non-NULL, reading from conffile. */
 	  if (!fgets(buff, MAXDNAME, f))
@@ -171,14 +161,12 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 		if (strcmp(opts[i].name, buff) == 0)
 		  option = opts[i].val;
 	      if (!option)
-		die("Bad option in %s: %s", conffile);
+		die("bad option %s", buff);
 	    }
 	}
-#endif
       
       if (option == -1)
 	{ /* end of command line args, start reading conffile. */
-#ifdef HAVE_FILE_SYSTEM
 	  if (!conffile)
 	    break; /* "confile=" option disables */
 	  option = 0;
@@ -187,28 +175,17 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 	      if (errno == ENOENT && !conffile_set)
 		break; /* No conffile, all done. */
 	      else
-		die("Cannot read %s: %s", conffile);
+		die("cannot read %s: %s", conffile);
 	    }
-#else
-	    break;
-#endif
 	}
      
-      if (
-#ifdef HAVE_FILE_SYSTEM
-      	!f && 
-#endif
-      	option == 'w')
+      if (!f && option == 'w')
 	{
 	  fprintf (stderr, usage,  CACHESIZ);
 	  exit(0);
 	}
 
-      if (
-#ifdef HAVE_FILE_SYSTEM
-      	!f && 
-#endif
-      	option == 'v')
+      if (!f && option == 'v')
         {
           fprintf(stderr, "dnsmasq version %s\n", VERSION);
           exit(0);
@@ -219,27 +196,18 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 	  {
 	    flags |= optmap[i].flag;
 	    option = 0;
-	    if (
-#ifdef HAVE_FILE_SYSTEM
-	    	f && 
-#endif
-	    	optarg)
-	      die("Extraneous parameter for %s in config file.", buff);
+	    if (f && optarg)
+	      die("extraneous parameter for %s in config file.", buff);
 	    break;
 	  }
       
       if (option && option != '?')
 	{
-	  if (
-#ifdef HAVE_FILE_SYSTEM
-	    	f && 
-#endif
-	  	!optarg)
-	    die("Missing parameter for %s in config file.", buff);
+	  if (f && !optarg)
+	    die("missing parameter for %s in config file.", buff);
 	  
 	  switch (option)
 	    { 
-#ifdef HAVE_FILE_SYSTEM
 	     case 'C': 
 	       conffile = safe_string_alloc(optarg);
 	       conffile_set = 1;
@@ -250,14 +218,33 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 	      break;
 	      
 	    case 'r':
-	      *resolv_file = safe_string_alloc(optarg);
-	      break;
-	      
-	    case 'l':
-	      *lease_file = safe_string_alloc(optarg);
-	      break;
-#endif
-	      
+	      {
+		char *name = safe_string_alloc(optarg);
+		struct resolvc *new, *list = *resolv_files;
+		if (list && list->is_default)
+		  {
+		    /* replace default resolv file - possibly with nothing */
+		    if (name)
+		      {
+			list->is_default = 0;
+			list->name = name;
+		      }
+		    else
+		      list = NULL;
+		  }
+		else if (name)
+		  {
+		    new = safe_malloc(sizeof(struct resolvc));
+		    new->next = list;
+		    new->name = name;
+		    new->is_default = 0;
+		    new->logged = 0;
+		    list = new;
+		  }
+		*resolv_files = list;
+		break;
+	      }
+
 	    case 'm':
 	      canonicalise(optarg);
 	      *mxname = safe_string_alloc(optarg);
@@ -266,6 +253,10 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 	    case 't':
 	      canonicalise(optarg);
 	      *mxtarget = safe_string_alloc(optarg);
+	      break;
+	      
+	    case 'l':
+	      *lease_file = safe_string_alloc(optarg);
 	      break;
 	      
 	    case 's':
@@ -293,11 +284,14 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 		new->next = *if_addrs;
 		*if_addrs = new;
 		new->found = 0;
+#ifdef HAVE_IPV6
 		if (inet_pton(AF_INET, optarg, &new->addr.in.sin_addr))
 		  new->addr.sa.sa_family = AF_INET;
-#ifdef HAVE_IPV6
 		else if (inet_pton(AF_INET6, optarg, &new->addr.in6.sin6_addr))
 		  new->addr.sa.sa_family = AF_INET6;
+#else
+		if ((new->addr.in.sin_addr.s_addr = inet_addr(optarg)) != (in_addr_t)-1)
+                    new->addr.sa.sa_family = AF_INET;
 #endif
 		else
 		  option = '?'; /* error */
@@ -305,42 +299,116 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 	      }
 	      
 	    case 'S':
+	    case 'A':
 	      {
-		struct server *new = safe_malloc(sizeof(struct server));
-		char *end = strrchr(optarg, '/');
-		new->next = *serv_addrs;
-		*serv_addrs = new;
-		new->from_resolv = 0;
-		new->domain = NULL;
-		if (*optarg == '/' && end)
+		struct server *serv, *newlist = NULL;
+		
+		if (*optarg == '/')
 		  {
-		    *end = 0;
-		    canonicalise(optarg+1);
-		    new->domain = safe_string_alloc(optarg+1);
-		    optarg = end+1;
+		    char *end;
+		    optarg++;
+		    while ((end = strchr(optarg, '/')))
+		      {
+			char *domain;
+			*end = 0;
+			canonicalise(optarg);
+			if ((domain = safe_string_alloc(optarg)))
+			  {
+			    serv = safe_malloc(sizeof(struct server));
+			    serv->next = newlist;
+			    newlist = serv;
+			    serv->from_resolv = 0;
+			    serv->domain = domain;
+			  }
+			optarg = end+1;
+		      }
+		    if (!newlist)
+		      {
+			option = '?';
+			break;
+		      }
+		
 		  }
-		if (inet_pton(AF_INET, optarg, &new->addr.in.sin_addr))
-		  {
-#ifdef HAVE_SOCKADDR_SA_LEN
-		    new->addr.in.sin_len = sizeof(struct sockaddr_in);
-#endif
-		    new->addr.sa.sa_family = AF_INET;
-		    new->addr.in.sin_port = htons(NAMESERVER_PORT);
-		  }
-#ifdef HAVE_IPV6
-		else if (inet_pton(AF_INET6, optarg, &new->addr.in6.sin6_addr))
-		  {
-#ifdef HAVE_SOCKADDR_SA_LEN
-		    new->addr.in6.sin6_len = sizeof(struct sockaddr_in6);
-#endif
-		    new->addr.sa.sa_family = AF_INET6;
-		    new->addr.in6.sin6_port = htons(NAMESERVER_PORT);
-		    new->addr.in6.sin6_flowinfo = htonl(0);
-		  }
-#endif
 		else
-		  option = '?'; /* error */
+		  {
+		    newlist = safe_malloc(sizeof(struct server));
+		    newlist->next = NULL;
+		    newlist->from_resolv = 0;
+		    newlist->domain = NULL;
+		  }
+		
+		if (option == 'A')
+		  {
+		    newlist->literal_address = 1;
+		    if (!newlist->domain)
+		      {
+			option = '?';
+		        break;
+		      }
+		  }
+		else
+		  newlist->literal_address = 0;
+		
+		if (!*optarg)
+		  {
+		    newlist->no_addr = 1; /* no server */
+		    if (newlist->literal_address)
+		      {
+			option = '?';
+		        break;
+		      }
+		  }
+		else
+		  {
+		    int serv_port = NAMESERVER_PORT;
+		    char *portno;
+		    
+		    newlist->no_addr = 0;
+		    
+		    if ((portno = strchr(optarg, '#'))) /* is there a port no. */
+		      {
+			*portno = 0;
+			serv_port = atoi(portno+1);
+		      }
+#ifdef HAVE_IPV6
+		    if (inet_pton(AF_INET, optarg, &newlist->addr.in.sin_addr))
+#else
+		    if ((newlist->addr.in.sin_addr.s_addr = inet_addr(optarg)) != (in_addr_t) -1)
+#endif
+		      {
+#ifdef HAVE_SOCKADDR_SA_LEN
+			newlist->addr.in.sin_len = sizeof(struct sockaddr_in);
+#endif
+			newlist->addr.sa.sa_family = AF_INET;
+			newlist->addr.in.sin_port = htons(serv_port);
+		      }
+#ifdef HAVE_IPV6
+		    else if (inet_pton(AF_INET6, optarg, &newlist->addr.in6.sin6_addr))
+		      {
+#ifdef HAVE_SOCKADDR_SA_LEN
+			newlist->addr.in6.sin6_len = sizeof(struct sockaddr_in6);
+#endif
+			newlist->addr.sa.sa_family = AF_INET6;
+			newlist->addr.in6.sin6_port = htons(serv_port);
+			newlist->addr.in6.sin6_flowinfo = htonl(0);
+		      }
+#endif
+		    else
+		      option = '?'; /* error */
+		  }
+		
+		serv = newlist;
+		while (serv->next)
+		  {
+		    serv->next->literal_address = serv->literal_address;
+		    serv->next->no_addr = serv->no_addr;
+		    serv->next->addr = serv->addr;
+		    serv = serv->next;
+		  }
+		serv->next = *serv_addrs;
+		*serv_addrs = newlist;
 		break;
+		
 	      }
 	      
 	    case 'c':
@@ -365,8 +433,12 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
 	}
       
       if (option == '?')
-	die("bad command line options: try --help.", NULL);
-	      
+	{
+	  if (f)
+	    die("bad argument for option %s", buff);
+	  else
+	    die("bad command line options: try --help.", NULL);
+	}
     }
       
   /* port might no be known when the address is parsed - fill in here */
@@ -406,6 +478,11 @@ unsigned int read_opts (int argc, char **argv, char *buff, char **resolv_file,
       if (!*mxtarget)
 	*mxtarget = safe_string_alloc(buff);
     }
+  
+  if (flags & OPT_NO_RESOLV)
+    *resolv_files = 0;
+  else if (*resolv_files && (*resolv_files)->next && (flags & OPT_NO_POLL))
+    die("only one resolv.conf file allowed in no-poll mode.", NULL);
   
   return flags;
 }

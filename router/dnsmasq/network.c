@@ -98,7 +98,7 @@ struct irec *find_all_interfaces(struct iname *names,
 	  lastlen = ifc.ifc_len;
 	}
       len += 10* sizeof(struct ifreq);
-      safe_free(buf);
+      free(buf);
     }
 
   for (ptr = buf; ptr < buf + ifc.ifc_len; )
@@ -143,7 +143,7 @@ struct irec *find_all_interfaces(struct iname *names,
 #endif /* IPV6 */
 	
     }
-  safe_free(buf);
+  free(buf);
   close(fd);
   
 #if defined(HAVE_LINUX_IPV6_PROC) && defined(HAVE_IPV6)
@@ -201,18 +201,16 @@ struct irec *find_all_interfaces(struct iname *names,
     {
       if (!addrs->found)
 	{
+	  char addrbuff[ADDRSTRLEN];
 #ifdef HAVE_IPV6
-	  char addrbuff[INET6_ADDRSTRLEN];
-#else
-	  char addrbuff[INET_ADDRSTRLEN];
-#endif
 	  if (addrs->addr.sa.sa_family == AF_INET)
 	    inet_ntop(AF_INET, &addrs->addr.in.sin_addr,
-		      addrbuff, INET_ADDRSTRLEN);
-#ifdef HAVE_IPV6
+		      addrbuff, ADDRSTRLEN);
 	  else
 	    inet_ntop(AF_INET6, &addrs->addr.in6.sin6_addr,
-		      addrbuff, INET6_ADDRSTRLEN);
+		      addrbuff, ADDRSTRLEN);
+#else
+	  strcpy(addrbuff, inet_ntoa(addrs->addr.in.sin_addr));
 #endif
 	  die("no interface with address %s", addrbuff);
 	}
@@ -225,61 +223,83 @@ struct irec *find_all_interfaces(struct iname *names,
 struct server *check_servers(struct server *new,
 			     struct irec *interfaces, int peerfd, int peerfd6)
 {
-#ifdef HAVE_IPV6
-  char addrbuff[INET6_ADDRSTRLEN];
-#else
-  char addrbuff[INET_ADDRSTRLEN];
-#endif
+  char addrbuff[ADDRSTRLEN];
   struct server *ret = NULL;
-  
+  /* assignment is bogus - remove compiler warning
+     when HAVE_IPV6 not set. */
+  int port = peerfd6;
+
   /* forward table rules reference servers, so have to blow them away */
   forward_init(0);
   
   while (new)
     {
       struct server *tmp = new->next;
-
-      if (new->addr.sa.sa_family == AF_INET)
-	inet_ntop(AF_INET, &new->addr.in.sin_addr, addrbuff, INET_ADDRSTRLEN);
+    
+      if (!new->no_addr)
+	{
 #ifdef HAVE_IPV6
-      else if (new->addr.sa.sa_family == AF_INET6)
-	inet_ntop(AF_INET6, &new->addr.in6.sin6_addr, addrbuff, INET6_ADDRSTRLEN);
+	  if (new->addr.sa.sa_family == AF_INET)
+	    {
+	      inet_ntop(AF_INET, &new->addr.in.sin_addr, addrbuff, ADDRSTRLEN);
+	      port = ntohs(new->addr.in.sin_port);
+	    }
+	  else if (new->addr.sa.sa_family == AF_INET6)
+	    {
+	      inet_ntop(AF_INET6, &new->addr.in6.sin6_addr, addrbuff, ADDRSTRLEN);
+	      port = ntohs(new->addr.in6.sin6_port);
+	    }
+#else
+	  strcpy(addrbuff, inet_ntoa(new->addr.in.sin_addr));
+	  port = ntohs(new->addr.in.sin_port);
 #endif
+	}
 
-      if (new->addr.sa.sa_family == AF_INET && peerfd == -1)
+      if (!new->no_addr &&
+	  !new->literal_address && 
+	  new->addr.sa.sa_family == AF_INET && peerfd == -1)
 	{
 	  syslog(LOG_WARNING, 
 		 "ignoring nameserver %s - no IPv4 kernel support", addrbuff);
-	  safe_free(new);
+	  free(new);
 	}
 #ifdef HAVE_IPV6
-      else if (new->addr.sa.sa_family == AF_INET6 && peerfd6 == -1)
+      else if (!new->no_addr && 
+	       !new->literal_address &&
+	       new->addr.sa.sa_family == AF_INET6 && peerfd6 == -1)
 	{
 	  syslog(LOG_WARNING, 
 		 "ignoring nameserver %s - no IPv6 kernel support", addrbuff);
-	  safe_free(new);
+	  free(new);
 	}
 #endif
       else 
 	{
 	  struct irec *iface;
 	  for (iface = interfaces; iface; iface = iface->next)
-	    if (sockaddr_isequal(&new->addr, &iface->addr))
+	    if (!new->no_addr &&
+		!new->literal_address &&
+		sockaddr_isequal(&new->addr, &iface->addr))
 	      {
 		syslog(LOG_WARNING, "ignoring nameserver %s - local interface", addrbuff);
 		break;
 	      }
 	  if (iface)
-	    safe_free(new);
+	    free(new);
 	  else
 	    {
 	      /* reverse order - gets it right. */
 	      new->next = ret;
 	      ret = new;
 	      if (new->domain)
-		syslog(LOG_INFO, "using nameserver %s for domain %s", addrbuff, new->domain);
+		{
+		  if (new->no_addr)
+		    syslog(LOG_INFO, "using local addresses only for domain %s", new->domain);
+		  else if (!new->literal_address)
+		    syslog(LOG_INFO, "using nameserver %s#%d for domain %s", addrbuff, port, new->domain);
+		}
 	      else
-		syslog(LOG_INFO, "using nameserver %s", addrbuff); 
+		syslog(LOG_INFO, "using nameserver %s#%d", addrbuff, port); 
 	    }
 	}
       
@@ -316,7 +336,6 @@ struct server *reload_servers(char *fname, char *buff, struct server *serv)
     }
 
   /* buff happens to be NAXDNAME long... */
-#ifdef HAVE_FILE_SYSTEM
   f = fopen(fname, "r");
   if (!f)
     {
@@ -324,11 +343,11 @@ struct server *reload_servers(char *fname, char *buff, struct server *serv)
     }
   else
     {
-      syslog(LOG_DEBUG, "reading %s", fname);
+      syslog(LOG_INFO, "reading %s", fname);
       while ((line = fgets(buff, MAXDNAME, f)))
 	{
 	  union  mysockaddr addr;
-	  char *token = strtok(line, " \t\n");
+	  char *token = strtok(line, " \t\n\r");
 	  struct server *serv;
 	  
 	  if (!token || strcmp(token, "nameserver") != 0)
@@ -336,7 +355,11 @@ struct server *reload_servers(char *fname, char *buff, struct server *serv)
 	  if (!(token = strtok(NULL, " \t\n")))
 	    continue;
 	  
-	  if (inet_pton(AF_INET, token, &addr.in.sin_addr))
+#ifdef HAVE_IPV6
+          if (inet_pton(AF_INET, token, &addr.in.sin_addr))
+#else
+          if ((addr.in.sin_addr.s_addr = inet_addr(token)) != (in_addr_t) -1)
+#endif
 	    {
 #ifdef HAVE_SOCKADDR_SA_LEN
 	      addr.in.sin_len = sizeof(struct sockaddr_in);
@@ -363,7 +386,7 @@ struct server *reload_servers(char *fname, char *buff, struct server *serv)
 	      serv = old_servers;
 	      old_servers = old_servers->next;
 	    }
-	  else if (!(serv = safe_malloc(sizeof (struct server))))
+	  else if (!(serv = malloc(sizeof (struct server))))
 	    continue;
 	  
 	  /* this list is reverse ordered: 
@@ -373,18 +396,18 @@ struct server *reload_servers(char *fname, char *buff, struct server *serv)
 	  serv->addr = addr;
 	  serv->domain = NULL;
 	  serv->from_resolv = 1;
+	  serv->no_addr = 0;
+	  serv->literal_address = 0;
 	}
   
       fclose(f);
     }
-#else
-#endif
 
   /* Free any memory not used. */
   while(old_servers)
     {
       struct server *tmp = old_servers->next;
-      safe_free(old_servers);
+      free(old_servers);
       old_servers = tmp;
     }
 

@@ -66,11 +66,7 @@ static int extract_name(HEADER *header, unsigned int plen, unsigned char **pp,
     }
 
   if (isExtract)
-  {
-  	if (cp == name)	/* bad packet! */
-		return 0;
     *--cp = 0; /* terminate: lose final period */
-  }
   
   if (p1) /* we jumped via compression */
     *pp = p1;
@@ -114,6 +110,10 @@ static int in_arpa_name_2_addr(char *namein, struct all_addr *addrp)
   if (strcmp(lastchunk, "arpa") == 0 && strcmp(penchunk, "in-addr") == 0)
     {
       /* IP v4 */
+      /* address arives as a name of the form
+	 www.xxx.yyy.zzz.in-addr.arpa
+	 some of the low order address octets might be missing
+	 and should be set to zero. */
       for (cp1 = name; cp1 != penchunk; cp1 += strlen(cp1)+1)
 	{
 	  /* check for digits only (weeds out things like
@@ -246,6 +246,10 @@ static void extract_neg_addrs(HEADER *header, unsigned int qlen, char *name)
   int qtype, qclass, rdlen;
   unsigned long ttl, minttl = 0;
   time_t now = time(NULL);
+  int flags = F_NEG | F_FORWARD;
+  
+  if (header->rcode == NXDOMAIN)
+    flags |= F_NXDOMAIN;
   
   /* there may be more than one question with some questions
      answered. We don't generate negative entries from those. */
@@ -316,10 +320,10 @@ static void extract_neg_addrs(HEADER *header, unsigned int qlen, char *name)
       GETSHORT(qclass, p);
       
       if (qclass == C_IN && qtype == T_A) 
-	cache_insert(name, NULL, now, minttl, F_IPV4 | F_FORWARD, &cache_fail);
+	cache_insert(name, NULL, now, minttl, F_IPV4 | flags, &cache_fail);
 #ifdef HAVE_IPV6	      
       if (qclass == C_IN && qtype == T_AAAA) 
-	cache_insert(name, NULL, now, minttl, F_IPV6 | F_FORWARD, &cache_fail);
+	cache_insert(name, NULL, now, minttl, F_IPV6 | flags, &cache_fail);
 #endif
     }
   
@@ -372,13 +376,9 @@ void extract_addresses(HEADER *header, unsigned int qlen, char *name)
 	  continue;
 	}
 
-      if (qtype == T_A){ /* A record. */
+      if (qtype == T_A) /* A record. */
 	cache_insert(name, (struct all_addr *)p, now, 
 		     ttl, F_IPV4 | F_FORWARD, &cache_fail);
-#if defined(MPPPOE_SUPPORT) || defined(IPPPOE_SUPPORT) 
-        route_add_mpppoe(name, (struct all_addr *)p, now, ttl);
-#endif
-      }
 #ifdef HAVE_IPV6
       else if (qtype == T_AAAA) /* IPV6 address record. */
 	cache_insert(name, (struct all_addr *)p, now,
@@ -481,16 +481,81 @@ void extract_addresses(HEADER *header, unsigned int qlen, char *name)
 int extract_request(HEADER *header,unsigned int qlen, char *name)
 {
   unsigned char *p = (unsigned char *)(header+1);
-  
+  int qtype, qclass;
+
   if (ntohs(header->qdcount) != 1 || header->opcode != QUERY)
     return 0; /* must be exactly one query. */
   
   if (!extract_name(header, qlen, &p, name, 1))
     return 0; /* bad packet */
+   
+  GETSHORT(qtype, p); 
+  GETSHORT(qclass, p);
+
+  if (qclass == C_IN)
+    {
+      if (qtype == T_A)
+	return F_IPV4;
+      if (qtype == T_AAAA)
+	return F_IPV6;
+    }
   
-  return 1;
+  return F_QUERY;
 }
+
+
+int setup_reply(HEADER *header, unsigned int qlen,
+		struct all_addr *addrp, int flags)
+{
+  unsigned char *p = skip_questions(header, qlen);
   
+  header->qr = 1; /* response */
+  header->aa = 0; /* authoritive */
+  header->ra = 1; /* recursion if available */
+  header->tc = 0; /* not truncated */
+  header->nscount = htons(0);
+  header->arcount = htons(0);
+  header->ancount = htons(0); /* no answers unless changed below*/
+  if (flags == F_FAIL)
+    header->rcode = SERVFAIL; /* couldn't get memory */
+  else if (flags == F_NOERR)
+    header->rcode = NOERROR; /* empty domain */
+  else if (p && flags == F_IPV4)
+    { /* we know the address */
+      header->rcode = NOERROR;
+      header->ancount = htons(1);
+      header->aa = 1;
+      PUTSHORT (sizeof(HEADER) | 0xc000, p);
+      PUTSHORT(T_A, p);
+      PUTSHORT(C_IN, p);
+      PUTLONG(0, p); /* TTL */
+      PUTSHORT(INADDRSZ, p);
+      memcpy(p, addrp, INADDRSZ);
+      p += INADDRSZ;
+    }
+#ifdef HAVE_IPV6
+  else if (p && flags == F_IPV6)
+    {
+      header->rcode = NOERROR;
+      header->ancount = htons(1);
+      header->aa = 1;
+      PUTSHORT (sizeof(HEADER) | 0xc000, p);
+      PUTSHORT(T_AAAA, p);
+      PUTSHORT(C_IN, p);
+      PUTLONG(0, p); /* TTL */
+      PUTSHORT(IN6ADDRSZ, p);
+      memcpy(p, addrp, IN6ADDRSZ);
+      p += IN6ADDRSZ;
+    }
+#endif
+  else /* nowhere to forward to */
+    header->rcode = REFUSED;
+ 
+  return p - (unsigned char *)header;
+}
+	
+
+
 /* return zero if we can't answer from cache, or packet size if we can */
 int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname, 
 		   char *mxtarget, unsigned int options, char *name)
@@ -503,6 +568,7 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
   int ans, anscount = 0;
   time_t now = time(NULL);
   struct crec *crecp;
+  int nxdomain = 0, auth = 1;
 
   if (!qdcount || header->opcode != QUERY )
     return 0;
@@ -535,12 +601,7 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
   
       ans = 0; /* have we answered this question */
       
-      if ((options & OPT_FILTER) &&
-      		(qtype == T_SOA
-#ifdef T_SRV
-			|| qtype == T_SRV
-#endif
-		))
+      if ((options & OPT_FILTER) && (qtype == T_SOA || qtype == T_SRV))
 	ans = 1;
       
       if (((qtype == T_PTR) || (qtype == T_ANY)) && is_arpa)
@@ -548,7 +609,13 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 	  crecp = NULL;
 	  while ((crecp = cache_find_by_addr(crecp, &addr, now, is_arpa)))
 	    { 
-	      unsigned long ttl = (crecp->flags & F_IMMORTAL) ? 0 : crecp->ttd - now;
+	      unsigned long ttl;
+	      /* Return 0 ttl for DHCP entries, which might change
+		 before the lease expires. */
+	      if  (crecp->flags & (F_IMMORTAL | F_DHCP))
+		ttl = 0;
+	      else
+		ttl = crecp->ttd - now;
 	      
 	      /* don't answer wildcard queries with data not from /etc/hosts 
 		 or dhcp leases */
@@ -556,6 +623,8 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 		return 0;
 	      
 	      ans = 1;
+	      if (!(crecp->flags & (F_HOSTS | F_DHCP)))
+		auth = 0;
 	      ansp = add_text_record(nameoffset, ansp, ttl, 0, T_PTR, 
 				     cache_get_name(crecp));
 
@@ -573,10 +642,8 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 	      private_net(&addr))
 	    {
 	      struct in_addr addr4 = *((struct in_addr *)&addr);
-	      char sa[INET_ADDRSTRLEN];
-		  inet_ntop(AF_INET, &addr4, sa, INET_ADDRSTRLEN);
-	      ansp = add_text_record(nameoffset, ansp, 0, 0, T_PTR, sa);
-	      log_query(F_REVERSE | F_IPV4, sa, &addr);
+	      ansp = add_text_record(nameoffset, ansp, 0, 0, T_PTR, inet_ntoa(addr4));  
+	      log_query(F_REVERSE | F_IPV4, inet_ntoa(addr4), &addr);
 	      anscount++;
 	      ans = 1;
 
@@ -598,7 +665,12 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 	      crecp = NULL;
 	      while ((crecp = cache_find_by_name(crecp, name, now, F_IPV4)))
 		{ 
-		  unsigned long ttl = (crecp->flags & F_IMMORTAL) ? 0 : crecp->ttd - now;
+		  unsigned long ttl;
+		  if  (crecp->flags & (F_IMMORTAL | F_DHCP))
+		    ttl = 0;
+		  else
+		    ttl = crecp->ttd - now;
+		  
 		  /* don't answer wildcard queries with data not from /etc/hosts
 		     or DHCP leases */
 		  if (qtype == T_ANY && !(crecp->flags & (F_HOSTS | F_DHCP)))
@@ -609,9 +681,16 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 		  ans = 1;
 		  
 		  if (crecp->flags & F_NEG)
-		    log_query(F_FORWARD | F_IPV4, name, NULL);
+		    {
+		      log_query(crecp->flags, name, NULL);
+		      auth = 0;
+		      if (crecp->flags & F_NXDOMAIN)
+			nxdomain = 1;
+		    }
 		  else
 		    {
+		      if (!(crecp->flags & (F_HOSTS | F_DHCP)))
+			auth = 0;
 		      log_query(crecp->flags & ~F_REVERSE, name, &crecp->addr);
 		      
 		      /* copy question as first part of answer (use compression) */
@@ -638,7 +717,7 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 	{
 	  /* T_ANY queries for hostnames with underscores are spam
              from win2k - don't forward them. */
-	  if ((options && OPT_FILTER) &&
+	  if ((options & OPT_FILTER) &&
 	      qtype == T_ANY 
 	      && (strchr(name, '_') != NULL))
 	    ans = 1;
@@ -647,7 +726,12 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 	      crecp = NULL;
 	      while ((crecp = cache_find_by_name(crecp, name, now, F_IPV6)))
 		{ 
-		  unsigned long ttl = (crecp->flags & F_IMMORTAL) ? 0 : crecp->ttd - now;
+		  unsigned long ttl;
+		  if  (crecp->flags & (F_IMMORTAL | F_DHCP))
+		    ttl = 0;
+		  else
+		    ttl = crecp->ttd - now;
+		  
 		  /* don't answer wildcard queries with data not from /etc/hosts
 		     or DHCP leases */
 		  if (qtype == T_ANY && !(crecp->flags & (F_HOSTS | F_DHCP)))
@@ -658,11 +742,18 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 		  ans = 1;
 		  
 		  if (crecp->flags & F_NEG)
-		    log_query(F_FORWARD | F_IPV6, name, NULL);
+		    {
+		      log_query(crecp->flags, name, NULL);
+		      auth = 0;
+		      if (crecp->flags & F_NXDOMAIN)
+			nxdomain = 1;
+		    }
 		  else
 		    {
+		      if (!(crecp->flags & (F_HOSTS | F_DHCP)))
+			auth = 0;
 		      log_query(crecp->flags & ~F_REVERSE, name, &crecp->addr);
-
+		      
 		      /* copy question as first part of answer (use compression) */
 		      PUTSHORT(nameoffset | 0xc000, ansp); 
 		      PUTSHORT(T_AAAA, ansp);
@@ -690,7 +781,7 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
 	      anscount++;
 	      ans = 1;
 	    }
-	  else if ((options && OPT_SELFMX) && 
+	  else if ((options & OPT_SELFMX) && 
 		   cache_find_by_name(NULL, name, now, F_HOSTS | F_DHCP))
 	    { 
 	      ansp = add_text_record(nameoffset, ansp, 0, 1, T_MX, name);
@@ -707,10 +798,13 @@ int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname,
   
   /* done all questions, set up header and return length of result */
   header->qr = 1; /* response */
-  header->aa = 0; /* authoritive - never */
+  header->aa = auth; /* authoritive - only hosts and DHCP derived names. */
   header->ra = 1; /* recursion if available */
   header->tc = 0; /* truncation */
-  header->rcode = NOERROR; /* no error */
+  if (anscount == 0 && nxdomain)
+    header->rcode = NXDOMAIN;
+  else
+    header->rcode = NOERROR; /* no error */
   header->ancount = htons(anscount);
   header->nscount = htons(0);
   header->arcount = htons(0);

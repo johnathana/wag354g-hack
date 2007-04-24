@@ -12,12 +12,10 @@
 
 #include "dnsmasq.h"
 
-
 static struct crec *cache_head, *cache_tail;
 static int cache_inserted, cache_live_freed;
 static union bigname *big_free;
 static int bignames_left, log_queries, cache_size;
-static struct crec *cache_buf;
 
 static void cache_free(struct crec *crecp);
 static void cache_unlink (struct crec *crecp);
@@ -37,7 +35,7 @@ void cache_init(int size, int logq)
 
   if (cache_size > 0)
     {
-      cache_buf = crecp = safe_malloc(size*sizeof(struct crec));
+      crecp = safe_malloc(size*sizeof(struct crec));
       
       for (i=0; i<size; i++, crecp++)
 	{
@@ -137,10 +135,14 @@ void cache_insert(char *name, struct all_addr *addr, time_t now,
 #endif
   struct crec *new, *crecp = cache_head;
   union bigname *big_name = NULL;
+  int auxflags = flags & (F_NEG | F_NXDOMAIN);
 
   log_query(flags | F_UPSTREAM, name, addr);
   
-  /* if previous insertion failed give up now. */
+  /* strip extra info out of flags arg (already saved in auxflags) */ 
+  flags &= F_REVERSE | F_FORWARD | F_IPV6 | F_IPV4;
+  
+    /* if previous insertion failed give up now. */
   if (*fail || cache_size == 0)
     return;
 
@@ -206,7 +208,7 @@ void cache_insert(char *name, struct all_addr *addr, time_t now,
 		big_free = big_free->next;
 	      }
 	    else if (!bignames_left ||
-		     !(big_name = (union bigname *)safe_malloc(sizeof(union bigname))))
+		     !(big_name = (union bigname *)malloc(sizeof(union bigname))))
 	      {
 		*fail = 1;
 		return;
@@ -267,8 +269,8 @@ void cache_insert(char *name, struct all_addr *addr, time_t now,
   strcpy(cache_get_name(new), name);
   if (addr)
     memcpy(&new->addr, addr, addrlen);
-  else
-    new->flags |= F_NEG;
+
+  new->flags |= auxflags;
   new->ttd = ttl + now;
   cache_link(new);
   cache_inserted++;
@@ -373,13 +375,11 @@ struct crec *cache_find_by_addr(struct crec *crecp, struct all_addr *addr,
   return NULL;
 }
 
-void cache_reload(int no_hosts, char *buff)
+void cache_reload(int opts, char *buff, char *domain_suffix)
 {
   struct crec *cache, *tmp;
-#ifdef HAVE_FILE_SYSTEM
   FILE *f;
   char *line;
-#endif
   
   for (cache=cache_head; cache; cache=tmp)
     {
@@ -387,7 +387,7 @@ void cache_reload(int no_hosts, char *buff)
       if (cache->flags & F_HOSTS)
 	{
 	  cache_unlink(cache);
-	  safe_free(cache);
+	  free(cache);
 	}
       else if (!(cache->flags & F_DHCP))
 	{
@@ -400,14 +400,13 @@ void cache_reload(int no_hosts, char *buff)
 	}
     }
 
-  if (no_hosts)
+  if (opts & OPT_NO_HOSTS)
     {
       if (cache_size > 0)
-	syslog(LOG_DEBUG, "cleared cache");
+	syslog(LOG_INFO, "cleared cache");
       return;
     }
-
-#ifdef HAVE_FILE_SYSTEM
+  
   f = fopen(HOSTSFILE, "r");
   
   if (!f)
@@ -415,28 +414,34 @@ void cache_reload(int no_hosts, char *buff)
       syslog(LOG_ERR, "failed to load names from %s: %m", HOSTSFILE);
       return;
     }
-    
-  syslog(LOG_DEBUG, "reading %s", HOSTSFILE);
+  
+  syslog(LOG_INFO, "reading %s", HOSTSFILE);
   
   while ((line = fgets(buff, MAXDNAME, f)))
     {
       struct all_addr addr;
-      char *token = strtok(line, " \t\n");
+      char *token = strtok(line, " \t\n\r");
       int addrlen, flags;
           
       if (!token || (*token == '#')) 
 	continue;
-      
+
+#ifdef HAVE_IPV6      
       if (inet_pton(AF_INET, token, &addr) == 1)
 	{
 	  flags = F_HOSTS | F_IMMORTAL | F_FORWARD | F_REVERSE | F_IPV4;
 	  addrlen = INADDRSZ;
 	}
-#ifdef HAVE_IPV6
       else if(inet_pton(AF_INET6, token, &addr) == 1)
 	{
 	  flags = F_HOSTS | F_IMMORTAL | F_FORWARD | F_REVERSE | F_IPV6;
 	  addrlen = IN6ADDRSZ;
+	}
+#else 
+     if ((addr.addr.addr4.s_addr = inet_addr(token)) != (in_addr_t) -1)
+        {
+          flags = F_HOSTS | F_IMMORTAL | F_FORWARD | F_REVERSE | F_IPV4;
+          addrlen = INADDRSZ;
 	}
 #endif
       else
@@ -445,9 +450,14 @@ void cache_reload(int no_hosts, char *buff)
       while ((token = strtok(NULL, " \t\n")) && (*token != '#'))
 	{
 	  canonicalise(token);
-	  if ((cache = safe_malloc(sizeof(struct crec) + strlen(token)+1-SMALLDNAME)))
+	  /* If set, add a version of the name with a default domain appended */
+	  if ((opts & OPT_EXPAND) && domain_suffix && !strchr(token, '.') && 
+	      (cache = malloc(sizeof(struct crec) + 
+			      strlen(token)+2+strlen(domain_suffix)-SMALLDNAME)))
 	    {
 	      strcpy(cache->name.sname, token);
+	      strcat(cache->name.sname, ".");
+	      strcat(cache->name.sname, domain_suffix);
 	      cache->flags = flags;
 	      memcpy(&cache->addr, &addr, addrlen);
 	      cache_link(cache);
@@ -455,12 +465,19 @@ void cache_reload(int no_hosts, char *buff)
 		 returned to reverse queries */
 	      flags &=  ~F_REVERSE;
 	    }
+	  if ((cache = malloc(sizeof(struct crec) + strlen(token)+1-SMALLDNAME)))
+	    {
+	      strcpy(cache->name.sname, token);
+	      cache->flags = flags;
+	      memcpy(&cache->addr, &addr, addrlen);
+	      cache_link(cache);
+	      /* Clear this here in case not done above. */
+	      flags &=  ~F_REVERSE;
+	    }
 	}
     }
 
   fclose(f);
-#else
-#endif
 }
 	    
 
@@ -484,34 +501,29 @@ struct crec *cache_clear_dhcp(void)
 
 void dump_cache(int debug, int cache_size)
 {
-  syslog(LOG_INFO,
-		"Cache size %d, %d/%d cache insertions re-used unexpired cache entries.\n", 
-			 cache_size, cache_live_freed, cache_inserted); 
-
+  syslog(LOG_INFO, "Cache size %d, %d/%d cache insertions re-used unexpired cache entries.", 
+	 cache_size, cache_live_freed, cache_inserted); 
   if (debug)
     {
       struct crec *cache ;
-#ifdef HAVE_IPV6
-      char addrbuff[INET6_ADDRSTRLEN];
-#else
-      char addrbuff[INET_ADDRSTRLEN];
-#endif
-      syslog(LOG_DEBUG,
-      		   "Host                         Address          Flags   Expires\n");
+      char addrbuff[ADDRSTRLEN];
+      syslog(LOG_DEBUG, "Host                                     Address                        Flags    Expires\n");
       
       for(cache = cache_head ; cache ; cache = cache->next)
 	if (cache->flags & (F_FORWARD | F_REVERSE))
 	  {
 	    if (cache->flags & F_NEG)
 	      addrbuff[0] = 0;
-	    else if (cache->flags & F_IPV4)
-	      inet_ntop(AF_INET, &cache->addr, addrbuff, INET_ADDRSTRLEN);
 #ifdef HAVE_IPV6
+	    else if (cache->flags & F_IPV4)
+	      inet_ntop(AF_INET, &cache->addr, addrbuff, ADDRSTRLEN);
 	    else if (cache->flags & F_IPV6)
-	      inet_ntop(AF_INET6, &cache->addr, addrbuff, INET6_ADDRSTRLEN);
+	      inet_ntop(AF_INET6, &cache->addr, addrbuff, ADDRSTRLEN);
+#else
+            else 
+                strcpy(addrbuff, inet_ntoa(cache->addr.addr.addr4));
 #endif
-	    syslog(LOG_DEBUG,
-		   "%-28.28s %-16.16s %s%s%s%s%s%s%s%s %s",
+	    syslog(LOG_DEBUG, "%-40.40s %-30.30s %s%s%s%s%s%s%s%s%s  %s",
 		   cache_get_name(cache), addrbuff,
 		   cache->flags & F_IPV4 ? "4" : "",
 		   cache->flags & F_IPV6 ? "6" : "",
@@ -520,6 +532,7 @@ void dump_cache(int debug, int cache_size)
 		   cache->flags & F_IMMORTAL ? "I" : " ",
 		   cache->flags & F_DHCP ? "D" : " ",
 		   cache->flags & F_NEG ? "N" : " ",
+		   cache->flags & F_NXDOMAIN ? "X" : " ",
 		   cache->flags & F_HOSTS ? "H" : " ",
 		   cache->flags & F_IMMORTAL ? "\n" : ctime(&(cache->ttd))) ;
 	  }
@@ -531,53 +544,55 @@ void log_query(int flags, char *name, struct all_addr *addr)
 {
   char *source;
   char *verb = "is";
-
-#ifdef HAVE_IPV6
-  char addrbuff[INET6_ADDRSTRLEN];
-#else
-  char addrbuff[INET_ADDRSTRLEN];
-#endif
+  char addrbuff[ADDRSTRLEN];
   
   if (!log_queries)
     return;
-
-  if (flags & F_IPV4)
+  
+  if (flags & F_NEG)
     {
-      if (addr)
-	inet_ntop(AF_INET, addr, addrbuff, INET_ADDRSTRLEN);
+      if (flags & F_NXDOMAIN)
+	strcpy(addrbuff, "<NXDOMAIN>-");
       else
-	strcpy(addrbuff, "<unknown>-IPv4");
+	strcpy(addrbuff, "<NODATA>-");
+      
+      if (flags & F_IPV4)
+	strcat(addrbuff, "IPv4");
+      else
+	strcat(addrbuff, "IPv6");
     }
+  else
 #ifdef HAVE_IPV6
-  else if (flags & F_IPV6)
-    {
-      if (addr)
-	inet_ntop(AF_INET6, addr, addrbuff, INET6_ADDRSTRLEN);
-      else
-	strcpy(addrbuff, "<unknown>-IPv6");
-    }
+    inet_ntop(flags & F_IPV4 ? AF_INET : AF_INET6,
+	      addr, addrbuff, ADDRSTRLEN);
+#else
+    strcpy(addrbuff, inet_ntoa(addr->addr.addr4));  
 #endif
-
+  
   if (flags & F_DHCP)
     source = "DHCP";
-#ifdef HAVE_FILE_SYSTEM
   else if (flags & F_HOSTS)
     source = HOSTSFILE;
-#endif
   else if (flags & F_UPSTREAM)
     source = "reply";
+  else if (flags & F_CONFIG)
+    source = "config";
   else if (flags & F_SERVER)
     {
       source = "forwarded";
       verb = "to";
     }
+  else if (flags & F_QUERY)
+    {
+      source = "query";
+      verb = "from";
+    }
   else
     source = "cached";
   
   if (flags & F_FORWARD)
-    syslog(LOG_INFO, "%s %s %s %s\n", source, name, verb, addrbuff);
+    syslog(LOG_INFO, "%s %s %s %s", source, name, verb, addrbuff);
   else if (flags & F_REVERSE)
-    syslog(LOG_INFO, "%s %s is %s\n", source, addrbuff, name);
+    syslog(LOG_INFO, "%s %s is %s", source, addrbuff, name);
 }
-
 

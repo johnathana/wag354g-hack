@@ -12,9 +12,12 @@
 
 /* Author's email: simon@thekelleys.org.uk */
 
+/* get these before config.h  for IPv6 stuff... */
+#include <sys/types.h>
+#include <netinet/in.h>
+
 #include "config.h"
 
-#include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/nameser.h>
 #include <arpa/inet.h>
@@ -51,6 +54,8 @@
 #define OPT_NO_POLL       32
 #define OPT_DEBUG         64
 #define OPT_ORDER         128
+#define OPT_NO_RESOLV     256
+#define OPT_EXPAND        512
 
 struct all_addr {
   union {
@@ -89,6 +94,11 @@ struct crec {
 #define F_BIGNAME   512
 #define F_UPSTREAM  1024
 #define F_SERVER    2048
+#define F_NXDOMAIN  4096
+#define F_QUERY     8192
+#define F_FAIL      16384
+#define F_NOERR     32768
+#define F_CONFIG    65536
 
 /* struct sockaddr is not large enough to hold any address,
    and specifically not big enough to hold and IPv6 address.
@@ -96,7 +106,6 @@ struct crec {
 union mysockaddr {
   struct sockaddr sa;
   struct sockaddr_in in;
-#ifdef HAVE_IPV6
 #ifdef HAVE_BROKEN_SOCKADDR_IN6
   /* early versions of glibc don't include sin6_scope_id in sockaddr_in6
      but latest kernels _require_ it to be set. The choice is to have
@@ -109,9 +118,8 @@ union mysockaddr {
     struct in6_addr sin6_addr;      /* IPv6 address */
     uint32_t        sin6_scope_id;  /* set of interfaces for a scope */
   } in6;
-#else
+#elif defined(HAVE_IPV6)
   struct sockaddr_in6 in6;
-#endif
 #endif
 };
 
@@ -119,7 +127,9 @@ struct server {
   union mysockaddr addr;
   char *domain; /* set if this server only handles a domain. */ 
   int from_resolv; /* 1 for servers from resolv, 0 for command line. */
-  struct server *next; /* circle */
+  int no_addr; /* no server, this domain is local only */
+  int literal_address; /* addr is the answer, not the server */ 
+  struct server *next; 
 };
 
 /* linked list of all the interfaces in the system and 
@@ -130,11 +140,20 @@ struct irec {
   struct irec *next;
 };
 
+/* interface and address parms from command line. */
 struct iname {
   char *name;
   union mysockaddr addr;
   struct iname *next;
   int found;
+};
+
+/* resolv-file parms from command-line */
+struct resolvc {
+  struct resolvc *next;
+  int is_default;
+  int logged;
+  char *name;
 };
 
 struct frec {
@@ -143,6 +162,7 @@ struct frec {
   unsigned short orig_id, new_id;
   int fd;
   time_t time;
+  struct frec *next;
 };
 
 /* cache.c */
@@ -157,13 +177,15 @@ void cache_end_insert(int fail);
 void cache_link(struct crec *crecp);
 void cache_insert(char *name, struct all_addr *addr, time_t now, 
 		  unsigned long ttl, int flags, int *fail);
-void cache_reload(int no_hosts, char *buff);
+void cache_reload(int opts, char *buff, char *domain_suffix);
 struct crec *cache_clear_dhcp(void);
 void dump_cache(int debug, int size);
 char *cache_get_name(struct crec *crecp);
 
 /* rfc1035.c */
-int extract_request(HEADER *header,unsigned int qlen, char *name);
+int extract_request(HEADER *header, unsigned int qlen, char *name);
+int setup_reply(HEADER *header, unsigned int qlen,
+		struct all_addr *addrp, int flags);
 void extract_addresses(HEADER *header, unsigned int qlen, char *namebuff);
 int answer_request(HEADER *header, char *limit, unsigned int qlen, char *mxname, 
 		   char *mxtarget, unsigned int options, char *namebuff);
@@ -179,10 +201,9 @@ void *safe_malloc(int size);
 char *safe_string_alloc(char *cp);
 int sa_len(union mysockaddr *addr);
 int sockaddr_isequal(union mysockaddr *s1, union mysockaddr *s2);
-void safe_free(void *mem);
 
 /* option.c */
-unsigned int read_opts(int argc, char **argv, char *buff, char **resolv_file, 
+unsigned int read_opts(int argc, char **argv, char *buff, struct resolvc **resolv_file, 
 		       char **mxname, char **mxtarget, char **lease_file, 
 		       char **username, char **domain_suffix, char **runfile, 
 		       struct iname **if_names, struct iname **if_addrs,
@@ -195,7 +216,6 @@ struct server *forward_query(int udpfd, int peerfd, int peerfd6,
 			     int plen, int strict_order, char *dnamebuff, 
 			     struct server *servers, struct server *last_server);
 struct server *reply_query(int fd, char *packet, char *dnamebuff, struct server *last_server);
-
 
 /* network.c */
 struct server *reload_servers(char *fname, char *buff, struct server *servers);

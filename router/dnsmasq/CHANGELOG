@@ -152,17 +152,23 @@ release 0.996 Added negative caching: If dnsmasq gets a "no such domain" reply
               only on specified interfaces.
 
 release 0.997 Deleted INSTALL script and added "install" target to makefile.
+
               Stopped distributing binaries in the tarball to avoid 
               libc version clashes.
+
               Fixed  interface detection code to
               remove spurious startup errors in rare circumstances.
+
               Dnsmasq now changes its uid, irrevocably, to nobody after
               startup for security reasons. Thanks to Peter Bailey for
               this patch.
+
 	      Cope with infinite DHCP leases. Patch thanks to 
 	      Yaacov Akiba Slama.
+
 	      Added rpm control files to .tar.gz distribution. Thanks to
               Peter Baldwin at ClarkConnect for those.
+
               Improved startup script for rpms. Thanks to Yaacov Akiba Slama.
 
 release 1.0   Stable release: dnsmasq is now considered feature-complete
@@ -170,11 +176,15 @@ release 1.0   Stable release: dnsmasq is now considered feature-complete
               
 release 1.1   Added --user argument to allow user to change to
               a different userid.
+
               Added --mx-target argument to allow mail to be delivered
               away from the gateway machine running dnsmasq.
+
               Fixed highly  obscure bug with wildcard queries for
               DHCP lease derived names.
+
               Moved manpage from section 1 to section 8.
+
               Added --no-poll option.
               Added Suse-rpm support.
               Thanks to Joerg Mayer for the last two.
@@ -185,9 +195,12 @@ release 1.2   Added IPv6 DNS record support. AAAA records are cached
               talk to upstream servers via IPv6 if it finds IP6 addresses
               in /etc/resolv.conf and it offers DNS service automatically
               if IPv6 support is present in the kernel.
+
               Extended negative caching to NODATA replies.
+
               Re-vamped CNAME processing to cope with RFC 2317's use of
               CNAMES to PTR RRs in CIDR.
+
               Added config.h and a couple of symbols to aid
               compilation on non-linux systems.
 
@@ -195,6 +208,7 @@ release 1.3   Some versions of the Linux kernel return EINVAL rather
               then ENPROTONOSUPPORT when IPv6 is not available, 
               causing dnsmasq to bomb out. This release fixes that.
               Thanks to Steve Davis for pointing this one out.
+
               Trivial change to startup logic so that dnsmasq logs
               its stuff and reads config files straight away on
               starting, rather than after the first query - principle 
@@ -210,13 +224,17 @@ release 1.5   Added --filterwin2k option which stops dnsmasq from forwarding
 	      "spam" queries from win2k boxes. This is useful to stop spurious
               connections over dial-on-demand links. Thanks to Steve Hardy 
               for this code.
+
               Clear "truncated" bit in replies we return from upstream. This
               stops resolvers from switching to TCP, which is pointless since
               dnsmasq doesn't support TCP. This should solve problems
               in resolving hotmail.com domains.
+
               Don't include getopt.h when Gnu-long-options are disabled -
               hopefully this will allow compilation on FreeBSD.
+
 	      Added the --listen-address and --pid-file flags.
+
               Fixed a bug which caused old entries in the DHCP leases file
               to be used in preference to current ones under certain
               circumstances.
@@ -228,40 +246,52 @@ release 1.6   If a machine gets named via DHCP and the DHCP name doesn't have
               get the name, the "without suffix" name used to be returned,
               now the "with suffix" one gets returned instead. This change
 	      suggested by Arnold Schulz.
+
               Fixed assorted typos in the documentation. Thanks 
               to David Kimdon.
+
               Subtle rearrangement to the downloadable tarball, and stopped
               distributing .debs, since dnsmasq is now an official Debian
               package.
 
 release 1.7   Fix a problem with cache not clearing properly
               on receipt of SIGHUP. Bug spotted by Sat Deshpande.
+
               In group-id changing code:
 	      1) Drop supplimentary groups.
               2) Change gid before dropping root (patch from Soewono Effendi.)
               3) Change group to "dip" if it exists, to allow access
                  to /etc/ppp/resolv.conf (suggestion from Jorg Sommer.)
               Update docs to reflect above changes.
+
               Other documentation changes from David Miller.
               Added suggested script fragment for dhcpcd.exe.
 
 release 1.8   Fix unsafe use of tolower() macro - allows linking against 
               ulibc. (Patches from Soewono Effendi and Bjorn Andersson.)
+
               Fix typo in usage string.
+
 	      Added advice about RedHat PPP configuration to
               documentation. (Thanks to C. Lee Taylor.)
+
 	      Patches to fix problems on BSD systems from Marc Huber
               and Can Erkin Acar. These add the options
               HAVE_ARC4RANDOM and HAVE_SOCKADDR_SA_LEN to config.h.
 	      Elaborated config.h - should really use autoconf.
+
 	      Fix time-to-live calculation when chasing CNAMEs.
+
 	      Fix use-after-free and missing initialisation bugs in
               the cache code. (Thanks to Marc Huber.)
+
               Builds on Solaris 9. (Thanks to Marc Huber.)           
 
 release 1.9   Fixes to rpm .spec files.
+
               Don't put expired DHCP entries into the cache only to 
 	      throw them away again.
+
               Put dnsmasq on a severe memory diet: this reduces both
               the amount of heap space used and the stack size
               required. The difference is not really visible with
@@ -269,42 +299,135 @@ release 1.9   Fixes to rpm .spec files.
               memory requirements when linked against ulibc for use on
               embeded routers, and that's the point really. Thanks to
               Matthew Natalier for prompting this.   
+
 	      Changed debug mode (-d) so that all logging appears on
               stderr as well as going to syslogd. 
+
 	      Added HAVE_IPV6 config symbol to allow compilation
               against a libc which doesn't have IPv6 support.
+
 	      Added a facility to log all queries, enabled with -q flag.
+
 	      Fixed packet size checking bug in address extraction code.
+
 	      Halved default cache size - 300 was way OTT in typical use.
+
 	      Added self-MX function, enabled by -e flag. Thanks to
               Lyonel Vincent for the patch.
+
 	      Added HAVE_FORK config symbol and stuff to support
               uClinux. Thanks to Matthew Natalier for uClinux stuff. 
 
 release 1.10  Log warnings if resolv.conf or dhcp.leases are not
               accessable for any reason, as suggested by Hinrich Eilts.
+
 	      Fixed wrong address printing in error message about
 	      no interface with address.
+
 	      Updated docs and split installation instuctions into setup.html.
+
 	      Fix bug in CNAME chasing code: One CNAME pointing
 	      to many A records would lose A records after the 
 	      first. This bug was introduced in version 1.9.
+
 	      Log startup failures at level Critical as well as 
 	      printing them to standard error.
 	      Exit with return code 1 when given bad options.
+
 	      Cleaned up code for no-cache operation.
+
               Added -o option which forces dnsmasq to use to
               upstream servers in the order they appear in /etc/resolv.conf.
+
               Added upstream server use logging.
+
               Log full cache dump on receipt of SIGUSR1 when query 
               logging is enabled (-q switch).
+
 	      Added -S option to directly specify upstream servers and
               added ability to direct queries for specific domains to
               specfic servers. Suggested by Jens Vonderheide.
+
 	      Upgraded random ID generation - patch from Rob Funk.	      
+
 	      Fixed reading of domains in arguments with capital
               letters or trailing periods.
+
 	      Fixed potential SEGV when given bad options.
+
 	      Read options from /etc/dnsmasq.conf if it exists.
               Do sensible things with missing parameters, eg 
               "--resolv-file=" turns off reading /etc/resolv.conf.
+
+release 1.11  Actually implement the -R flag promised in the 1.10 man page.
+
+              Improve and rationalise the return codes in answers to
+              queries. In the case that there are no available
+              upstream servers to forward a query to, return REFUSED.
+              This makes sendmail work better on modem connected
+              systems when the modem link is down (Thanks to Roger Plant).
+	      Cache and return the NXDOMAIN status of failed queries:
+              this makes the `host` command work when traversing search
+              paths (Thanks to Peter Bailey). Set the "authoritative"
+              bit in replies containing names from /etc/hosts or DHCP.
+
+              Tolerate MS-DOS style line ending codes in /etc/hosts
+	      and /etc/resolv.conf, for people who copy from winsock
+              installations.
+
+	      Allow specification of more than one resolv.conf file. This is 
+              intended for laptops which connect via DHCP or
+              PPP. Whichever resolv.conf was updated last is used.
+
+              Allow -S flags which specify a domain but no server
+              address. This gives local domains which are never forwarded.
+
+	      Add -E flag to automatically add the domain suffix to
+              names in /etc/hosts -suggestion from Phil Harman.
+
+	      Always return a zero time-to-live for names derived from 
+	      DHCP which stops anthing else caching these
+              names. Previously the TTL was derived from the lease
+              time but that is incorrect since a lease can be given
+              up early: dnsmasq would know this but anything with the
+              name cached with long TTL would not be updated.
+
+	      Extended HAVE_IPV6 config flag to allow compliation on
+	      old systems which don't have modern library routines
+	      like inet_ntop(). Thanks to Phil Harman for the patch.
+
+release 1.12  Allow more than one domain in server config lines and
+	      make "local" a synonym for "server". This makes things
+	      like "local=/localnet/thekelleys.org.uk/" legal. Allow
+              port to specified as part of server address.
+
+	      Allow whole domains to have an IP address specified
+              in /etc/dnsmasq.conf. (/etc/hosts doesn't work domains).
+              address=/doubleclick.net/127.0.0.1 should catch all
+              those nasty banner ads. Inspired by a patch 
+	      from Daniel Gryniewicz
+
+	      Log the source of each query when logging switched on. 
+
+	      Fix bug in script fragment for dhcpcd - thanks to Barry Stewart.
+	      
+	      Fix bug which meant that strict-order and self-mx were
+	      always enabled.
+
+	      Builds with Linux libc5 now - for the Freesco project.
+
+	      Fixed Makefile installation script (patch from Silvan
+	      Minghetti) and added CC and CFLAGS variables.
+
+	      Improve resource allocation to reduce vulnerability to
+	      DOS attacks - the old version could have all queries
+	      blocked by a continuous high-speed stream of
+	      queries. Now some queries will succeed, and the excess
+	      will be rejected with a server fail error. This change also
+	      protects against server-loops; setting up a resolving
+              loop between two instances of dnsmasq is no longer
+	      catastrophic. The servers will continue to run, looped
+	      queries fail and a warning is logged. Thanks to C. Lee
+	      Taylor for help with this.
+	      
+

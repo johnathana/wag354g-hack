@@ -21,7 +21,7 @@ is lightweight and easy to configure. It is intended as be run on
 small router/firewalls and  provide a DNS service to a LAN.
 .SH OPTIONS
 Note that in general missing parameters are allowed and switch off
-functions, for instance "--resolv-file=" disables all use of /etc/resolv.conf.
+functions, for instance "--pid-file=" disables writing a PID file.
 .TP
 .B \-h, --no-hosts
 Don't read the hostnames in /etc/hosts.
@@ -84,7 +84,15 @@ requested name has underscores, to catch LDAP requests.
 Read the IP addresses of the upstream nameservers from <file>, instead of
 /etc/resolv.conf. For the format of this file see
 .BR resolv.conf (5) 
-the only lines relevant to dnsmasq are nameserver ones.
+the only lines relevant to dnsmasq are nameserver ones. Dnsmasq can
+be told to poll more than one resolv.conf file, the first file name  specified
+overrides the default, subsequent ones add to the list. This is only
+allowed when polling; the file with the currently latest modification
+time is the one used. 
+.TP
+.B \-R, --no-resolv
+Don't read /etc/resolv.conf. Get upstream servers only from the command
+line or /etc/dnsmasq.conf.
 .TP
 .B \-o, --strict-order
 By default, dnsmasq will send queries to any of the upstream servers
@@ -95,11 +103,12 @@ server strictly in the order they appear in /etc/resolv.conf
 .B \-n, --no-poll
 Don't poll /etc/resolv.conf for changes.
 .TP
-.B \-S, --server=/<domain>/<ipaddr>
+.B \-S, --server=[/<domain>/[domain/]][<ipaddr>[#<port>]]
 Specify IP address of upsream severs directly. Setting this flag does
-not suppress reading of /etc/resolv.conf, use -R to do that. If the
-optional /domain/ is given, that server is used only for that domain
-and that domain is queried only using the specified server. This is
+not suppress reading of /etc/resolv.conf, use -R to do that. If one or
+more 
+optional domains are given, that server is used only for those domains
+and they are queried only using the specified server. This is
 intended for private nameservers: if you have a nameserver on your
 network which deals with names of the form
 xxx.internal.thekelleys.org.uk at 192.168.1.1 then giving  the flag 
@@ -107,7 +116,26 @@ xxx.internal.thekelleys.org.uk at 192.168.1.1 then giving  the flag
 will send all queries for
 internal machines to that nameserver. Everything else will go to the
 servers in /etc/resolv.conf. More than one -S flag is allowed, with
-repeated domain or ipaddr parts as required.
+repeated domain or ipaddr parts as required. Also permitted is a -S
+flag which gives a domain but no IP address; this tells dnsmasq that
+a domain is local and it may answer queries from /etc/hosts or DHCP
+but should never forward queries on that domain to any uptsream
+servers.
+.B local
+is a synonym for
+.B server
+to make configuration files clearer in this case.
+A non-standard port may be specified as part of the IP
+address using a # character.
+.TP
+.B \-A, --address=/<domain>/[domain/]<ipaddr>
+Specify an IP address to return for any host in the given domains.
+Queries in the domains are never forwarded and always replied to
+with the specified IP address which may be IPv4 or IPv6. To give
+both IPv4 and IPv6 addresses for a domain, use repeated -A flags.
+Note that /etc/hosts and DHCP leases override this for individual
+names. A common use of this is to redirect the entire doubleclick.net
+domain to some friendly local web server to avoid banner ads.
 .TP
 .B \-m, --mx-host=<mx name>
 Return an MX record named <mx name> pointing to the host specified in the --mx-target switch
@@ -139,6 +167,10 @@ Specifies the domain which hosts read from the DHCP leases file must have to be 
 and have a machine whose DHCP hostname is "laptop". The IP address for that machine is available from 
 .B dnsmasq
 both as "laptop" and "laptop.thekelleys.org.uk".
+.TP
+.B \-E, --expand-hosts
+Add the domain-suffix to simple names (without a period) in /etc/hosts
+in the same way as for DHCP-derived names.
 .SH CONFIG FILE
 At startup, dnsmasq reads /etc/dnsmasq.conf, if it exists. The format of this
 file consists of one option per line, exactly as the long options detailed 
@@ -176,7 +208,12 @@ be set dynamically by PPP or DHCP since both protocols provide the
 information.
 Absence of /etc/resolv.conf is not an error
 since it may not have been created before a PPP connection exists. Dnsmasq 
-simply keeps checking in case /etc/resolv.conf is created at any time.
+simply keeps checking in case /etc/resolv.conf is created at any
+time. Dnsmasq can be told to parse more than one resolv.conf
+file. This is useful on a laptop, where both PPP and DHCP may be used:
+dnsmasq can be set to poll both /etc/ppp/resolv.conf and
+/etc/dhcpc/resolv.conf and will use the contents of whichever changed
+last, giving automatic switching between DNS servers.
 .PP
 Upstream servers may also be specified on the command line or in
 /etc/dnsmasq.conf. These server specifications optionally take a

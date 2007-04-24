@@ -15,7 +15,6 @@
 
 #include "dnsmasq.h"
 
-
 static char *next_token (char *token, int buffsize, FILE * fp);
 static void process_lease(struct crec **empty_cache, char *host_name, 
 			  struct in_addr host_address, time_t ttd, int flags);
@@ -23,10 +22,9 @@ static void process_lease(struct crec **empty_cache, char *host_name,
 void load_dhcp(char *file, char *suffix, time_t now, char *hostname)
 {
   struct crec *spares;
-  time_t ttd, tts;
-#ifdef HAVE_FILE_SYSTEM
-  struct in_addr host_address;
   char token[MAXTOK], *dot;
+  struct in_addr host_address;
+  time_t ttd, tts;
   FILE *fp = fopen (file, "r");
   
   if (!fp)
@@ -36,21 +34,23 @@ void load_dhcp(char *file, char *suffix, time_t now, char *hostname)
     }
   
   syslog (LOG_INFO, "reading %s", file);
-#endif
 
   /* remove all existing DHCP cache entries onto temp. freelist */
   spares = cache_clear_dhcp();
   
-#ifdef HAVE_FILE_SYSTEM
   while ((next_token(token, MAXTOK, fp)))
     {
       if (strcmp(token, "lease") == 0)
         {
           hostname[0] = '\0';
 	  ttd = tts = (time_t)(-1);
-
+#ifdef HAVE_IPV6
           if (next_token(token, MAXTOK, fp) && 
 	      inet_pton(AF_INET, token, &host_address))
+#else
+	  if (next_token(token, MAXTOK, fp) && 
+	      (host_address.s_addr = inet_addr(token)) != (in_addr_t) -1)
+#endif
             {
               if (next_token(token, MAXTOK, fp) && *token == '{')
                 {
@@ -153,14 +153,12 @@ void load_dhcp(char *file, char *suffix, time_t now, char *hostname)
 	}
     }
   fclose(fp);
-#else
-#endif
-
+  
   /* free any still-unused cache structs */
   while (spares)
     { 
       struct crec *tmp = spares->next;
-      safe_free(spares);
+      free(spares);
       spares = tmp;
     }
 }
@@ -242,9 +240,9 @@ static void process_lease(struct crec **empty_cache, char *host_name,
       else /* need new one */
 	{
 	  if ((strlen(host_name) < SMALLDNAME-1))
-	    crec = safe_malloc(sizeof(struct crec));
+	    crec = malloc(sizeof(struct crec));
 	  else
-	    crec = safe_malloc(sizeof(struct crec) +
+	    crec = malloc(sizeof(struct crec) +
 			  strlen(host_name)+1-SMALLDNAME);
 	}
       

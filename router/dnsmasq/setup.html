@@ -19,7 +19,7 @@ Dnsmasq should be run on your firewall machine (the machine with the modem or ot
 Put the binary in <TT>/usr/local/sbin/dnsmasq</TT> (running <TT>make install</TT>  will do this) and arrange for it
 to be started at boot time.
 
-Note that dnsmasq needs to run as root, since it binds privileged ports. It will drop root priviliges after start-up. Dnsmasq
+Note that dnsmasq needs to run as root, since it binds privileged ports. It will drop root privileges after start-up. Dnsmasq
 logs problems using the syslog facility as a daemon.
 <P>
 <H2>Configuration.</H2>
@@ -30,7 +30,7 @@ configuration (ie one or more external nameservers in <TT>/etc/resolv.conf</TT>
 and any local hosts in <TT>/etc/hosts</TT>) can be turned into a nameserver
 simply by running dnsmasq, with no options or configuration at
 all. Set the IP address of the machine running dnsmasq as the DNS
-server in all the other machines on your network, and your're done.
+server in all the other machines on your network, and you're done.
 <P>
 With a few option flags, it is possible to make dnsmasq do more clever
 tricks. Options for dnsmasq can be set either on the command line
@@ -78,7 +78,7 @@ uses that to write a file suitable for dnsmasq.
 <PRE>
 
 echo -n >|/etc/dhcpc/resolv.conf
-dnsservs=${DNS/,/ }
+dnsservs=${DNS//,/ }
 for serv in $dnsservs; do
     echo "nameserver $serv" >>/etc/dhcpc/resolv.conf
 done
@@ -90,6 +90,15 @@ Remember to give dhcpcd the <TT>-R</TT> flag to stop it overwriting
 
 <P>
 For other DHCP clients it should be possible to achieve the same effect.
+
+<h3> DHCP and PPP.</h3>
+On a laptop which may potentially connect via a modem and PPP or
+ethernet and DHCP it is possible to combine both of the above
+configurations. Running dnsmasq with the flags
+<TT>resolv-file=/etc/ppp/resolv.conf resolv-file=/etc/dhcpc/resolv.conf</TT>  
+makes it poll <B>both</B> files and use whichever was updated
+last. The result is automatic switching between DNS servers.
+</H3>
 
 <H2> Integration with DHCP.</H2>
 Dnsmasq reads <TT>/etc/hosts</TT> so that the names of local machines are
@@ -162,10 +171,20 @@ private domains within the company, and dnsmasq allows this. Assuming
 that internal company machines are all in the domain internal.myco.com
 and the companies nameserver is at 192.168.10.1 then the option
 <TT>server=/internal.myco.com/192.168.10.1</TT> will direct all
-queries in the internal domain to the correct nameserver. If there is
-more than one nameserver or more than one domain, just include as many
+queries in the internal domain to the correct nameserver. You can
+specify more than one domain in each server option. If there is
+more than one nameserver just include as many
 <TT>server</TT> options as is needed to specify them all.  
 
+<H2>Local domains.</H2>
+Sometimes people have local domains which they do not want forwarded
+to upstream servers. This is accomodated by using server options
+without the server IP address. To make things clearer <TT>local</TT>
+is a synonym for <TT>server</TT>. For example the option
+<TT>local=/localnet/</TT> ensures that any domain name query which ends in
+<TT>.localnet</TT> will be answered if possible from
+<TT>/etc/hosts</TT> or DHCP, but never sent to an upstream server.
+ 
 <H2>Other configuration details.</H2>
 By default dnsmasq offers DNS service on all the configured interfaces
 of a host. It's likely that you don't (for instance) want to offer a
