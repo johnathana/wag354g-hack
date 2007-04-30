@@ -31,6 +31,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <wait.h>
+#include <syslog.h>
 
 #include <bcmnvram.h>
 #include <netconf.h>
@@ -52,12 +53,12 @@ enum {M_LAN, M_WAN};
 
 struct mon mons[] = {
 	{ "tftpd",	1,	M_LAN,	stop_tftpd,		start_tftpd},
-	//{ "httpd",	1,	M_LAN,	stop_httpd,		start_httpd},
+	{ "httpd",	1,	M_LAN,	stop_httpd,		start_httpd},
 	{ "upnpd-igd",	1,	M_LAN,	stop_upnp_pak,		start_upnp},
 	//junzhao 2004.3.18
 	//{ "upnpd-igd",	1,	M_LAN,	stop_upnp,		start_upnp},
 	//{ "udhcpd",	1,	M_LAN,	stop_dhcpd,		start_dhcpd},
-	//{ "dnsmasq",	1,	M_LAN,	stop_dns,		start_dns},
+	{ "dnsmasq",	1,	M_LAN,	stop_dns,		start_dns},
 };
 
 int
@@ -117,7 +118,8 @@ do_mon(void)
 			else
 #endif
 			{
-				cprintf("Maybe %s had died, we need to re-exec it\n", v->name);
+				openlog("monitor_ps", LOG_PID, LOG_DAEMON);
+				syslog(LOG_INFO, "%s had died", v->name);
 				if(v->stop)
 					v->stop();
 				sleep(1);
