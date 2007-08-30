@@ -2278,6 +2278,8 @@ stop_pppox(int whichconn)
 		printf("ppp_pid[%d], %s\n", whichconn, pidchar);
 		sprintf(buf, "kill -15 %s", pidchar);
        		system(buf);
+		sprintf(buf, "/tmp/ppp/link%d", which_conn);
+		unlink(buf);
        		//ret = eval("kill", "-15", pidchar);
 		//junzhao 2004.6.15
        		ret = eval("kill", "-9", pidchar);
@@ -2288,28 +2290,6 @@ stop_pppox(int whichconn)
 	return ret;
 }
 
-#if 0
-int
-stop_pppox(int whichconn)
-{
-	char pppfile[28];
-	char pidchar[32];
-	int ret = -1;
-	memset(pppfile, 0, sizeof(pppfile));
-	sprintf(pppfile, "/var/run/ppp%d.pid", whichconn);
-	if(file_to_buf(pppfile, pidchar, sizeof(pidchar)))
-	{
-		printf("ppp_pid[%d], %s\n", whichconn, pidchar);
-       		ret = eval("kill", "-15", pidchar);
-		//junzhao 2004.6.15
-       		ret = eval("kill", "-9", pidchar);
-	}
-	if(whichconn < MAX_CHAN)
-		ppp_pid[whichconn] = -1;
-	unlink(pppfile);
-	return ret;
-}
-#endif
 
 int
 stop_dhcpc(int whichconn)
