@@ -33,7 +33,7 @@
 #elif defined(CONFIG_SMP)
 #define LOG_BUF_LEN	(32768)
 #else	
-#define LOG_BUF_LEN	(1024)			/* This must be a power of two */
+#define LOG_BUF_LEN	(16384)			/* This must be a power of two */
 #endif
 
 #define LOG_BUF_MASK	(LOG_BUF_LEN-1)
